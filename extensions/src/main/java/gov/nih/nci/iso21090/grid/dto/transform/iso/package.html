@@ -1,0 +1,26 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+</head>
+<body bgcolor="white">
+Provides transformers that move between the <i>DTO</i> and <i>XML</i> layers.  The most important class is
+<code>Transformer</code>, which is the interface that most classes in this package implement.  It specifies
+the rules for moving from DTO to XML and vice versa.
+
+<p>The XML layer is codegened from the <code>ISO_datatypes_Narrative</code> XML schema by
+<a href="http://java.sun.com/developer/technicalArticles/WebServices/jaxb/">JAXB</a>.  The stubs are generated
+to the package <code>org.iso._21090</code>.  This is a standard XSD published by ISO.  The NCI has standardized
+on this representation, as document on <a href="https://wiki.nci.nih.gov/display/LSCAT/ISO+21090+Data+Types">the
+NCI LS CAT wiki</a>.  These are the "full" ISO data types, and are not localized in any way.
+
+<p>The DTO layer is taken from the iso-datatypes project.  See the documentation there for full details.  The most
+critical information is that DTO layer is a <b>localized</b> version of the ISO data types, not a full implementation.
+Therefore:
+<ul>
+<li>Some fields from the XML objects are not copied to the DTO layer.
+<li>Translations from the DTO to XML will always leave some fields empty (Java <i>null</i>).
+<li>OCL constraints at the full ISO types are respected.
+</ul>
+
+</body>
+</html>
