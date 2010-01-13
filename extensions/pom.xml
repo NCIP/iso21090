@@ -12,8 +12,38 @@
     <name>iso-datatypes-extensions</name>
     <url>../../extensions/target/site/</url>
     
+    <properties>
+        <generatedStubsSrcDir>target/generated-sources/stubs</generatedStubsSrcDir>
+    </properties>
+    
     <build>
         <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${compileSource}</source>
+                    <target>${compileSource}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jaxb2-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>xjc</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <bindingDirectory>${basedir}/src/main/xjb</bindingDirectory>
+                    <schemaDirectory>${basedir}/src/main/xsd/</schemaDirectory>
+                    <schemaFiles>ISO_datatypes_Narrative.xsd</schemaFiles>
+                    <outputDirectory>${generatedStubsSrcDir}</outputDirectory>
+                    <staleFile>${project.build.directory}/generated-sources/jaxb/.staleFlag</staleFile>
+                    <verbose>true</verbose>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
     
@@ -32,8 +62,20 @@
                         <ruleset>../src/main/resources/Pmd.xml</ruleset>
                     </rulesets>
                     <targetJdk>1.5</targetJdk>
+                    <excludeRoots>
+                        <excludeRoot>${generatedStubsSrcDir}</excludeRoot>
+                    </excludeRoots>
                 </configuration>
             </plugin>
         </plugins>
     </reporting>
+    
+    <dependencies>
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.1</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 </project>
