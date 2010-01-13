@@ -3,12 +3,18 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>gov.nih.nci.iso21090</groupId>
     <artifactId>iso-datatypes</artifactId>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
     <version>2.0-SNAPSHOT</version>
     <name>iso</name>
-
+    
+    <inceptionYear>2010</inceptionYear>
+    
+    <modules>
+        <module>localization</module>
+        <module>extensions</module>
+    </modules>
+    
     <properties>
-        <nci-commons.version>1.2.1</nci-commons.version>
         <compileSource>1.5</compileSource>
     </properties>
 
@@ -40,8 +46,13 @@
             <id>tparnell</id>
             <name>Todd Parnell</name>
         </developer>
+        <developer>
+            <email>aevansel@5amsolutions.com</email>
+            <id>aevansel</id>
+            <name>Abraham Evans-EL</name>
+        </developer>
     </developers>
-
+    
     <distributionManagement>
         <repository>
             <id>5AM-Releases</id>
@@ -74,13 +85,6 @@
                         </goals>
                     </execution>
                 </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.fiveamsolutions</groupId>
-                        <artifactId>nci-commons-core</artifactId>
-                        <version>${nci-commons.version}</version>
-                    </dependency>
-                </dependencies>
             </plugin>
             <plugin>
                 <artifactId>maven-pmd-plugin</artifactId>
@@ -92,13 +96,9 @@
                         </goals>
                     </execution>
                 </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.fiveamsolutions</groupId>
-                        <artifactId>nci-commons-core</artifactId>
-                        <version>${nci-commons.version}</version>
-                    </dependency>
-                </dependencies>
+                <configuration>
+                    <targetJdk>${compileSource}</targetJdk>
+                </configuration>
             </plugin>
         </plugins>
         <extensions>
@@ -115,7 +115,7 @@
             <plugin>
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <configuration>
-                    <configLocation>5amCheckstyle-5.xml</configLocation>
+                    <configLocation>src/main/resources/Checkstyle-5.xml</configLocation>
                </configuration>
             </plugin>
             <plugin>
@@ -125,7 +125,7 @@
                 <artifactId>maven-pmd-plugin</artifactId>
                 <configuration>
                     <rulesets>
-                        <ruleset>5amPmd.xml</ruleset>
+                        <ruleset>src/main/resources/Pmd.xml</ruleset>
                     </rulesets>
                     <failOnViolation>true</failOnViolation>
                     <linkXref>true</linkXref>
@@ -173,24 +173,6 @@
     </pluginRepositories>
 
     <dependencies>
-        <dependency>
-            <groupId>commons-collections</groupId>
-            <artifactId>commons-collections</artifactId>
-            <version>3.0</version>
-            <scope>compile</scope>
-        </dependency>
-      <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-            <version>2.4</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>commons-beanutils</groupId>
-            <artifactId>commons-beanutils</artifactId>
-            <version>1.7.0</version>
-            <scope>compile</scope>
-        </dependency>
         <!-- Testing only jars -->
         <dependency>
             <groupId>junit</groupId>
