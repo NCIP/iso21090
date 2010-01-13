@@ -13,4 +13,4 @@ accept the defaults for everything. Look at the repositories tag directory for t
     NOTE: If the task fails when attempting to produce the tag with a message saying a file already exists, then run 'svn up' and rerun 'mvn release:prepare'.
             This is a problem caused by a change in subversion breaking how the plugin worked.
 6.  After #5 is completes successfully, run mvn release:perform
-7.  Mark the version released in Jira.
+7.  Mark the version released in Jira.   
