@@ -12,7 +12,7 @@ import java.util.List;
 public interface Transformer<XML, DTO> {
 
     /**
-     * Convert a PO DTO into a XML(JAXB) object.
+     * Convert a DTO into a XML(JAXB) object.
      *
      * General Rules:
      * <ol>
@@ -29,7 +29,7 @@ public interface Transformer<XML, DTO> {
     XML toXml(DTO input) throws DtoTransformException;
 
     /**
-     * Convert an XML(JAXB) object into a PO DTO object.
+     * Convert an XML(JAXB) object into a  DTO object.
      *
      * General Rules:
      * <ol>
@@ -46,7 +46,7 @@ public interface Transformer<XML, DTO> {
     DTO toDto(XML input) throws DtoTransformException;
 
     /**
-     * Convert a list of PO DTO into an array of XML(JAXB) objects.
+     * Convert a list of DTO into an array of XML(JAXB) objects.
      *
      * General Rules for objects in the list:
      * <ol>
