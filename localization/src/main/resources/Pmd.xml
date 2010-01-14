@@ -1,7 +1,10 @@
 <?xml version="1.0"?>
+<!--
+    This file is based on the standard 5AM PMD but was moved here to remove the dependency to nci-commons.
+-->
 <ruleset name="pmd-rules">
 
-    <description>5AM PMD Rules</description>
+    <description>SIO21090 PMD Rules</description>
 
     <rule ref="rulesets/basic.xml" />
     <rule ref="rulesets/basic.xml/EmptyCatchBlock">

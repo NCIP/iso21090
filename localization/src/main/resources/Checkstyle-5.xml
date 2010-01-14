@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-    This configuration file was written by the eclipse-cs plugin configuration editor
+    This file is based on the standard 5AM checkstyle but was moved here to remove the dependency to nci-commons.
 -->
 <!--
-    Checkstyle-Configuration: caArray Checks
+    Checkstyle-Configuration: ISO21090 Checks
     Description: none
 -->
 <!DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 1.2//EN" "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
