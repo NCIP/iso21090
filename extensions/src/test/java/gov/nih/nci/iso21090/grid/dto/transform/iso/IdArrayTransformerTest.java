@@ -88,78 +88,106 @@ import static org.junit.Assert.assertNull;
 import gov.nih.nci.iso21090.IdentifierReliability;
 import gov.nih.nci.iso21090.IdentifierScope;
 import gov.nih.nci.iso21090.Ii;
-import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformerTestBase;
+import gov.nih.nci.iso21090.NullFlavor;
+import gov.nih.nci.iso21090.grid.dto.transform.DtoTransformException;
 
-import org.iso._21090.II;
-import org.iso._21090.NullFlavor;
+import org.iso._21090.extensions.Id;
 import org.junit.Test;
 
-public class IITransformerTest extends AbstractTransformerTestBase<IITransformer,II,Ii>{
-     /**
-     * The identifier name.
-     */
-    public static final String IDENTIFIER_NAME = "identifier name";
+public class IdArrayTransformerTest {
 
-    /**
-     * The ii root value.
-     */
-    public static final String ROOT = "2.16.840.1.113883.3.26.4.4.3";
-
-    @Override
-    public Ii makeDtoSimple() {
-          Ii id = new Ii();
-          id.setDisplayable(Boolean.TRUE);
-          id.setRoot(ROOT);
-          id.setIdentifierName(IDENTIFIER_NAME);
-          id.setExtension("123");
-          id.setReliability(IdentifierReliability.ISS);
-          id.setScope(IdentifierScope.VER);
-          return id;
-    }
-
-    @Override
-    public II makeXmlSimple() {
-          II id = new II();
-          id.setDisplayable(Boolean.TRUE);
-          id.setRoot(ROOT);
-          id.setIdentifierName(IDENTIFIER_NAME);
-          id.setExtension("123");
-          id.setReliability(org.iso._21090.IdentifierReliability.ISS);
-          id.setScope(org.iso._21090.IdentifierScope.VER);
-          return id;
-    }
-
-    @Override
-    public void verifyDtoSimple(Ii x) {
-        assertEquals(x.getDisplayable(),Boolean.TRUE);
-        assertEquals(x.getRoot(),ROOT);
-        assertEquals(x.getIdentifierName(),IDENTIFIER_NAME);
-        assertEquals(x.getExtension(), "123");
-        assertNull(x.getNullFlavor());
-        assertEquals(x.getReliability(),IdentifierReliability.ISS);
-        assertEquals(x.getScope(),IdentifierScope.VER);
-
-    }
-
-    @Override
-    public void verifyXmlSimple(II x) {
-        assertEquals(x.getRoot(), ROOT);
-        assertEquals(x.getIdentifierName(), IDENTIFIER_NAME);
-        assertEquals(x.getExtension(), "123");
-        assertNull(x.getNullFlavor());
-        assertEquals(x.getReliability(), org.iso._21090.IdentifierReliability.ISS);
-        assertEquals(x.getScope(), org.iso._21090.IdentifierScope.VER);
+    @Test
+    public void toXml_null() throws DtoTransformException {
+        assertNull(IdArrayTransformer.INSTANCE.toXml(null));
     }
 
     @Test
-    public void testNullFlavorConversion() {
-        II x = new II();
-        x.setNullFlavor(NullFlavor.ASKU);
-        Ii y = IITransformer.INSTANCE.toDto(x);
-        assertNotNull(y);
-        assertEquals(y.getNullFlavor(), gov.nih.nci.iso21090.NullFlavor.ASKU);
-        x = IITransformer.INSTANCE.toXml(y);
-        assertNotNull(x);
-        assertEquals(x.getNullFlavor(), NullFlavor.ASKU);
+    public void toXml_empty() throws DtoTransformException {
+        assertEquals(0, IdArrayTransformer.INSTANCE.toXml(new Ii[0]).length);
+    }
+
+    @Test
+    public void toXml_values() throws DtoTransformException {
+        Ii a = makeDtoSimple();
+        Ii b = makeDtoSimple("456");
+        Id[] xmls = IdArrayTransformer.INSTANCE.toXml(new Ii[] { a, b });
+
+        assertNotNull(xmls);
+        assertEquals(2, xmls.length);
+        verifyXml(xmls[0], a);
+        verifyXml(xmls[1], b);
+    }
+
+    @Test
+    public void toDto_null() throws DtoTransformException {
+        assertNull(IdArrayTransformer.INSTANCE.toDto(null));
+    }
+
+    @Test
+    public void toDto_empty() throws DtoTransformException {
+        assertEquals(0, IdArrayTransformer.INSTANCE.toDto(new Id[0]).length);
+    }
+
+    @Test
+    public void toDto_values() throws DtoTransformException {
+        Id a = makeXmlSimple();
+        Id b = makeXmlSimple("456");
+        Ii[] dtos = IdArrayTransformer.INSTANCE.toDto(new Id[] { a, b });
+
+        assertNotNull(dtos);
+        assertEquals(2, dtos.length);
+        verifyDto(dtos[0], a);
+        verifyDto(dtos[1], b);
+
+    }
+
+    private void verifyXml(Id expected, Ii value) {
+        verifyDto(value, expected);
+    }
+
+    private void verifyDto(Ii expected, Id value) {
+        assertEquals(expected.getDisplayable(), value.isDisplayable());
+        assertEquals(expected.getRoot(), value.getRoot());
+        assertEquals(expected.getIdentifierName(), value.getIdentifierName());
+        assertEquals(expected.getExtension(), value.getExtension());
+        assertEquals(expected.getNullFlavor().name(), value.getNullFlavor().name());
+        assertEquals(expected.getReliability().name(), value.getReliability().name());
+        assertEquals(expected.getScope().name(), value.getScope().name());
+    }
+
+    private Id makeXmlSimple(String extension) {
+        Id id = makeXmlSimple();
+        id.setExtension(extension);
+        return id;
+    }
+
+    private Id makeXmlSimple() {
+        Id id = new Id();
+        id.setDisplayable(Boolean.TRUE);
+        id.setRoot(IITransformerTest.ROOT);
+        id.setIdentifierName(IITransformerTest.IDENTIFIER_NAME);
+        id.setExtension("123");
+        id.setNullFlavor(org.iso._21090.NullFlavor.OTH);
+        id.setReliability(org.iso._21090.IdentifierReliability.ISS);
+        id.setScope(org.iso._21090.IdentifierScope.VER);
+        return id;
+    }
+
+    private Ii makeDtoSimple(String extension) {
+        Ii id = makeDtoSimple();
+        id.setExtension(extension);
+        return id;
+    }
+
+    private Ii makeDtoSimple() {
+        Ii id = new Ii();
+        id.setDisplayable(Boolean.TRUE);
+        id.setRoot(IITransformerTest.ROOT);
+        id.setIdentifierName(IITransformerTest.IDENTIFIER_NAME);
+        id.setExtension("123");
+        id.setNullFlavor(NullFlavor.OTH);
+        id.setReliability(IdentifierReliability.ISS);
+        id.setScope(IdentifierScope.VER);
+        return id;
     }
 }

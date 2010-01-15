@@ -16,6 +16,7 @@
     
     <properties>
         <compileSource>1.5</compileSource>
+        <cobertura.check.haltOnFailure>true</cobertura.check.haltOnFailure>
     </properties>
 
     <scm>

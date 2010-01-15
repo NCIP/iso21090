@@ -30,7 +30,7 @@
                 <configuration>
                     <bindingDirectory>${basedir}/src/main/xjb</bindingDirectory>
                     <schemaDirectory>${basedir}/src/main/xsd/</schemaDirectory>
-                    <schemaFiles>ISO_datatypes_Narrative.xsd</schemaFiles>
+                    <schemaFiles>ISO_datatypes_Narrative.xsd,ISO_extensions.xsd</schemaFiles>
                     <outputDirectory>${generatedStubsSrcDir}</outputDirectory>
                     <staleFile>${project.build.directory}/generated-sources/jaxb/.staleFlag</staleFile>
                     <verbose>true</verbose>

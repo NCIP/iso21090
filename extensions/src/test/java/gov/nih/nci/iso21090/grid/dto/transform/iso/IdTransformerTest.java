@@ -83,83 +83,90 @@
 package gov.nih.nci.iso21090.grid.dto.transform.iso;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+
+import gov.nih.nci.iso21090.DSet;
 import gov.nih.nci.iso21090.IdentifierReliability;
 import gov.nih.nci.iso21090.IdentifierScope;
 import gov.nih.nci.iso21090.Ii;
 import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformerTestBase;
 
-import org.iso._21090.II;
-import org.iso._21090.NullFlavor;
-import org.junit.Test;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
-public class IITransformerTest extends AbstractTransformerTestBase<IITransformer,II,Ii>{
-     /**
-     * The identifier name.
-     */
-    public static final String IDENTIFIER_NAME = "identifier name";
+import org.iso._21090.DSETII;
+import org.iso._21090.II;
+import org.iso._21090.extensions.Id;
+
+public class IdTransformerTest extends AbstractTransformerTestBase<IdTransformer, Id, Ii> {
 
     /**
-     * The ii root value.
+     * The identifier name for for Identified org.
      */
-    public static final String ROOT = "2.16.840.1.113883.3.26.4.4.3";
+    public static final String IDENTIFIED_ORG_IDENTIFIER_NAME = "Identified org identifier";
+
+    /**
+     * The ii root value for Identified org.
+     */
+    public static final String IDENTIFIED_ORG_ROOT = "2.16.840.1.113883.3.26.4.4.6";
 
     @Override
     public Ii makeDtoSimple() {
-          Ii id = new Ii();
-          id.setDisplayable(Boolean.TRUE);
-          id.setRoot(ROOT);
-          id.setIdentifierName(IDENTIFIER_NAME);
-          id.setExtension("123");
-          id.setReliability(IdentifierReliability.ISS);
-          id.setScope(IdentifierScope.VER);
-          return id;
+        Ii id = new Ii();
+        id.setRoot(IDENTIFIED_ORG_ROOT);
+        id.setIdentifierName(IDENTIFIED_ORG_IDENTIFIER_NAME);
+        id.setExtension("123");
+        id.setReliability(IdentifierReliability.ISS);
+        id.setScope(IdentifierScope.OBJ);
+
+        return id;
     }
 
     @Override
-    public II makeXmlSimple() {
-          II id = new II();
-          id.setDisplayable(Boolean.TRUE);
-          id.setRoot(ROOT);
-          id.setIdentifierName(IDENTIFIER_NAME);
-          id.setExtension("123");
-          id.setReliability(org.iso._21090.IdentifierReliability.ISS);
-          id.setScope(org.iso._21090.IdentifierScope.VER);
-          return id;
+    public Id makeXmlSimple() {
+        Id id = new Id();
+        id.setRoot(IDENTIFIED_ORG_ROOT);
+        id.setIdentifierName(IDENTIFIED_ORG_IDENTIFIER_NAME);
+        id.setExtension("123");
+        id.setReliability(org.iso._21090.IdentifierReliability.ISS);
+        id.setScope(org.iso._21090.IdentifierScope.OBJ);
+        return id;
     }
 
     @Override
     public void verifyDtoSimple(Ii x) {
-        assertEquals(x.getDisplayable(),Boolean.TRUE);
-        assertEquals(x.getRoot(),ROOT);
-        assertEquals(x.getIdentifierName(),IDENTIFIER_NAME);
+        assertEquals(x.getRoot(), IDENTIFIED_ORG_ROOT);
         assertEquals(x.getExtension(), "123");
-        assertNull(x.getNullFlavor());
-        assertEquals(x.getReliability(),IdentifierReliability.ISS);
-        assertEquals(x.getScope(),IdentifierScope.VER);
-
+        assertEquals(x.getIdentifierName(), IDENTIFIED_ORG_IDENTIFIER_NAME);
+        assertEquals(IdentifierReliability.ISS, x.getReliability());
+        assertEquals(IdentifierScope.OBJ, x.getScope());
     }
 
     @Override
-    public void verifyXmlSimple(II x) {
-        assertEquals(x.getRoot(), ROOT);
-        assertEquals(x.getIdentifierName(), IDENTIFIER_NAME);
+    public void verifyXmlSimple(Id x) {
+        assertEquals(x.getRoot(), IDENTIFIED_ORG_ROOT);
         assertEquals(x.getExtension(), "123");
-        assertNull(x.getNullFlavor());
-        assertEquals(x.getReliability(), org.iso._21090.IdentifierReliability.ISS);
-        assertEquals(x.getScope(), org.iso._21090.IdentifierScope.VER);
+        assertEquals(x.getIdentifierName(), IDENTIFIED_ORG_IDENTIFIER_NAME);
+        assertEquals(org.iso._21090.IdentifierReliability.ISS, x.getReliability());
+        assertEquals(org.iso._21090.IdentifierScope.OBJ, x.getScope());
     }
 
-    @Test
-    public void testNullFlavorConversion() {
-        II x = new II();
-        x.setNullFlavor(NullFlavor.ASKU);
-        Ii y = IITransformer.INSTANCE.toDto(x);
-        assertNotNull(y);
-        assertEquals(y.getNullFlavor(), gov.nih.nci.iso21090.NullFlavor.ASKU);
-        x = IITransformer.INSTANCE.toXml(y);
-        assertNotNull(x);
-        assertEquals(x.getNullFlavor(), NullFlavor.ASKU);
+    /**
+     * Converts a single Ii into a DSet<Ii> containing just that Ii.
+     *
+     * @param id Ii to add to set
+     * @return DSet<Ii> containing the id
+     */
+    static DSet<Ii> convertIdToDSetIi(Ii id) {
+        Set<Ii> identifiers = new LinkedHashSet<Ii>();
+        identifiers.add(id);
+        DSet<Ii> identifier = new DSet<Ii>();
+        identifier.setItem(identifiers);
+        return identifier;
+    }
+
+    static DSETII convertIIToDSETII(II ii) {
+        DSETII identifier = new DSETII();
+        identifier.getItem().add(ii);
+        return identifier;
     }
 }
