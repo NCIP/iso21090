@@ -1,12 +1,12 @@
 /**
  * The software subject to this notice and license includes both human readable
- * source code form and machine readable, binary, object code form. The iso
+ * source code form and machine readable, binary, object code form. The ISO21090
  * Software was developed in conjunction with the National Cancer Institute
  * (NCI) by NCI employees and 5AM Solutions, Inc. (5AM). To the extent
  * government employees are authors, any rights in such works shall be subject
  * to Title 17 of the United States Code, section 105.
  *
- * This iso Software License (the License) is between NCI and You. You (or
+ * This ISO21090 Software License (the License) is between NCI and You. You (or
  * Your) shall mean a person or an entity, and all other entities that control,
  * are controlled by, or are under common control with the entity. Control for
  * purposes of this definition means (i) the direct or indirect power to cause
@@ -17,10 +17,10 @@
  * This License is granted provided that You agree to the conditions described
  * below. NCI grants You a non-exclusive, worldwide, perpetual, fully-paid-up,
  * no-charge, irrevocable, transferable and royalty-free right and license in
- * its rights in the iso Software to (i) use, install, access, operate,
+ * its rights in the ISO21090 Software to (i) use, install, access, operate,
  * execute, copy, modify, translate, market, publicly display, publicly perform,
- * and prepare derivative works of the iso Software; (ii) distribute and
- * have distributed to and by third parties the iso Software and any
+ * and prepare derivative works of the ISO21090 Software; (ii) distribute and
+ * have distributed to and by third parties the ISO21090 Software and any
  * modifications and derivative works thereof; and (iii) sublicense the
  * foregoing rights set out in (i) and (ii) to third parties, including the
  * right to license such rights to further third parties. For sake of clarity,
@@ -80,79 +80,86 @@
  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package gov.nih.nci.iso21090;
+package gov.nih.nci.iso21090.grid.dto.transform.iso;
 
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import gov.nih.nci.iso21090.St;
+import gov.nih.nci.iso21090.StNt;
+import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformerTestBase;
+
+import org.iso._21090.ST;
+import org.iso._21090.STNT;
+import org.junit.Test;
+
 
 /**
- * Represents the iso ST data type.
- * A ST SHALL have at least one character or else be NULL.
- * @author Scott Miller
+ *
+ * @author mshestoalov
  */
-public class St extends Any implements Cloneable {
+public class STNTTransformerTest  
+    extends AbstractTransformerTestBase<STNTTransformer, STNT, StNt>{
 
-    private static final long serialVersionUID = 1L;
 
-    private String value;
-
-    /**
-     * @return the value
-     */
-    public String getValue() {
-        return this.value;
-    }
-
-    /**
-     * @param value the value to set
-     */
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
+    private STTransformerTest stTest = new STTransformerTest();
+    
     @Override
-    public boolean equals(Object o) {
-        if (o == null) {
-            return false;
+    public STNT makeXmlSimple() {
+        ST st = stTest.makeXmlSimple();
+        if (st != null) {
+            STNT returnVal = new STNT();
+            returnVal.setNullFlavor(st.getNullFlavor());
+            returnVal.setValue(st.getValue());
+            return returnVal;
+        } else {
+            return null;
         }
-
-        if (this == o) {
-            return true;
-        }
-
-        if (!(o instanceof St)) {
-            return false;
-        }
-
-
-        St x = (St) o;
-
-        return new EqualsBuilder()
-            .appendSuper(super.equals(o))
-            .append(this.getValue(), x.getValue())
-            .isEquals();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public int hashCode() {
-
-        return new HashCodeBuilder(HASH_CODE_SEED_1, HASH_CODE_SEED_2)
-            .append(this.getValue())
-            .toHashCode();
+    public StNt makeDtoSimple() {
+        St st = stTest.makeDtoSimple();
+        if (st != null) {
+            StNt returnVal = new StNt();
+            returnVal.setNullFlavor(st.getNullFlavor());
+            returnVal.setValue(st.getValue());
+            return returnVal;
+        } else {
+            return null;
+        }
+        
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @SuppressWarnings("PMD.CloneThrowsCloneNotSupportedException")
     @Override
-    public St clone() {
-        return (St) super.clone();
+    public void verifyXmlSimple(STNT x) {
+        assertEquals("v", x.getValue());
     }
+
+    @Override
+    public void verifyDtoSimple(StNt x) {
+        assertEquals("v", x.getValue());
+    }
+
+    public STNT makeXmlNullFlavored() {
+        STNT x = new STNT();
+        x.setNullFlavor(org.iso._21090.NullFlavor.NI);
+        return x;
+    }
+
+    public void verifyDtoNullFlavored(StNt dto) {
+        assertNull(dto.getValue());
+        assertEquals(gov.nih.nci.iso21090.NullFlavor.NI, dto.getNullFlavor());
+    }
+
+    @Test
+    public void testStNtNull() throws Exception {
+        StNt stNt = new StNt();
+        stNt.setNullFlavor(gov.nih.nci.iso21090.NullFlavor.ASKU);
+        STNT result = STNTTransformer.INSTANCE.toXml(stNt);
+        assertNotNull(result);
+        assertEquals(org.iso._21090.NullFlavor.ASKU, result.getNullFlavor());
+        assertNull(result.getValue());
+    }
+    
 }
