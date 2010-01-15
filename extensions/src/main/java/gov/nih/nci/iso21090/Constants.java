@@ -82,6 +82,11 @@
  */
 package gov.nih.nci.iso21090;
 
+/**
+ * ISO Contants.
+ * 
+ * @author evanselaj
+ */
 public class Constants {
     
     /**
