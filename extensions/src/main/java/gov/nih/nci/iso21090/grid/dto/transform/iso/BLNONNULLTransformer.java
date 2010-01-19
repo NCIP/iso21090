@@ -1,12 +1,12 @@
 /**
  * The software subject to this notice and license includes both human readable
- * source code form and machine readable, binary, object code form. The iso-datatypes
+ * source code form and machine readable, binary, object code form. The ISO21090
  * Software was developed in conjunction with the National Cancer Institute
  * (NCI) by NCI employees and 5AM Solutions, Inc. (5AM). To the extent
  * government employees are authors, any rights in such works shall be subject
  * to Title 17 of the United States Code, section 105.
  *
- * This iso-datatypes Software License (the License) is between NCI and You. You (or
+ * This ISO21090 Software License (the License) is between NCI and You. You (or
  * Your) shall mean a person or an entity, and all other entities that control,
  * are controlled by, or are under common control with the entity. Control for
  * purposes of this definition means (i) the direct or indirect power to cause
@@ -17,10 +17,10 @@
  * This License is granted provided that You agree to the conditions described
  * below. NCI grants You a non-exclusive, worldwide, perpetual, fully-paid-up,
  * no-charge, irrevocable, transferable and royalty-free right and license in
- * its rights in the iso-datatypes Software to (i) use, install, access, operate,
+ * its rights in the ISO21090 Software to (i) use, install, access, operate,
  * execute, copy, modify, translate, market, publicly display, publicly perform,
- * and prepare derivative works of the iso-datatypes Software; (ii) distribute and
- * have distributed to and by third parties the iso-datatypes Software and any
+ * and prepare derivative works of the ISO21090 Software; (ii) distribute and
+ * have distributed to and by third parties the ISO21090 Software and any
  * modifications and derivative works thereof; and (iii) sublicense the
  * foregoing rights set out in (i) and (ii) to third parties, including the
  * right to license such rights to further third parties. For sake of clarity,
@@ -80,77 +80,61 @@
  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package gov.nih.nci.iso21090;
+package gov.nih.nci.iso21090.grid.dto.transform.iso;
 
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
+import gov.nih.nci.iso21090.Bl;
+import gov.nih.nci.iso21090.BlNonNull;
+import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformer;
+import gov.nih.nci.iso21090.grid.dto.transform.DtoTransformException;
+import gov.nih.nci.iso21090.grid.dto.transform.Transformer;
+
+import org.iso._21090.BL;
+import org.iso._21090.BLNonNull;
 
 /**
- * Represents the iso BL data type.
- * @author lpower
+ * Transforms strings.
  */
-public class Bl extends Any implements Cloneable {
-
-    private static final long serialVersionUID = 1L;
-
-    private Boolean value;
+public final class BLNONNULLTransformer extends AbstractTransformer<BLNonNull, BlNonNull> 
+    implements Transformer<BLNonNull, BlNonNull> {
 
     /**
-     * @return the value
+     * Public singleton.
      */
-    public Boolean getValue() {
-        return value;
-    }
-
-    /**
-     * @param value the value to set
-     */
-    public void setValue(Boolean value) {
-        this.value = value;
+    public static final BLNONNULLTransformer INSTANCE = new BLNONNULLTransformer();
+    
+    private BLNONNULLTransformer() {
     }
 
     /**
      * {@inheritDoc}
      */
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
+    public BLNonNull toXml(BlNonNull input) {
+        BL bl = BLTransformer.INSTANCE.toXml(input);
+        if (bl == null) {
+            return null;
         }
-
-        if (this == obj) {
-            return true;
-        }
-
-        if (!(obj instanceof Bl)) {
-            return false;
-        }
-
-        Bl x = (Bl) obj;
-
-        return new EqualsBuilder()
-            .appendSuper(super.equals(obj))
-            .append(this.getValue(), x.getValue())
-            .isEquals();
+        BLNonNull blnonnull = new BLNonNull();
+        blnonnull.setValue(bl.isValue());
+        return blnonnull;
     }
 
     /**
      * {@inheritDoc}
      */
-    @Override
-    public int hashCode() {
-
-        return new HashCodeBuilder(HASH_CODE_SEED_1, HASH_CODE_SEED_2)
-            .append(this.getValue())
-            .toHashCode();
+    public BlNonNull toDto(BLNonNull input) {
+        Bl bl = BLTransformer.INSTANCE.toDto(input);
+        if (bl == null) {
+            return null;
+        }
+        BlNonNull blnonnull = new BlNonNull();
+        blnonnull.setValue(bl.getValue());
+        return blnonnull;
     }
 
     /**
      * {@inheritDoc}
      */
-    @SuppressWarnings("PMD.CloneThrowsCloneNotSupportedException")
-    @Override
-    public Bl clone() {
-        return (Bl) super.clone();
+    public BLNonNull[] createXmlArray(int size) throws DtoTransformException {
+        return new BLNonNull[size];
     }
 }
