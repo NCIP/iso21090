@@ -1,12 +1,12 @@
 /**
  * The software subject to this notice and license includes both human readable
- * source code form and machine readable, binary, object code form. The iso-datatypes
+ * source code form and machine readable, binary, object code form. The ISO21090
  * Software was developed in conjunction with the National Cancer Institute
  * (NCI) by NCI employees and 5AM Solutions, Inc. (5AM). To the extent
  * government employees are authors, any rights in such works shall be subject
  * to Title 17 of the United States Code, section 105.
  *
- * This iso-datatypes Software License (the License) is between NCI and You. You (or
+ * This ISO21090 Software License (the License) is between NCI and You. You (or
  * Your) shall mean a person or an entity, and all other entities that control,
  * are controlled by, or are under common control with the entity. Control for
  * purposes of this definition means (i) the direct or indirect power to cause
@@ -17,10 +17,10 @@
  * This License is granted provided that You agree to the conditions described
  * below. NCI grants You a non-exclusive, worldwide, perpetual, fully-paid-up,
  * no-charge, irrevocable, transferable and royalty-free right and license in
- * its rights in the iso-datatypes Software to (i) use, install, access, operate,
+ * its rights in the ISO21090 Software to (i) use, install, access, operate,
  * execute, copy, modify, translate, market, publicly display, publicly perform,
- * and prepare derivative works of the iso-datatypes Software; (ii) distribute and
- * have distributed to and by third parties the iso-datatypes Software and any
+ * and prepare derivative works of the ISO21090 Software; (ii) distribute and
+ * have distributed to and by third parties the ISO21090 Software and any
  * modifications and derivative works thereof; and (iii) sublicense the
  * foregoing rights set out in (i) and (ii) to third parties, including the
  * right to license such rights to further third parties. For sake of clarity,
@@ -75,42 +75,92 @@
  * AFFILIATES BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
- * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * OR BUSINESS REALERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
  * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package gov.nih.nci.iso21090;
+package gov.nih.nci.iso21090.grid.dto.transform.iso;
 
+import gov.nih.nci.iso21090.Real;
+import gov.nih.nci.iso21090.grid.dto.transform.DtoTransformException;
+import gov.nih.nci.iso21090.grid.dto.transform.Transformer;
 
+import org.iso._21090.REAL;
 
 /**
- * Represents the iso BL Non Null data type.
- * @author lpower
+ * Transforms real numbers.
+ * @author mshestopalov
  */
-public final class BlNonNull extends Bl implements Cloneable {
-    
-    @Override
-    public void setNullFlavor(NullFlavor nf) {
-        throw new IllegalArgumentException("BL NON NULL does not support a null flavor.");
+public final class REALTransformer extends QTYTransformer<REAL, Real>
+    implements Transformer<REAL, Real> {
+
+    /**
+     * Public singleton.
+     */
+    public static final REALTransformer INSTANCE = new REALTransformer();
+
+    private REALTransformer() {
+
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public NullFlavor getNullFlavor() {
-        return null;
+    protected REAL newXml() {
+        return new REAL();
     }
-    
-    @SuppressWarnings("PMD.ProperCloneImplementation")
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public BlNonNull clone() {
-        BlNonNull snapshot = null;
-        try {
-            snapshot = new BlNonNull();
-            snapshot.setValue(this.getValue());
-        } catch (Exception e) {
-            throw new IsoCloneException(e);
+    protected Real newDto() {
+        return new Real();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public REAL toXml(Real input) throws DtoTransformException {
+        if (input == null) {
+            return null;
+        }
+        REAL x = transformBaseXml(input);
+        Double v = input.getValue();
+        if (v != null) {
+            x.setValue(v);
+        } else {
+            x.setNullFlavor(NullFlavorTransformer.INSTANCE.toXml(input.getNullFlavor()));
         }
 
-        return snapshot;
+        return x;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Real toDto(REAL input) throws DtoTransformException {
+        if (input == null) {
+            return null;
+        }
+        Real d = transformBaseDto(input);
+        Double v = input.getValue();
+        if (v != null) {
+            d.setValue(v);
+        } else {
+            d.setNullFlavor(NullFlavorTransformer.INSTANCE.toDto(input.getNullFlavor()));
+        }
+        return d;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public REAL[] createXmlArray(int size) throws DtoTransformException {
+        return new REAL[size];
+    }
+
+
 }

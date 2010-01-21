@@ -1,12 +1,12 @@
 /**
  * The software subject to this notice and license includes both human readable
- * source code form and machine readable, binary, object code form. The iso-datatypes
+ * source code form and machine readable, binary, object code form. The ISO21090
  * Software was developed in conjunction with the National Cancer Institute
  * (NCI) by NCI employees and 5AM Solutions, Inc. (5AM). To the extent
  * government employees are authors, any rights in such works shall be subject
  * to Title 17 of the United States Code, section 105.
  *
- * This iso-datatypes Software License (the License) is between NCI and You. You (or
+ * This ISO21090 Software License (the License) is between NCI and You. You (or
  * Your) shall mean a person or an entity, and all other entities that control,
  * are controlled by, or are under common control with the entity. Control for
  * purposes of this definition means (i) the direct or indirect power to cause
@@ -17,10 +17,10 @@
  * This License is granted provided that You agree to the conditions described
  * below. NCI grants You a non-exclusive, worldwide, perpetual, fully-paid-up,
  * no-charge, irrevocable, transferable and royalty-free right and license in
- * its rights in the iso-datatypes Software to (i) use, install, access, operate,
+ * its rights in the ISO21090 Software to (i) use, install, access, operate,
  * execute, copy, modify, translate, market, publicly display, publicly perform,
- * and prepare derivative works of the iso-datatypes Software; (ii) distribute and
- * have distributed to and by third parties the iso-datatypes Software and any
+ * and prepare derivative works of the ISO21090 Software; (ii) distribute and
+ * have distributed to and by third parties the ISO21090 Software and any
  * modifications and derivative works thereof; and (iii) sublicense the
  * foregoing rights set out in (i) and (ii) to third parties, including the
  * right to license such rights to further third parties. For sake of clarity,
@@ -75,42 +75,120 @@
  * AFFILIATES BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
- * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * OR BUSINESS REALERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
  * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package gov.nih.nci.iso21090;
+package gov.nih.nci.iso21090.grid.dto.transform.iso;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import gov.nih.nci.iso21090.Ed;
+import gov.nih.nci.iso21090.EdText;
+import gov.nih.nci.iso21090.Int;
+import gov.nih.nci.iso21090.Real;
+import gov.nih.nci.iso21090.UncertaintyType;
+import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformerTestBase;
 
+import org.iso._21090.ED;
+import org.iso._21090.EDText;
+import org.iso._21090.INT;
+import org.iso._21090.NullFlavor;
+import org.iso._21090.REAL;
+import org.junit.Test;
 
 /**
- * Represents the iso BL Non Null data type.
- * @author lpower
+ *
+ * @author max
  */
-public final class BlNonNull extends Bl implements Cloneable {
-    
-    @Override
-    public void setNullFlavor(NullFlavor nf) {
-        throw new IllegalArgumentException("BL NON NULL does not support a null flavor.");
-    }
-    
-    @Override
-    public NullFlavor getNullFlavor() {
-        return null;
-    }
-    
-    @SuppressWarnings("PMD.ProperCloneImplementation")
-    @Override
-    public BlNonNull clone() {
-        BlNonNull snapshot = null;
-        try {
-            snapshot = new BlNonNull();
-            snapshot.setValue(this.getValue());
-        } catch (Exception e) {
-            throw new IsoCloneException(e);
+public class REALTransformerTest extends AbstractTransformerTestBase<REALTransformer, REAL, Real>{
+
+        private static final Float VALUE = new Float(4.0);
+        private static final Integer UNCERT = 5;
+
+        @Override
+        public REAL makeXmlSimple() {
+            REAL x = new REAL();
+            x.setValue(new Double(VALUE));
+            EDText edText = new EDText();
+            ED ed = new EDTransformerTest().makeXmlSimple();
+            edText.setValue(ed.getValue());
+            edText.setNullFlavor(ed.getNullFlavor());
+            x.setOriginalText(edText);
+            INT uncert = new INT();
+            uncert.setValue(UNCERT);
+            uncert.setUncertainty(null);
+            uncert.setUncertaintyType(null);
+            x.setUncertainty(uncert);
+            x.setUncertaintyType(org.iso._21090.UncertaintyType.B);
+            return x;
         }
 
-        return snapshot;
+        @Override
+        public Real makeDtoSimple() {
+            Real x = new Real();
+            x.setValue(new Double(VALUE));
+            EdText edText = new EdText();
+            Ed ed = new EDTransformerTest().makeDtoSimple();
+            edText.setValue(ed.getValue());
+            edText.setNullFlavor(ed.getNullFlavor());
+            x.setOriginalText(edText);
+            Int uncert = new Int();
+            uncert.setValue(UNCERT);
+            uncert.setUncertainty(null);
+            uncert.setUncertaintyType(null);
+            x.setUncertainty(uncert);
+            x.setUncertaintyType(UncertaintyType.B);
+            return x;
+        }
+
+        @Override
+        public void verifyXmlSimple(REAL x) {
+            assertEquals(null, VALUE, x.getValue(), 0);
+            ED ed = new EDTransformerTest().makeXmlSimple();
+            assertEquals(ed.getValue(), x.getOriginalText().getValue());
+            assertEquals(ed.getNullFlavor(), x.getOriginalText().getNullFlavor());
+            assertEquals(UNCERT, ((INT) x.getUncertainty()).getValue());
+            assertNotNull(x.getUncertainty());
+            assertEquals(org.iso._21090.UncertaintyType.B, x.getUncertaintyType());
+        }
+
+        @Override
+        public void verifyDtoSimple(Real x) {
+            assertEquals(null, VALUE, x.getValue(), 0);
+            EdText edText = new EdText();
+            Ed ed = new EDTransformerTest().makeDtoSimple();
+            edText.setValue(ed.getValue());
+            edText.setNullFlavor(ed.getNullFlavor());
+            assertEquals(edText, x.getOriginalText());
+            Int uncert = new Int();
+            uncert.setValue(UNCERT);
+            uncert.setUncertainty(null);
+            uncert.setUncertaintyType(null);
+            assertEquals(uncert, x.getUncertainty());
+            assertEquals(UncertaintyType.B, x.getUncertaintyType());
+        }
+
+        public REAL makeXmlNullFlavored() {
+            REAL x = new REAL();
+            x.setNullFlavor(NullFlavor.NI);
+            return x;
+        }
+
+        public void verifyDtoNullFlavored(Real dto) {
+            assertNull(dto.getValue());
+            assertEquals(gov.nih.nci.iso21090.NullFlavor.NI, dto.getNullFlavor());
+        }
+
+        @Test
+        public void testRealNull() throws Exception {
+            Real ts = new Real();
+            ts.setNullFlavor(gov.nih.nci.iso21090.NullFlavor.ASKU);
+            REAL result = REALTransformer.INSTANCE.toXml(ts);
+            assertNotNull(result);
+            assertEquals(NullFlavor.ASKU, result.getNullFlavor());
+            assertNull(result.getValue());
+        }
     }
-}
