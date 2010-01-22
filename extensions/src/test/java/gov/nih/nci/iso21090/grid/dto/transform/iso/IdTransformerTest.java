@@ -156,7 +156,7 @@ public class IdTransformerTest extends AbstractTransformerTestBase<IdTransformer
      * @param id Ii to add to set
      * @return DSet<Ii> containing the id
      */
-    static DSet<Ii> convertIdToDSetIi(Ii id) {
+    public static DSet<Ii> convertIdToDSetIi(Ii id) {
         Set<Ii> identifiers = new LinkedHashSet<Ii>();
         identifiers.add(id);
         DSet<Ii> identifier = new DSet<Ii>();
@@ -164,7 +164,7 @@ public class IdTransformerTest extends AbstractTransformerTestBase<IdTransformer
         return identifier;
     }
 
-    static DSETII convertIIToDSETII(II ii) {
+    public static DSETII convertIIToDSETII(II ii) {
         DSETII identifier = new DSETII();
         identifier.getItem().add(ii);
         return identifier;
