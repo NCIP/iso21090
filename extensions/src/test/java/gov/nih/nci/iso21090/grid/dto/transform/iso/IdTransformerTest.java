@@ -88,6 +88,7 @@ import gov.nih.nci.iso21090.DSet;
 import gov.nih.nci.iso21090.IdentifierReliability;
 import gov.nih.nci.iso21090.IdentifierScope;
 import gov.nih.nci.iso21090.Ii;
+import gov.nih.nci.iso21090.extensions.Id;
 import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformerTestBase;
 
 import java.util.LinkedHashSet;
@@ -95,7 +96,6 @@ import java.util.Set;
 
 import org.iso._21090.DSETII;
 import org.iso._21090.II;
-import org.iso._21090.extensions.Id;
 
 public class IdTransformerTest extends AbstractTransformerTestBase<IdTransformer, Id, Ii> {
 

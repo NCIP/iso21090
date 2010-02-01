@@ -82,11 +82,10 @@
  */
 package gov.nih.nci.iso21090.grid.dto.transform.iso;
 
-import org.iso._21090.extensions.Id;
-
 import gov.nih.nci.iso21090.IdentifierReliability;
 import gov.nih.nci.iso21090.IdentifierScope;
 import gov.nih.nci.iso21090.Ii;
+import gov.nih.nci.iso21090.extensions.Id;
 import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformer;
 import gov.nih.nci.iso21090.grid.dto.transform.DtoTransformException;
 import gov.nih.nci.iso21090.grid.dto.transform.Transformer;

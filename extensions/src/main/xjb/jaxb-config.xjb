@@ -9,7 +9,7 @@
     
     <jxb:bindings schemaLocation="../xsd/ISO_extensions.xsd" node="/xs:schema">
         <jxb:schemaBindings>
-            <jxb:package name="org.iso._21090.extensions"/>
+            <jxb:package name="gov.nih.nci.iso21090.extensions"/>
         </jxb:schemaBindings>
     </jxb:bindings>
 </jxb:bindings>
