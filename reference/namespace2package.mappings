@@ -10,9 +10,9 @@ gme\://caGrid.caBIG/1.0/gov.nih.nci.cagrid.metadata.service=gov.nih.nci.cagrid.m
 gme\://caGrid.caBIG/1.0/gov.nih.nci.cagrid.metadata=gov.nih.nci.cagrid.metadata
 http\://reference.iso21090.nci.nih.gov/ISO21090ReferenceService/types=gov.nih.nci.iso21090.reference.stubs.types
 http\://reference.iso21090.nci.nih.gov=gov.nih.nci.iso21090.reference
-uri\:iso.org\:21090=iso.org._21090
+uri\:iso.org\:21090=org.iso._21090
 gme\://caGrid.caBIG/1.0/gov.nih.nci.cagrid.metadata.security=gov.nih.nci.cagrid.metadata.security
-http\://iso21090.nci.nih.gov=iso21090.nci.nih.gov
+http\://iso21090.nci.nih.gov=gov.nih.nci.iso21090
 gme\://caGrid.caBIG/1.0/gov.nih.nci.cagrid.metadata.common=gov.nih.nci.cagrid.metadata.common
 
 

@@ -23,6 +23,4 @@
             </xs:complexContent>
         </xs:complexType>
     </xs:element>
- 
-    
 </xs:schema>

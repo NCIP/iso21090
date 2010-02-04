@@ -61,7 +61,21 @@
 	<!-- Post Stubs Build Target                                        -->
 	<!-- ============================================================== -->
 	<target name="postStubs">
-
+	    <java classname="com.sun.tools.xjc.XJCFacade" fork="true" failonerror="true">
+	        <classpath>
+	            <path refid="base.classpath"/>
+	        </classpath>
+	        <arg value="-xmlschema" />
+	        <arg file="${basedir}/schema/ISO21090ReferenceService/ReferenceObjects.xsd" />
+	        <arg file="${basedir}/schema/ISO21090ReferenceService/ISO_datatypes_Narrative.xsd" />
+	        <arg value="-d" />
+	        <arg file="${stubs.src}" />
+	        <arg value="-b" />
+	        <arg file="${basedir}/schema/ISO21090ReferenceService/jaxb-config.xjb" />
+	        <arg value="-nv" />
+	        <arg value="-verbose" />
+	    </java>
+	    <delete dir="${stubs.src}/org" />
 	</target>
 
 	<!-- ============================================================== -->

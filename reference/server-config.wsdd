@@ -15,6 +15,14 @@
   </service>
   <typeMapping name="AggregatorContent" qname="aggr:AggregatorContent" type="java:org.globus.mds.aggregator.types.AggregatorContent" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" />
   <!-- START INTRODUCE TYPEMAPPINGS -->
+<ns3:typeMapping encodingStyle="" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" type="ns1:gov.nih.nci.iso21090.Bl" qname="ns2:Bl" xmlns:ns1="http://xml.apache.org/axis/wsdd/providers/java" xmlns:ns2="http://iso21090.nci.nih.gov" xmlns:ns3="http://xml.apache.org/axis/wsdd/"/>
+
+<ns3:typeMapping encodingStyle="" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" type="ns1:gov.nih.nci.iso21090.Cd" qname="ns2:Cd" xmlns:ns1="http://xml.apache.org/axis/wsdd/providers/java" xmlns:ns2="http://iso21090.nci.nih.gov" xmlns:ns3="http://xml.apache.org/axis/wsdd/"/>
+
+<ns3:typeMapping encodingStyle="" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" type="ns1:gov.nih.nci.iso21090.Id" qname="ns2:Id" xmlns:ns1="http://xml.apache.org/axis/wsdd/providers/java" xmlns:ns2="http://iso21090.nci.nih.gov" xmlns:ns3="http://xml.apache.org/axis/wsdd/"/>
+
+<ns3:typeMapping encodingStyle="" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" type="ns1:gov.nih.nci.iso21090.Id" qname="ns2:St" xmlns:ns1="http://xml.apache.org/axis/wsdd/providers/java" xmlns:ns2="http://iso21090.nci.nih.gov" xmlns:ns3="http://xml.apache.org/axis/wsdd/"/>
+
 <ns3:typeMapping encodingStyle="" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" type="ns1:gov.nih.nci.iso21090.reference.MyObject" qname="ns2:MyObject" xmlns:ns1="http://xml.apache.org/axis/wsdd/providers/java" xmlns:ns2="http://reference.iso21090.nci.nih.gov" xmlns:ns3="http://xml.apache.org/axis/wsdd/"/>
 
 

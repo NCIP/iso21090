@@ -1,12 +1,12 @@
 <ns1:ServiceDescription introduceVersion="1.3" xmlns:ns1="gme://gov.nih.nci.cagrid/1/Introduce">
  <ns2:Namespaces xsi:type="ns2:NamespacesType" xmlns:ns2="gme://gov.nih.nci.cagrid.introduce/1/Namespace" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <ns2:Namespace location="./ISO_extensions.xsd" namespace="http://iso21090.nci.nih.gov" packageName="iso21090.nci.nih.gov" xsi:type="ns2:NamespaceType">
-   <ns2:SchemaElement type="Bl" xsi:type="ns2:SchemaElementType"/>
-   <ns2:SchemaElement type="Cd" xsi:type="ns2:SchemaElementType"/>
-   <ns2:SchemaElement type="Id" xsi:type="ns2:SchemaElementType"/>
-   <ns2:SchemaElement type="St" xsi:type="ns2:SchemaElementType"/>
+  <ns2:Namespace generateStubs="false" location="./ISO_extensions.xsd" namespace="http://iso21090.nci.nih.gov" packageName="gov.nih.nci.iso21090" xsi:type="ns2:NamespaceType">
+   <ns2:SchemaElement className="Bl" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="Bl" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="Cd" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="Cd" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="Id" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="Id" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="Id" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="St" xsi:type="ns2:SchemaElementType"/>
   </ns2:Namespace>
-  <ns2:Namespace location="./ISO_datatypes_Narrative.xsd" namespace="uri:iso.org:21090" packageName="iso.org._21090" xsi:type="ns2:NamespaceType">
+  <ns2:Namespace location="./ISO_datatypes_Narrative.xsd" namespace="uri:iso.org:21090" packageName="org.iso._21090" xsi:type="ns2:NamespaceType">
    <ns2:SchemaElement type="br" xsi:type="ns2:SchemaElementType"/>
    <ns2:SchemaElement type="caption" xsi:type="ns2:SchemaElementType"/>
    <ns2:SchemaElement type="col" xsi:type="ns2:SchemaElementType"/>
