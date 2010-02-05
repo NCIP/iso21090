@@ -5,7 +5,9 @@
 	<!-- deploy process without having to edit the build-deploy.xml     -->
 	<!-- file. DO NOT REMOVE ANY TARGETS                                -->
 	<!-- ============================================================== -->
-
+    <property name="jboss.serverinstance.name" value="refimpl"/>
+    <property name="globus.webapp" value="wsrf" />
+    <property name="webapp.deploy.dir" value="${jboss.dir}/server/${jboss.serverinstance.name}/deploy/${globus.webapp}.war" />
 
 	<!-- ============================================================== -->
 	<!-- Pre Deploy Tomcat                                              -->

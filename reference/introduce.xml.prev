@@ -162,7 +162,7 @@
     </ns4:Method>
    </ns4:Methods>
    <ns13:ResourcePropertiesList xsi:type="ns13:ResourcePropertiesListType" xmlns:ns13="gme://gov.nih.nci.cagrid.introduce/1/Resources">
-    <ns13:ResourceProperty qName="ns14:ServiceMetadata" fileLocation="serviceMetadata.xml" populateFromFile="true" register="true" xsi:type="ns13:ResourcePropertyType" xmlns:ns14="gme://caGrid.caBIG/1.0/gov.nih.nci.cagrid.metadata"/>
+    <ns13:ResourceProperty qName="ns14:ServiceMetadata" description="" fileLocation="serviceMetadata.xml" populateFromFile="true" register="true" xsi:type="ns13:ResourcePropertyType" xmlns:ns14="gme://caGrid.caBIG/1.0/gov.nih.nci.cagrid.metadata"/>
    </ns13:ResourcePropertiesList>
    <ns3:description xsi:type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"></ns3:description>
    <ns3:ResourceFrameworkOptions xsi:type="ns3:ResourceFrameworkOptions">

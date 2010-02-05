@@ -10,10 +10,11 @@
 	<!-- ============================================================== -->
 	<!-- Place any other properties you will need here                  -->
 	<!-- ============================================================== -->
-
-
-
-
+    <property file="local.properties" />
+    <property name="service.hostname" value="localhost" />
+    <property name="service.port" value="8080" />
+    <property name="build.dir" location="build" />
+    
 	<!-- ============================================================== -->
 	<!-- Create any extended Classpaths here                            -->
 	<!-- ============================================================== -->
@@ -39,7 +40,7 @@
 	<!-- Pre Init Target                                                -->
 	<!-- ============================================================== -->
 	<target name="preInit">
-
+	    
 	</target>
 
 	<!-- ============================================================== -->
