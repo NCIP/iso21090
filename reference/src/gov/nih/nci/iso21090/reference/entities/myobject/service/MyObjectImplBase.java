@@ -1,6 +1,6 @@
-package gov.nih.nci.iso21090.reference.service;
+package gov.nih.nci.iso21090.reference.entities.myobject.service;
 
-import gov.nih.nci.iso21090.reference.service.globus.resource.ISO21090ReferenceServiceResource;
+import gov.nih.nci.iso21090.reference.entities.myobject.service.globus.resource.MyObjectResource;
 import  gov.nih.nci.iso21090.reference.service.ISO21090ReferenceServiceConfiguration;
 
 import java.rmi.RemoteException;
@@ -26,9 +26,9 @@ import org.globus.wsrf.ResourcePropertySet;
  * @created by Introduce Toolkit version 1.3
  * 
  */
-public abstract class ISO21090ReferenceServiceImplBase {
+public abstract class MyObjectImplBase {
 	
-	public ISO21090ReferenceServiceImplBase() throws RemoteException {
+	public MyObjectImplBase() throws RemoteException {
 	
 	}
 	
@@ -37,17 +37,17 @@ public abstract class ISO21090ReferenceServiceImplBase {
 	}
 	
 	
-	public gov.nih.nci.iso21090.reference.service.globus.resource.ISO21090ReferenceServiceResourceHome getResourceHome() throws Exception {
+	public gov.nih.nci.iso21090.reference.entities.myobject.service.globus.resource.MyObjectResourceHome getResourceHome() throws Exception {
 		ResourceHome resource = getResourceHome("home");
-		return (gov.nih.nci.iso21090.reference.service.globus.resource.ISO21090ReferenceServiceResourceHome)resource;
+		return (gov.nih.nci.iso21090.reference.entities.myobject.service.globus.resource.MyObjectResourceHome)resource;
 	}
 
 	
 	
 	
-	public gov.nih.nci.iso21090.reference.entities.myobject.service.globus.resource.MyObjectResourceHome getMyObjectResourceHome() throws Exception {
-		ResourceHome resource = getResourceHome("myObjectHome");
-		return (gov.nih.nci.iso21090.reference.entities.myobject.service.globus.resource.MyObjectResourceHome)resource;
+	public gov.nih.nci.iso21090.reference.service.globus.resource.ISO21090ReferenceServiceResourceHome getISO21090ReferenceServiceResourceHome() throws Exception {
+		ResourceHome resource = getResourceHome("iSO21090ReferenceServiceHome");
+		return (gov.nih.nci.iso21090.reference.service.globus.resource.ISO21090ReferenceServiceResourceHome)resource;
 	}
 	
 	

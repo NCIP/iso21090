@@ -1,6 +1,6 @@
 <ns1:ServiceDescription introduceVersion="1.3" xmlns:ns1="gme://gov.nih.nci.cagrid/1/Introduce">
  <ns2:Namespaces xsi:type="ns2:NamespacesType" xmlns:ns2="gme://gov.nih.nci.cagrid.introduce/1/Namespace" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <ns2:Namespace generateStubs="false" location="./ISO_extensions.xsd" namespace="http://iso21090.nci.nih.gov" packageName="gov.nih.nci.iso21090" xsi:type="ns2:NamespaceType">
+  <ns2:Namespace generateStubs="false" location="./ISO_extensions.xsd" namespace="http://iso21090.nci.nih.gov" packageName="gov.nih.nci.iso21090.extensions" xsi:type="ns2:NamespaceType">
    <ns2:SchemaElement className="Bl" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="Bl" xsi:type="ns2:SchemaElementType"/>
    <ns2:SchemaElement className="Cd" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="Cd" xsi:type="ns2:SchemaElementType"/>
    <ns2:SchemaElement className="Id" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="Id" xsi:type="ns2:SchemaElementType"/>
@@ -118,6 +118,9 @@
    <ns2:SchemaElement type="UMLClass" xsi:type="ns2:SchemaElementType"/>
    <ns2:SchemaElement type="ValueDomain" xsi:type="ns2:SchemaElementType"/>
   </ns2:Namespace>
+  <ns2:Namespace location="./MyObjectTypes.xsd" namespace="http://reference.iso21090.nci.nih.gov/MyObject/types" packageName="gov.nih.nci.iso21090.reference.entities.myobject.stubs.types" xsi:type="ns2:NamespaceType">
+   <ns2:SchemaElement type="MyObjectReference" xsi:type="ns2:SchemaElementType"/>
+  </ns2:Namespace>
  </ns2:Namespaces>
  <ns3:Services xsi:type="ns3:ServicesType" xmlns:ns3="gme://gov.nih.nci.cagrid.introduce/1/Services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <ns3:Service name="ISO21090ReferenceService" namespace="http://reference.iso21090.nci.nih.gov/ISO21090ReferenceService" packageName="gov.nih.nci.iso21090.reference" xsi:type="ns3:ServiceType">
@@ -169,8 +172,56 @@
     <ns3:ResourcePropertyManagement xsi:type="ns3:ResourcePropertyManagement"/>
    </ns3:ResourceFrameworkOptions>
   </ns3:Service>
+  <ns3:Service name="MyObject" namespace="http://reference.iso21090.nci.nih.gov/MyObject" packageName="gov.nih.nci.iso21090.reference.entities.myobject" xsi:type="ns3:ServiceType">
+   <ns15:Methods xsi:type="ns15:MethodsType" xmlns:ns15="gme://gov.nih.nci.cagrid.introduce/1/Methods">
+    <ns15:Method description="" isImported="false" isProvided="false" name="create" xsi:type="ns15:MethodType">
+     <ns15:Inputs>
+      <ns15:Input qName="ns16:MyObject" description="" isArray="false" name="myObject" xmlns:ns16="http://reference.iso21090.nci.nih.gov"/>
+     </ns15:Inputs>
+     <ns15:Output qName="ns17:Id" description="" isArray="false" xmlns:ns17="http://iso21090.nci.nih.gov"/>
+     <ns15:Exceptions/>
+    </ns15:Method>
+    <ns15:Method description="" isImported="false" isProvided="false" name="getById" xsi:type="ns15:MethodType">
+     <ns15:Inputs>
+      <ns15:Input qName="ns18:Id" description="" isArray="false" name="id" xmlns:ns18="http://iso21090.nci.nih.gov"/>
+     </ns15:Inputs>
+     <ns15:Output qName="ns19:MyObject" description="" isArray="false" xmlns:ns19="http://reference.iso21090.nci.nih.gov"/>
+     <ns15:Exceptions/>
+    </ns15:Method>
+    <ns15:Method description="" isImported="false" isProvided="false" name="update" xsi:type="ns15:MethodType">
+     <ns15:Inputs>
+      <ns15:Input qName="ns20:MyObject" description="" isArray="false" name="myObject" xmlns:ns20="http://reference.iso21090.nci.nih.gov"/>
+     </ns15:Inputs>
+     <ns15:Output qName="void" description="" isArray="false"/>
+     <ns15:Exceptions/>
+    </ns15:Method>
+    <ns15:Method description="" isImported="false" isProvided="false" name="delete" xsi:type="ns15:MethodType">
+     <ns15:Inputs>
+      <ns15:Input qName="ns21:MyObject" description="" isArray="false" name="myObject" xmlns:ns21="http://reference.iso21090.nci.nih.gov"/>
+     </ns15:Inputs>
+     <ns15:Output qName="void" description="" isArray="false"/>
+     <ns15:Exceptions/>
+    </ns15:Method>
+    <ns15:Method isImported="true" isProvided="true" name="getServiceSecurityMetadata" xsi:type="ns15:MethodType">
+     <ns15:Output qName="ns22:ServiceSecurityMetadata" isArray="false" isClientHandle="false" xmlns:ns22="gme://caGrid.caBIG/1.0/gov.nih.nci.cagrid.metadata.security"/>
+     <ns23:MethodSecurity xsi:type="ns23:MethodSecurity" xmlns:ns23="gme://gov.nih.nci.cagrid.introduce/1/Security">
+      <ns23:SecuritySetting xsi:type="ns23:SecuritySetting">None</ns23:SecuritySetting>
+      <ns23:MethodAuthorization xsi:type="ns23:MethodAuthorization">
+       <ns23:NoAuthorization xsi:type="ns23:NoAuthorization"/>
+      </ns23:MethodAuthorization>
+     </ns23:MethodSecurity>
+     <ns15:ImportInformation namespace="http://security.introduce.cagrid.nci.nih.gov/ServiceSecurity" packageName="gov.nih.nci.cagrid.introduce.security.stubs" portTypeName="ServiceSecurityPortType" wsdlFile="ServiceSecurity.wsdl"/>
+     <ns15:ProviderInformation providerClass="gov.nih.nci.cagrid.introduce.security.service.globus.ServiceSecurityProviderImpl"/>
+    </ns15:Method>
+   </ns15:Methods>
+   <ns24:ResourcePropertiesList xsi:type="ns24:ResourcePropertiesListType" xmlns:ns24="gme://gov.nih.nci.cagrid.introduce/1/Resources"/>
+   <ns3:description xsi:type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"></ns3:description>
+   <ns3:ResourceFrameworkOptions xsi:type="ns3:ResourceFrameworkOptions">
+    <ns3:Identifiable xsi:type="ns3:Identifiable"/>
+   </ns3:ResourceFrameworkOptions>
+  </ns3:Service>
  </ns3:Services>
- <ns15:Extensions xsi:type="ns15:ExtensionsType" xmlns:ns15="gme://gov.nih.nci.cagrid.introduce/1/Extension" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <ns15:Extension name="cagrid_metadata" version="1.3" xsi:type="ns15:ExtensionType"/>
- </ns15:Extensions>
+ <ns25:Extensions xsi:type="ns25:ExtensionsType" xmlns:ns25="gme://gov.nih.nci.cagrid.introduce/1/Extension" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ns25:Extension name="cagrid_metadata" version="1.3" xsi:type="ns25:ExtensionType"/>
+ </ns25:Extensions>
 </ns1:ServiceDescription>
