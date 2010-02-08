@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jndiConfig xmlns="http://wsrf.globus.org/jndi/config">
+  <service name="SERVICE-INSTANCE-PREFIX/ISO21090ReferenceService">
+    <resource name="configuration" type="gov.nih.nci.iso21090.reference.service.service.globus.resource.ISO21090ReferenceServiceResourceConfiguration">
+      <resourceParams>
+        <parameter>
+          <name>factory</name>
+          <value>org.globus.wsrf.jndi.BeanFactory</value>
+        </parameter>
+        <parameter>
+          <name>performRegistration</name>
+          <!-- Set this to false to skip ServiceGroup registration -->
+          <value>PERFORM_REGISTRATION</value>
+        </parameter>
+        <parameter>
+          <name>registrationTemplateFile</name>
+          <!-- Set this to the relative path (from the container root, e.g GLOBUS_LOCATION for globus container) of the registration parameters template file (ignored if performRegistration is false) -->
+          <value>ETC-PATH/ISO21090ReferenceService_registration.xml</value>
+        </parameter>
+        <parameter>
+          <name>serviceMetadataFile</name>
+          <!-- Set this to the relative path (from the container root, e.g GLOBUS_LOCATION for globus container) of the serviceMetadata extract -->
+          <value>ETC-PATH/serviceMetadata.xml</value>
+        </parameter>
+      </resourceParams>
+    </resource>
+    <resource name="serviceconfiguration" type="gov.nih.nci.iso21090.reference.service.service.ISO21090ReferenceServiceConfiguration">
+      <resourceParams>
+        <parameter>
+          <name>factory</name>
+          <value>org.globus.wsrf.jndi.BeanFactory</value>
+        </parameter>
+        <parameter>
+          <name>etcDirectoryPath</name>
+          <value>ETC-PATH</value>
+        </parameter>
+      </resourceParams>
+    </resource>
+    <resource name="home" type="gov.nih.nci.iso21090.reference.service.service.globus.resource.ISO21090ReferenceServiceResourceHome">
+      <resourceParams>
+        <parameter>
+          <name>factory</name>
+          <value>org.globus.wsrf.jndi.BeanFactory</value>
+        </parameter>
+      </resourceParams>
+    </resource>
+  </service>
+</jndiConfig>
+
