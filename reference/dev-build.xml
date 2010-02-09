@@ -208,7 +208,7 @@
 	</target>
     
     <macrodef name="run-client">
-        <attribute name="class" default="gov.nih.nci.iso21090.reference.client.ISO21090ReferenceServiceClient" />
+        <attribute name="class" default="gov.nih.nci.iso21090.reference.service.client.ISO21090ReferenceServiceClient" />
         <attribute name="serviceEndpointName" default="ISO21090ReferenceService" />
         <attribute name="hostname" default="${service.hostname}" />
         <attribute name="port" default="${service.port}" />
@@ -230,7 +230,7 @@
    </macrodef>
     
     <target name="runMyObjectClient" depends="checkGlobus, defineClasspaths" description="Run the sample MyObject Client">
-        <run-client serviceEndpointName="MyObject" class="gov.nih.nci.iso21090.reference.entities.myobject.client.MyObjectClient" debug-suspend="n" />
+        <run-client serviceEndpointName="MyObject" class="gov.nih.nci.iso21090.reference.service.entities.myobject.client.MyObjectClient" debug-suspend="n" />
     </target>
 
 </project>
