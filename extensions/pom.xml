@@ -2,12 +2,12 @@
     <parent>
         <artifactId>ISO21090</artifactId>
         <groupId>gov.nih.nci.iso21090</groupId>
-        <version>2.0-SNAPSHOT</version>
+        <version>2.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>iso-datatypes-extensions</artifactId>
     <packaging>jar</packaging>
-    <version>2.0-SNAPSHOT</version>
+    <version>2.0</version>
     <name>extensions</name>
     <url>../../extensions/target/site/</url>
     
@@ -113,7 +113,7 @@
         <dependency>
             <groupId>gov.nih.nci.iso21090</groupId>
             <artifactId>iso-datatypes</artifactId>
-            <version>2.0-SNAPSHOT</version>
+            <version>2.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
