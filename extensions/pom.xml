@@ -68,6 +68,7 @@
         <plugins>
             <plugin>
                 <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>2.4</version>
                 <configuration>
                     <configLocation>../localization/src/main/resources/Checkstyle-5.xml</configLocation>
                 </configuration>
