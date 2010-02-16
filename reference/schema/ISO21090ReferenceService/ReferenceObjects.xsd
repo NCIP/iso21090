@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:ISO="uri:iso.org:21090"  xmlns:REF-OBJ="http://reference.iso21090.nci.nih.gov" 
+    targetNamespace="http://reference.iso21090.nci.nih.gov" elementFormDefault="qualified" 
+    xmlns:jxb="http://java.sun.com/xml/ns/jaxb" jxb:version="1.0">
+    <xs:import schemaLocation="ISO_datatypes_Narrative.xsd" namespace="uri:iso.org:21090" />
+    
+    <xs:complexType name="Entity" abstract="true">
+        <xs:sequence>
+            <xs:element name="id" type="ISO:II" />
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:element name="Person">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="REF-OBJ:Entity">
+                    <xs:sequence>
+                        <xs:element name="name" type="ISO:EN.PN"/>
+                        <xs:element name="favoriteColor" type="ISO:ST"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+ 
+    
+</xs:schema>
