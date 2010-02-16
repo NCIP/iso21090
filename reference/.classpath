@@ -86,5 +86,6 @@
 	<classpathentry kind="lib" path="lib/jaxb-impl-2.1.4.jar"/>
 	<classpathentry kind="lib" path="lib/jaxb-xjc-2.1.4.jar"/>
 	<classpathentry kind="lib" path="lib/stax-api-1.0-2.jar"/>
+	<classpathentry kind="lib" path="lib/commons-lang-2.4.jar"/>
 	<classpathentry kind="output" path="eclipse-out"/>
 </classpath>

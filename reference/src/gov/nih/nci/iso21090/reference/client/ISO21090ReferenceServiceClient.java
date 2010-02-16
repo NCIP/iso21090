@@ -16,6 +16,8 @@ import org.oasis.wsrf.properties.GetResourcePropertyResponse;
 
 import org.globus.gsi.GlobusCredential;
 
+import gov.nih.nci.iso21090.Constants;
+import gov.nih.nci.iso21090.extensions.Id;
 import gov.nih.nci.iso21090.reference.stubs.ISO21090ReferenceServicePortType;
 import gov.nih.nci.iso21090.reference.stubs.service.ISO21090ReferenceServiceAddressingLocator;
 import gov.nih.nci.iso21090.reference.common.ISO21090ReferenceServiceI;
@@ -62,6 +64,8 @@ public class ISO21090ReferenceServiceClient extends ISO21090ReferenceServiceClie
 			  ISO21090ReferenceServiceClient client = new ISO21090ReferenceServiceClient(args[1]);
 			  // place client calls here if you want to use this main as a
 			  // test....
+			  System.out.println("Retrieving person.");
+			  //ClientUtils.handleResult(client.getPersonById(createII()));
 			} else {
 				usage();
 				System.exit(1);
@@ -75,6 +79,48 @@ public class ISO21090ReferenceServiceClient extends ISO21090ReferenceServiceClie
 			System.exit(1);
 		}
 	}
+	
+	private static Id createII() {
+	    Id id = new Id();
+	    id.setRoot(Constants.NCI_OID);
+	    id.setIdentifierName("Person");
+	    id.setExtension("1");
+	    return id;
+	}
+
+  public gov.nih.nci.iso21090.extensions.Id createPerson(gov.nih.nci.iso21090.reference.Person person) throws RemoteException {
+    synchronized(portTypeMutex){
+      configureStubSecurity((Stub)portType,"createPerson");
+    gov.nih.nci.iso21090.reference.stubs.CreatePersonRequest params = new gov.nih.nci.iso21090.reference.stubs.CreatePersonRequest();
+    gov.nih.nci.iso21090.reference.stubs.CreatePersonRequestPerson personContainer = new gov.nih.nci.iso21090.reference.stubs.CreatePersonRequestPerson();
+    personContainer.setPerson(person);
+    params.setPerson(personContainer);
+    gov.nih.nci.iso21090.reference.stubs.CreatePersonResponse boxedResult = portType.createPerson(params);
+    return boxedResult.getId();
+    }
+  }
+
+  public void updatePerson(gov.nih.nci.iso21090.reference.Person person) throws RemoteException {
+    synchronized(portTypeMutex){
+      configureStubSecurity((Stub)portType,"updatePerson");
+    gov.nih.nci.iso21090.reference.stubs.UpdatePersonRequest params = new gov.nih.nci.iso21090.reference.stubs.UpdatePersonRequest();
+    gov.nih.nci.iso21090.reference.stubs.UpdatePersonRequestPerson personContainer = new gov.nih.nci.iso21090.reference.stubs.UpdatePersonRequestPerson();
+    personContainer.setPerson(person);
+    params.setPerson(personContainer);
+    gov.nih.nci.iso21090.reference.stubs.UpdatePersonResponse boxedResult = portType.updatePerson(params);
+    }
+  }
+
+  public void deletePerson(gov.nih.nci.iso21090.reference.Person person) throws RemoteException {
+    synchronized(portTypeMutex){
+      configureStubSecurity((Stub)portType,"deletePerson");
+    gov.nih.nci.iso21090.reference.stubs.DeletePersonRequest params = new gov.nih.nci.iso21090.reference.stubs.DeletePersonRequest();
+    gov.nih.nci.iso21090.reference.stubs.DeletePersonRequestPerson personContainer = new gov.nih.nci.iso21090.reference.stubs.DeletePersonRequestPerson();
+    personContainer.setPerson(person);
+    params.setPerson(personContainer);
+    gov.nih.nci.iso21090.reference.stubs.DeletePersonResponse boxedResult = portType.deletePerson(params);
+    }
+  }
 
   public org.oasis.wsrf.properties.GetMultipleResourcePropertiesResponse getMultipleResourceProperties(org.oasis.wsrf.properties.GetMultipleResourceProperties_Element params) throws RemoteException {
     synchronized(portTypeMutex){
@@ -94,6 +140,18 @@ public class ISO21090ReferenceServiceClient extends ISO21090ReferenceServiceClie
     synchronized(portTypeMutex){
       configureStubSecurity((Stub)portType,"queryResourceProperties");
     return portType.queryResourceProperties(params);
+    }
+  }
+
+  public gov.nih.nci.iso21090.reference.Person getPersonById(gov.nih.nci.iso21090.extensions.Id id) throws RemoteException {
+    synchronized(portTypeMutex){
+      configureStubSecurity((Stub)portType,"getPersonById");
+    gov.nih.nci.iso21090.reference.stubs.GetPersonByIdRequest params = new gov.nih.nci.iso21090.reference.stubs.GetPersonByIdRequest();
+    gov.nih.nci.iso21090.reference.stubs.GetPersonByIdRequestId idContainer = new gov.nih.nci.iso21090.reference.stubs.GetPersonByIdRequestId();
+    idContainer.setId(id);
+    params.setId(idContainer);
+    gov.nih.nci.iso21090.reference.stubs.GetPersonByIdResponse boxedResult = portType.getPersonById(params);
+    return boxedResult.getPerson();
     }
   }
 

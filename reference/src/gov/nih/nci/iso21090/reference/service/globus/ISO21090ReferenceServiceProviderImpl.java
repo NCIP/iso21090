@@ -26,4 +26,28 @@ public class ISO21090ReferenceServiceProviderImpl{
 	}
 	
 
+    public gov.nih.nci.iso21090.reference.stubs.CreatePersonResponse createPerson(gov.nih.nci.iso21090.reference.stubs.CreatePersonRequest params) throws RemoteException {
+    gov.nih.nci.iso21090.reference.stubs.CreatePersonResponse boxedResult = new gov.nih.nci.iso21090.reference.stubs.CreatePersonResponse();
+    boxedResult.setId(impl.createPerson(params.getPerson().getPerson()));
+    return boxedResult;
+  }
+
+    public gov.nih.nci.iso21090.reference.stubs.UpdatePersonResponse updatePerson(gov.nih.nci.iso21090.reference.stubs.UpdatePersonRequest params) throws RemoteException {
+    gov.nih.nci.iso21090.reference.stubs.UpdatePersonResponse boxedResult = new gov.nih.nci.iso21090.reference.stubs.UpdatePersonResponse();
+    impl.updatePerson(params.getPerson().getPerson());
+    return boxedResult;
+  }
+
+    public gov.nih.nci.iso21090.reference.stubs.DeletePersonResponse deletePerson(gov.nih.nci.iso21090.reference.stubs.DeletePersonRequest params) throws RemoteException {
+    gov.nih.nci.iso21090.reference.stubs.DeletePersonResponse boxedResult = new gov.nih.nci.iso21090.reference.stubs.DeletePersonResponse();
+    impl.deletePerson(params.getPerson().getPerson());
+    return boxedResult;
+  }
+
+    public gov.nih.nci.iso21090.reference.stubs.GetPersonByIdResponse getPersonById(gov.nih.nci.iso21090.reference.stubs.GetPersonByIdRequest params) throws RemoteException {
+    gov.nih.nci.iso21090.reference.stubs.GetPersonByIdResponse boxedResult = new gov.nih.nci.iso21090.reference.stubs.GetPersonByIdResponse();
+    boxedResult.setPerson(impl.getPersonById(params.getId().getId()));
+    return boxedResult;
+  }
+
 }

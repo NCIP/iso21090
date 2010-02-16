@@ -70,6 +70,22 @@ public class ISO21090ReferenceServiceAuthorization implements PDP {
 	public void authorizeGetServiceSecurityMetadata(Subject peerSubject, MessageContext context, QName operation) throws AuthorizationException {
 		
 	}
+	   				
+	public void authorizeGetPersonById(Subject peerSubject, MessageContext context, QName operation) throws AuthorizationException {
+		
+	}
+	   				
+	public void authorizeCreatePerson(Subject peerSubject, MessageContext context, QName operation) throws AuthorizationException {
+		
+	}
+	   				
+	public void authorizeUpdatePerson(Subject peerSubject, MessageContext context, QName operation) throws AuthorizationException {
+		
+	}
+	   				
+	public void authorizeDeletePerson(Subject peerSubject, MessageContext context, QName operation) throws AuthorizationException {
+		
+	}
 	   
 	
 	public boolean isPermitted(Subject peerSubject, MessageContext context, QName operation)
@@ -89,6 +105,18 @@ public class ISO21090ReferenceServiceAuthorization implements PDP {
 			return true;
 		} else if(operation.getLocalPart().equals("getServiceSecurityMetadata")){
 			authorizeGetServiceSecurityMetadata(peerSubject, context, operation);
+			return true;
+		} else if(operation.getLocalPart().equals("getPersonById")){
+			authorizeGetPersonById(peerSubject, context, operation);
+			return true;
+		} else if(operation.getLocalPart().equals("createPerson")){
+			authorizeCreatePerson(peerSubject, context, operation);
+			return true;
+		} else if(operation.getLocalPart().equals("updatePerson")){
+			authorizeUpdatePerson(peerSubject, context, operation);
+			return true;
+		} else if(operation.getLocalPart().equals("deletePerson")){
+			authorizeDeletePerson(peerSubject, context, operation);
 			return true;
 		} 		
 		return false;
