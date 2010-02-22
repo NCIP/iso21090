@@ -14,9 +14,9 @@
     <agg:AggregatorConfig xsi:type="agg:AggregatorConfig">
       <agg:GetMultipleResourcePropertiesPollType
 			xmlns:ns6="gme://caGrid.caBIG/1.0/gov.nih.nci.cagrid.metadata.service"
+			xmlns:ns0="http://impl.reference.iso21090.nci.nih.gov"
 			xmlns:ns5="gme://caGrid.caBIG/1.0/gov.nih.nci.cagrid.metadata"
 			xmlns:ns3="http://reference.iso21090.nci.nih.gov/ISO21090ReferenceService/types"
-			xmlns:ns0="http://reference.iso21090.nci.nih.gov"
 			xmlns:ns1="uri:iso.org:21090"
 			xmlns:xs="http://www.w3.org/2001/XMLSchema"
 			xmlns:ns4="gme://caGrid.caBIG/1.0/gov.nih.nci.cagrid.metadata.security"

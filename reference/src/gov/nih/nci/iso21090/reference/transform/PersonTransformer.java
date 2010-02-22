@@ -6,7 +6,7 @@ import gov.nih.nci.iso21090.grid.dto.transform.Transformer;
 import gov.nih.nci.iso21090.grid.dto.transform.iso.ENTransformer;
 import gov.nih.nci.iso21090.grid.dto.transform.iso.IITransformer;
 import gov.nih.nci.iso21090.grid.dto.transform.iso.STTransformer;
-import gov.nih.nci.iso21090.reference.Person;
+import gov.nih.nci.iso21090.reference.impl.Person;
 import gov.nih.nci.iso21090.reference.dto.PersonDTO;
 
 public final class PersonTransformer extends AbstractTransformer<Person, PersonDTO> 

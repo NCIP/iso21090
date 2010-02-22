@@ -22,7 +22,7 @@ public class ISO21090ReferenceServiceImpl extends ISO21090ReferenceServiceImplBa
         super();
     }
 
-    public gov.nih.nci.iso21090.extensions.Id createPerson(gov.nih.nci.iso21090.reference.Person person) throws RemoteException {
+  public gov.nih.nci.iso21090.extensions.Id createPerson(gov.nih.nci.iso21090.reference.impl.Person person) throws RemoteException {
         try {
             PersonDTO personDto = PersonTransformer.INSTANCE.toDto(person);
             Ii id = personService.createPerson(personDto);
@@ -33,7 +33,7 @@ public class ISO21090ReferenceServiceImpl extends ISO21090ReferenceServiceImplBa
         }
     }
 
-    public gov.nih.nci.iso21090.reference.Person getPersonById(gov.nih.nci.iso21090.extensions.Id id) throws RemoteException {
+  public gov.nih.nci.iso21090.reference.impl.Person getPersonById(gov.nih.nci.iso21090.extensions.Id id) throws RemoteException {
         try {
             Ii ii = IITransformer.INSTANCE.toDto(id);
             PersonDTO personDto = personService.getPerson(ii);
@@ -44,7 +44,7 @@ public class ISO21090ReferenceServiceImpl extends ISO21090ReferenceServiceImplBa
         }
     }
 
-    public void updatePerson(gov.nih.nci.iso21090.reference.Person person) throws RemoteException {
+  public void updatePerson(gov.nih.nci.iso21090.reference.impl.Person person) throws RemoteException {
         try {
             PersonDTO personDto = PersonTransformer.INSTANCE.toDto(person);
             personService.updatePerson(personDto);
@@ -54,7 +54,7 @@ public class ISO21090ReferenceServiceImpl extends ISO21090ReferenceServiceImplBa
         }
     }
 
-    public void deletePerson(gov.nih.nci.iso21090.reference.Person person) throws RemoteException {
+  public void deletePerson(gov.nih.nci.iso21090.reference.impl.Person person) throws RemoteException {
         try {
             PersonDTO personDto = PersonTransformer.INSTANCE.toDto(person);
             personService.deletePerson(personDto);

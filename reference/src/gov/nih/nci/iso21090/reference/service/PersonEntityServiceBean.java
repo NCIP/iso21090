@@ -10,7 +10,7 @@ import gov.nih.nci.iso21090.reference.dto.PersonDTO;
  * @author aevansel
  */
 public class PersonEntityServiceBean implements PersonEntityServiceRemote {
-    private PersonServiceBeanLocal personService;
+    private PersonServiceBeanLocal personService = new PersonServiceBean();
     
     /**
      * {@inheritDoc}

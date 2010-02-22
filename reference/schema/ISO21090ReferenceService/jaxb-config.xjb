@@ -7,7 +7,7 @@
     
     <jxb:bindings schemaLocation="ReferenceObjects.xsd" node="/xs:schema">
         <jxb:schemaBindings>
-            <jxb:package name="gov.nih.nci.iso21090.reference"/>
+            <jxb:package name="gov.nih.nci.iso21090.reference.impl"/>
         </jxb:schemaBindings>
     </jxb:bindings>
     <jxb:bindings schemaLocation="ISO_datatypes_Narrative.xsd" node="/xs:schema">

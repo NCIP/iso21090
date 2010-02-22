@@ -12,19 +12,19 @@ import java.rmi.RemoteException;
  */
 public interface ISO21090ReferenceServiceI {
 
-  public gov.nih.nci.iso21090.extensions.Id createPerson(gov.nih.nci.iso21090.reference.Person person) throws RemoteException ;
-
-  public void updatePerson(gov.nih.nci.iso21090.reference.Person person) throws RemoteException ;
-
-  public void deletePerson(gov.nih.nci.iso21090.reference.Person person) throws RemoteException ;
-
   public org.oasis.wsrf.properties.GetMultipleResourcePropertiesResponse getMultipleResourceProperties(org.oasis.wsrf.properties.GetMultipleResourceProperties_Element params) throws RemoteException ;
 
   public org.oasis.wsrf.properties.GetResourcePropertyResponse getResourceProperty(javax.xml.namespace.QName params) throws RemoteException ;
 
   public org.oasis.wsrf.properties.QueryResourcePropertiesResponse queryResourceProperties(org.oasis.wsrf.properties.QueryResourceProperties_Element params) throws RemoteException ;
 
-  public gov.nih.nci.iso21090.reference.Person getPersonById(gov.nih.nci.iso21090.extensions.Id id) throws RemoteException ;
+  public gov.nih.nci.iso21090.reference.impl.Person getPersonById(gov.nih.nci.iso21090.extensions.Id id) throws RemoteException ;
+
+  public gov.nih.nci.iso21090.extensions.Id createPerson(gov.nih.nci.iso21090.reference.impl.Person person) throws RemoteException ;
+
+  public void updatePerson(gov.nih.nci.iso21090.reference.impl.Person person) throws RemoteException ;
+
+  public void deletePerson(gov.nih.nci.iso21090.reference.impl.Person person) throws RemoteException ;
 
 }
 
