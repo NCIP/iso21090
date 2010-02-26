@@ -86,10 +86,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-import gov.nih.nci.iso21090.Ed;
-import gov.nih.nci.iso21090.EdText;
 import gov.nih.nci.iso21090.Ts;
-import gov.nih.nci.iso21090.UncertaintyType;
 import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformerTestBase;
 
 import java.text.ParseException;
@@ -115,17 +112,6 @@ public class TSTransformerTest extends AbstractTransformerTestBase<TSTransformer
     public TS makeXmlSimple() {
         TS x = new TS();
         x.setValue(VALUE_DATE);
-        EDText edText = new EDText();
-        ED ed = new EDTransformerTest().makeXmlSimple();
-        edText.setValue(ed.getValue());
-        edText.setNullFlavor(ed.getNullFlavor());
-        x.setOriginalText(edText);
-        TS uncert = new TS();
-        uncert.setValue(VALUE_DATE);
-        uncert.setUncertainty(null);
-        uncert.setUncertaintyType(null);
-        x.setUncertainty(uncert);
-        x.setUncertaintyType(org.iso._21090.UncertaintyType.B);
         return x;
     }
 
@@ -136,17 +122,6 @@ public class TSTransformerTest extends AbstractTransformerTestBase<TSTransformer
         Ts x = new Ts();
         try {
             x.setValue(sdf.parse(VALUE_DATE));
-            EdText edText = new EdText();
-            Ed ed = new EDTransformerTest().makeDtoSimple();
-            edText.setValue(ed.getValue());
-            edText.setNullFlavor(ed.getNullFlavor());
-            x.setOriginalText(edText);
-            Ts uncert = new Ts();
-            uncert.setValue(sdf.parse(VALUE_DATE));
-            uncert.setUncertainty(null);
-            uncert.setUncertaintyType(null);
-            x.setUncertainty(uncert);
-            x.setUncertaintyType(UncertaintyType.B);
         } catch (ParseException pe) {
             throw new RuntimeException(pe);
         }
@@ -161,16 +136,9 @@ public class TSTransformerTest extends AbstractTransformerTestBase<TSTransformer
             Date number1 = sdf.parse(VALUE_DATE);
             Date number2 = sdf.parse(x.getValue());
             assertEquals(number1.getTime(), number2.getTime());
-            ED ed = new EDTransformerTest().makeXmlSimple();
-            assertEquals(ed.getValue(), x.getOriginalText().getValue());
-            assertEquals(ed.getNullFlavor(), x.getOriginalText().getNullFlavor());
-
+            
             number1 = sdf.parse(VALUE_DATE);
-            number2 = sdf.parse(((TS) x.getUncertainty()).getValue());
             assertEquals(number1.getTime(), number2.getTime());
-
-            assertNotNull(x.getUncertainty());
-            assertEquals(org.iso._21090.UncertaintyType.B, x.getUncertaintyType());
         } catch (ParseException pe) {
             throw new RuntimeException(pe);
         }
@@ -182,17 +150,6 @@ public class TSTransformerTest extends AbstractTransformerTestBase<TSTransformer
         sdf.setLenient(false);
         try {
             assertEquals(sdf.parse(VALUE_DATE).getTime(), x.getValue().getTime());
-            EdText edText = new EdText();
-            Ed ed = new EDTransformerTest().makeDtoSimple();
-            edText.setValue(ed.getValue());
-            edText.setNullFlavor(ed.getNullFlavor());
-            assertEquals(edText, x.getOriginalText());
-            Ts uncert = new Ts();
-            uncert.setValue(sdf.parse(VALUE_DATE));
-            uncert.setUncertainty(null);
-            uncert.setUncertaintyType(null);
-            assertEquals(uncert, x.getUncertainty());
-            assertEquals(UncertaintyType.B, x.getUncertaintyType());
         } catch (ParseException pe) {
             throw new RuntimeException(pe);
         }

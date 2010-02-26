@@ -121,7 +121,6 @@ public final class IVLTSTransformer extends AbstractTransformer<IVLTS, Ivl<Ts>>
         result.setLow(TSTransformer.INSTANCE.toDto(input.getLow()));
         result.setLowClosed(input.isLowClosed());
         result.setNullFlavor(NullFlavorTransformer.INSTANCE.toDto(input.getNullFlavor()));
-        result.setOriginalText(EDTextTransformer.INSTANCE.toDto(input.getOriginalText()));
         // Cast from QTY -> TS is ok by invariant in 21090 Sec. 7.11.8.3.5
         result.setWidth(TSTransformer.INSTANCE.toDto((TS) input.getWidth()));
 
@@ -150,7 +149,6 @@ public final class IVLTSTransformer extends AbstractTransformer<IVLTS, Ivl<Ts>>
         result.setLow(TSTransformer.INSTANCE.toXml(input.getLow()));
         result.setLowClosed(input.getLowClosed());
         result.setNullFlavor(NullFlavorTransformer.INSTANCE.toXml(input.getNullFlavor()));
-        result.setOriginalText(EDTextTransformer.INSTANCE.toXml(input.getOriginalText()));
         // Cast from QTY -> TS is ok by invariant in 21090 Sec. 7.11.8.3.5
         result.setWidth(TSTransformer.INSTANCE.toXml((Ts) input.getWidth()));
 

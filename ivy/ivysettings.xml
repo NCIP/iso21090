@@ -1,0 +1,24 @@
+<ivysettings>
+    <property name="nci.ivy.repo" value="http://ncisvn.nci.nih.gov/svnroot/commonlibrary/trunk/ivy-repo" />
+    <property name="5am.maven.internal" value="http://maven.5amsolutions.com/archiva/repository/internal" />
+    <property name="5am.maven.snapshots" value="http://maven.5amsolutions.com/archiva/repository/snapshots" />
+
+    <settings defaultResolver="iso-chain" />
+    <caches defaultCacheDir="${user.home}/.ivy2-${ant.project.name}" useOrigin="true" />
+    <resolvers>
+        <chain name="iso-chain">
+            <url name="ncicb-ivy-repo" m2compatible="false">
+                <ivy pattern="${nci.ivy.repo}/[organisation]/[module]/[revision]/ivy.xml" />
+                <artifact pattern="${nci.ivy.repo}/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
+            </url>
+            <url name="snapshot-repo" m2compatible="true">
+                <artifact pattern="${5am.maven.snapshots}/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
+                <artifact pattern="${5am.maven.snapshots}/[organisation]/[module]/[revision]/[artifact]-[revision].pom" />
+            </url>
+            <url name="internal-repo" m2compatible="true">
+                <artifact pattern="${5am.maven.internal}/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
+                <artifact pattern="${5am.maven.internal}/[organisation]/[module]/[revision]/[artifact]-[revision].pom" />
+            </url>
+        </chain>
+    </resolvers>
+</ivysettings>

@@ -107,7 +107,6 @@ public class IVLINTTransformerTest extends AbstractTransformerTestBase<IVLINTTra
         result.setHighClosed(Boolean.TRUE);
         result.setLow(getInt(-1));
         result.setLowClosed(Boolean.FALSE);
-        result.setOriginalText(new EDTextTransformerTest().makeDtoSimple());
         result.setWidth(getInt(3));
 
         return result;
@@ -120,7 +119,6 @@ public class IVLINTTransformerTest extends AbstractTransformerTestBase<IVLINTTra
         result.setHighClosed(Boolean.TRUE);
         result.setLow(getINT(-1));
         result.setLowClosed(Boolean.FALSE);
-        result.setOriginalText(new EDTextTransformerTest().makeXmlSimple());
         result.setWidth(getINT(3));
 
         return result;
@@ -135,7 +133,6 @@ public class IVLINTTransformerTest extends AbstractTransformerTestBase<IVLINTTra
         assertEquals(expected.getHighClosed(), x.getHighClosed());
         assertEquals(expected.getLow(), x.getLow());
         assertEquals(expected.getLowClosed(), x.getLowClosed());
-        assertEquals(expected.getOriginalText(), x.getOriginalText());
         assertEquals(expected.getWidth(), x.getWidth());
     }
 
@@ -146,7 +143,6 @@ public class IVLINTTransformerTest extends AbstractTransformerTestBase<IVLINTTra
         assertEquals(expected.isHighClosed(), x.isHighClosed());
         assertEquals(expected.getLow().getValue(), x.getLow().getValue());
         assertEquals(expected.isLowClosed(), x.isLowClosed());
-        assertEquals(expected.getOriginalText().getValue(), x.getOriginalText().getValue());
         assertEquals(((INT) expected.getWidth()).getValue(), ((INT) x.getWidth()).getValue());
 
     }
@@ -167,7 +163,6 @@ public class IVLINTTransformerTest extends AbstractTransformerTestBase<IVLINTTra
     public void testAnyXmlToDto() throws DtoTransformException {
          // set Any with equal high and low
          IVLINT input = new IVLINT();
-         input.setOriginalText(new EDTextTransformerTest().makeXmlSimple());
          input.setWidth(getINT(3));
          input.setHigh(getINT(4));
          input.setLow(getINT(4));
@@ -175,14 +170,12 @@ public class IVLINTTransformerTest extends AbstractTransformerTestBase<IVLINTTra
          assertEquals(output.getAny(), getInt(4));
          // set Any with some high and no low
          IVLINT input2 = new IVLINT();
-         input2.setOriginalText(new EDTextTransformerTest().makeXmlSimple());
          input2.setWidth(getINT(3));
          input2.setHigh(getINT(5));
          Ivl<Int> output2 = IVLINTTransformer.INSTANCE.toDto(input2);
          assertEquals(output2.getAny(), getInt(5));
          // set Any with no high and some low
          IVLINT input3 = new IVLINT();
-         input3.setOriginalText(new EDTextTransformerTest().makeXmlSimple());
          input3.setWidth(getINT(3));
          input3.setHigh(getINT(1));
          Ivl<Int> output3 = IVLINTTransformer.INSTANCE.toDto(input3);
@@ -193,7 +186,6 @@ public class IVLINTTransformerTest extends AbstractTransformerTestBase<IVLINTTra
     public void testAnyDtoToXml() throws DtoTransformException {
          // set Any with equal high and low
          Ivl<Int> input = new Ivl<Int>();
-         input.setOriginalText(new EDTextTransformerTest().makeDtoSimple());
          input.setAny(getInt(3));
          IVLINT output = IVLINTTransformer.INSTANCE.toXml(input);
          assertEquals(output.getHigh().getValue(), getINT(3).getValue());
@@ -202,7 +194,6 @@ public class IVLINTTransformerTest extends AbstractTransformerTestBase<IVLINTTra
          assertTrue(output.isLowClosed());
          // set Any with some high and low not being equal
          Ivl<Int> input2 = new Ivl<Int>();
-         input2.setOriginalText(new EDTextTransformerTest().makeDtoSimple());
          input2.setWidth(getInt(3));
          input2.setHigh(getInt(5));
          input2.setLow(getInt(1));
