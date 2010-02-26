@@ -93,23 +93,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 @SuppressWarnings("PMD.AbstractNaming")
 public abstract class QSet<T extends Qty> extends Any implements Cloneable {
 
-    private static final long serialVersionUID = 1L;
-
-    private EdText originalText;
-
-    /**
-     * @return the originalText
-     */
-    public EdText getOriginalText() {
-        return originalText;
-    }
-
-    /**
-     * @param originalText the originalText to set
-     */
-    public void setOriginalText(EdText originalText) {
-        this.originalText = originalText;
-    }
+    private static final long serialVersionUID = 2L;
 
     /**
      * {@inheritDoc}
@@ -128,11 +112,8 @@ public abstract class QSet<T extends Qty> extends Any implements Cloneable {
             return false;
         }
 
-        QSet<?> x = (QSet<?>) obj;
-
         return new EqualsBuilder()
             .appendSuper(super.equals(obj))
-            .append(this.getOriginalText(), x.getOriginalText())
             .isEquals();
     }
 
@@ -143,7 +124,7 @@ public abstract class QSet<T extends Qty> extends Any implements Cloneable {
     public int hashCode() {
 
         return new HashCodeBuilder(HASH_CODE_SEED_1, HASH_CODE_SEED_2)
-            .append(this.getOriginalText())
+            .append(super.hashCode())
             .toHashCode();
     }
 

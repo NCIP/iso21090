@@ -122,7 +122,6 @@ public final class IVLINTTransformer extends AbstractTransformer<IVLINT, Ivl<Int
         result.setLow(INTTransformer.INSTANCE.toDto(input.getLow()));
         result.setLowClosed(input.isLowClosed());
         result.setNullFlavor(NullFlavorTransformer.INSTANCE.toDto(input.getNullFlavor()));
-        result.setOriginalText(EDTextTransformer.INSTANCE.toDto(input.getOriginalText()));
         // Cast from QTY -> INT is ok by invariant in 21090 Sec. 7.11.8.3.5
         result.setWidth(INTTransformer.INSTANCE.toDto((INT) input.getWidth()));
 
@@ -151,7 +150,6 @@ public final class IVLINTTransformer extends AbstractTransformer<IVLINT, Ivl<Int
         result.setLow(INTTransformer.INSTANCE.toXml(input.getLow()));
         result.setLowClosed(input.getLowClosed());
         result.setNullFlavor(NullFlavorTransformer.INSTANCE.toXml(input.getNullFlavor()));
-        result.setOriginalText(EDTextTransformer.INSTANCE.toXml(input.getOriginalText()));
         // Cast from QTY -> INT is ok by invariant in 21090 Sec. 7.11.8.3.5
         result.setWidth(INTTransformer.INSTANCE.toXml((Int) input.getWidth()));
 

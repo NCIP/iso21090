@@ -92,53 +92,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 @SuppressWarnings("PMD.AbstractNaming")
 public abstract class Qty extends Any implements Cloneable {
 
-    private static final long serialVersionUID = 1L;
-
-    private EdText originalText;
-    private Qty uncertainty;
-    private UncertaintyType uncertaintyType;
-
-    /**
-     * @return the originalText
-     */
-    public EdText getOriginalText() {
-        return originalText;
-    }
-
-    /**
-     * @param originalText the originalText to set
-     */
-    public void setOriginalText(EdText originalText) {
-        this.originalText = originalText;
-    }
-
-    /**
-     * @return the uncertainty
-     */
-    public Qty getUncertainty() {
-        return uncertainty;
-    }
-
-    /**
-     * @param uncertainty the uncertainty to set
-     */
-    public void setUncertainty(Qty uncertainty) {
-        this.uncertainty = uncertainty;
-    }
-
-    /**
-     * @return the uncertaintyType
-     */
-    public UncertaintyType getUncertaintyType() {
-        return uncertaintyType;
-    }
-
-    /**
-     * @param uncertaintyType the uncertaintyType to set
-     */
-    public void setUncertaintyType(UncertaintyType uncertaintyType) {
-        this.uncertaintyType = uncertaintyType;
-    }
+    private static final long serialVersionUID = 2L;
 
     /**
      * {@inheritDoc}
@@ -157,13 +111,8 @@ public abstract class Qty extends Any implements Cloneable {
             return false;
         }
 
-        Qty x = (Qty) obj;
-
         return new EqualsBuilder()
             .appendSuper(super.equals(obj))
-            .append(this.getOriginalText(), x.getOriginalText())
-            .append(this.getUncertainty(), x.getUncertainty())
-            .append(this.getUncertaintyType(), x.getUncertaintyType())
             .isEquals();
     }
 
@@ -175,9 +124,6 @@ public abstract class Qty extends Any implements Cloneable {
 
         return new HashCodeBuilder(HASH_CODE_SEED_1, HASH_CODE_SEED_2)
             .append(super.hashCode())
-            .append(this.getOriginalText())
-            .append(this.getUncertainty())
-            .append(this.getUncertaintyType())
             .toHashCode();
     }
 
