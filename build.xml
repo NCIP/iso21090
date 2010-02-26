@@ -1,0 +1,22 @@
+<project name="convertPomToIvy" basedir="." default="all" xmlns:ivy="antlib:fr.jayasoft.ivy.ant"
+    xmlns:ac="antlib:net.sf.antcontrib">
+    
+    <path id="antlib.classpath">
+        <fileset dir="./ivy/lib" includes="*.jar"/>
+    </path>
+
+    <taskdef uri="antlib:fr.jayasoft.ivy.ant" resource="fr/jayasoft/ivy/ant/antlib.xml" classpathref="antlib.classpath"
+        loaderref="antlib.classpath.loader"/>
+    
+    <ivy:settings file="./ivy/ivysettings.xml" id="ivy.instance" />
+    
+    <target name="all">
+        <ant target="convert" dir="localization"/>
+        <ant target="convert" dir="extensions"/>
+        
+        <!--The following replacements are needed to convert the auto-generated dependencies org name from their -->
+        <!-- maven paths to their ivy paths. -->
+        <replace file="localization/ivy.xml" replacefilterfile="ivy/replace.properties"/>
+        <replace file="extensions/ivy.xml" replacefilterfile="ivy/replace.properties"/>
+    </target>
+</project>
