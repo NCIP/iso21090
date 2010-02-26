@@ -85,16 +85,10 @@ package gov.nih.nci.iso21090.grid.dto.transform.iso;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-import gov.nih.nci.iso21090.Ed;
-import gov.nih.nci.iso21090.EdText;
-import gov.nih.nci.iso21090.Int;
 import gov.nih.nci.iso21090.Real;
-import gov.nih.nci.iso21090.UncertaintyType;
+
 import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformerTestBase;
 
-import org.iso._21090.ED;
-import org.iso._21090.EDText;
-import org.iso._21090.INT;
 import org.iso._21090.NullFlavor;
 import org.iso._21090.REAL;
 import org.junit.Test;
@@ -106,23 +100,11 @@ import org.junit.Test;
 public class REALTransformerTest extends AbstractTransformerTestBase<REALTransformer, REAL, Real>{
 
         private static final Float VALUE = new Float(4.0);
-        private static final Integer UNCERT = 5;
 
         @Override
         public REAL makeXmlSimple() {
             REAL x = new REAL();
             x.setValue(new Double(VALUE));
-            EDText edText = new EDText();
-            ED ed = new EDTransformerTest().makeXmlSimple();
-            edText.setValue(ed.getValue());
-            edText.setNullFlavor(ed.getNullFlavor());
-            x.setOriginalText(edText);
-            INT uncert = new INT();
-            uncert.setValue(UNCERT);
-            uncert.setUncertainty(null);
-            uncert.setUncertaintyType(null);
-            x.setUncertainty(uncert);
-            x.setUncertaintyType(org.iso._21090.UncertaintyType.B);
             return x;
         }
 
@@ -130,45 +112,17 @@ public class REALTransformerTest extends AbstractTransformerTestBase<REALTransfo
         public Real makeDtoSimple() {
             Real x = new Real();
             x.setValue(new Double(VALUE));
-            EdText edText = new EdText();
-            Ed ed = new EDTransformerTest().makeDtoSimple();
-            edText.setValue(ed.getValue());
-            edText.setNullFlavor(ed.getNullFlavor());
-            x.setOriginalText(edText);
-            Int uncert = new Int();
-            uncert.setValue(UNCERT);
-            uncert.setUncertainty(null);
-            uncert.setUncertaintyType(null);
-            x.setUncertainty(uncert);
-            x.setUncertaintyType(UncertaintyType.B);
             return x;
         }
 
         @Override
         public void verifyXmlSimple(REAL x) {
             assertEquals(null, VALUE, x.getValue(), 0);
-            ED ed = new EDTransformerTest().makeXmlSimple();
-            assertEquals(ed.getValue(), x.getOriginalText().getValue());
-            assertEquals(ed.getNullFlavor(), x.getOriginalText().getNullFlavor());
-            assertEquals(UNCERT, ((INT) x.getUncertainty()).getValue());
-            assertNotNull(x.getUncertainty());
-            assertEquals(org.iso._21090.UncertaintyType.B, x.getUncertaintyType());
         }
 
         @Override
         public void verifyDtoSimple(Real x) {
             assertEquals(null, VALUE, x.getValue(), 0);
-            EdText edText = new EdText();
-            Ed ed = new EDTransformerTest().makeDtoSimple();
-            edText.setValue(ed.getValue());
-            edText.setNullFlavor(ed.getNullFlavor());
-            assertEquals(edText, x.getOriginalText());
-            Int uncert = new Int();
-            uncert.setValue(UNCERT);
-            uncert.setUncertainty(null);
-            uncert.setUncertaintyType(null);
-            assertEquals(uncert, x.getUncertainty());
-            assertEquals(UncertaintyType.B, x.getUncertaintyType());
         }
 
         public REAL makeXmlNullFlavored() {
