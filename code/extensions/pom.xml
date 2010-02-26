@@ -126,7 +126,7 @@
         <dependency>
             <groupId>commons-collections</groupId>
             <artifactId>commons-collections</artifactId>
-            <version>3.0</version>
+            <version>3.2</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -156,18 +156,6 @@
         <dependency>
             <groupId>globus</groupId>
             <artifactId>cog-jglobus</artifactId>
-            <version>4.0.3</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>globus</groupId>
-            <artifactId>wsrf_core</artifactId>
-            <version>4.0.3</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>globus</groupId>
-            <artifactId>wsrf_core_stubs</artifactId>
             <version>4.0.3</version>
             <scope>compile</scope>
         </dependency>
