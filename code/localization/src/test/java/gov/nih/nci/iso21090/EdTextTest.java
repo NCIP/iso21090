@@ -128,8 +128,10 @@ public class EdTextTest {
 
     @Test
     public void testDescription() {
-        t.setDescription(phrase);
-        assertEquals(t.getDescription(), phrase);
+        St st = new St();
+        st.setValue(phrase);    	
+        t.setDescription(st);
+        assertEquals(t.getDescription().getValue(), phrase);
     }
 
     @Test
