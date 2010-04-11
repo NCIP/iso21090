@@ -100,7 +100,7 @@ public class Ed extends Any implements Cloneable {
 
     private Compression compression;
     private byte[] data;
-    private String description;
+    private St description;
     private String value;
 
     /**
@@ -136,14 +136,14 @@ public class Ed extends Any implements Cloneable {
     /**
      * @return the description
      */
-    public String getDescription() {
+    public St getDescription() {
         return description;
     }
 
     /**
      * @param description the description to set
      */
-    public void setDescription(String description) {
+    public void setDescription(St description) {
         this.description = description;
     }
 
