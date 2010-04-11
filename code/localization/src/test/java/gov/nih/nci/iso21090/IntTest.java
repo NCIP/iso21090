@@ -125,7 +125,10 @@ public class IntTest {
            Int first = new Int();
            first.setNullFlavor(NullFlavor.ASKU);
            EdText firstText = new EdText();
-           firstText.setDescription("value");
+
+           St st = new St();
+           st.setValue("value");
+           firstText.setDescription(st);
            
            Int uncertainty2 = new Int();
            uncertainty2.setNullFlavor(NullFlavor.DER);
@@ -134,7 +137,10 @@ public class IntTest {
            Int second = new Int();
            second.setNullFlavor(NullFlavor.ASKU);
            EdText secondText = new EdText();
-           secondText.setDescription("value");
+
+           St st2 = new St();
+           st2.setValue("value");
+           secondText.setDescription(st2);
 
            assertEquals(first.hashCode(), second.hashCode());
 
@@ -153,7 +159,10 @@ public class IntTest {
            Int first = new Int();
            first.setNullFlavor(NullFlavor.ASKU);
            EdText firstText = new EdText();
-           firstText.setDescription("value");
+           
+           St st = new St();
+           st.setValue("value");
+           firstText.setDescription(st);
 
            Int second = first.clone();
 
