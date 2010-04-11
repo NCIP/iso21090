@@ -82,6 +82,8 @@
  */
 package gov.nih.nci.iso21090.grid.dto.transform.iso;
 
+import java.math.BigDecimal;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -99,7 +101,7 @@ import org.junit.Test;
  */
 public class REALTransformerTest extends AbstractTransformerTestBase<REALTransformer, REAL, Real>{
 
-        private static final Float VALUE = new Float(4.0);
+        private static final Double VALUE = new Double(4.0);
 
         @Override
         public REAL makeXmlSimple() {
@@ -111,7 +113,7 @@ public class REALTransformerTest extends AbstractTransformerTestBase<REALTransfo
         @Override
         public Real makeDtoSimple() {
             Real x = new Real();
-            x.setValue(new Double(VALUE));
+            x.setValue(new BigDecimal(VALUE));
             return x;
         }
 
@@ -122,7 +124,7 @@ public class REALTransformerTest extends AbstractTransformerTestBase<REALTransfo
 
         @Override
         public void verifyDtoSimple(Real x) {
-            assertEquals(null, VALUE, x.getValue(), 0);
+            assertEquals(null, VALUE, x.getValue().doubleValue(), 0);
         }
 
         public REAL makeXmlNullFlavored() {

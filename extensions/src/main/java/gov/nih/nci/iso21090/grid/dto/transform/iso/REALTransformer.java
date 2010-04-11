@@ -82,6 +82,8 @@
  */
 package gov.nih.nci.iso21090.grid.dto.transform.iso;
 
+import java.math.BigDecimal;
+
 import gov.nih.nci.iso21090.Real;
 import gov.nih.nci.iso21090.grid.dto.transform.DtoTransformException;
 import gov.nih.nci.iso21090.grid.dto.transform.Transformer;
@@ -128,9 +130,9 @@ public final class REALTransformer extends QTYTransformer<REAL, Real>
             return null;
         }
         REAL x = transformBaseXml(input);
-        Double v = input.getValue();
+        BigDecimal v = input.getValue();
         if (v != null) {
-            x.setValue(v);
+            x.setValue(v.doubleValue());
         } else {
             x.setNullFlavor(NullFlavorTransformer.INSTANCE.toXml(input.getNullFlavor()));
         }
@@ -148,7 +150,7 @@ public final class REALTransformer extends QTYTransformer<REAL, Real>
         Real d = transformBaseDto(input);
         Double v = input.getValue();
         if (v != null) {
-            d.setValue(v);
+            d.setValue(BigDecimal.valueOf(v));
         } else {
             d.setNullFlavor(NullFlavorTransformer.INSTANCE.toDto(input.getNullFlavor()));
         }

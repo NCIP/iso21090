@@ -82,6 +82,8 @@
  */
 package gov.nih.nci.iso21090;
 
+import java.math.BigDecimal;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -131,7 +133,7 @@ public class RealTest {
 
            assertEquals(first.hashCode(), second.hashCode());
 
-           second.setValue(555.0);
+           second.setValue(new BigDecimal(555.0));
 
            assertFalse(first.hashCode() == second.hashCode());
 
@@ -141,7 +143,7 @@ public class RealTest {
        public void testCloneable() {
            Real uncertainty1 = new Real();
            uncertainty1.setNullFlavor(NullFlavor.DER);
-           uncertainty1.setValue(111.0);
+           uncertainty1.setValue(new BigDecimal(111.0));
 
            Real first = new Real();
            first.setNullFlavor(NullFlavor.ASKU);
