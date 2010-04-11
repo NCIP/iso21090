@@ -109,6 +109,20 @@ public final class Ad extends Any implements Cloneable {
         this.part = part;
     }
 
+    
+    /**
+     * @param partInstance ADXP part to be added to the part collection
+     */
+    public void addPart(Adxp partInstance) {
+        if (part == null) {
+            part = new ArrayList<Adxp>();
+        }
+        if (partInstance != null) {
+            part.add(partInstance);
+        }
+    }
+    
+    
     /**
      * {@inheritDoc}
      */

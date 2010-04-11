@@ -101,7 +101,7 @@ public class EnTest {
 
         first.getPart().add(new Enxp(EntityNamePartType.DEL));
         first.getPart().add(new Enxp(EntityNamePartType.FAM));
-        first.getPart().add(new Enxp(EntityNamePartType.GIV));
+        first.addPart(new Enxp(EntityNamePartType.GIV));
 
         assertTrue(first.equals(first));
         assertFalse(first.equals(null));

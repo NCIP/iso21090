@@ -130,6 +130,15 @@ public class En extends Any implements Cloneable {
     }
 
     /**
+     * @param partInstance ENXP instance to be added to part collection 
+     */
+    public void addPart(Enxp partInstance) {
+        if (partInstance != null) {
+            getPart().add(partInstance);
+        }
+    }
+    
+    /**
      * {@inheritDoc}
      */
     @Override
