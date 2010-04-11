@@ -1,0 +1,16 @@
+<project name="convertPomToIvy" basedir="." default="convert" xmlns:ivy="antlib:fr.jayasoft.ivy.ant"
+    xmlns:ac="antlib:net.sf.antcontrib">
+    
+    <path id="antlib.classpath">
+        <fileset dir="../ivy/lib" includes="*.jar"/>
+    </path>
+
+    <taskdef uri="antlib:fr.jayasoft.ivy.ant" resource="fr/jayasoft/ivy/ant/antlib.xml" classpathref="antlib.classpath"
+        loaderref="antlib.classpath.loader"/>
+    
+    <ivy:settings file="../ivy/ivysettings.xml" id="ivy.instance" />
+    
+    <target name="convert">
+        <ivy:convertpom pomFile="pom.xml" ivyFile="ivy.xml" />
+    </target>
+</project>

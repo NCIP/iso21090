@@ -12,6 +12,7 @@
     <modules>
         <module>localization</module>
         <module>extensions</module>
+        <module>hibernate</module>        
     </modules>
 
     <properties>
@@ -37,6 +38,11 @@
     </ciManagement>
 
     <developers>
+        <developer>
+            <email>patelsat@mail.nih.gov</email>
+            <id>patelsat</id>
+            <name>Satish Patel</name>
+        </developer>
         <developer>
             <email>slustbader@5amsolutions.com</email>
             <id>slustbader</id>
