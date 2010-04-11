@@ -108,7 +108,7 @@ public class AdTest {
         first.setPart(new ArrayList<Adxp>());
         first.getPart().add(new AdxpAdl());
         first.getPart().add(new AdxpAl());
-        first.getPart().add(new AdxpBnn());
+        first.addPart(new AdxpBnn());
 
         assertTrue(first.equals(first));
         assertFalse(first.equals(null));
