@@ -13,10 +13,12 @@
     <target name="all">
         <ant target="convert" dir="localization"/>
         <ant target="convert" dir="extensions"/>
+        <ant target="convert" dir="hibernate"/>
         
         <!--The following replacements are needed to convert the auto-generated dependencies org name from their -->
         <!-- maven paths to their ivy paths. -->
         <replace file="localization/ivy.xml" replacefilterfile="ivy/replace.properties"/>
         <replace file="extensions/ivy.xml" replacefilterfile="ivy/replace.properties"/>
+        <replace file="hibernate/ivy.xml" replacefilterfile="ivy/replace.properties"/>
     </target>
 </project>
