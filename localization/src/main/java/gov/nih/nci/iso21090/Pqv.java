@@ -10,7 +10,8 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
  * @author Naveen Amiruddin
  *
  */
-public class Pqv extends Qty implements Cloneable {
+@SuppressWarnings("PMD.AbstractNaming")
+public abstract class Pqv extends Qty implements Cloneable {
     private static final long serialVersionUID = 1L;
 
     private BigDecimal value;
