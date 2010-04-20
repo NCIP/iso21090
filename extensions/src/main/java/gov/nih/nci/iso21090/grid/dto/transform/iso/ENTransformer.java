@@ -112,6 +112,11 @@ public abstract class ENTransformer<ENXX extends EN, EnXx extends En> extends Ab
     /**
      * Public singleton.
      */
+    public static final ENCoreTransformer EN_INSTANCE = ENCoreTransformer.INSTANCE;
+
+    /**
+     * Public singleton.
+     */
     public static final ENONTransformer ENON_INSTANCE = ENONTransformer.INSTANCE;
     /**
      * Public singleton.
@@ -211,6 +216,41 @@ public abstract class ENTransformer<ENXX extends EN, EnXx extends En> extends Ab
      * @return newly constructed dto object.
      */
     protected abstract EnXx newDto();
+
+    /**
+     * Org name transformer.
+     */
+    public static final class ENCoreTransformer extends ENTransformer<EN, En> {
+
+        /**
+         * Public singleton.
+         */
+        public static final ENCoreTransformer INSTANCE = new ENCoreTransformer();
+
+        private  ENCoreTransformer() {
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        protected EN newXml() {
+            return new EN();
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        protected En newDto() {
+            return new En();
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        public EN[] createXmlArray(int size) throws DtoTransformException {
+            return new EN[size];
+        }
+    }    
 
     /**
      * Org name transformer.
