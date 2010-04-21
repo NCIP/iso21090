@@ -88,16 +88,15 @@ import gov.nih.nci.iso21090.DSet;
 import gov.nih.nci.iso21090.IdentifierReliability;
 import gov.nih.nci.iso21090.IdentifierScope;
 import gov.nih.nci.iso21090.Ii;
-import gov.nih.nci.iso21090.extensions.Id;
+//import gov.nih.nci.iso21090.extensions.Id;
 import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformerTestBase;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import org.iso._21090.DSETII;
-import org.iso._21090.II;
+import org.iso._21090.DSetII;
 
-public class IdTransformerTest extends AbstractTransformerTestBase<IdTransformer, Id, Ii> {
+public class IdTransformerTest extends AbstractTransformerTestBase<IdTransformer, org.iso._21090.Ii, Ii> {
 
     /**
      * The identifier name for for Identified org.
@@ -122,8 +121,8 @@ public class IdTransformerTest extends AbstractTransformerTestBase<IdTransformer
     }
 
     @Override
-    public Id makeXmlSimple() {
-        Id id = new Id();
+    public org.iso._21090.Ii makeXmlSimple() {
+    	org.iso._21090.Ii id = new org.iso._21090.Ii();
         id.setRoot(IDENTIFIED_ORG_ROOT);
         id.setIdentifierName(IDENTIFIED_ORG_IDENTIFIER_NAME);
         id.setExtension("123");
@@ -142,7 +141,7 @@ public class IdTransformerTest extends AbstractTransformerTestBase<IdTransformer
     }
 
     @Override
-    public void verifyXmlSimple(Id x) {
+    public void verifyXmlSimple(org.iso._21090.Ii x) {
         assertEquals(x.getRoot(), IDENTIFIED_ORG_ROOT);
         assertEquals(x.getExtension(), "123");
         assertEquals(x.getIdentifierName(), IDENTIFIED_ORG_IDENTIFIER_NAME);
@@ -164,9 +163,9 @@ public class IdTransformerTest extends AbstractTransformerTestBase<IdTransformer
         return identifier;
     }
 
-    public static DSETII convertIIToDSETII(II ii) {
-        DSETII identifier = new DSETII();
-        identifier.getItem().add(ii);
+    public static DSetII convertIIToDSETII(org.iso._21090.Ii ii) {
+    	DSetII identifier = new DSetII();
+        identifier.getItems().add(ii);
         return identifier;
     }
 }

@@ -120,7 +120,7 @@ import gov.nih.nci.iso21090.grid.dto.transform.Transformer;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.iso._21090.ADXP;
+//import org.iso._21090.AddressPartType;
 
 /**
  * Transforms the parts of an address. Should only be used by the ADTransformer class.
@@ -136,11 +136,11 @@ final class ADXPTransformer extends AbstractTransformer<org.iso._21090.ADXP, Adx
     /**
      * {@inheritDoc}
      */
-    public ADXP toXml(Adxp input) {
+    public org.iso._21090.ADXP toXml(Adxp input) {
         // Don't worry about null here - this is a package-protected class and
         // the AD converter
         // has the responsibility to detect null.
-        ADXP x = new ADXP();
+        org.iso._21090.ADXP x = new org.iso._21090.ADXP();
         x.setCode(input.getCode());
         x.setCodeSystem(input.getCodeSystem());
         x.setValue(input.getValue());
@@ -152,7 +152,7 @@ final class ADXPTransformer extends AbstractTransformer<org.iso._21090.ADXP, Adx
     /**
      * {@inheritDoc}
      */
-    public Adxp toDto(ADXP input) {
+    public Adxp toDto(org.iso._21090.ADXP input) {
         // Don't worry about null here - this is a package-protected class and
         // the AD converter
         // has the responsibility to detect null.
@@ -181,7 +181,7 @@ final class ADXPTransformer extends AbstractTransformer<org.iso._21090.ADXP, Adx
         return value;
     }
 
-    private static Map<AddressPartType, Adxp> types = new HashMap<AddressPartType, Adxp>();
+    private static Map<AddressPartType, gov.nih.nci.iso21090.Adxp> types = new HashMap<AddressPartType, gov.nih.nci.iso21090.Adxp>();
 
     static {
         types.put(AddressPartType.ADL, new AdxpAdl());
@@ -218,7 +218,7 @@ final class ADXPTransformer extends AbstractTransformer<org.iso._21090.ADXP, Adx
     /**
      * {@inheritDoc}
      */
-    public ADXP[] createXmlArray(int size) throws DtoTransformException {
-        return new ADXP[size];
+    public org.iso._21090.ADXP[] createXmlArray(int size) throws DtoTransformException {
+        return new org.iso._21090.ADXP[size];
     }
 }

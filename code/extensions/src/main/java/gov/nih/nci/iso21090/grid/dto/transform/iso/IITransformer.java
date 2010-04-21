@@ -89,13 +89,12 @@ import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformer;
 import gov.nih.nci.iso21090.grid.dto.transform.DtoTransformException;
 import gov.nih.nci.iso21090.grid.dto.transform.Transformer;
 
-import org.iso._21090.II;
 
 /**
  * Transforms identifiers.
  */
-public final class IITransformer extends AbstractTransformer<II, Ii>
-    implements Transformer<II, Ii> {
+public final class IITransformer extends AbstractTransformer<org.iso._21090.Ii, Ii>
+    implements Transformer<org.iso._21090.Ii, Ii> {
 
     /**
      * Public singleton.
@@ -108,16 +107,16 @@ public final class IITransformer extends AbstractTransformer<II, Ii>
     /**
      * {@inheritDoc}
      */
-    public II toXml(Ii input) {
+    public org.iso._21090.Ii toXml(Ii input) {
         if (input == null) {
             return null;
         }
-        II d = new II();
+        org.iso._21090.Ii d = new org.iso._21090.Ii();
         copyToXml(input, d);
         return d;
     }
 
-    private static void copyToXml(Ii source, II target) {
+    private static void copyToXml(Ii source, org.iso._21090.Ii target) {
         target.setDisplayable(source.getDisplayable());
         target.setExtension(source.getExtension());
         target.setIdentifierName(source.getIdentifierName());
@@ -138,7 +137,7 @@ public final class IITransformer extends AbstractTransformer<II, Ii>
     /**
      * {@inheritDoc}
      */
-    public Ii toDto(II input) {
+    public Ii toDto(org.iso._21090.Ii input) {
         if (input == null) {
             return null;
         }
@@ -147,7 +146,7 @@ public final class IITransformer extends AbstractTransformer<II, Ii>
         return d;
     }
 
-    private static void copyToDto(II source, Ii target) {
+    private static void copyToDto(org.iso._21090.Ii source, Ii target) {
         target.setDisplayable(source.isDisplayable());
         target.setExtension(source.getExtension());
         target.setIdentifierName(source.getIdentifierName());
@@ -168,7 +167,7 @@ public final class IITransformer extends AbstractTransformer<II, Ii>
     /**
      * {@inheritDoc}
      */
-    public II[] createXmlArray(int size) throws DtoTransformException {
-        return new II[size];
+    public org.iso._21090.Ii[] createXmlArray(int size) throws DtoTransformException {
+        return new org.iso._21090.Ii[size];
     }
 }

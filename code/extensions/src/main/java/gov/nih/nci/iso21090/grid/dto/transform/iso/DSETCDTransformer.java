@@ -93,15 +93,15 @@ import java.util.List;
 import java.util.Set;
 
 import org.iso._21090.CD;
-import org.iso._21090.DSETCD;
+import org.iso._21090.DSetCd;
 import org.iso._21090.NullFlavor;
 
 /**
  * Transforms sets of CD.
  */
 @SuppressWarnings("PMD.CyclomaticComplexity")
-public final class DSETCDTransformer extends AbstractTransformer<DSETCD, DSet<Cd>>
-    implements Transformer<DSETCD, DSet<Cd>> {
+public final class DSETCDTransformer extends AbstractTransformer<DSetCd, DSet<gov.nih.nci.iso21090.Cd>>
+    implements Transformer<DSetCd, DSet<gov.nih.nci.iso21090.Cd>> {
     /**
      * Public transformer instance.
      */
@@ -113,20 +113,20 @@ public final class DSETCDTransformer extends AbstractTransformer<DSETCD, DSet<Cd
     /**
      * {@inheritDoc}
      */
-    public DSETCD toXml(DSet<Cd> input) {
-        DSETCD x = new DSETCD();
+    public DSetCd toXml(DSet<Cd> input) {
+    	DSetCd x = new DSetCd();
         if (input != null && input.getItem() != null) {
             Set<Cd> sItem = input.getItem();
-            List<CD> tItem = x.getItem();
+            List<org.iso._21090.CD> tItem = x.getItems();
             for (Cd cd : sItem) {
-                CD cur = CDTransformer.INSTANCE.toXml(cd);
+            	org.iso._21090.CD cur = CDTransformer.INSTANCE.toXml(cd);
                 // XSD rule: all elements of set must be non-null
                 if (!(cur == null || cur.getNullFlavor() != null)) {
                     tItem.add(cur);
                 }
             }
         }
-        if (x.getItem().isEmpty()) {
+        if (x.getItems().isEmpty()) {
             x.setNullFlavor(NullFlavor.NI);
         }
         return x;
@@ -136,15 +136,15 @@ public final class DSETCDTransformer extends AbstractTransformer<DSETCD, DSet<Cd
     /**
      * {@inheritDoc}
      */
-    public DSet<Cd> toDto(DSETCD input) {
+    public DSet<Cd> toDto(DSetCd input) {
         if (input == null || input.getNullFlavor() != null) {
             return null;
         }
         DSet<Cd> x = new DSet<Cd>();
         x.setItem(new HashSet<Cd>());
-        List<CD> sItem = input.getItem();
+        List<org.iso._21090.CD> sItem = input.getItems();
         Set<Cd> tItem = x.getItem();
-        for (CD cd : sItem) {
+        for (org.iso._21090.CD cd : sItem) {
             tItem.add(CDTransformer.INSTANCE.toDto(cd));
         }
         return x;
@@ -153,8 +153,8 @@ public final class DSETCDTransformer extends AbstractTransformer<DSETCD, DSet<Cd
     /**
      * {@inheritDoc}
      */
-    public DSETCD[] createXmlArray(int size) throws DtoTransformException {
-        return new DSETCD[size];
+    public DSetCd[] createXmlArray(int size) throws DtoTransformException {
+        return new DSetCd[size];
     }
 
 }

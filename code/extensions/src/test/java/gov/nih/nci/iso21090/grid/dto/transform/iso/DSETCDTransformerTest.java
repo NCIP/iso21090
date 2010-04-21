@@ -94,12 +94,12 @@ import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformerTestBase;
 import java.util.HashSet;
 
 import org.iso._21090.CD;
-import org.iso._21090.DSETCD;
+import org.iso._21090.DSetCd;
 import org.iso._21090.NullFlavor;
 import org.junit.Test;
 
 public class DSETCDTransformerTest extends
-	AbstractTransformerTestBase<DSETCDTransformer,DSETCD,DSet<Cd>> {
+	AbstractTransformerTestBase<DSETCDTransformer,DSetCd,DSet<Cd>> {
 
 	@Override
 	public DSet<Cd> makeDtoSimple() {
@@ -110,9 +110,9 @@ public class DSETCDTransformerTest extends
 	}
 
 	@Override
-	public DSETCD makeXmlSimple() {
-		 DSETCD result = new DSETCD();
-		 result.getItem().add(new CDTransformerTest().makeXmlSimple());
+	public DSetCd makeXmlSimple() {
+		DSetCd result = new DSetCd();
+		 result.getItems().add(new CDTransformerTest().makeXmlSimple());
 		 return result;
 	}
 
@@ -127,24 +127,24 @@ public class DSETCDTransformerTest extends
 	}
 
 	@Override
-	public void verifyXmlSimple(DSETCD x) {
+	public void verifyXmlSimple(DSetCd x) {
 		 assertNotNull(x);
 	     assertNull(x.getNullFlavor());
-	     assertEquals(1, x.getItem().size());
-	     for (CD cd : x.getItem()) {
+	     assertEquals(1, x.getItems().size());
+	     for (CD cd : x.getItems()) {
 	        	new CDTransformerTest().verifyXmlSimple(cd);
 	        }
 	}
 	@Override
-	public void verifyXmlNull(DSETCD x) {
+	public void verifyXmlNull(DSetCd x) {
 	        assertNotNull(x);
 	        assertEquals(NullFlavor.NI, x.getNullFlavor());
-	        assertTrue(x.getItem().isEmpty());
+	        assertTrue(x.getItems().isEmpty());
 	}
 
 	@Test
 	public void testNull() throws Exception {
-		DSETCD xml = new DSETCD();
+		DSetCd xml = new DSetCd();
 	    xml.setNullFlavor(NullFlavor.ASKU);
 	    DSet<Cd> dto = DSETCDTransformer.INSTANCE.toDto(xml);
 	    assertNull(dto); // potentially, this could be non-null with an empty set (either would be fine),
@@ -152,12 +152,12 @@ public class DSETCDTransformerTest extends
 
 	    xml = DSETCDTransformer.INSTANCE.toXml(null);
 	    assertNotNull(xml);
-	    assertTrue(xml.getItem().isEmpty());
+	    assertTrue(xml.getItems().isEmpty());
 	    assertEquals(NullFlavor.NI, xml.getNullFlavor());
 
 	    dto = new DSet<Cd>();
 	    assertNotNull(xml);
-	    assertTrue(xml.getItem().isEmpty());
+	    assertTrue(xml.getItems().isEmpty());
 	    assertEquals(NullFlavor.NI, xml.getNullFlavor());
 
 	    dto.setItem(new HashSet<Cd>());
@@ -168,7 +168,7 @@ public class DSETCDTransformerTest extends
 	    dto.getItem().add(cd);
 	    xml = DSETCDTransformer.INSTANCE.toXml(dto);
 	    assertNotNull(xml);
-	    assertTrue(xml.getItem().isEmpty());
+	    assertTrue(xml.getItems().isEmpty());
 	    assertEquals(NullFlavor.NI, xml.getNullFlavor());
 	}
 

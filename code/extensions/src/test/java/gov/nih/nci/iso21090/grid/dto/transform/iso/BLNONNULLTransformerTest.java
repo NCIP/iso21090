@@ -90,7 +90,6 @@ import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformerTestBase;
 import gov.nih.nci.iso21090.grid.dto.transform.DtoTransformException;
 
 import org.iso._21090.BL;
-import org.iso._21090.BLNonNull;
 import org.junit.Test;
 
 
@@ -99,16 +98,16 @@ import org.junit.Test;
  * @author mshestoalov
  */
 public class BLNONNULLTransformerTest  
-    extends AbstractTransformerTestBase<BLNONNULLTransformer, BLNonNull, BlNonNull>{
+    extends AbstractTransformerTestBase<BLNONNULLTransformer, org.iso._21090.BlNonNull, BlNonNull>{
 
 
     private BLTransformerTest blTest = new BLTransformerTest();
     
     @Override
-    public BLNonNull makeXmlSimple() {
+    public org.iso._21090.BlNonNull makeXmlSimple() {
         BL bl = blTest.makeXmlSimple();
         if (bl != null) {
-            BLNonNull returnVal = new BLNonNull();
+        	org.iso._21090.BlNonNull returnVal = new org.iso._21090.BlNonNull();
             returnVal.setValue(bl.isValue());
             return returnVal;
         } else {
@@ -130,7 +129,7 @@ public class BLNONNULLTransformerTest
     }
 
     @Override
-    public void verifyXmlSimple(BLNonNull x) {
+    public void verifyXmlSimple(org.iso._21090.BlNonNull x) {
         assertEquals(true, x.isValue());
     }
 
@@ -139,8 +138,8 @@ public class BLNONNULLTransformerTest
         assertEquals(true, x.getValue());
     }
     
-    public BLNonNull makeXmlNullFlavored() throws DtoTransformException {
-        BLNonNull x = new BLNonNull();
+    public org.iso._21090.BlNonNull makeXmlNullFlavored() throws DtoTransformException {
+    	org.iso._21090.BlNonNull x = new org.iso._21090.BlNonNull();
         x.setNullFlavor(org.iso._21090.NullFlavor.NI);
         return x;
     }

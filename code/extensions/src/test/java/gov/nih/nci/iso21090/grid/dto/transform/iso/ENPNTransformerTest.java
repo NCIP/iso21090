@@ -94,11 +94,9 @@ import gov.nih.nci.iso21090.grid.dto.transform.iso.ENTransformer.ENPNTransformer
 
 import java.util.Iterator;
 
-import org.iso._21090.ENPN;
-import org.iso._21090.ENXP;
 import org.junit.Test;
 
-public class ENPNTransformerTest extends AbstractTransformerTestBase<ENPNTransformer, ENPN, EnPn> {
+public class ENPNTransformerTest extends AbstractTransformerTestBase<ENPNTransformer, org.iso._21090.EnPn, EnPn> {
 
     @Override
     public EnPn makeDtoSimple() {
@@ -109,12 +107,12 @@ public class ENPNTransformerTest extends AbstractTransformerTestBase<ENPNTransfo
     }
 
     @Override
-    public ENPN makeXmlSimple() {
-        ENPN xml = new ENPN();
-        ENXP o = new ENXP();
+    public org.iso._21090.EnPn makeXmlSimple() {
+    	org.iso._21090.EnPn xml = new org.iso._21090.EnPn();
+    	org.iso._21090.ENXP o = new org.iso._21090.ENXP();
         o.setCode("value");
         o.setType(org.iso._21090.EntityNamePartType.FAM);
-        xml.getPart().add(o);
+        xml.getParts().add(o);
         return xml;
     }
 
@@ -126,29 +124,29 @@ public class ENPNTransformerTest extends AbstractTransformerTestBase<ENPNTransfo
     }
 
     @Override
-    public void verifyXmlSimple(ENPN x) {
-        assertEquals(x.getPart().size(), 1);
-        assertEquals(x.getPart().get(0).getType(), org.iso._21090.EntityNamePartType.FAM);
+    public void verifyXmlSimple(org.iso._21090.EnPn x) {
+        assertEquals(x.getParts().size(), 1);
+        assertEquals(x.getParts().get(0).getType(), org.iso._21090.EntityNamePartType.FAM);
     }
 
     @Test
     public void testAllNullPartToDto() throws DtoTransformException {
-        ENPN xml = new ENPN();
-        ENXP o1 = new ENXP();
+    	org.iso._21090.EnPn xml = new org.iso._21090.EnPn();
+    	org.iso._21090.ENXP o1 = new org.iso._21090.ENXP();
         o1.setCode("value1");
-        xml.getPart().add(o1);
-        ENXP o2 = new ENXP();
+        xml.getParts().add(o1);
+        org.iso._21090.ENXP o2 = new org.iso._21090.ENXP();
         o2.setCode("value2");
-        xml.getPart().add(o2);
-        ENXP o3 = new ENXP();
+        xml.getParts().add(o2);
+        org.iso._21090.ENXP o3 = new org.iso._21090.ENXP();
         o3.setCode("value3");
-        xml.getPart().add(o3);
-        ENXP o4 = new ENXP();
+        xml.getParts().add(o3);
+        org.iso._21090.ENXP o4 = new org.iso._21090.ENXP();
         o4.setCode("value4");
-        xml.getPart().add(o4);
-        ENXP o5 = new ENXP();
+        xml.getParts().add(o4);
+        org.iso._21090.ENXP o5 = new org.iso._21090.ENXP();
         o5.setCode("value5");
-        xml.getPart().add(o5);
+        xml.getParts().add(o5);
         EnPn result = ENPNTransformer.INSTANCE.toDto(xml);
 
         Iterator<Enxp> it = result.getPart().iterator();
@@ -164,24 +162,24 @@ public class ENPNTransformerTest extends AbstractTransformerTestBase<ENPNTransfo
 
     @Test
     public void testSomeNullPartToDto() throws DtoTransformException {
-        ENPN xml = new ENPN();
-        ENXP o1 = new ENXP();
+    	org.iso._21090.EnPn xml = new org.iso._21090.EnPn();
+    	org.iso._21090.ENXP o1 = new org.iso._21090.ENXP();
         o1.setCode("value1");
         o1.setType(org.iso._21090.EntityNamePartType.PFX);
-        xml.getPart().add(o1);
-        ENXP o2 = new ENXP();
+        xml.getParts().add(o1);
+        org.iso._21090.ENXP o2 = new org.iso._21090.ENXP();
         o2.setCode("value2");
         o2.setType(org.iso._21090.EntityNamePartType.GIV);
-        xml.getPart().add(o2);
-        ENXP o3 = new ENXP();
+        xml.getParts().add(o2);
+        org.iso._21090.ENXP o3 = new org.iso._21090.ENXP();
         o3.setCode("value3");
-        xml.getPart().add(o3);
-        ENXP o4 = new ENXP();
+        xml.getParts().add(o3);
+        org.iso._21090.ENXP o4 = new org.iso._21090.ENXP();
         o4.setCode("value4");
-        xml.getPart().add(o4);
-        ENXP o5 = new ENXP();
+        xml.getParts().add(o4);
+        org.iso._21090.ENXP o5 = new org.iso._21090.ENXP();
         o5.setCode("value5");
-        xml.getPart().add(o5);
+        xml.getParts().add(o5);
         EnPn result = ENPNTransformer.INSTANCE.toDto(xml);
 
         assertEquals(EntityNamePartType.PFX, result.getPart().get(0).getType());
@@ -209,11 +207,11 @@ public class ENPNTransformerTest extends AbstractTransformerTestBase<ENPNTransfo
         Enxp o5 = new Enxp();
         o5.setCode("value5");
         dto.getPart().add(o5);
-        ENPN result = ENPNTransformer.INSTANCE.toXml(dto);
+        org.iso._21090.EnPn result = ENPNTransformer.INSTANCE.toXml(dto);
 
-        Iterator<ENXP> it = result.getPart().iterator();
+        Iterator<org.iso._21090.ENXP> it = result.getParts().iterator();
         while(it.hasNext()) {
-            ENXP item = it.next();
+        	org.iso._21090.ENXP item = it.next();
             if (it.hasNext()) {
                 assertEquals(org.iso._21090.EntityNamePartType.GIV, item.getType());
             } else {
@@ -242,25 +240,25 @@ public class ENPNTransformerTest extends AbstractTransformerTestBase<ENPNTransfo
         Enxp o5 = new Enxp();
         o5.setCode("value5");
         dto.getPart().add(o5);
-        ENPN result = ENPNTransformer.INSTANCE.toXml(dto);
+        org.iso._21090.EnPn result = ENPNTransformer.INSTANCE.toXml(dto);
 
-        assertEquals(org.iso._21090.EntityNamePartType.PFX, result.getPart().get(0).getType());
-        assertEquals(org.iso._21090.EntityNamePartType.GIV, result.getPart().get(1).getType());
-        assertEquals(org.iso._21090.EntityNamePartType.GIV, result.getPart().get(2).getType());
-        assertEquals(org.iso._21090.EntityNamePartType.GIV, result.getPart().get(3).getType());
-        assertEquals(org.iso._21090.EntityNamePartType.FAM, result.getPart().get(4).getType());
+        assertEquals(org.iso._21090.EntityNamePartType.PFX, result.getParts().get(0).getType());
+        assertEquals(org.iso._21090.EntityNamePartType.GIV, result.getParts().get(1).getType());
+        assertEquals(org.iso._21090.EntityNamePartType.GIV, result.getParts().get(2).getType());
+        assertEquals(org.iso._21090.EntityNamePartType.GIV, result.getParts().get(3).getType());
+        assertEquals(org.iso._21090.EntityNamePartType.FAM, result.getParts().get(4).getType());
     }
 
     @Test
     public void testNullPartToXml() throws DtoTransformException {
         EnPn dto = new EnPn();
-        ENPN result = ENPNTransformer.INSTANCE.toXml(dto);
-        assertTrue(result.getPart().isEmpty());
+        org.iso._21090.EnPn result = ENPNTransformer.INSTANCE.toXml(dto);
+        assertTrue(result.getParts().isEmpty());
     }
 
     @Test
     public void testNullPartToDto() throws DtoTransformException {
-        ENPN xml = new ENPN();
+    	org.iso._21090.EnPn xml = new org.iso._21090.EnPn();
         EnPn result = ENPNTransformer.INSTANCE.toDto(xml);
         assertTrue(result.getPart().isEmpty());
     }

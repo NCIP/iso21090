@@ -83,20 +83,17 @@
 package gov.nih.nci.iso21090.grid.dto.transform.iso;
 
 import gov.nih.nci.iso21090.Ad;
-import gov.nih.nci.iso21090.Adxp;
 import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformer;
 import gov.nih.nci.iso21090.grid.dto.transform.DtoTransformException;
 import gov.nih.nci.iso21090.grid.dto.transform.Transformer;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.iso._21090.AD;
-import org.iso._21090.ADXP;
 
 /**
  * Transforms Addresses.
  */
-public final class ADTransformer extends AbstractTransformer<AD, Ad> implements Transformer<AD, Ad> {
+public final class ADTransformer extends AbstractTransformer<org.iso._21090.Ad, gov.nih.nci.iso21090.Ad> implements Transformer<org.iso._21090.Ad, gov.nih.nci.iso21090.Ad> {
 
     /**
      * Public singleton.
@@ -109,21 +106,21 @@ public final class ADTransformer extends AbstractTransformer<AD, Ad> implements 
     /**
      * {@inheritDoc}
      */
-    public AD toXml(Ad input) {
+    public org.iso._21090.Ad toXml(Ad input) {
         if (input == null) {
             return null;
         }
-        AD x = new AD();
+        org.iso._21090.Ad x = new org.iso._21090.Ad();
         copyToXml(input, x);
         return x;
     }
 
-    private static void copyToXml(Ad source, AD target) {
+    private static void copyToXml(gov.nih.nci.iso21090.Ad source, org.iso._21090.Ad target) {
         target.setNullFlavor(NullFlavorTransformer.INSTANCE.toXml(source.getNullFlavor()));
-        List<Adxp> sourcePart = source.getPart();
+        List<gov.nih.nci.iso21090.Adxp> sourcePart = source.getPart();
         if (sourcePart != null) {
-            List<ADXP> targetPart = target.getPart(); // never return null
-            for (Adxp p : sourcePart) {
+            List<org.iso._21090.ADXP> targetPart = target.getParts(); // never return null
+            for (gov.nih.nci.iso21090.Adxp p : sourcePart) {
                 if (p != null) {
                     targetPart.add(ADXPTransformer.INSTANCE.toXml(p));
                 }
@@ -134,7 +131,7 @@ public final class ADTransformer extends AbstractTransformer<AD, Ad> implements 
     /**
      * {@inheritDoc}
      */
-    public Ad toDto(AD input) {
+    public Ad toDto(org.iso._21090.Ad input) {
         if (input == null) {
             return null;
         }
@@ -143,12 +140,12 @@ public final class ADTransformer extends AbstractTransformer<AD, Ad> implements 
         return d;
     }
 
-    private static void copyToDto(AD source, Ad target) {
+    private static void copyToDto(org.iso._21090.Ad source, Ad target) {
         target.setNullFlavor(NullFlavorTransformer.INSTANCE.toDto(source.getNullFlavor()));
-        List<ADXP> sourcePart = source.getPart(); // never returns null
-        List<Adxp> targetPart = new ArrayList<Adxp>(sourcePart.size());
+        List<org.iso._21090.ADXP> sourcePart = source.getParts(); // never returns null
+        List<gov.nih.nci.iso21090.Adxp> targetPart = new ArrayList<gov.nih.nci.iso21090.Adxp>(sourcePart.size());
         target.setPart(targetPart);
-        for (ADXP p : sourcePart) {
+        for (org.iso._21090.ADXP p : sourcePart) {
             if (p != null) {
                 targetPart.add(ADXPTransformer.INSTANCE.toDto(p));
             }
@@ -158,7 +155,7 @@ public final class ADTransformer extends AbstractTransformer<AD, Ad> implements 
     /**
      * {@inheritDoc}
      */
-    public AD[] createXmlArray(int size) throws DtoTransformException {
-        return new AD[size];
+    public org.iso._21090.Ad[] createXmlArray(int size) throws DtoTransformException {
+        return new org.iso._21090.Ad[size];
     }
 }

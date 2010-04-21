@@ -99,7 +99,7 @@ import org.junit.Test;
 /**
  *
  * @author max
- */public class PQTransformerTest extends AbstractTransformerTestBase<PQTransformer, PQ, Pq>{
+ */public class PQTransformerTest extends AbstractTransformerTestBase<PQTransformer, org.iso._21090.PQ, Pq>{
 
         public Double VALUE_DOUBLE = new Double(12345);
         private static final String UNIT = "test unit";

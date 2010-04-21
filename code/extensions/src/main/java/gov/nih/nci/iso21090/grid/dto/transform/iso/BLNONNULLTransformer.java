@@ -88,14 +88,13 @@ import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformer;
 import gov.nih.nci.iso21090.grid.dto.transform.DtoTransformException;
 import gov.nih.nci.iso21090.grid.dto.transform.Transformer;
 
-import org.iso._21090.BL;
-import org.iso._21090.BLNonNull;
+import gov.nih.nci.iso21090.BlNonNull;
 
 /**
  * Transforms strings.
  */
-public final class BLNONNULLTransformer extends AbstractTransformer<BLNonNull, BlNonNull> 
-    implements Transformer<BLNonNull, BlNonNull> {
+public final class BLNONNULLTransformer extends AbstractTransformer<org.iso._21090.BlNonNull, BlNonNull> 
+    implements Transformer<org.iso._21090.BlNonNull, BlNonNull> {
 
     /**
      * Public singleton.
@@ -108,12 +107,12 @@ public final class BLNONNULLTransformer extends AbstractTransformer<BLNonNull, B
     /**
      * {@inheritDoc}
      */
-    public BLNonNull toXml(BlNonNull input) {
-        BL bl = BLTransformer.INSTANCE.toXml(input);
+    public org.iso._21090.BlNonNull toXml(BlNonNull input) {
+        org.iso._21090.BL bl = BLTransformer.INSTANCE.toXml(input);
         if (bl == null) {
             return null;
         }
-        BLNonNull blnonnull = new BLNonNull();
+        org.iso._21090.BlNonNull blnonnull = new org.iso._21090.BlNonNull();
         blnonnull.setValue(bl.isValue());
         return blnonnull;
     }
@@ -121,7 +120,7 @@ public final class BLNONNULLTransformer extends AbstractTransformer<BLNonNull, B
     /**
      * {@inheritDoc}
      */
-    public BlNonNull toDto(BLNonNull input) {
+    public BlNonNull toDto(org.iso._21090.BlNonNull input) {
         Bl bl = BLTransformer.INSTANCE.toDto(input);
         if (bl == null) {
             return null;
@@ -134,7 +133,7 @@ public final class BLNONNULLTransformer extends AbstractTransformer<BLNonNull, B
     /**
      * {@inheritDoc}
      */
-    public BLNonNull[] createXmlArray(int size) throws DtoTransformException {
-        return new BLNonNull[size];
+    public org.iso._21090.BlNonNull[] createXmlArray(int size) throws DtoTransformException {
+        return new org.iso._21090.BlNonNull[size];
     }
 }
