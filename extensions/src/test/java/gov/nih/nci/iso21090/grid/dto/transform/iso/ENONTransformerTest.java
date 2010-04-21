@@ -91,11 +91,9 @@ import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformerTestBase;
 import gov.nih.nci.iso21090.grid.dto.transform.DtoTransformException;
 import gov.nih.nci.iso21090.grid.dto.transform.iso.ENTransformer.ENONTransformer;
 
-import org.iso._21090.ENON;
-import org.iso._21090.ENXP;
 import org.junit.Test;
 
-public class ENONTransformerTest extends AbstractTransformerTestBase<ENONTransformer, ENON, EnOn>{
+public class ENONTransformerTest extends AbstractTransformerTestBase<ENONTransformer, org.iso._21090.EnOn, EnOn>{
 
     @Override
     public EnOn makeDtoSimple() {
@@ -106,11 +104,11 @@ public class ENONTransformerTest extends AbstractTransformerTestBase<ENONTransfo
     }
 
     @Override
-    public ENON makeXmlSimple() {
-        ENON xml = new ENON();
-        ENXP o = new ENXP();
+    public org.iso._21090.EnOn makeXmlSimple() {
+    	org.iso._21090.EnOn xml = new org.iso._21090.EnOn();
+    	org.iso._21090.ENXP o = new org.iso._21090.ENXP();
         o.setType(org.iso._21090.EntityNamePartType.DEL);
-        xml.getPart().add(o);
+        xml.getParts().add(o);
         return xml;
     }
 
@@ -121,22 +119,22 @@ public class ENONTransformerTest extends AbstractTransformerTestBase<ENONTransfo
     }
 
     @Override
-    public void verifyXmlSimple(ENON x) {
-        assertEquals(x.getPart().size(),1);
-        assertEquals(x.getPart().get(0).getType(),org.iso._21090.EntityNamePartType.DEL);
+    public void verifyXmlSimple(org.iso._21090.EnOn x) {
+        assertEquals(x.getParts().size(),1);
+        assertEquals(x.getParts().get(0).getType(),org.iso._21090.EntityNamePartType.DEL);
 
     }
 
     @Test
     public void testNullPartToXml() throws DtoTransformException {
         EnOn dto = new EnOn();
-        ENON result = ENONTransformer.INSTANCE.toXml(dto);
-        assertTrue(result.getPart().isEmpty());
+        org.iso._21090.EnOn result = ENONTransformer.INSTANCE.toXml(dto);
+        assertTrue(result.getParts().isEmpty());
     }
 
     @Test
     public void testNullPartToDto() throws DtoTransformException {
-        ENON xml = new ENON();
+    	org.iso._21090.EnOn xml = new org.iso._21090.EnOn();
         EnOn result = ENONTransformer.INSTANCE.toDto(xml);
         assertTrue(result.getPart().isEmpty());
     }

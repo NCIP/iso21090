@@ -28,14 +28,18 @@
                     </execution>
                 </executions>
                 <configuration>
+		    <!-- use extension so that we can process jaxb schema directives such as xjc:simple -->
+		    <extension>true</extension>
                     <bindingDirectory>${basedir}/src/main/xjb</bindingDirectory>
                     <schemaDirectory>${basedir}/src/main/xsd/</schemaDirectory>
-                    <schemaFiles>ISO_datatypes_Narrative.xsd,ISO_extensions.xsd</schemaFiles>
+<!--                    <schemaFiles>ISO_datatypes_Narrative.xsd,ISO_extensions.xsd</schemaFiles> -->
+                    <schemaFiles>ISO_extensions.xsd</schemaFiles>
                     <outputDirectory>${generatedStubsSrcDir}</outputDirectory>
                     <staleFile>${project.build.directory}/generated-sources/jaxb/.staleFlag</staleFile>
                     <verbose>true</verbose>
                 </configuration>
             </plugin>
+<!--
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>cobertura-maven-plugin</artifactId>
@@ -49,6 +53,7 @@
                     </execution>
                 </executions>
             </plugin>
+-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>

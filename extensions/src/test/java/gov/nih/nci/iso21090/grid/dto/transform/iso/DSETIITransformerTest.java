@@ -93,12 +93,11 @@ import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformerTestBase;
 
 import java.util.HashSet;
 
-import org.iso._21090.DSETII;
-import org.iso._21090.II;
+import org.iso._21090.DSetII;
 import org.iso._21090.NullFlavor;
 import org.junit.Test;
 
-public class DSETIITransformerTest extends AbstractTransformerTestBase<DSETIITransformer, DSETII, DSet<Ii>> {
+public class DSETIITransformerTest extends AbstractTransformerTestBase<DSETIITransformer, DSetII, DSet<Ii>> {
 
 	@Override
 	public DSet<Ii> makeDtoSimple() {
@@ -109,9 +108,9 @@ public class DSETIITransformerTest extends AbstractTransformerTestBase<DSETIITra
 	}
 
 	@Override
-	public DSETII makeXmlSimple() {
-		 DSETII result = new DSETII();
-		 result.getItem().add(new IITransformerTest().makeXmlSimple());
+	public DSetII makeXmlSimple() {
+		DSetII result = new DSetII();
+		 result.getItems().add(new IITransformerTest().makeXmlSimple());
 		 return result;
 	}
 
@@ -126,24 +125,24 @@ public class DSETIITransformerTest extends AbstractTransformerTestBase<DSETIITra
 	}
 
 	@Override
-	public void verifyXmlSimple(DSETII x) {
+	public void verifyXmlSimple(DSetII x) {
 		 assertNotNull(x);
 	     assertNull(x.getNullFlavor());
-	     assertEquals(1, x.getItem().size());
-	     for (II ii : x.getItem()) {
+	     assertEquals(1, x.getItems().size());
+	     for (org.iso._21090.Ii ii : x.getItems()) {
 	        	new IITransformerTest().verifyXmlSimple(ii);
 	        }
 	}
 	@Override
-	public void verifyXmlNull(DSETII x) {
+	public void verifyXmlNull(DSetII x) {
 	        assertNotNull(x);
 	        assertEquals(NullFlavor.NI, x.getNullFlavor());
-	        assertTrue(x.getItem().isEmpty());
+	        assertTrue(x.getItems().isEmpty());
 	}
 
 	@Test
 	public void testNull() throws Exception {
-		DSETII xml = new DSETII();
+		DSetII xml = new DSetII();
 	    xml.setNullFlavor(NullFlavor.ASKU);
 	    DSet<Ii> dto = DSETIITransformer.INSTANCE.toDto(xml);
 	    assertNull(dto); // potentially, this could be non-null with an empty set (either would be fine),
@@ -151,12 +150,12 @@ public class DSETIITransformerTest extends AbstractTransformerTestBase<DSETIITra
 
 	    xml = DSETIITransformer.INSTANCE.toXml(null);
 	    assertNotNull(xml);
-	    assertTrue(xml.getItem().isEmpty());
+	    assertTrue(xml.getItems().isEmpty());
 	    assertEquals(NullFlavor.NI, xml.getNullFlavor());
 
 	    dto = new DSet<Ii>();
 	    assertNotNull(xml);
-	    assertTrue(xml.getItem().isEmpty());
+	    assertTrue(xml.getItems().isEmpty());
 	    assertEquals(NullFlavor.NI, xml.getNullFlavor());
 
 	    dto.setItem(new HashSet<Ii>());
@@ -167,7 +166,7 @@ public class DSETIITransformerTest extends AbstractTransformerTestBase<DSETIITra
 	    dto.getItem().add(ii);
 	    xml = DSETIITransformer.INSTANCE.toXml(dto);
 	    assertNotNull(xml);
-	    assertTrue(xml.getItem().isEmpty());
+	    assertTrue(xml.getItems().isEmpty());
 	    assertEquals(NullFlavor.NI, xml.getNullFlavor());
 	}
 

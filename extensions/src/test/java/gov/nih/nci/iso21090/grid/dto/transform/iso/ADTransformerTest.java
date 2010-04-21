@@ -92,10 +92,8 @@ import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformerTestBase;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.iso._21090.AD;
-import org.iso._21090.ADXP;
 
-public class ADTransformerTest extends AbstractTransformerTestBase<ADTransformer, AD, Ad> {
+public class ADTransformerTest extends AbstractTransformerTestBase<ADTransformer, org.iso._21090.Ad, Ad> {
     public final String CODE = "code";
     public final String VAL = "val";
 
@@ -112,12 +110,12 @@ public class ADTransformerTest extends AbstractTransformerTestBase<ADTransformer
     }
 
     @Override
-    public AD makeXmlSimple() {
-        AD xml = new AD();
-        ADXP part1 = new ADXP();
+    public org.iso._21090.Ad makeXmlSimple() {
+    	org.iso._21090.Ad xml = new org.iso._21090.Ad();
+    	org.iso._21090.ADXP part1 = new org.iso._21090.ADXP();
         part1.setCode(CODE);
         part1.setValue(VAL);
-        xml.getPart().add(part1);
+        xml.getParts().add(part1);
         return xml;
     }
 
@@ -128,13 +126,13 @@ public class ADTransformerTest extends AbstractTransformerTestBase<ADTransformer
     }
 
     @Override
-    public void verifyXmlSimple(AD x) {
-        assertEquals(x.getPart().get(0).getCode(), CODE);
-        assertEquals(x.getPart().get(0).getValue(), VAL);
+    public void verifyXmlSimple(org.iso._21090.Ad x) {
+        assertEquals(x.getParts().get(0).getCode(), CODE);
+        assertEquals(x.getParts().get(0).getValue(), VAL);
     }
 
     @Override
-    public void verifyXmlNull(AD x) {
+    public void verifyXmlNull(org.iso._21090.Ad x) {
         assertNull(x);
     }
 }

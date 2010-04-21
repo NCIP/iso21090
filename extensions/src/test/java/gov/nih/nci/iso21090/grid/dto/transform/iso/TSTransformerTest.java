@@ -85,7 +85,6 @@ package gov.nih.nci.iso21090.grid.dto.transform.iso;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-
 import gov.nih.nci.iso21090.Ts;
 import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformerTestBase;
 
@@ -93,8 +92,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.iso._21090.ED;
-import org.iso._21090.EDText;
 import org.iso._21090.NullFlavor;
 import org.iso._21090.TS;
 import org.junit.Test;
@@ -103,7 +100,7 @@ import org.junit.Test;
  *
  * @author max
  */
-public class TSTransformerTest extends AbstractTransformerTestBase<TSTransformer, TS, Ts>{
+public class TSTransformerTest extends AbstractTransformerTestBase<TSTransformer, org.iso._21090.TS, Ts>{
 
     public final String VALUE_DATE = "19800928023033.0978-0000";
     public final String OVERFLOW_VALUE_DATE = "20090229000000.0000-0000";

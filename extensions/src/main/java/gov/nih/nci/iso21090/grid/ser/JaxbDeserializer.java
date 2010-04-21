@@ -87,6 +87,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.namespace.QName;
 
@@ -134,6 +135,10 @@ public class JaxbDeserializer extends DeserializerImpl implements Deserializer {
                 Unmarshaller unmarshaller = jc.createUnmarshaller();
                 // Unmarshall the nested XML element into a jaxb object of type 'javaType'
                 value = unmarshaller.unmarshal(msgElem.getAsDOM());
+                if (value instanceof JAXBElement) {
+                	JAXBElement jaxbElement = (JAXBElement)value;
+                	value = jaxbElement.getValue();
+                }
             }
         } catch (Exception e) {
             throw new SAXException(e);

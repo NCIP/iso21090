@@ -95,15 +95,11 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import org.iso._21090.TEL;
-import org.iso._21090.TELEmail;
-import org.iso._21090.TELPerson;
-import org.iso._21090.TELPhone;
-import org.iso._21090.TELUrl;
 
 /**
  * Transforms telecoms.
  */
-public final class TELTransformer extends AbstractTransformer<TEL, Tel> implements Transformer<TEL, Tel> {
+public final class TELTransformer extends AbstractTransformer<org.iso._21090.TEL, Tel> implements Transformer<org.iso._21090.TEL, Tel> {
 
     /**
      * Public singleton.
@@ -122,13 +118,13 @@ public final class TELTransformer extends AbstractTransformer<TEL, Tel> implemen
         }
         TEL x;
         if (input instanceof TelEmail) {
-            x = new TELEmail();
+            x = new org.iso._21090.TelEmail();
         } else if (input instanceof TelPhone) {
-            x = new TELPhone();
+            x = new org.iso._21090.TelPhone();
         } else if (input instanceof TelPerson) {
-            x = new TELPerson();
+            x = new org.iso._21090.TELPerson();
         } else if (input instanceof TelUrl) {
-            x = new TELUrl();
+            x = new org.iso._21090.TelUrl();
         } else {
             x = new TEL();
         }
@@ -153,13 +149,13 @@ public final class TELTransformer extends AbstractTransformer<TEL, Tel> implemen
             return null;
         }
         Tel d;
-        if (input instanceof TELEmail) {
+        if (input instanceof org.iso._21090.TelEmail) {
             d = new TelEmail();
-        } else if (input instanceof TELPhone) {
+        } else if (input instanceof org.iso._21090.TelPhone) {
             d = new TelPhone();
-        } else if (input instanceof TELPerson) {
+        } else if (input instanceof org.iso._21090.TELPerson) {
             d = new TelPerson();
-        } else if (input instanceof TELUrl) {
+        } else if (input instanceof org.iso._21090.TelUrl) {
             d = new TelUrl();
         } else {
             d = new Tel();

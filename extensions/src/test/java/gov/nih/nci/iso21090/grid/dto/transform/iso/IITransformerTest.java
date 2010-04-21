@@ -90,11 +90,10 @@ import gov.nih.nci.iso21090.IdentifierScope;
 import gov.nih.nci.iso21090.Ii;
 import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformerTestBase;
 
-import org.iso._21090.II;
 import org.iso._21090.NullFlavor;
 import org.junit.Test;
 
-public class IITransformerTest extends AbstractTransformerTestBase<IITransformer,II,Ii>{
+public class IITransformerTest extends AbstractTransformerTestBase<IITransformer,org.iso._21090.Ii,Ii>{
      /**
      * The identifier name.
      */
@@ -118,8 +117,8 @@ public class IITransformerTest extends AbstractTransformerTestBase<IITransformer
     }
 
     @Override
-    public II makeXmlSimple() {
-          II id = new II();
+    public org.iso._21090.Ii makeXmlSimple() {
+    	org.iso._21090.Ii id = new org.iso._21090.Ii();
           id.setDisplayable(Boolean.TRUE);
           id.setRoot(ROOT);
           id.setIdentifierName(IDENTIFIER_NAME);
@@ -142,7 +141,7 @@ public class IITransformerTest extends AbstractTransformerTestBase<IITransformer
     }
 
     @Override
-    public void verifyXmlSimple(II x) {
+    public void verifyXmlSimple(org.iso._21090.Ii x) {
         assertEquals(x.getRoot(), ROOT);
         assertEquals(x.getIdentifierName(), IDENTIFIER_NAME);
         assertEquals(x.getExtension(), "123");
@@ -153,7 +152,7 @@ public class IITransformerTest extends AbstractTransformerTestBase<IITransformer
 
     @Test
     public void testNullFlavorConversion() {
-        II x = new II();
+    	org.iso._21090.Ii x = new org.iso._21090.Ii();
         x.setNullFlavor(NullFlavor.ASKU);
         Ii y = IITransformer.INSTANCE.toDto(x);
         assertNotNull(y);

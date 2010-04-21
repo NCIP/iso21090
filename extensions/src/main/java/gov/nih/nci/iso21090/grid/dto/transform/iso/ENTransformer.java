@@ -86,8 +86,8 @@ package gov.nih.nci.iso21090.grid.dto.transform.iso;
 import gov.nih.nci.iso21090.En;
 import gov.nih.nci.iso21090.EnOn;
 import gov.nih.nci.iso21090.EnPn;
-import gov.nih.nci.iso21090.EntityNamePartType;
 import gov.nih.nci.iso21090.Enxp;
+import gov.nih.nci.iso21090.EntityNamePartType;
 import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformer;
 import gov.nih.nci.iso21090.grid.dto.transform.DtoTransformException;
 import gov.nih.nci.iso21090.grid.dto.transform.Transformer;
@@ -95,9 +95,6 @@ import gov.nih.nci.iso21090.grid.dto.transform.Transformer;
 import java.util.List;
 
 import org.iso._21090.EN;
-import org.iso._21090.ENON;
-import org.iso._21090.ENPN;
-import org.iso._21090.ENXP;
 
 /**
  * Transformer for EN and subtypes.
@@ -159,7 +156,7 @@ public abstract class ENTransformer<ENXX extends EN, EnXx extends En> extends Ab
      */
     protected void copyToDto(ENXX source, EnXx target) throws DtoTransformException {
         target.setNullFlavor(NullFlavorTransformer.INSTANCE.toDto(source.getNullFlavor()));
-        List<ENXP> sPart = source.getPart();
+        List<org.iso._21090.ENXP> sPart = source.getParts();
         if (sPart == null || sPart.isEmpty()) {
             return;
         }
@@ -173,8 +170,8 @@ public abstract class ENTransformer<ENXX extends EN, EnXx extends En> extends Ab
      * @throws DtoTransformException transform exception.
      */
     protected void copyTypesToDto(ENXX source, EnXx target) throws DtoTransformException {
-        List<Enxp> tPart = target.getPart();
-        for (ENXP enxp : source.getPart()) {
+        List<gov.nih.nci.iso21090.Enxp> tPart = target.getPart();
+        for (org.iso._21090.ENXP enxp : source.getParts()) {
             tPart.add(ENXPTransformer.INSTANCE.toDto(enxp));
         }
     }
@@ -201,7 +198,7 @@ public abstract class ENTransformer<ENXX extends EN, EnXx extends En> extends Ab
      * @throws DtoTransformException transform exception.
      */
     protected void copyTypesToXml(EnXx source, ENXX target) throws DtoTransformException {
-        List<ENXP> tPart = target.getPart();
+        List<org.iso._21090.ENXP> tPart = target.getParts();
         for (Enxp enxp : source.getPart()) {
             tPart.add(ENXPTransformer.INSTANCE.toXml(enxp));
         }
@@ -251,11 +248,10 @@ public abstract class ENTransformer<ENXX extends EN, EnXx extends En> extends Ab
             return new EN[size];
         }
     }    
-
     /**
      * Org name transformer.
      */
-    public static final class ENONTransformer extends ENTransformer<ENON, EnOn> {
+    public static final class ENONTransformer extends ENTransformer<org.iso._21090.EnOn, EnOn> {
 
         /**
          * Public singleton.
@@ -269,8 +265,8 @@ public abstract class ENTransformer<ENXX extends EN, EnXx extends En> extends Ab
          * {@inheritDoc}
          */
         @Override
-        protected ENON newXml() {
-            return new ENON();
+        protected org.iso._21090.EnOn newXml() {
+            return new org.iso._21090.EnOn();
         }
 
         /**
@@ -284,15 +280,15 @@ public abstract class ENTransformer<ENXX extends EN, EnXx extends En> extends Ab
         /**
          * {@inheritDoc}
          */
-        public ENON[] createXmlArray(int size) throws DtoTransformException {
-            return new ENON[size];
+        public org.iso._21090.EnOn[] createXmlArray(int size) throws DtoTransformException {
+            return new org.iso._21090.EnOn[size];
         }
     }
 
     /**
      * Person name transformer.
      */
-    public static final class ENPNTransformer extends ENTransformer<ENPN, EnPn> {
+    public static final class ENPNTransformer extends ENTransformer<org.iso._21090.EnPn, EnPn> {
 
         /**
          * Public singleton.
@@ -306,8 +302,8 @@ public abstract class ENTransformer<ENXX extends EN, EnXx extends En> extends Ab
          * {@inheritDoc}
          */
         @Override
-        protected ENPN newXml() {
-            return new ENPN();
+        protected org.iso._21090.EnPn newXml() {
+            return new org.iso._21090.EnPn();
         }
 
         /**
@@ -321,20 +317,20 @@ public abstract class ENTransformer<ENXX extends EN, EnXx extends En> extends Ab
         /**
          * {@inheritDoc}
          */
-        public ENPN[] createXmlArray(int size) throws DtoTransformException {
-            return new ENPN[size];
+        public org.iso._21090.EnPn[] createXmlArray(int size) throws DtoTransformException {
+            return new org.iso._21090.EnPn[size];
         }
 
         /**
          * {@inheritDoc}
          */
         @Override
-        protected void copyTypesToDto(ENPN source, EnPn target) throws DtoTransformException {
-            if (xmlAllTypesSet(source.getPart())) {
+        protected void copyTypesToDto(org.iso._21090.EnPn source, EnPn target) throws DtoTransformException {
+            if (xmlAllTypesSet(source.getParts())) {
                 super.copyTypesToDto(source, target);
             } else {
                 List<Enxp> tPart = target.getPart();
-                handleSomeXmlNullTypes(source.getPart(), tPart);
+                handleSomeXmlNullTypes(source.getParts(), tPart);
             }
         }
 
@@ -342,17 +338,17 @@ public abstract class ENTransformer<ENXX extends EN, EnXx extends En> extends Ab
          * {@inheritDoc}
          */
         @Override
-        protected void copyTypesToXml(EnPn source, ENPN target) throws DtoTransformException {
+        protected void copyTypesToXml(EnPn source, org.iso._21090.EnPn target) throws DtoTransformException {
             if (dtoAllTypesSet(source.getPart())) {
                 super.copyTypesToXml(source, target);
             } else {
-                List<ENXP> tPart = target.getPart();
+                List<org.iso._21090.ENXP> tPart = target.getParts();
                 handleSomeDtoNullTypes(source.getPart(), tPart);
             }
         }
 
-        private boolean xmlAllTypesSet(List<ENXP> source) {
-            for (ENXP enxp : source) {
+        private boolean xmlAllTypesSet(List<org.iso._21090.ENXP> source) {
+            for (org.iso._21090.ENXP enxp : source) {
                 if (enxp != null && enxp.getType() == null) {
                     return false;
                 }
@@ -379,7 +375,7 @@ public abstract class ENTransformer<ENXX extends EN, EnXx extends En> extends Ab
              }
         }
 
-        private void handleSetType(ENXP result, boolean last,
+        private void handleSetType(org.iso._21090.ENXP result, boolean last,
                 org.iso._21090.EntityNamePartType lastType) {
             if (last) {
                 result.setType(org.iso._21090.EntityNamePartType.FAM);
@@ -388,7 +384,7 @@ public abstract class ENTransformer<ENXX extends EN, EnXx extends En> extends Ab
             }
        }
 
-        private void handleSomeXmlNullTypes(List<ENXP> sPart, List<Enxp> tPart)
+        private void handleSomeXmlNullTypes(List<org.iso._21090.ENXP> sPart, List<Enxp> tPart)
             throws DtoTransformException {
             EntityNamePartType lastType = EntityNamePartType.GIV;
             for (int count = 0; count < sPart.size(); count++) {
@@ -403,11 +399,11 @@ public abstract class ENTransformer<ENXX extends EN, EnXx extends En> extends Ab
             }
         }
 
-        private void handleSomeDtoNullTypes(List<Enxp> sPart, List<ENXP> tPart)
+        private void handleSomeDtoNullTypes(List<Enxp> sPart, List<org.iso._21090.ENXP> tPart)
         throws DtoTransformException {
             org.iso._21090.EntityNamePartType lastType = org.iso._21090.EntityNamePartType.GIV;
         for (int count = 0; count < sPart.size(); count++) {
-            ENXP result = ENXPTransformer.INSTANCE.toXml(sPart.get(count));
+        	org.iso._21090.ENXP result = ENXPTransformer.INSTANCE.toXml(sPart.get(count));
             if (result.getType() == null) {
                 handleSetType(result, count == sPart.size() - 1, lastType);
             } else {

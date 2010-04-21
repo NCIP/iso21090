@@ -82,30 +82,28 @@
  */
 package gov.nih.nci.iso21090.grid.dto.transform.iso;
 
-import java.math.BigDecimal;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import gov.nih.nci.iso21090.Real;
-
 import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformerTestBase;
 
+import java.math.BigDecimal;
+
 import org.iso._21090.NullFlavor;
-import org.iso._21090.REAL;
 import org.junit.Test;
 
 /**
  *
  * @author max
  */
-public class REALTransformerTest extends AbstractTransformerTestBase<REALTransformer, REAL, Real>{
+public class REALTransformerTest extends AbstractTransformerTestBase<REALTransformer, org.iso._21090.Real, Real>{
 
         private static final Double VALUE = new Double(4.0);
 
         @Override
-        public REAL makeXmlSimple() {
-            REAL x = new REAL();
+        public org.iso._21090.Real makeXmlSimple() {
+        	org.iso._21090.Real x = new org.iso._21090.Real();
             x.setValue(new Double(VALUE));
             return x;
         }
@@ -118,7 +116,7 @@ public class REALTransformerTest extends AbstractTransformerTestBase<REALTransfo
         }
 
         @Override
-        public void verifyXmlSimple(REAL x) {
+        public void verifyXmlSimple(org.iso._21090.Real x) {
             assertEquals(null, VALUE, x.getValue(), 0);
         }
 
@@ -127,8 +125,8 @@ public class REALTransformerTest extends AbstractTransformerTestBase<REALTransfo
             assertEquals(null, VALUE, x.getValue().doubleValue(), 0);
         }
 
-        public REAL makeXmlNullFlavored() {
-            REAL x = new REAL();
+        public org.iso._21090.Real makeXmlNullFlavored() {
+        	org.iso._21090.Real x = new org.iso._21090.Real();
             x.setNullFlavor(NullFlavor.NI);
             return x;
         }
@@ -142,7 +140,7 @@ public class REALTransformerTest extends AbstractTransformerTestBase<REALTransfo
         public void testRealNull() throws Exception {
             Real ts = new Real();
             ts.setNullFlavor(gov.nih.nci.iso21090.NullFlavor.ASKU);
-            REAL result = REALTransformer.INSTANCE.toXml(ts);
+            org.iso._21090.Real result = REALTransformer.INSTANCE.toXml(ts);
             assertNotNull(result);
             assertEquals(NullFlavor.ASKU, result.getNullFlavor());
             assertNull(result.getValue());

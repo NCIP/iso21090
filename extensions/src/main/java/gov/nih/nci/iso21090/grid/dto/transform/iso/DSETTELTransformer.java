@@ -92,7 +92,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.iso._21090.DSETTEL;
+import org.iso._21090.DSetTel;
 import org.iso._21090.NullFlavor;
 import org.iso._21090.TEL;
 
@@ -106,8 +106,8 @@ import org.iso._21090.TEL;
  * </ol>
  */
 @SuppressWarnings("PMD.CyclomaticComplexity")
-public final class DSETTELTransformer extends AbstractTransformer<DSETTEL, DSet<Tel>>
-    implements Transformer<DSETTEL, DSet<Tel>> {
+public final class DSETTELTransformer extends AbstractTransformer<DSetTel, DSet<Tel>>
+    implements Transformer<DSetTel, DSet<Tel>> {
 
     /**
      * Public singleton.
@@ -120,11 +120,11 @@ public final class DSETTELTransformer extends AbstractTransformer<DSETTEL, DSet<
     /**
      * {@inheritDoc}
      */
-    public DSETTEL toXml(DSet<Tel> input) throws DtoTransformException {
-        DSETTEL x = new DSETTEL();
+    public DSetTel toXml(DSet<Tel> input) throws DtoTransformException {
+    	DSetTel x = new DSetTel();
         if (input != null && input.getItem() != null) {
             Set<Tel> sItem = input.getItem();
-            List<TEL> tItem = x.getItem();
+            List<TEL> tItem = x.getItems();
             for (Tel element : sItem) {
                 TEL cur = TELTransformer.INSTANCE.toXml(element);
                 // XSD rule: all elements of set must be non-null
@@ -134,7 +134,7 @@ public final class DSETTELTransformer extends AbstractTransformer<DSETTEL, DSet<
             }
         }
 
-        if (x.getItem().isEmpty()) {
+        if (x.getItems().isEmpty()) {
             x.setNullFlavor(NullFlavor.NI);
         }
         return x;
@@ -143,13 +143,13 @@ public final class DSETTELTransformer extends AbstractTransformer<DSETTEL, DSet<
     /**
      * {@inheritDoc}
      */
-    public DSet<Tel> toDto(DSETTEL input) throws DtoTransformException {
+    public DSet<Tel> toDto(DSetTel input) throws DtoTransformException {
         if (input == null || input.getNullFlavor() != null) {
             return null;
         }
         DSet<Tel> d = new DSet<Tel>();
         d.setItem(new HashSet<Tel>());
-        List<TEL> sItem = input.getItem();
+        List<TEL> sItem = input.getItems();
         Set<Tel> tItem = d.getItem();
         for (TEL tel : sItem) {
             tItem.add(TELTransformer.INSTANCE.toDto(tel));
@@ -160,7 +160,7 @@ public final class DSETTELTransformer extends AbstractTransformer<DSETTEL, DSet<
     /**
      * {@inheritDoc}
      */
-    public DSETTEL[] createXmlArray(int size) throws DtoTransformException {
-        return new DSETTEL[size];
+    public DSetTel[] createXmlArray(int size) throws DtoTransformException {
+        return new DSetTel[size];
     }
 }

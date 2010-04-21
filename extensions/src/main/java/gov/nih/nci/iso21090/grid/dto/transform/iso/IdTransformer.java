@@ -85,7 +85,6 @@ package gov.nih.nci.iso21090.grid.dto.transform.iso;
 import gov.nih.nci.iso21090.IdentifierReliability;
 import gov.nih.nci.iso21090.IdentifierScope;
 import gov.nih.nci.iso21090.Ii;
-import gov.nih.nci.iso21090.extensions.Id;
 import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformer;
 import gov.nih.nci.iso21090.grid.dto.transform.DtoTransformException;
 import gov.nih.nci.iso21090.grid.dto.transform.Transformer;
@@ -96,7 +95,7 @@ import gov.nih.nci.iso21090.grid.dto.transform.Transformer;
  * @author smatyas
  *
  */
-public final class IdTransformer extends AbstractTransformer<Id, Ii> implements Transformer<Id, Ii> {
+public final class IdTransformer extends AbstractTransformer<org.iso._21090.Ii, Ii> implements Transformer<org.iso._21090.Ii, Ii> {
 
     /**
      * Public singleton.
@@ -109,16 +108,16 @@ public final class IdTransformer extends AbstractTransformer<Id, Ii> implements 
     /**
      * {@inheritDoc}
      */
-    public Id toXml(Ii input) {
+    public org.iso._21090.Ii toXml(Ii input) {
         if (input == null) {
             return null;
         }
-        Id d = new Id();
+        org.iso._21090.Ii d = new org.iso._21090.Ii();
         copyToXml(input, d);
         return d;
     }
 
-    private static void copyToXml(Ii source, Id target) {
+    private static void copyToXml(Ii source, org.iso._21090.Ii target) {
         target.setDisplayable(source.getDisplayable());
         target.setExtension(source.getExtension());
         target.setIdentifierName(source.getIdentifierName());
@@ -135,7 +134,7 @@ public final class IdTransformer extends AbstractTransformer<Id, Ii> implements 
     /**
      * {@inheritDoc}
      */
-    public Ii toDto(Id input) {
+    public Ii toDto(org.iso._21090.Ii input) {
         if (input == null) {
             return null;
         }
@@ -144,7 +143,7 @@ public final class IdTransformer extends AbstractTransformer<Id, Ii> implements 
         return d;
     }
 
-    private static void copyToDto(Id source, Ii target) {
+    private static void copyToDto(org.iso._21090.Ii source, Ii target) {
         target.setDisplayable(source.isDisplayable());
         target.setExtension(source.getExtension());
         target.setIdentifierName(source.getIdentifierName());
@@ -161,8 +160,8 @@ public final class IdTransformer extends AbstractTransformer<Id, Ii> implements 
     /**
      * {@inheritDoc}
      */
-    public Id[] createXmlArray(int arg0) throws DtoTransformException {
-        return new Id[arg0];
+    public org.iso._21090.Ii[] createXmlArray(int arg0) throws DtoTransformException {
+        return new org.iso._21090.Ii[arg0];
     }
 
 }

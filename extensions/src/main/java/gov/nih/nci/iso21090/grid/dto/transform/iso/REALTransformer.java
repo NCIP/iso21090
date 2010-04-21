@@ -82,20 +82,18 @@
  */
 package gov.nih.nci.iso21090.grid.dto.transform.iso;
 
-import java.math.BigDecimal;
-
 import gov.nih.nci.iso21090.Real;
 import gov.nih.nci.iso21090.grid.dto.transform.DtoTransformException;
 import gov.nih.nci.iso21090.grid.dto.transform.Transformer;
 
-import org.iso._21090.REAL;
+import java.math.BigDecimal;
 
 /**
  * Transforms real numbers.
  * @author mshestopalov
  */
-public final class REALTransformer extends QTYTransformer<REAL, Real>
-    implements Transformer<REAL, Real> {
+public final class REALTransformer extends QTYTransformer<org.iso._21090.Real, Real>
+    implements Transformer<org.iso._21090.Real, Real> {
 
     /**
      * Public singleton.
@@ -110,8 +108,8 @@ public final class REALTransformer extends QTYTransformer<REAL, Real>
      * {@inheritDoc}
      */
     @Override
-    protected REAL newXml() {
-        return new REAL();
+    protected org.iso._21090.Real newXml() {
+        return new org.iso._21090.Real();
     }
 
     /**
@@ -125,11 +123,11 @@ public final class REALTransformer extends QTYTransformer<REAL, Real>
     /**
      * {@inheritDoc}
      */
-    public REAL toXml(Real input) throws DtoTransformException {
+    public org.iso._21090.Real toXml(Real input) throws DtoTransformException {
         if (input == null) {
             return null;
         }
-        REAL x = transformBaseXml(input);
+        org.iso._21090.Real x = transformBaseXml(input);
         BigDecimal v = input.getValue();
         if (v != null) {
             x.setValue(v.doubleValue());
@@ -143,7 +141,7 @@ public final class REALTransformer extends QTYTransformer<REAL, Real>
     /**
      * {@inheritDoc}
      */
-    public Real toDto(REAL input) throws DtoTransformException {
+    public Real toDto(org.iso._21090.Real input) throws DtoTransformException {
         if (input == null) {
             return null;
         }
@@ -160,8 +158,8 @@ public final class REALTransformer extends QTYTransformer<REAL, Real>
     /**
      * {@inheritDoc}
      */
-    public REAL[] createXmlArray(int size) throws DtoTransformException {
-        return new REAL[size];
+    public org.iso._21090.Real[] createXmlArray(int size) throws DtoTransformException {
+        return new org.iso._21090.Real[size];
     }
 
 

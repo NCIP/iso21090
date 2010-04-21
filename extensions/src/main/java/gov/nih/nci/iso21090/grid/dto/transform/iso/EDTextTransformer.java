@@ -89,14 +89,13 @@ import gov.nih.nci.iso21090.grid.dto.transform.DtoTransformException;
 import gov.nih.nci.iso21090.grid.dto.transform.Transformer;
 
 import org.iso._21090.ED;
-import org.iso._21090.EDText;
 
 /**
  * Transforms strings.
  * @author mshestopalov
  */
-public final class EDTextTransformer extends AbstractTransformer<EDText, EdText>
-    implements Transformer<EDText, EdText> {
+public final class EDTextTransformer extends AbstractTransformer<org.iso._21090.EdText, EdText>
+    implements Transformer<org.iso._21090.EdText, EdText> {
 
     /**
      * Public singleton.
@@ -109,11 +108,11 @@ public final class EDTextTransformer extends AbstractTransformer<EDText, EdText>
     /**
      * {@inheritDoc}
      */
-    public EDText toXml(EdText input) throws DtoTransformException {
+    public org.iso._21090.EdText toXml(EdText input) throws DtoTransformException {
         if (input == null) {
             return null;
         }
-        EDText x = new EDText();
+        org.iso._21090.EdText x = new org.iso._21090.EdText();
         ED ed = EDTransformer.INSTANCE.toXml(input);
         x.setCharset(ed.getCharset());
         x.setData(ed.getData());
@@ -128,7 +127,7 @@ public final class EDTextTransformer extends AbstractTransformer<EDText, EdText>
     /**
      * {@inheritDoc}
      */
-    public EdText toDto(EDText input) throws DtoTransformException {
+    public EdText toDto(org.iso._21090.EdText input) throws DtoTransformException {
         if (input == null) {
             return null;
         }
@@ -143,7 +142,7 @@ public final class EDTextTransformer extends AbstractTransformer<EDText, EdText>
     /**
      * {@inheritDoc}
      */
-    public EDText[] createXmlArray(int size) throws DtoTransformException {
-        return new EDText[size];
+    public org.iso._21090.EdText[] createXmlArray(int size) throws DtoTransformException {
+        return new org.iso._21090.EdText[size];
     }
 }

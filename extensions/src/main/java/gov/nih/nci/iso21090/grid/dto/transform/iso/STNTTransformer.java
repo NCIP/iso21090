@@ -89,12 +89,11 @@ import gov.nih.nci.iso21090.grid.dto.transform.DtoTransformException;
 import gov.nih.nci.iso21090.grid.dto.transform.Transformer;
 
 import org.iso._21090.ST;
-import org.iso._21090.STNT;
 
 /**
  * Transforms strings.
  */
-public final class STNTTransformer extends AbstractTransformer<STNT, StNt> implements Transformer<STNT, StNt> {
+public final class STNTTransformer extends AbstractTransformer<org.iso._21090.StNt, StNt> implements Transformer<org.iso._21090.StNt, StNt> {
 
     /**
      * Public singleton.
@@ -107,12 +106,12 @@ public final class STNTTransformer extends AbstractTransformer<STNT, StNt> imple
     /**
      * {@inheritDoc}
      */
-    public STNT toXml(StNt input) {
+    public org.iso._21090.StNt toXml(StNt input) {
         ST st = STTransformer.INSTANCE.toXml(input);
         if (st == null) {
             return null;
         }
-        STNT stnt = new STNT();
+        org.iso._21090.StNt stnt = new org.iso._21090.StNt();
         stnt.setValue(st.getValue());
         stnt.setNullFlavor(st.getNullFlavor());
         return stnt;
@@ -121,7 +120,7 @@ public final class STNTTransformer extends AbstractTransformer<STNT, StNt> imple
     /**
      * {@inheritDoc}
      */
-    public StNt toDto(STNT input) {
+    public StNt toDto(org.iso._21090.StNt input) {
         St st = STTransformer.INSTANCE.toDto(input);
         if (st == null) {
             return null;
@@ -135,7 +134,7 @@ public final class STNTTransformer extends AbstractTransformer<STNT, StNt> imple
     /**
      * {@inheritDoc}
      */
-    public STNT[] createXmlArray(int size) throws DtoTransformException {
-        return new STNT[size];
+    public org.iso._21090.StNt[] createXmlArray(int size) throws DtoTransformException {
+        return new org.iso._21090.StNt[size];
     }
 }

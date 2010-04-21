@@ -91,9 +91,7 @@ import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformerTestBase;
 
 import java.util.HashSet;
 
-import org.iso._21090.ENXP;
-
-public class ENXPTransformerTest extends AbstractTransformerTestBase<ENXPTransformer, ENXP, Enxp>{
+public class ENXPTransformerTest extends AbstractTransformerTestBase<ENXPTransformer, org.iso._21090.ENXP, Enxp>{
 
     @Override
     public Enxp makeDtoSimple() {
@@ -109,15 +107,15 @@ public class ENXPTransformerTest extends AbstractTransformerTestBase<ENXPTransfo
     }
 
     @Override
-    public ENXP makeXmlSimple() {
-        ENXP xml = new ENXP();
+    public org.iso._21090.ENXP makeXmlSimple() {
+    	org.iso._21090.ENXP xml = new org.iso._21090.ENXP();
         xml.setType(org.iso._21090.EntityNamePartType.DEL);
         xml.setCode("code");
         xml.setCodeSystem("code string");
         xml.setCodeSystemVersion("codeSystemVersion");
         xml.setValue("value");
-        xml.getQualifier().add(org.iso._21090.EntityNamePartQualifier.AC);
-        xml.getQualifier().add(org.iso._21090.EntityNamePartQualifier.AD);
+        xml.getQualifiers().add(org.iso._21090.EntityNamePartQualifier.AC);
+        xml.getQualifiers().add(org.iso._21090.EntityNamePartQualifier.AD);
         return xml;
     }
 
@@ -131,12 +129,12 @@ public class ENXPTransformerTest extends AbstractTransformerTestBase<ENXPTransfo
     }
 
     @Override
-    public void verifyXmlSimple(ENXP x) {
+    public void verifyXmlSimple(org.iso._21090.ENXP x) {
         assertEquals(x.getCode(), "code");
         assertEquals(x.getCodeSystem(), "code string");
         assertEquals(x.getCodeSystemVersion(), "codeSystemVersion");
         assertEquals(x.getValue(), "value");
-        assertEquals(x.getQualifier().size(), 2);
+        assertEquals(x.getQualifiers().size(), 2);
     }
 
 }

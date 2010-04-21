@@ -90,7 +90,6 @@ import gov.nih.nci.iso21090.StNt;
 import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformerTestBase;
 
 import org.iso._21090.ST;
-import org.iso._21090.STNT;
 import org.junit.Test;
 
 
@@ -99,16 +98,16 @@ import org.junit.Test;
  * @author mshestoalov
  */
 public class STNTTransformerTest  
-    extends AbstractTransformerTestBase<STNTTransformer, STNT, StNt>{
+    extends AbstractTransformerTestBase<STNTTransformer, org.iso._21090.StNt, StNt>{
 
 
     private STTransformerTest stTest = new STTransformerTest();
     
     @Override
-    public STNT makeXmlSimple() {
+    public org.iso._21090.StNt makeXmlSimple() {
         ST st = stTest.makeXmlSimple();
         if (st != null) {
-            STNT returnVal = new STNT();
+        	org.iso._21090.StNt returnVal = new org.iso._21090.StNt();
             returnVal.setNullFlavor(st.getNullFlavor());
             returnVal.setValue(st.getValue());
             return returnVal;
@@ -132,7 +131,7 @@ public class STNTTransformerTest
     }
 
     @Override
-    public void verifyXmlSimple(STNT x) {
+    public void verifyXmlSimple(org.iso._21090.StNt x) {
         assertEquals("v", x.getValue());
     }
 
@@ -141,8 +140,8 @@ public class STNTTransformerTest
         assertEquals("v", x.getValue());
     }
 
-    public STNT makeXmlNullFlavored() {
-        STNT x = new STNT();
+    public org.iso._21090.StNt makeXmlNullFlavored() {
+    	org.iso._21090.StNt x = new org.iso._21090.StNt();
         x.setNullFlavor(org.iso._21090.NullFlavor.NI);
         return x;
     }
@@ -156,7 +155,7 @@ public class STNTTransformerTest
     public void testStNtNull() throws Exception {
         StNt stNt = new StNt();
         stNt.setNullFlavor(gov.nih.nci.iso21090.NullFlavor.ASKU);
-        STNT result = STNTTransformer.INSTANCE.toXml(stNt);
+        org.iso._21090.StNt result = STNTTransformer.INSTANCE.toXml(stNt);
         assertNotNull(result);
         assertEquals(org.iso._21090.NullFlavor.ASKU, result.getNullFlavor());
         assertNull(result.getValue());

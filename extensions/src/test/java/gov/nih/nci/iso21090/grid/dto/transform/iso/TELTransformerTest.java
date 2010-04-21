@@ -99,7 +99,6 @@ import java.net.URISyntaxException;
 
 import org.iso._21090.TEL;
 import org.iso._21090.TELPerson;
-import org.iso._21090.TELUrl;
 import org.junit.Test;
 
 /**
@@ -136,7 +135,7 @@ public class TELTransformerTest extends AbstractTransformerTestBase<TELTransform
 
     @Override
     public TEL makeXmlSimple() {
-        TEL tel = new TELUrl();
+        TEL tel = new org.iso._21090.TelUrl();
         tel.setValue("http://www.example.com");
 
         return tel;

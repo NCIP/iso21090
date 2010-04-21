@@ -92,7 +92,6 @@ import gov.nih.nci.iso21090.EdText;
 import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformerTestBase;
 
 import org.iso._21090.ED;
-import org.iso._21090.EDText;
 import org.iso._21090.NullFlavor;
 import org.junit.Test;
 
@@ -100,12 +99,12 @@ import org.junit.Test;
  *
  * @author max
  */
-public class EDTextTransformerTest extends AbstractTransformerTestBase<EDTextTransformer, EDText, EdText>{
+public class EDTextTransformerTest extends AbstractTransformerTestBase<EDTextTransformer, org.iso._21090.EdText, EdText>{
 
     @Override
-    public EDText makeXmlSimple() {
+    public org.iso._21090.EdText makeXmlSimple() {
         ED x = new EDTransformerTest().makeXmlSimple();
-        EDText edText = new EDText();
+        org.iso._21090.EdText edText = new org.iso._21090.EdText();
         edText.setValue(x.getValue());
         edText.setNullFlavor(x.getNullFlavor());
         return edText;
@@ -121,7 +120,7 @@ public class EDTextTransformerTest extends AbstractTransformerTestBase<EDTextTra
     }
 
     @Override
-    public void verifyXmlSimple(EDText x) {
+    public void verifyXmlSimple(org.iso._21090.EdText x) {
         assertEquals(EDTransformerTest.VALUE, x.getValue());
     }
 
@@ -130,8 +129,8 @@ public class EDTextTransformerTest extends AbstractTransformerTestBase<EDTextTra
         assertEquals(EDTransformerTest.VALUE, x.getValue());
     }
 
-    public EDText makeXmlNullFlavored() {
-        EDText x = new EDText();
+    public org.iso._21090.EdText makeXmlNullFlavored() {
+    	org.iso._21090.EdText x = new org.iso._21090.EdText();
         x.setNullFlavor(NullFlavor.NI);
         return x;
     }
@@ -145,7 +144,7 @@ public class EDTextTransformerTest extends AbstractTransformerTestBase<EDTextTra
     public void testEdTextNull() throws Exception {
         EdText ed = new EdText();
         ed.setNullFlavor(gov.nih.nci.iso21090.NullFlavor.ASKU);
-        EDText result = EDTextTransformer.INSTANCE.toXml(ed);
+        org.iso._21090.EdText result = EDTextTransformer.INSTANCE.toXml(ed);
         assertNotNull(result);
         assertEquals(NullFlavor.ASKU, result.getNullFlavor());
         assertNull(result.getValue());

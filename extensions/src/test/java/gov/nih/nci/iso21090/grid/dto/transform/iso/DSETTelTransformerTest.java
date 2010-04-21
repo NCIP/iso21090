@@ -94,10 +94,9 @@ import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformerTestBase;
 
 import java.util.HashSet;
 
-import org.iso._21090.DSETTEL;
+import org.iso._21090.DSetTel;
 import org.iso._21090.NullFlavor;
 import org.iso._21090.TEL;
-import org.iso._21090.TELUrl;
 import org.junit.Test;
 
 /**
@@ -105,7 +104,7 @@ import org.junit.Test;
  *
  */
 public class DSETTelTransformerTest
-    extends AbstractTransformerTestBase<DSETTELTransformer, org.iso._21090.DSETTEL, DSet<Tel>> {
+    extends AbstractTransformerTestBase<DSETTELTransformer, org.iso._21090.DSetTel, DSet<Tel>> {
 
     @Override
     public DSet<Tel> makeDtoSimple() {
@@ -122,14 +121,14 @@ public class DSETTelTransformerTest
     }
 
     @Override
-    public DSETTEL makeXmlSimple() {
-        DSETTEL result = new DSETTEL();
+    public DSetTel makeXmlSimple() {
+    	DSetTel result = new DSetTel();
         TEL item = new TEL();
         item.setValue(TELTransformerTest.MAILTO.toASCIIString());
-        result.getItem().add(item);
-        item = new TELUrl();
+        result.getItems().add(item);
+        item = new TEL();
         item.setValue(TELTransformerTest.WEB.toASCIIString());
-        result.getItem().add(item);
+        result.getItems().add(item);
 
         return result;
     }
@@ -146,11 +145,11 @@ public class DSETTelTransformerTest
     }
 
     @Override
-    public void verifyXmlSimple(DSETTEL x) {
+    public void verifyXmlSimple(DSetTel x) {
         assertNotNull(x);
         assertNull(x.getNullFlavor());
-        assertEquals(2, x.getItem().size());
-        for (TEL t : x.getItem()) {
+        assertEquals(2, x.getItems().size());
+        for (TEL t : x.getItems()) {
             assertNotNull(t);
             assertNull(t.getNullFlavor());
             assertNotNull(t.getValue());
@@ -158,15 +157,15 @@ public class DSETTelTransformerTest
     }
 
     @Override
-    public void verifyXmlNull(DSETTEL x) {
+    public void verifyXmlNull(DSetTel x) {
         assertNotNull(x);
         assertEquals(NullFlavor.NI, x.getNullFlavor());
-        assertTrue(x.getItem().isEmpty());
+        assertTrue(x.getItems().isEmpty());
     }
 
     @Test
     public void testNull() throws Exception {
-        DSETTEL xml = new DSETTEL();
+    	DSetTel xml = new DSetTel();
         xml.setNullFlavor(NullFlavor.ASKU);
         DSet<Tel> dto = DSETTELTransformer.INSTANCE.toDto(xml);
         assertNull(dto); // potentially, this could be non-null with an empty set (either would be fine),
@@ -174,12 +173,12 @@ public class DSETTelTransformerTest
 
         xml = DSETTELTransformer.INSTANCE.toXml(null);
         assertNotNull(xml);
-        assertTrue(xml.getItem().isEmpty());
+        assertTrue(xml.getItems().isEmpty());
         assertEquals(NullFlavor.NI, xml.getNullFlavor());
 
         dto = new DSet<Tel>();
         assertNotNull(xml);
-        assertTrue(xml.getItem().isEmpty());
+        assertTrue(xml.getItems().isEmpty());
         assertEquals(NullFlavor.NI, xml.getNullFlavor());
 
         dto.setItem(new HashSet<Tel>());
@@ -189,7 +188,7 @@ public class DSETTelTransformerTest
         dto.getItem().add(tel);
         xml = DSETTELTransformer.INSTANCE.toXml(dto);
         assertNotNull(xml);
-        assertTrue(xml.getItem().isEmpty());
+        assertTrue(xml.getItems().isEmpty());
         assertEquals(NullFlavor.NI, xml.getNullFlavor());
     }
 }

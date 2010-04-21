@@ -92,16 +92,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.iso._21090.DSETII;
-import org.iso._21090.II;
+import org.iso._21090.DSetII;
 import org.iso._21090.NullFlavor;
 
 /**
  * Transforms sets of II.
  */
 @SuppressWarnings("PMD.CyclomaticComplexity")
-public final class DSETIITransformer extends AbstractTransformer<DSETII, DSet<Ii>>
-    implements Transformer<DSETII, DSet<Ii>> {
+public final class DSETIITransformer extends AbstractTransformer<DSetII, DSet<gov.nih.nci.iso21090.Ii>>
+    implements Transformer<DSetII, DSet<gov.nih.nci.iso21090.Ii>> {
 
     /**
      * Public transformer instance.
@@ -114,20 +113,20 @@ public final class DSETIITransformer extends AbstractTransformer<DSETII, DSet<Ii
     /**
      * {@inheritDoc}
      */
-    public DSETII toXml(DSet<Ii> input) {
-        DSETII x = new DSETII();
+    public DSetII toXml(DSet<Ii> input) {
+    	DSetII x = new DSetII();
         if (input != null && input.getItem() != null) {
             Set<Ii> sItem = input.getItem();
-            List<II> tItem = x.getItem();
+            List<org.iso._21090.Ii> tItem = x.getItems();
             for (Ii ad : sItem) {
-                II cur = IITransformer.INSTANCE.toXml(ad);
+            	org.iso._21090.Ii cur = IITransformer.INSTANCE.toXml(ad);
                 // XSD rule: all elements of set must be non-null
                 if (!(cur == null || cur.getNullFlavor() != null)) {
                     tItem.add(cur);
                 }
             }
         }
-        if (x.getItem().isEmpty()) {
+        if (x.getItems().isEmpty()) {
             x.setNullFlavor(NullFlavor.NI);
         }
         return x;
@@ -136,15 +135,15 @@ public final class DSETIITransformer extends AbstractTransformer<DSETII, DSet<Ii
     /**
      * {@inheritDoc}
      */
-    public DSet<Ii> toDto(DSETII input) {
+    public DSet<Ii> toDto(DSetII input) {
         if (input == null || input.getNullFlavor() != null) {
             return null;
         }
         DSet<Ii> x = new DSet<Ii>();
         x.setItem(new HashSet<Ii>());
-        List<II> sItem = input.getItem();
+        List<org.iso._21090.Ii> sItem = input.getItems();
         Set<Ii> tItem = x.getItem();
-        for (II ad : sItem) {
+        for (org.iso._21090.Ii ad : sItem) {
             tItem.add(IITransformer.INSTANCE.toDto(ad));
         }
         return x;
@@ -153,8 +152,8 @@ public final class DSETIITransformer extends AbstractTransformer<DSETII, DSet<Ii
     /**
      * {@inheritDoc}
      */
-    public DSETII[] createXmlArray(int size) throws DtoTransformException {
-        return new DSETII[size];
+    public DSetII[] createXmlArray(int size) throws DtoTransformException {
+        return new DSetII[size];
     }
 
 }

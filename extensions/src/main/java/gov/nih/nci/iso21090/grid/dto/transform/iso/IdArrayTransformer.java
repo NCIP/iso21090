@@ -83,16 +83,16 @@
 package gov.nih.nci.iso21090.grid.dto.transform.iso;
 
 import gov.nih.nci.iso21090.Ii;
-import gov.nih.nci.iso21090.extensions.Id;
+//import gov.nih.nci.iso21090.extensions.Id;
 import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformer;
 import gov.nih.nci.iso21090.grid.dto.transform.DtoTransformException;
 import gov.nih.nci.iso21090.grid.dto.transform.Transformer;
 
 /**
- * Transforms Id[] (XML type) and Ii[] (DTO type) instances.
+ * Transforms II[] (XML type) and Ii[] (DTO type) instances.
  * @author smatyas
  */
-public final class IdArrayTransformer extends AbstractTransformer<Id[], Ii[]> implements Transformer<Id[], Ii[]> {
+public final class IdArrayTransformer extends AbstractTransformer<org.iso._21090.Ii[], Ii[]> implements Transformer<org.iso._21090.Ii[], Ii[]> {
     /**
      * Public singleton.
      */
@@ -104,13 +104,13 @@ public final class IdArrayTransformer extends AbstractTransformer<Id[], Ii[]> im
     /**
      * {@inheritDoc}
      */
-    public Ii[] toDto(Id[] input) throws DtoTransformException {
+    public Ii[] toDto(org.iso._21090.Ii[] input) throws DtoTransformException {
         if (input == null) {
             return null;
         }
         Ii[] results = new Ii[input.length];
         int i = 0;
-        for (Id id : input) {
+        for (org.iso._21090.Ii id : input) {
             results[i] = IdTransformer.INSTANCE.toDto(id);
             i++;
         }
@@ -120,11 +120,11 @@ public final class IdArrayTransformer extends AbstractTransformer<Id[], Ii[]> im
     /**
      * {@inheritDoc}
      */
-    public Id[] toXml(Ii[] input) throws DtoTransformException {
+    public org.iso._21090.Ii[] toXml(Ii[] input) throws DtoTransformException {
         if (input == null) {
             return null;
         }
-        Id[] results = new Id[input.length];
+        org.iso._21090.Ii[] results = new org.iso._21090.Ii[input.length];
         int i = 0;
         for (Ii id : input) {
             results[i] = IdTransformer.INSTANCE.toXml(id);
@@ -136,8 +136,8 @@ public final class IdArrayTransformer extends AbstractTransformer<Id[], Ii[]> im
     /**
      * {@inheritDoc}
      */
-    public Id[][] createXmlArray(int arg0) throws DtoTransformException {
-        return new Id[arg0][];
+    public org.iso._21090.Ii[][] createXmlArray(int arg0) throws DtoTransformException {
+        return new org.iso._21090.Ii[arg0][];
     }
 
 }

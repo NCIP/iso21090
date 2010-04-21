@@ -96,9 +96,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-import org.iso._21090.AD;
-import org.iso._21090.ADXP;
-import org.iso._21090.DSETAD;
+import org.iso._21090.DSetAd;
 import org.iso._21090.NullFlavor;
 import org.junit.Test;
 
@@ -107,7 +105,7 @@ import org.junit.Test;
  *
  */
 public class DSETADTransformerTest
-    extends AbstractTransformerTestBase<DSETADTransformer, org.iso._21090.DSETAD, DSet<Ad>> {
+    extends AbstractTransformerTestBase<DSETADTransformer, DSetAd, DSet<Ad>> {
 
     public final String CODE1 = "code1";
     public final String CODE2= "code2";
@@ -134,16 +132,16 @@ public class DSETADTransformerTest
     }
 
     @Override
-    public DSETAD makeXmlSimple() {
-        DSETAD result = new DSETAD();
-        ADXP part1 = new ADXP();
+    public DSetAd makeXmlSimple() {
+    	DSetAd result = new DSetAd();
+        org.iso._21090.ADXP part1 = new org.iso._21090.ADXP();
         part1.setCode(CODE1);
         part1.setValue(VALUE1);
 
-        AD item1 = new AD();
-        item1.getPart().add(part1);
+        org.iso._21090.Ad item1 = new org.iso._21090.Ad();
+        item1.getParts().add(part1);
 
-        result.getItem().add(item1);
+        result.getItems().add(item1);
 
         return result;
     }
@@ -162,29 +160,29 @@ public class DSETADTransformerTest
     }
 
     @Override
-    public void verifyXmlSimple(DSETAD x) {
+    public void verifyXmlSimple(DSetAd x) {
         assertNotNull(x);
         assertNull(x.getNullFlavor());
-        assertEquals(1, x.getItem().size());
-        for (AD t : x.getItem()) {
+        assertEquals(1, x.getItems().size());
+        for (org.iso._21090.Ad t : x.getItems()) {
             assertNotNull(t);
             assertNull(t.getNullFlavor());
-            assertEquals(1, t.getPart().size());
-            assertEquals(t.getPart().get(0).getCode(), CODE1);
-            assertEquals(t.getPart().get(0).getValue(), VALUE1);
+            assertEquals(1, t.getParts().size());
+            assertEquals(t.getParts().get(0).getCode(), CODE1);
+            assertEquals(t.getParts().get(0).getValue(), VALUE1);
         }
     }
 
     @Override
-    public void verifyXmlNull(DSETAD x) {
+    public void verifyXmlNull(DSetAd x) {
         assertNotNull(x);
         assertEquals(NullFlavor.NI, x.getNullFlavor());
-        assertTrue(x.getItem().isEmpty());
+        assertTrue(x.getItems().isEmpty());
     }
 
     @Test
     public void testNull() throws Exception {
-        DSETAD xml = new DSETAD();
+    	DSetAd xml = new DSetAd();
         xml.setNullFlavor(NullFlavor.ASKU);
         DSet<Ad> dto = DSETADTransformer.INSTANCE.toDto(xml);
         assertNull(dto); // potentially, this could be non-null with an empty set (either would be fine),
@@ -192,12 +190,12 @@ public class DSETADTransformerTest
 
         xml = DSETADTransformer.INSTANCE.toXml(null);
         assertNotNull(xml);
-	    assertTrue(xml.getItem().isEmpty());
+	    assertTrue(xml.getItems().isEmpty());
 	    assertEquals(NullFlavor.NI, xml.getNullFlavor());
 
         dto = new DSet<Ad>();
 	    assertNotNull(xml);
-	    assertTrue(xml.getItem().isEmpty());
+	    assertTrue(xml.getItems().isEmpty());
 	    assertEquals(NullFlavor.NI, xml.getNullFlavor());
 
         dto.setItem(new HashSet<Ad>());
@@ -209,7 +207,7 @@ public class DSETADTransformerTest
 
         xml = DSETADTransformer.INSTANCE.toXml(dto);
         assertNotNull(xml);
-	    assertTrue(xml.getItem().isEmpty());
+	    assertTrue(xml.getItems().isEmpty());
 	    assertEquals(NullFlavor.NI, xml.getNullFlavor());
     }
 }
