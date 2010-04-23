@@ -91,7 +91,7 @@ import java.util.Set;
  * @author lpower
  * @param <T> the type
  */
-public final class DSet<T extends Any> extends Coll implements Serializable, Cloneable {
+public final class DSet<T extends Any> extends Coll<T> implements Serializable, Cloneable {
 
     private static final long serialVersionUID = 1L;
     private Set<T> item;
