@@ -87,7 +87,7 @@ package gov.nih.nci.iso21090;
  * @author Dan Dumitru
  */
 @SuppressWarnings({ "PMD.AbstractNaming", "PMD.AbstractClassWithoutAnyMethod" })
-public abstract class Coll extends Any implements Cloneable {
+public abstract class Coll<T extends Any> extends Any implements Cloneable {
 
     private static final long serialVersionUID = 2L;
 
