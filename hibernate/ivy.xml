@@ -4,10 +4,9 @@
 		module="iso-datatypes-hibernate"
 		revision="2.0.2-SNAPSHOT"
 		status="integration"
-		publication="20100411160042"
+		publication="20100424171525"
 	>
 		<description homepage="../../hibernate/target/site/" />
-		<m:maven.plugins>org.codehaus.mojo__cobertura-maven-plugin__2.0</m:maven.plugins>
 	</info>
 	<configurations>
 		<conf name="default" visibility="public" description="runtime dependencies and master artifact can be used with this conf" extends="runtime,master"/>
@@ -28,5 +27,6 @@
 		<dependency org="ncicb" name="iso-datatypes" rev="2.0.2-SNAPSHOT" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>
 		<dependency org="commons-logging" name="commons-logging" rev="1.1" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>
 		<dependency org="org.hibernate" name="hibernate" rev="3.2.0.ga" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>
+		<dependency org="springframework" name="spring" rev="2.0-M4" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>
 	</dependencies>
 </ivy-module>
