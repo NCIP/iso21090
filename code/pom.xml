@@ -11,8 +11,8 @@
 
     <modules>
         <module>localization</module>
-        <module>extensions</module>
         <module>hibernate</module>        
+        <module>extensions</module>
     </modules>
 
     <properties>
