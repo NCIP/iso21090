@@ -1,16 +1,11 @@
-<project name="convertPomToIvy" basedir="." default="convert" xmlns:ivy="antlib:fr.jayasoft.ivy.ant"
-    xmlns:ac="antlib:net.sf.antcontrib">
-    
-    <path id="antlib.classpath">
-        <fileset dir="../ivy/lib" includes="*.jar"/>
-    </path>
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="iso-datatypes-hibernate" default="dist" basedir="." >
 
-    <taskdef uri="antlib:fr.jayasoft.ivy.ant" resource="fr/jayasoft/ivy/ant/antlib.xml" classpathref="antlib.classpath"
-        loaderref="antlib.classpath.loader"/>
-    
-    <ivy:settings file="../ivy/ivysettings.xml" id="ivy.instance" />
-    
-    <target name="convert">
-        <ivy:convertpom pomFile="pom.xml" ivyFile="ivy.xml" />
-    </target>
+	<property name="software.dir" value="${basedir}/.."/>
+	<property name="target.dir" value="${basedir}/target"/>
+	<property name="build.finalName" value="iso-datatypes-hibernate-2.1" />
+	<property name="junit.present" value="false"/>
+	<property name="test.skip" value="true"/>
+	<import file="../master-build.xml" />
+	
 </project>
