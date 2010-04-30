@@ -153,8 +153,14 @@ public class IsoConstantTuplizerHelper {
                 + targetType.getName());
     }
 
+    /**
+     * Finds field in class by going to super class.
+     * @param klass klass in which the filedName is to be searched
+     * @param fieldName name of the field to be retrieved
+     * @return Field or exception
+     */
     @SuppressWarnings("PMD.EmptyCatchBlock")
-    private Field findFieldInClass(Class klass, String fieldName) {
+    public Field findFieldInClass(Class klass, String fieldName) {
         Class tempKlass = klass;
         while (tempKlass != null && Object.class != tempKlass) {
             try {
@@ -177,13 +183,11 @@ public class IsoConstantTuplizerHelper {
         
         try {
             
-            Field propertyField = parent.getClass().getDeclaredField(propertyName);
+            Field propertyField = findFieldInClass(parent.getClass(), propertyName);
             Class propertyTypeClass = propertyField.getType();
             return propertyTypeClass.newInstance();
             
         } catch (SecurityException e) {
-            throw new HibernateException(e);
-        } catch (NoSuchFieldException e) {
             throw new HibernateException(e);
         } catch (IllegalAccessException e) {
             throw new HibernateException(e);
