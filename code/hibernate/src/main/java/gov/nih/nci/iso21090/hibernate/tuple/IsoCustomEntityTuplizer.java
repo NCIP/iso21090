@@ -50,7 +50,7 @@ public class IsoCustomEntityTuplizer extends PojoEntityTuplizer {
             
             for (int i = 0; i < values.length; i++) {
 
-                Class propertyTypeClass = this.getMappedClass().getDeclaredField(propertyNames[i]).getType();
+                Class propertyTypeClass = helper.findFieldInClass(this.getMappedClass(), propertyNames[i]).getType();
 
                 if (Any.class.isAssignableFrom(propertyTypeClass)) {
                     helper.setConstantValues(entity, values[i], entityName, propertyNames[i]);
