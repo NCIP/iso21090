@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ====================================================================== -->
+<!-- Ant build file (http://ant.apache.org/) for Ant 1.6.2 or above.        -->
+<!-- ====================================================================== -->
+<project name="ISO21090"  basedir="." xmlns:ivy="antlib:fr.jayasoft.ivy.ant" xmlns:ac="antlib:net.sf.antcontrib" xmlns:cs="antlib:com.puppycrawl.tools.checkstyle">
+
+	<!-- ====================================================================== -->
+	<!-- Cleaning up target                                                     -->
+	<!-- ====================================================================== -->
+
+	<!-- Ivy -->
+	<property name="software.dir" value="${basedir}"/>
+	<property name="ivy.dir" location="${software.dir}/ivy" />
+	<property name="ivy.settings.file" location="${ivy.dir}/cbiit-ivy-settings-with-cagrid13.xml" />
+	<property name="local.repo.dir" value="${software.dir}/local-ivy-repo" />
+	<property name="target.dir" value="target"/>
+	<property name="target.lib" value="${target.dir}/target/lib" />
+	<property name="local.ivy.repo" value="${local.repo.dir}" />	
+	
+	<!-- Project properties -->
+	<property name="release.version"			value="2.1" />
+	<property name="build.finalName"			value="iso-datatypes" />
+	<property name="build.dir"					value="${basedir}/target" />
+	<property name="lib.dir"					value="${build.dir}/lib" />
+	<property name="src.dir"					value="${basedir}/src/main/java" />
+	<property name="src.test.dir"				value="${basedir}/src/test/java" />	
+	<property name="resources.dir"				value="${basedir}/src/main/resources" />
+	<property name="resources.test.dir"			value="${basedir}/src/test/resources" />
+	<property name="build.outputDir"			value="${build.dir}/classes" />
+	<property name="build.testOutputDir"		value="${build.dir}/test-classes" />
+	<property name="build.instrumented.dir"		value="${build.dir}/instrumented" />
+	<property name="test.reports"				value="${build.dir}/test-reports" />
+	<property name="reporting.outputDirectory"	value="${build.dir}/site" />
+	<property name="settings.offline"			value="false" />
+	<property name="settings.interactiveMode"	value="true" />
+	<property name="checkstyle.src.dir"			value="${basedir}/src/main/java" />
+	<property name="checkstyle.config.file"		value="${basedir}/src/main/resources/Checkstyle-5.xml" />
+	<property name="checkstyle.style.file"		value="${basedir}/src/main/resources/checkstyle.xsl" />
+	<property name="checkstyle.report.dir"	value="${basedir}/target/report" />
+	<property name="checkstyle.report.xml.file"	value="${basedir}/target/report/checkstyle_report.xml" />
+	<property name="checkstyle.report.html.file" value="${basedir}/target/report/checkstyle_report.html" />
+	<property name="pmd.src.dir"				value="${basedir}/src/main/java" />
+	<property name="pmd.report.dir"				value="${basedir}/target/report" />
+	<property name="pmd.config.file"			value="${basedir}/src/main/resources/Pmd.xml" />
+	<property name="pmd.report.xml.file"		value="${basedir}/target/report/pmd_report.xml" />
+	<property name="pmd.report.html.file"		value="${basedir}/target/report/pmd_report.html" />
+	
+
+	<!-- ====================================================================== -->
+	<!-- Defining classpaths                                                    -->
+	<!-- ====================================================================== -->
+
+	<path id="build.classpath">
+		<fileset dir="${lib.dir}/compile" includes="*.jar" excludes="ant-1.6.jar"/>
+	</path>
+	<path id="build.test.classpath">
+		<fileset dir="${lib.dir}/compile" includes="*.jar" excludes="ant-1.6.jar"/>  
+		<fileset dir="${lib.dir}/static-analysis" includes="*.jar" excludes="ant-1.6.jar"/>
+	</path>
+	<path id="ivy.classpath">
+	   	<fileset dir="${ivy.dir}/lib" includes="*.jar" />
+	</path> 
+	
+	<path id="static.analysis.classpath">
+		<fileset dir="${lib.dir}/static-analysis" includes="**/*.jar" />
+		
+	</path>
+	
+	<!-- ====================================================================== -->
+	<!-- Init target                                                     -->
+	<!-- ====================================================================== -->
+	<target name="init">
+		<mkdir dir="${local.repo.dir}"/> 
+		
+		<echo message="Locating IVY library from ${ivy.dir}"/>
+		<echo message="Configuring IVY from ${ivy.settings.file}"/>
+		<taskdef uri="antlib:fr.jayasoft.ivy.ant" resource="fr/jayasoft/ivy/ant/antlib.xml" classpathref="ivy.classpath" />
+		<ivy:settings file="${ivy.settings.file}" />
+		
+		<ivy:resolve refresh="true" conf="static-analysis" />
+		<ivy:retrieve pattern="${lib.dir}/[conf]/[artifact]-[revision].[ext]" conf="static-analysis" />
+	
+		<taskdef resource="checkstyletask.properties" uri="antlib:com.puppycrawl.tools.checkstyle" classpathref="static.analysis.classpath" />
+		<taskdef name="pmd" classname="net.sourceforge.pmd.ant.PMDTask" classpathref="static.analysis.classpath" />
+		<taskdef resource="tasks.properties" classpathref="static.analysis.classpath" />
+		
+	</target>
+	<target name="get-dependency-jars" depends="init">
+			<ivy:resolve refresh="true" conf="compile" />
+			<ivy:resolve refresh="true" conf="runtime" />
+			<ivy:retrieve pattern="${lib.dir}/[conf]/[artifact]-[revision].[ext]" conf="compile" />
+			<ivy:retrieve pattern="${lib.dir}/[conf]/[artifact]-[revision].[ext]" conf="runtime" />
+			<ivy:retrieve pattern="${lib.dir}/[conf]/[artifact]-[revision].[ext]" conf="static-analysis" />
+
+	</target>
+
+	<target name="pre-compile"  description="Do nothing. Extend in sub-build">
+		<!-- to be extended by sub projects/build.--> 		
+	</target>
+	<target name="compile" depends="init,get-dependency-jars,pre-compile" description="Compile the code">
+			<mkdir dir="${build.outputDir}" />
+			<javac destdir="${build.outputDir}" nowarn="false" debug="true" optimize="false" deprecation="true" target="1.5" verbose="false" fork="false" source="1.5">
+				<src>
+					<pathelement location="${src.dir}" />
+				</src>
+				<classpath refid="build.classpath" />
+			</javac>
+			<copy todir="${build.outputDir}">
+				<fileset dir="${resources.dir}" />
+			</copy>
+	</target>
+	<target name="jar" depends="compile">
+			<jar jarfile="${build.dir}/${build.finalName}.jar" compress="true" index="false" basedir="${build.outputDir}" excludes="**/dist.html" />
+	</target>
+	<target name="publish-local" depends="jar" description=" Publish Local">
+		<ivy:publish resolver="local-project-repo" pubrevision="${release.version}" status="release" update="true" overwrite="true">
+		     <artifacts pattern="${target.dir}/[module]-[revision].[ext]" />
+		</ivy:publish>
+	</target>
+	<!-- ====================================================================== -->
+	<!-- Cleaning up target                                                     -->
+	<!-- ====================================================================== -->
+
+		<target name="clean" description="Clean the output directory">
+			<delete dir="${build.dir}" />
+			<delete dir="${lib.dir}/compile" />
+			<delete dir="${lib.dir}/static-analysis" />
+		</target>
+
+		<!-- ====================================================================== -->
+		<!-- Compilation target                                                     -->
+		<!-- ====================================================================== -->
+
+		
+		<!-- ====================================================================== -->
+		<!-- Test-compilation target                                                -->
+		<!-- ====================================================================== -->
+
+		<target name="compile-tests" depends="compile" description="Compile the test code" unless="test.skip">
+			<mkdir dir="${build.testOutputDir}" />
+			<javac destdir="${build.testOutputDir}" nowarn="false" debug="true" optimize="false" deprecation="true" target="1.5" verbose="false" fork="false" source="1.5">
+				<src>
+					<pathelement location="${src.test.dir}" />
+				</src>
+				<classpath>
+					<path refid="build.test.classpath" />
+					<pathelement location="${build.outputDir}" />
+				</classpath>
+			</javac>
+			<copy todir="${build.testOutputDir}">
+				<fileset dir="${resources.test.dir}" />
+			</copy>
+		</target>
+
+		<!-- ====================================================================== -->
+		<!-- Run all tests                                                          -->
+		<!-- ====================================================================== -->
+
+		<target name="test" depends="compile-tests, junit-missing" unless="junit.skipped" description="Run the test cases">
+			<mkdir dir="${test.reports}" />
+			<cobertura-instrument todir="${build.instrumented.dir}" datafile="${target.dir}/cobertura.ser" classpathref="static.analysis.classpath">
+				<fileset dir="${build.outputDir}">
+					<include name="**/*.class" />
+				</fileset>
+			</cobertura-instrument>
+
+			<junit printSummary="yes" haltonerror="true" haltonfailure="true" fork="true">
+				<sysproperty key="net.sourceforge.cobertura.datafile" file="${target.dir}/cobertura.ser" />
+
+<!--				<formatter type="xml" />-->
+				<formatter type="brief" />
+<!--				<formatter type="plain" usefile="false" />-->
+				<classpath>
+					<path refid="build.test.classpath" />
+
+					<pathelement location="${build.instrumented.dir}" />
+					<pathelement location="${build.outputDir}" />
+					<pathelement location="${build.testOutputDir}" />
+					<fileset dir="${lib.dir}/runtime" includes="*.jar" />
+
+				</classpath>
+				<batchtest todir="${test.reports}">
+					<fileset dir="${src.test.dir}">
+						<include name="**/Test*.java" />
+						<include name="**/*Test.java" />
+						<include name="**/*TestCase.java" />
+						<exclude name="**/*Abstract*Test.java" />
+					</fileset>
+				</batchtest>
+				<batchtest todir="${test.reports}">
+					<fileset dir="${src.test.dir}">
+						<include name="**/*Test.java" />
+						<exclude name="**/*Abstract*Test.java" />
+					</fileset>
+				</batchtest>
+			</junit>
+		</target>
+
+		<target name="test-junit-present">
+			<available classname="junit.framework.Test" property="junit.present" />
+			
+			<condition property="checkstyle.analysis.skip">
+				<or>
+					<isfalse value="${junit.present}" />
+					<istrue value="${test.skip}" />
+				</or>
+			</condition>
+			<condition property="cobertura.analysis.skip">
+				<or>
+					<isfalse value="${junit.present}" />
+					<istrue value="${test.skip}" />
+				</or>
+			</condition>
+		</target>
+
+		<target name="test-junit-status" depends="test-junit-present">
+			<condition property="junit.missing">
+				<and>
+					<isfalse value="${junit.present}" />
+					<isfalse value="${test.skip}" />
+				</and>
+			</condition>
+			<condition property="junit.skipped">
+				<or>
+					<isfalse value="${junit.present}" />
+					<istrue value="${test.skip}" />
+				</or>
+			</condition>
+		</target>
+
+		<target name="junit-missing" depends="test-junit-status" if="junit.missing">
+			<echo>=================================== WARNING ===================================</echo>
+			<echo> JUnit is not present in your $ANT_HOME/lib directory. Tests not executed.</echo>
+			<echo>===============================================================================</echo>
+			
+			<property name="checkstyle.analysis.skip" value="true"/>
+			<property name="cobertura.analysis.skip" value="true"/>
+	
+		</target>
+
+		<!-- ====================================================================== -->
+		<!-- Javadoc target                                                         -->
+		<!-- ====================================================================== -->
+
+		<target name="javadoc" description="Generates the Javadoc of the application">
+			<javadoc sourcepath="${src.dir}" distnames="*" destdir="${reporting.outputDirectory}/apidocs" access="protected" old="false" verbose="false" version="true" use="true" author="true" splitindex="false" nodeprecated="false" nodeprecatedlist="false" notree="false" noindex="false" nohelp="false" nonavbar="false" serialwarn="false" charset="ISO-8859-1" linksource="false" breakiterator="false" />
+		</target>
+
+		
+
+		
+	<!-- ====================================================================== -->
+	<!-- Static Analysis targets  - checkstyle                                         -->
+	<!-- ====================================================================== -->
+
+	<target name="perform-static-analysis-checkstyle"  unless="checkstyle.analysis.skip">
+		<mkdir dir="${checkstyle.report.dir}"/>
+		<cs:checkstyle config="${checkstyle.config.file}" failOnViolation="true" maxerrors="0" maxwarnings="0" classpathref="static.analysis.classpath">
+			<formatter type="xml" tofile="${checkstyle.report.xml.file}" />
+			<fileset dir="${checkstyle.src.dir}">
+				<include name="**/*.java" />
+			</fileset>
+		</cs:checkstyle>
+		<style in="${checkstyle.report.xml.file}" out="${checkstyle.report.html.file}" style="${checkstyle.style.file}" />
+	</target>
+	<target name="perform-static-analysis-pmd"  unless="pmd.analysis.skip">
+		<mkdir dir="${pmd.report.dir}"/>		
+			<pmd rulesetfiles="${pmd.config.file}" classpathref="static.analysis.classpath">
+				<formatter type="xml" toFile="${pmd.report.xml.file}" linkPrefix="http://pmd.sourceforge.net/xref/" />
+				<formatter type="html" toFile="${pmd.report.html.file}" linkPrefix="http://pmd.sourceforge.net/xref/" />
+				
+				<fileset dir="${src.dir}">
+					<include name="**/*.java" />
+				</fileset>
+			</pmd>
+  	</target>
+	<target name="perform-static-analysis-cobertura"  unless="cobertura.analysis.skip">
+		<cobertura-report datafile="${target.dir}/cobertura.ser" format="html" destdir="${build.dir}/cobertura" classpathref="static.analysis.classpath">
+			<fileset dir="${src.dir}">
+				<include name="**/*.java" />
+			</fileset>
+		</cobertura-report>
+		<cobertura-check failureproperty="cobertura.failure" datafile="${target.dir}/cobertura.ser" haltonfailure="false" linerate="0" packagebranchrate="0" packagelinerate="0" totalbranchrate="90" totallinerate="85" classpathref="static.analysis.classpath" />
+	</target>
+	
+	
+	<target name="perform-static-analysis" depends="init,junit-missing,test,
+								perform-static-analysis-checkstyle,
+								perform-static-analysis-pmd,
+								perform-static-analysis-cobertura" unless="analysis.skip">
+					
+	</target> 
+
+		
+
+		<!-- ====================================================================== -->
+		<!-- Download dependencies target                                           -->
+		<!-- ====================================================================== -->
+
+		<target name="test-offline">
+			<condition property="mode.offline">
+				<equals arg1="${settings.offline}" arg2="true" />
+			</condition>
+		</target>
+	
+	<target name="dist" depends="compile,test,perform-static-analysis,jar,publish-local" description="dist the application" >
+	</target>
+
+	
+
+</project>
