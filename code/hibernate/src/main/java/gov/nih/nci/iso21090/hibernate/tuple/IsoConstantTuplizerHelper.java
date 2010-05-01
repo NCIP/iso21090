@@ -1,5 +1,5 @@
 package gov.nih.nci.iso21090.hibernate.tuple;
-
+    
 import gov.nih.nci.iso21090.Any;
 import gov.nih.nci.iso21090.NullFlavor;
 import gov.nih.nci.iso21090.hibernate.node.ComplexNode;
@@ -26,6 +26,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 @SuppressWarnings("PMD.CyclomaticComplexity")
 public class IsoConstantTuplizerHelper {
 
+    /**
+     * Prefix for the entity name.
+     */
+    public static final String ENTITY_NAME_PREFIX = "_xxEntityxx_";
     private static final String NULL_FLAVOR_ATTRIBUTE = "nullFlavor";
     private static ApplicationContext ctx = new ClassPathXmlApplicationContext("IsoConstants.xml");
 
@@ -39,14 +43,16 @@ public class IsoConstantTuplizerHelper {
      * @param propertyValue object in which constants are to be set
      * @param entityName name of the entity
      * @param propertyName name of the property
+     * @param processParts indicates if the innerNode is a collection part then whether to process it or not
      */
-    public void setConstantValues(Object entity, Object propertyValue, String entityName, String propertyName) {
-        ComplexNode complexNode = getComplexNodeBean(entityName, propertyName);
-        setConstantValues(entity, propertyValue, complexNode);
+    public void setConstantValues(Object entity, Object propertyValue, String entityName, 
+            String propertyName, boolean processParts) {
+        Node node = getComplexNodeBean(entityName, propertyName);
+        setConstantValues(entity, propertyValue, (ComplexNode) node, processParts);
     }
     
     @SuppressWarnings("PMD.CyclomaticComplexity")
-    private void setConstantValues(Object parent, Object property, ComplexNode complexNode) {
+    private void setConstantValues(Object parent, Object property, ComplexNode complexNode, boolean processParts) {
         
         if (complexNode == null) {
             return;
@@ -54,8 +60,6 @@ public class IsoConstantTuplizerHelper {
         
         if (property == null) {
             setNullFlavor(parent, complexNode);
-        } else if (Any.class.isAssignableFrom(property.getClass()) && ((Any) property).getNullFlavor() == null) {
-            return;
         } else {
             
             for (Node node : complexNode.getInnerNodes()) {
@@ -70,21 +74,28 @@ public class IsoConstantTuplizerHelper {
                     
                     if (!node.getName().startsWith("part_")) {
                         Object existingObject = getPropertyObject(property, node.getName());
-                        if (Any.class.isAssignableFrom(existingObject.getClass())) {
-                            setConstantValues(property, existingObject, (ComplexNode) node);
-                        } else if (Set.class.isAssignableFrom(existingObject.getClass())) {
-                            for (Object obj : (Set) existingObject) {
-                                setConstantValues(property, obj, (ComplexNode) node);
+                        if (existingObject == null) {
+                            setNullFlavor(property, (ComplexNode) node);
+                        } else {
+                            
+                            if (Any.class.isAssignableFrom(existingObject.getClass())) {
+                                setConstantValues(property, existingObject, (ComplexNode) node, processParts);
+                            } else if (Set.class.isAssignableFrom(existingObject.getClass())) {
+                                for (Object obj : (Set) existingObject) {
+                                    setConstantValues(property, obj, (ComplexNode) node, processParts);
+                                }
                             }
                         }
-                    } else  {
+                    } else if (processParts) {
                         List partList = (List) getPropertyObject(property, "part");
                         Integer index = Integer.parseInt(node.getName().substring("part_".length()));
 
-                        if (partList.size() < index) {
-                            throw new HibernateException("Can not set constant as part.size()<part[index]");
+                        if (partList != null) {
+                            if (partList.size() < index) {
+                                throw new HibernateException("Can not set constant as part.size()<part[index]");
+                            }
+                            setConstantValues(property, partList.get(index), (ComplexNode) node, processParts);
                         }
-                        setConstantValues(property, partList.get(index), (ComplexNode) node);
                     }
                 }
             }
@@ -179,12 +190,12 @@ public class IsoConstantTuplizerHelper {
         throw new HibernateException("No field found in class " + klass.getName() + " for " + fieldName);
     }
     
-    private Object intantiatePropertyObject(Object parent, String propertyName) {
+    private Object intantiatePropertyObject(String typeName) {
         
         try {
-            
-            Field propertyField = findFieldInClass(parent.getClass(), propertyName);
-            Class propertyTypeClass = propertyField.getType();
+            //Field propertyField = findFieldInClass(parent.getClass(), propertyName);
+            //Class propertyTypeClass = propertyField.getType();
+            Class propertyTypeClass = Class.forName(typeName);
             return propertyTypeClass.newInstance();
             
         } catch (SecurityException e) {
@@ -192,6 +203,8 @@ public class IsoConstantTuplizerHelper {
         } catch (IllegalAccessException e) {
             throw new HibernateException(e);
         } catch (InstantiationException e) {
+            throw new HibernateException(e);
+        } catch (ClassNotFoundException e) {
             throw new HibernateException(e);
         }
     }    
@@ -206,7 +219,7 @@ public class IsoConstantTuplizerHelper {
             }
         }
 
-        Object nullValueObject = intantiatePropertyObject(parent, rootNode.getName());
+        Object nullValueObject = intantiatePropertyObject(rootNode.getIsoClassName());
 
         if (!Any.class.isAssignableFrom(nullValueObject.getClass())) {
             return;
@@ -223,8 +236,24 @@ public class IsoConstantTuplizerHelper {
      * @return RootNode instance or null
      */
     private ComplexNode getComplexNodeBean(String entityName, String propertyName) {
-           String configLookupKey = entityName + "." + propertyName;
-           return getComplexNodeBean(configLookupKey);
+        String convertedEntityName = convertEntityName(entityName);
+        String convertedPropertyName = convertPropertyName(entityName, propertyName);
+        
+        String configLookupKey = convertedEntityName + "." + convertedPropertyName;
+        ComplexNode complexNode = getComplexNodeBean(configLookupKey);
+        
+        if (complexNode == null) {
+            return null;
+        } else if (entityName.startsWith(ENTITY_NAME_PREFIX)) {
+            for (Node node : complexNode.getInnerNodes()) {
+                if (node.getName().equals(propertyName)) {
+                    //Could be constant or complex node
+                    return (ComplexNode) node;
+                }
+            }
+            return null;
+        }
+        return complexNode;
     }
 
     @SuppressWarnings("PMD.EmptyCatchBlock")
@@ -237,6 +266,38 @@ public class IsoConstantTuplizerHelper {
         }
         return null;
     }
+    
+    /**
+     * Determines the name of the property to be used for processing.
+     * 
+     * @param entityName Name of the entity
+     * @param propertyName name of the property
+     * @return name of the property
+     */
+    public String convertPropertyName(String entityName, String propertyName) {
+        if (!entityName.startsWith(ENTITY_NAME_PREFIX)) {
+            return propertyName;
+        }
+        //_xxEntityxx_gov_nih_nci_cacoresdk_domain_other_datatype_AdDataType_value9        
+        return entityName.substring(entityName.lastIndexOf('_') + 1, entityName.length());
+    }
+
+    /**
+     * Determines name of the entity.
+     * @param entityName Name of the entity
+     * @return  name of the entity
+     */
+    public String convertEntityName(String entityName) {
+        
+        if (!entityName.startsWith(ENTITY_NAME_PREFIX)) {
+            return entityName;
+        }
+        //_xxEntityxx_gov_nih_nci_cacoresdk_domain_other_datatype_AdDataType_value9        
+        String convertedName = entityName.substring(ENTITY_NAME_PREFIX.length(), entityName.lastIndexOf('_'));
+        convertedName = convertedName.replace('_', '.');
+        return convertedName;
+    }
+    
     
     /**
      * Sets the constant values for AD and EN part collection.
@@ -260,7 +321,7 @@ public class IsoConstantTuplizerHelper {
             }
             for (Node node : complexNode.getInnerNodes()) {
                 if (propertyName.equals(node.getName()) && node instanceof ComplexNode) {
-                    setConstantValues(null, value, (ComplexNode) node);
+                    setConstantValues(null, value, (ComplexNode) node, true);
                     return;
                 }
             }

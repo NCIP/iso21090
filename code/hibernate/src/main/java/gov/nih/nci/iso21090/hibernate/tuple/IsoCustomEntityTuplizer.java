@@ -13,6 +13,7 @@ import org.hibernate.tuple.entity.PojoEntityTuplizer;
  * @author patelsat
  *
  */
+@SuppressWarnings("PMD.CyclomaticComplexity")
 public class IsoCustomEntityTuplizer extends PojoEntityTuplizer {
 
     /**
@@ -40,20 +41,24 @@ public class IsoCustomEntityTuplizer extends PojoEntityTuplizer {
             String entityName = this.getEntityMetamodel().getName();
             String identifierName = this.getEntityMetamodel().getIdentifierProperty().getName();
 
-            Object identifier = this.getIdentifier(entity);
-            
             IsoConstantTuplizerHelper helper = new IsoConstantTuplizerHelper();
+
+            //Identifier can be null if the Tuplizer is for entity
+            if (identifierName != null) {
+                
+                Object identifier = this.getIdentifier(entity);
             
-            if (Any.class.isAssignableFrom(identifier.getClass())) {
-                helper.setConstantValues(entity, identifier, entityName, identifierName);
+                if (Any.class.isAssignableFrom(identifier.getClass())) {
+                    helper.setConstantValues(entity, identifier, entityName, identifierName, false);
+                }
             }
-            
             for (int i = 0; i < values.length; i++) {
 
-                Class propertyTypeClass = helper.findFieldInClass(this.getMappedClass(), propertyNames[i]).getType();
-
+                Class propertyTypeClass = helper.findFieldInClass(this.getMappedClass(), 
+                        propertyNames[i]).getType();
+    
                 if (Any.class.isAssignableFrom(propertyTypeClass)) {
-                    helper.setConstantValues(entity, values[i], entityName, propertyNames[i]);
+                    helper.setConstantValues(entity, values[i], entityName, propertyNames[i], false);
                 }
             }
             
