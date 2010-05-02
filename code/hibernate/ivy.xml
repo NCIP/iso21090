@@ -35,7 +35,7 @@
 		<dependency org="commons-beanutils" name="commons-beanutils" rev="1.7.0" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>
 		<dependency org="commons-logging" name="commons-logging" rev="1.0.3" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>
 		<dependency org="junit" name="junit" rev="4.4" force="true" conf="test->runtime(*),master(*)"/>
-		<dependency org="apache" name="log4j" rev="1.2.15" force="true" conf="test->runtime(*),master(*)"/>
+		<dependency org="apache" name="log4j" rev="1.2.14" force="true" conf="test->runtime(*),master(*)"/>
 		<dependency org="javax.transaction" name="jta" rev="1.1" force="true" conf="test->runtime(*),master(*)"/>
 		<dependency org="asm" name="asm" rev="3.1" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>		
 		<dependency org="com.google.collections" name="google-collections" rev="0.9" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>		
