@@ -55,6 +55,7 @@
 		<dependency org="checkstyle" name="checkstyle" rev="5.0" force="true" conf="static-analysis->master(*)"/>
 		<dependency org="pmd" name="pmd" rev="4.2.5" force="true" conf="static-analysis->master(*)"/>
 		<dependency org="apache" name="log4j" rev="1.2.14" force="true" conf="static-analysis->master(*)"/>
+		<dependency org="junit" name="junit" rev="4.4" force="true" conf="test->runtime(*),master(*)"/>
 		
 	</dependencies>
 </ivy-module>

@@ -57,6 +57,7 @@
 	<path id="build.test.classpath">
 		<fileset dir="${lib.dir}/compile" includes="*.jar" excludes="ant-1.6.jar"/>  
 		<fileset dir="${lib.dir}/static-analysis" includes="*.jar" excludes="ant-1.6.jar"/>
+		<fileset dir="${lib.dir}/test" includes="*.jar" />
 	</path>
 	<path id="ivy.classpath">
 	   	<fileset dir="${ivy.dir}/lib" includes="*.jar" />
@@ -89,9 +90,12 @@
 	<target name="get-dependency-jars" depends="init">
 			<ivy:resolve refresh="true" conf="compile" />
 			<ivy:resolve refresh="true" conf="runtime" />
+			<ivy:resolve refresh="true" conf="static-analysis" />
+			<ivy:resolve refresh="true" conf="test" />
 			<ivy:retrieve pattern="${lib.dir}/[conf]/[artifact]-[revision].[ext]" conf="compile" />
 			<ivy:retrieve pattern="${lib.dir}/[conf]/[artifact]-[revision].[ext]" conf="runtime" />
 			<ivy:retrieve pattern="${lib.dir}/[conf]/[artifact]-[revision].[ext]" conf="static-analysis" />
+			<ivy:retrieve pattern="${lib.dir}/[conf]/[artifact]-[revision].[ext]" conf="test" />
 
 	</target>
 
@@ -125,7 +129,9 @@
 		<target name="clean" description="Clean the output directory">
 			<delete dir="${build.dir}" />
 			<delete dir="${lib.dir}/compile" />
+			<delete dir="${lib.dir}/runtime" />
 			<delete dir="${lib.dir}/static-analysis" />
+			<delete dir="${lib.dir}/test" />
 		</target>
 
 		<!-- ====================================================================== -->
@@ -198,7 +204,7 @@
 		</target>
 
 		<target name="test-junit-present">
-			<available classname="junit.framework.Test" property="junit.present" />
+			<available file="${src.test.dir}" type="dir" property="junit.present" />
 			
 			<condition property="checkstyle.analysis.skip">
 				<or>
@@ -231,7 +237,7 @@
 
 		<target name="junit-missing" depends="test-junit-status" if="junit.missing">
 			<echo>=================================== WARNING ===================================</echo>
-			<echo> JUnit is not present in your $ANT_HOME/lib directory. Tests not executed.</echo>
+			<echo> JUnit is not present in your directory. Tests not executed.</echo>
 			<echo>===============================================================================</echo>
 			
 			<property name="checkstyle.analysis.skip" value="true"/>
