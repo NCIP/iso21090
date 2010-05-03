@@ -8,7 +8,7 @@ This file is the is the settings file used by IVY.  It is a good starting point 
 <ivysettings>
 	<property name="ivy.project.repo" value="${software.dir}/local-ivy-repo"/>
 	<property name="ivy.system.repo" value="${software.dir}/../../system-ivy-repo"/>
-	<property name="local.cbiit-ivy-repo.dir" value="C:/vijay/projects/cbiit-ivy-repo"/>
+
 
 	<settings defaultResolver="ncicb-chain" />
 	<!-- defaultCacheDir causes the bda-utils module to use it's own cache directory -->
@@ -27,10 +27,6 @@ This file is the is the settings file used by IVY.  It is a good starting point 
 				<artifact pattern="${ivy.system.repo}/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
 				<ivy pattern="${ivy.system.repo}/[organisation]/[module]/[revision]/ivy.xml" />
 			</filesystem>-->
-			 <filesystem name="local-cbiit-ivy-repo" local="true">
-				<artifact pattern="${local.cbiit-ivy-repo.dir}/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
-				<ivy pattern="${local.cbiit-ivy-repo.dir}/[organisation]/[module]/[revision]/ivy.xml" />
-			</filesystem>
 			<url name="cbiit-ivy-repo">
 				<!-- remote enterprise repository -->
 				<artifact pattern="https://ncisvn.nci.nih.gov/svn/cbiit-ivy-repo/trunk/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
