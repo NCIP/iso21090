@@ -18,9 +18,12 @@
 		<conf name="javadoc" visibility="public" description="this configuration contains the javadoc artifact of this module, if any."/>
 		<conf name="optional" visibility="public" description="contains all optional dependencies"/>
 		<conf name="static-analysis" visibility="public" description="contains all static-analysis dependencies"/>
+		<conf name="standards-xsd" visibility="public" description="XSD files"/>
 	</configurations>
 	<publications>
 		<artifact name="iso-datatypes-extensions" type="jar" ext="jar" conf="master"/>
+		<artifact name="ISO_datatypes_Narrative" type="xsd" ext="xsd" conf="standards-xsd"/>		
+		<artifact name="ISO_extensions" type="xsd" ext="xsd" conf="standards-xsd"/>
 	</publications>
 	<dependencies>
 		<dependency org="ncicb" name="iso-datatypes" rev="2.1" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>

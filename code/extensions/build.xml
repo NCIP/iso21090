@@ -76,6 +76,15 @@
 		</copy>
 	</target>
 	
+	<target name="publish-resources" description=" Publish Local Resources">
+		<copy todir="${target.dir}">
+		     <fileset dir="src/main/xsd/" includes="*.xsd" />
+		</copy>
+	</target>
+	
+
+	
+	
 	
 	
 
