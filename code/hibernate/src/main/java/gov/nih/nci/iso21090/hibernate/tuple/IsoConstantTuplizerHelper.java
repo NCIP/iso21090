@@ -1,6 +1,7 @@
 package gov.nih.nci.iso21090.hibernate.tuple;
     
 import gov.nih.nci.iso21090.Any;
+import gov.nih.nci.iso21090.DSet;
 import gov.nih.nci.iso21090.NullFlavor;
 import gov.nih.nci.iso21090.hibernate.node.ComplexNode;
 import gov.nih.nci.iso21090.hibernate.node.ConstantNode;
@@ -60,8 +61,12 @@ public class IsoConstantTuplizerHelper {
         
         if (property == null) {
             setNullFlavor(parent, complexNode);
+        } else if (Any.class.isAssignableFrom(property.getClass()) && ((Any) property).getNullFlavor() !=  null) {
+            return;
+        } else if (DSet.class.isAssignableFrom(property.getClass()) && (((DSet) property).getItem() == null || ((DSet) property).getItem().size() == 0)) {
+            //System.out.println("Dset is null. Need to set Null flavor for Dset");
+            setNullFlavor(parent, complexNode);
         } else {
-            
             for (Node node : complexNode.getInnerNodes()) {
                 if ((node instanceof ConstantNode) && !(NULL_FLAVOR_ATTRIBUTE.equals(node.getName()))) {
                     setValue(property, node.getName(), ((ConstantNode) node).getInstance());
@@ -147,7 +152,13 @@ public class IsoConstantTuplizerHelper {
             
             if (value.getClass() == String.class) {
                 if (Boolean.class == targetType) {
-                    return Boolean.valueOf((String) value);
+                    if("1".equals(value)) {
+                        return Boolean.TRUE;
+                    } else if ("0".equals(value)) {
+                        return Boolean.FALSE;
+                    } else {
+                        return Boolean.valueOf((String) value);
+                    }
                 } else if (Integer.class == targetType) {
                     return Integer.valueOf((String) value);
                 } else if (BigDecimal.class == targetType) {
@@ -210,7 +221,7 @@ public class IsoConstantTuplizerHelper {
     }    
 
     private void setNullFlavor(Object parent, ComplexNode rootNode) {
-        NullFlavor nullFlavor = NullFlavor.MSK;
+        NullFlavor nullFlavor = NullFlavor.NI;
         for (Node node : rootNode.getInnerNodes()) {
             if (NULL_FLAVOR_ATTRIBUTE.equals(node.getName())) {
                 ConstantNode nullFlavorNode = (ConstantNode) node;
