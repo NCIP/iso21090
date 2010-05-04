@@ -2,7 +2,11 @@ package gov.nih.nci.iso21090.hibernate.tuple;
     
 import gov.nih.nci.iso21090.Any;
 import gov.nih.nci.iso21090.DSet;
+import gov.nih.nci.iso21090.Int;
+import gov.nih.nci.iso21090.Ivl;
 import gov.nih.nci.iso21090.NullFlavor;
+import gov.nih.nci.iso21090.Pq;
+import gov.nih.nci.iso21090.Real;
 import gov.nih.nci.iso21090.hibernate.node.ComplexNode;
 import gov.nih.nci.iso21090.hibernate.node.ConstantNode;
 import gov.nih.nci.iso21090.hibernate.node.Node;
@@ -49,22 +53,23 @@ public class IsoConstantTuplizerHelper {
     public void setConstantValues(Object entity, Object propertyValue, String entityName, 
             String propertyName, boolean processParts) {
         Node node = getComplexNodeBean(entityName, propertyName);
-        setConstantValues(entity, propertyValue, (ComplexNode) node, processParts);
+        setConstantValues(entity, propertyValue, propertyName, (ComplexNode) node, processParts);
     }
     
     @SuppressWarnings("PMD.CyclomaticComplexity")
-    private void setConstantValues(Object parent, Object property, ComplexNode complexNode, boolean processParts) {
+    private void setConstantValues(Object parent, Object property, String propertyName, ComplexNode complexNode, boolean processParts) {
         
-        if (complexNode == null) {
-            return;
+        if (complexNode == null && property == null) {
+        	setNullFlavor(parent, propertyName);
+        } else if (complexNode == null && property != null) {
+        	setNullFlavor(property);
+        	return;
         }
-        
         if (property == null) {
             setNullFlavor(parent, complexNode);
         } else if (Any.class.isAssignableFrom(property.getClass()) && ((Any) property).getNullFlavor() !=  null) {
             return;
         } else if (DSet.class.isAssignableFrom(property.getClass()) && (((DSet) property).getItem() == null || ((DSet) property).getItem().size() == 0)) {
-            //System.out.println("Dset is null. Need to set Null flavor for Dset");
             setNullFlavor(parent, complexNode);
         } else {
             for (Node node : complexNode.getInnerNodes()) {
@@ -84,10 +89,10 @@ public class IsoConstantTuplizerHelper {
                         } else {
                             
                             if (Any.class.isAssignableFrom(existingObject.getClass())) {
-                                setConstantValues(property, existingObject, (ComplexNode) node, processParts);
+                                setConstantValues(property, existingObject, node.getName(), (ComplexNode) node, processParts);
                             } else if (Set.class.isAssignableFrom(existingObject.getClass())) {
                                 for (Object obj : (Set) existingObject) {
-                                    setConstantValues(property, obj, (ComplexNode) node, processParts);
+                                    setConstantValues(property, obj, node.getName(), (ComplexNode) node, processParts);
                                 }
                             }
                         }
@@ -99,7 +104,7 @@ public class IsoConstantTuplizerHelper {
                             if (partList.size() < index) {
                                 throw new HibernateException("Can not set constant as part.size()<part[index]");
                             }
-                            setConstantValues(property, partList.get(index), (ComplexNode) node, processParts);
+                            setConstantValues(property, partList.get(index), node.getName(), (ComplexNode) node, processParts);
                         }
                     }
                 }
@@ -240,6 +245,87 @@ public class IsoConstantTuplizerHelper {
         setValue(parent, rootNode.getName(), nullValueObject);
     }
 
+    private void setNullFlavor(Object parent) {
+
+    	Class klass = parent.getClass();
+    	Boolean allNullFlavors = true;
+    	try {
+	    	while (klass != Object.class) {
+	    		for (Field field : klass.getDeclaredFields()) {
+	    			Object value = field.get(parent);
+	    			if(value == null) {
+	    				setNullFlavor(parent, field.getName());
+	    			}
+	    			else {
+	    				setNullFlavor(value);
+	    				if (allNullFlavors && Any.class.isAssignableFrom(value.getClass()) && ((Any) value).getNullFlavor() == null) {
+	    					allNullFlavors = false;
+	    				}
+	    			}
+	    		}
+	    		
+	    		klass = klass.getSuperclass();
+	    	}
+        } catch (SecurityException e) {
+            throw new HibernateException(e);
+        } catch (IllegalAccessException e) {
+            throw new HibernateException(e);
+        } catch (IllegalArgumentException e) {
+            throw new HibernateException(e);
+		}
+    	
+        if (allNullFlavors && (Any.class.isAssignableFrom(klass)))
+        	((Any) parent).setNullFlavor(NullFlavor.NI);
+    }
+    
+    private void setNullFlavor(Object parent, String propertyName) {
+    	
+        NullFlavor nullFlavor = NullFlavor.NI;
+
+    	Class propertyTypeClass = determinePropertyClass(parent, propertyName);
+    	Object nullValueObject = intantiatePropertyObject(propertyTypeClass.getName());
+
+        if (!Any.class.isAssignableFrom(nullValueObject.getClass())) {
+            return;
+        }
+        
+        setValue(nullValueObject, NULL_FLAVOR_ATTRIBUTE, nullFlavor);
+        setValue(parent, propertyName, nullValueObject);
+    }
+    
+    private Class determinePropertyClass(Object parent, String propertyName)
+    {
+    	if(parent instanceof Ivl) {
+    		Ivl ivl = (Ivl) parent;
+    		Class type = Object.class;
+    		Class widthType = Object.class;
+    		if (ivl.getAny() != null) {
+    			type = ivl.getAny().getClass();
+    		} else if (ivl.getHigh() != null) {
+    			type = ivl.getHigh().getClass();
+    		} else if (ivl.getLow() != null) {
+    			type = ivl.getLow().getClass();
+    		} 
+    		
+    		if ("any".equals(propertyName) || "low".equals(propertyName) || "high".equals(propertyName)) {
+    			return type;
+    		}
+    		
+    		if ("width".equals(propertyName))
+    		{
+        		if(Int.class == type) {
+        			return Int.class;
+        		} else if(Real.class == type) {
+        			return Real.class;
+        		}
+        		return Pq.class;
+    		}
+    	} 
+    	
+   		Field field = findFieldInClass(parent.getClass(),propertyName);
+   		return field.getType();
+    }
+
     /**
      * Returns the RootNode by reading the Spring configuration file.
      * 
@@ -332,7 +418,7 @@ public class IsoConstantTuplizerHelper {
             }
             for (Node node : complexNode.getInnerNodes()) {
                 if (propertyName.equals(node.getName()) && node instanceof ComplexNode) {
-                    setConstantValues(null, value, (ComplexNode) node, true);
+                    setConstantValues(null, value, node.getName(), (ComplexNode) node, true);
                     return;
                 }
             }
