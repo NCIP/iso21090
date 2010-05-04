@@ -43,7 +43,7 @@ public class EntityPartNameQualifierUserType implements UserType {
      * @return returns the class of the instance being managed by the UserType
      */
     public Class returnedClass() {
-        return EntityNamePartQualifier.class;
+        return Set.class;
     }
 
     /**
@@ -74,17 +74,19 @@ public class EntityPartNameQualifierUserType implements UserType {
             throws SQLException {
         String strEntityPartQualifier = resultSet.getString(names[0]);
         
-        Set<EntityNamePartQualifier> entityNamePartyQualifierSet = null;
+        if (strEntityPartQualifier == null) {
+        	return null;
+        }
+        
+        Set<EntityNamePartQualifier> entityNamePartyQualifierSet = new HashSet();
 
         String[] qualifiers = strEntityPartQualifier.split(",");
-        if(qualifiers!=null){
-        	entityNamePartyQualifierSet=new HashSet();
-        }
-        for(String enpqVal : qualifiers){
-        	try{
-        		entityNamePartyQualifierSet.add(Enum.valueOf(EntityNamePartQualifier.class,enpqVal));
-        	}catch(IllegalArgumentException e){
-        		throw new TypeMismatchException(e.getMessage());
+
+        for (String enpqVal : qualifiers){
+        	try {
+        		entityNamePartyQualifierSet.add(Enum.valueOf(EntityNamePartQualifier.class, enpqVal));
+        	} catch (IllegalArgumentException e){
+        		throw new TypeMismatchException(e);
         	}
 	    }
     
@@ -108,7 +110,7 @@ public class EntityPartNameQualifierUserType implements UserType {
         	for(EntityNamePartQualifier entityNamePartQualifier : ss){
         		temp = temp + entityNamePartQualifier.name();
         		if(count > 1){
-        			temp = temp+", ";
+        			temp = temp+",";
         		}
         		count--;
         	}
