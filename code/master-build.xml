@@ -178,7 +178,7 @@
 			<junit printSummary="yes" haltonerror="true" haltonfailure="true" fork="true">
 				<sysproperty key="net.sourceforge.cobertura.datafile" file="${target.dir}/cobertura.ser" />
 
--				<formatter type="xml" />
+				<formatter type="xml" />
 				<classpath>
 					<path refid="build.test.classpath" />
 
