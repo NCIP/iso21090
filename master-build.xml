@@ -117,11 +117,15 @@
 	<target name="jar" depends="compile">
 			<jar jarfile="${build.dir}/${build.finalName}.jar" compress="true" index="false" basedir="${build.outputDir}" excludes="**/dist.html" />
 	</target>
-	<target name="publish-local" depends="jar" description=" Publish Local">
+	<target name="publish-local" depends="jar, publish-resources" description=" Publish Local">
 		<ivy:publish resolver="local-project-repo" pubrevision="${release.version}" status="release" update="true" overwrite="true">
-		     <artifacts pattern="${target.dir}/[module]-[revision].[ext]" />
+		    <artifacts pattern="${target.dir}/[module]-[revision].[ext]" />
+			<artifacts pattern="${target.dir}/[artifact].[ext]" />
 		</ivy:publish>
 	</target>
+		     	
+	<target name="publish-resources" />
+	
 	<!-- ====================================================================== -->
 	<!-- Cleaning up target                                                     -->
 	<!-- ====================================================================== -->
