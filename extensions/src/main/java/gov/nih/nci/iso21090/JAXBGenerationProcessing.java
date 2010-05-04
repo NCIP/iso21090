@@ -95,6 +95,7 @@ public class JAXBGenerationProcessing {
 
 		for (String filename : filenames) {
 			File pFile = new File(directory, filename);
+			System.out.println("Processing file:"+pFile.getName());
 			String contents = getContents(pFile);
 			//search for @XmlRootElement annotation
 			//if not present, add annotation
@@ -215,6 +216,7 @@ public class JAXBGenerationProcessing {
 		//test it
 		//		String[] files = new String[] { "Ad.java" };
 		//		String[] files = new String[] { "CD.java" };
+		System.out.println("Executing JAXB Generation Processing..........");
 		if (args.length < 1) {
 			throw new ProcessingException("Pass in a directory for the location of the ISO 21090 jaxb-generated source files");
 		}
