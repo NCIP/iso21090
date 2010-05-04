@@ -12,6 +12,7 @@ import gov.nih.nci.iso21090.hibernate.node.ConstantNode;
 import gov.nih.nci.iso21090.hibernate.node.Node;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.util.List;
@@ -61,16 +62,20 @@ public class IsoConstantTuplizerHelper {
         
         if (complexNode == null && property == null) {
         	setNullFlavor(parent, propertyName);
+        	return;
         } else if (complexNode == null && property != null) {
         	setNullFlavor(property);
         	return;
         }
+        
         if (property == null) {
             setNullFlavor(parent, complexNode);
+            return;
         } else if (Any.class.isAssignableFrom(property.getClass()) && ((Any) property).getNullFlavor() !=  null) {
             return;
         } else if (DSet.class.isAssignableFrom(property.getClass()) && (((DSet) property).getItem() == null || ((DSet) property).getItem().size() == 0)) {
             setNullFlavor(parent, complexNode);
+            return;
         } else {
             for (Node node : complexNode.getInnerNodes()) {
                 if ((node instanceof ConstantNode) && !(NULL_FLAVOR_ATTRIBUTE.equals(node.getName()))) {
@@ -109,6 +114,7 @@ public class IsoConstantTuplizerHelper {
                     }
                 }
             }
+            setNullFlavor(property);
         }
     }
 
@@ -250,17 +256,27 @@ public class IsoConstantTuplizerHelper {
     	Class klass = parent.getClass();
     	Boolean allNullFlavors = true;
     	try {
-	    	while (klass != Object.class) {
+	    	while (klass != null && klass != Object.class) {
 	    		for (Field field : klass.getDeclaredFields()) {
-	    			Object value = field.get(parent);
-	    			if(value == null) {
-	    				setNullFlavor(parent, field.getName());
-	    			}
-	    			else {
-	    				setNullFlavor(value);
-	    				if (allNullFlavors && Any.class.isAssignableFrom(value.getClass()) && ((Any) value).getNullFlavor() == null) {
-	    					allNullFlavors = false;
-	    				}
+	    			if (!Modifier.isStatic(field.getModifiers())) 
+	    			{
+		    			field.setAccessible(true);
+		    			Object value = field.get(parent);
+		    			if(value == null) {
+		    				setNullFlavor(parent, field.getName());
+		    			}
+		    			else {
+		    				if (Any.class.isAssignableFrom(value.getClass()))
+		    				{
+		    					setNullFlavor(value);
+		    					if(((Any) value).getNullFlavor() != null) 
+		    						allNullFlavors = false;
+		    				}
+		    				else
+		    				{
+		    					allNullFlavors = false;
+		    				}
+		    			}
 	    			}
 	    		}
 	    		
@@ -283,11 +299,11 @@ public class IsoConstantTuplizerHelper {
         NullFlavor nullFlavor = NullFlavor.NI;
 
     	Class propertyTypeClass = determinePropertyClass(parent, propertyName);
-    	Object nullValueObject = intantiatePropertyObject(propertyTypeClass.getName());
-
-        if (!Any.class.isAssignableFrom(nullValueObject.getClass())) {
+        if (!Any.class.isAssignableFrom(propertyTypeClass.getClass())) {
             return;
         }
+        
+    	Object nullValueObject = intantiatePropertyObject(propertyTypeClass.getName());
         
         setValue(nullValueObject, NULL_FLAVOR_ATTRIBUTE, nullFlavor);
         setValue(parent, propertyName, nullValueObject);
