@@ -255,43 +255,48 @@ public class IsoConstantTuplizerHelper {
 
     	Class klass = parent.getClass();
     	Boolean allNullFlavors = true;
-    	try {
-	    	while (klass != null && klass != Object.class) {
-	    		for (Field field : klass.getDeclaredFields()) {
-	    			if (!Modifier.isStatic(field.getModifiers())) 
-	    			{
-		    			field.setAccessible(true);
-		    			Object value = field.get(parent);
-		    			if(value == null) {
-		    				setNullFlavor(parent, field.getName());
-		    			}
-		    			else {
-		    				if (Any.class.isAssignableFrom(value.getClass()))
-		    				{
-		    					setNullFlavor(value);
-		    					if(((Any) value).getNullFlavor() != null) 
-		    						allNullFlavors = false;
-		    				}
-		    				else
-		    				{
-		    					allNullFlavors = false;
-		    				}
-		    			}
-	    			}
-	    		}
-	    		
-	    		klass = klass.getSuperclass();
-	    	}
-        } catch (SecurityException e) {
-            throw new HibernateException(e);
-        } catch (IllegalAccessException e) {
-            throw new HibernateException(e);
-        } catch (IllegalArgumentException e) {
-            throw new HibernateException(e);
-		}
-    	
-        if (allNullFlavors && (Any.class.isAssignableFrom(klass)))
-        	((Any) parent).setNullFlavor(NullFlavor.NI);
+    	if(Any.class.isAssignableFrom(klass))
+    	{
+    		if(((Any)parent).getNullFlavor() == null)
+    		{
+		    	try {
+			    	while (klass != null && klass != Object.class) {
+			    		for (Field field : klass.getDeclaredFields()) {
+			    			if (!Modifier.isStatic(field.getModifiers())) 
+			    			{
+				    			field.setAccessible(true);
+				    			Object value = field.get(parent);
+				    			if(value == null) {
+				    				setNullFlavor(parent, field.getName());
+				    			}
+				    			else {
+				    				if (Any.class.isAssignableFrom(value.getClass()))
+				    				{
+				    					setNullFlavor(value);
+				    					if(((Any) value).getNullFlavor() != null) 
+				    						allNullFlavors = false;
+				    				}
+				    				else
+				    				{
+				    					allNullFlavors = false;
+				    				}
+				    			}
+			    			}
+			    		}
+			    		
+			    		klass = klass.getSuperclass();
+			    	}
+		        } catch (SecurityException e) {
+		            throw new HibernateException(e);
+		        } catch (IllegalAccessException e) {
+		            throw new HibernateException(e);
+		        } catch (IllegalArgumentException e) {
+		            throw new HibernateException(e);
+				}
+		        if (allNullFlavors)
+		        	((Any) parent).setNullFlavor(NullFlavor.NI);
+    		}
+    	}    	
     }
     
     private void setNullFlavor(Object parent, String propertyName) {
@@ -299,7 +304,7 @@ public class IsoConstantTuplizerHelper {
         NullFlavor nullFlavor = NullFlavor.NI;
 
     	Class propertyTypeClass = determinePropertyClass(parent, propertyName);
-        if (!Any.class.isAssignableFrom(propertyTypeClass.getClass())) {
+        if (!Any.class.isAssignableFrom(propertyTypeClass)) {
             return;
         }
         
