@@ -45,7 +45,7 @@
 	<property name="pmd.config.file"			value="${basedir}/src/main/resources/Pmd.xml" />
 	<property name="pmd.report.xml.file"		value="${basedir}/target/report/pmd_report.xml" />
 	<property name="pmd.report.html.file"		value="${basedir}/target/report/pmd_report.html" />
-	
+	<property name="cobertura.src.dir"			value="${basedir}/src/main/java" />
 
 	<!-- ====================================================================== -->
 	<!-- Defining classpaths                                                    -->
@@ -273,19 +273,20 @@
 		<style in="${checkstyle.report.xml.file}" out="${checkstyle.report.html.file}" style="${checkstyle.style.file}" />
 	</target>
 	<target name="perform-static-analysis-pmd"  unless="pmd.analysis.skip">
+		<echo message="PMD ========= SRC.DIR = ${src.dir}"/>
 		<mkdir dir="${pmd.report.dir}"/>		
 			<pmd rulesetfiles="${pmd.config.file}" classpathref="static.analysis.classpath">
 				<formatter type="xml" toFile="${pmd.report.xml.file}" linkPrefix="http://pmd.sourceforge.net/xref/" />
 				<formatter type="html" toFile="${pmd.report.html.file}" linkPrefix="http://pmd.sourceforge.net/xref/" />
 				
-				<fileset dir="${src.dir}">
+				<fileset dir="${pmd.src.dir}">
 					<include name="**/*.java" />
 				</fileset>
 			</pmd>
   	</target>
 	<target name="perform-static-analysis-cobertura"  unless="cobertura.analysis.skip">
 		<cobertura-report datafile="${target.dir}/cobertura.ser" format="xml" destdir="${build.dir}/cobertura" classpathref="static.analysis.classpath">
-			<fileset dir="${src.dir}">
+			<fileset dir="${cobertura.src.dir}">
 				<include name="**/*.java" />
 			</fileset>
 		</cobertura-report>
