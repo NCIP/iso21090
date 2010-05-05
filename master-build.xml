@@ -284,7 +284,7 @@
 			</pmd>
   	</target>
 	<target name="perform-static-analysis-cobertura"  unless="cobertura.analysis.skip">
-		<cobertura-report datafile="${target.dir}/cobertura.ser" format="html" destdir="${build.dir}/cobertura" classpathref="static.analysis.classpath">
+		<cobertura-report datafile="${target.dir}/cobertura.ser" format="xml" destdir="${build.dir}/cobertura" classpathref="static.analysis.classpath">
 			<fileset dir="${src.dir}">
 				<include name="**/*.java" />
 			</fileset>
