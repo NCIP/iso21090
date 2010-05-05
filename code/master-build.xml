@@ -288,6 +288,7 @@
 		<cobertura-report datafile="${target.dir}/cobertura.ser" format="xml" destdir="${build.dir}/cobertura" classpathref="static.analysis.classpath">
 			<fileset dir="${cobertura.src.dir}">
 				<include name="**/*.java" />
+				<exclude name="**/org/iso/_21090/*.java"/>
 			</fileset>
 		</cobertura-report>
 		<cobertura-check failureproperty="cobertura.failure" datafile="${target.dir}/cobertura.ser" haltonfailure="false" linerate="0" packagebranchrate="0" packagelinerate="0" totalbranchrate="90" totallinerate="85" classpathref="static.analysis.classpath" />
