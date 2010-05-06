@@ -309,6 +309,7 @@
 	</target>
 
 	<target name="ivy:clean" description="Cleans up the ivy cache of this project and all sub-projects">
+		<taskdef uri="antlib:fr.jayasoft.ivy.ant" resource="fr/jayasoft/ivy/ant/antlib.xml" classpathref="ivy.classpath" />
 		<ivy:settings file="${ivy.settings.file}" />
 		<ivy:cleancache />
 	</target>
