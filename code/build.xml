@@ -78,8 +78,12 @@
 		<ant antfile="build.xml" dir="extensions" target="dist" inheritall="false" inheritrefs="false" />
 		<ant antfile="build.xml" dir="hibernate" target="dist" inheritall="false" inheritrefs="false" />
 	</target>
-	
 
+	<target name="ivy:clean" description="ivy clean">
+		<ant antfile="build.xml" dir="localization" target="ivy:clean" inheritall="false" inheritrefs="false" />
+		<ant antfile="build.xml" dir="extensions" target="ivy:clean" inheritall="false" inheritrefs="false" />
+		<ant antfile="build.xml" dir="hibernate" target="ivy:clean" inheritall="false" inheritrefs="false" />
+	</target>
 	<!-- ====================================================================== -->
 	<!-- perform-static-analysis 												-->
 	<!-- ====================================================================== -->
