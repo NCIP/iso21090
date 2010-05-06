@@ -8,7 +8,7 @@ This file is the is the settings file used by IVY.  It is a good starting point 
 <ivysettings>
 	<property name="ivy.project.repo" value="${software.dir}/local-ivy-repo"/>
 	<property name="ivy.system.repo" value="${software.dir}/../../system-ivy-repo"/>
-
+	<property name="nci.ivy.repo" value="http://gforge.nci.nih.gov/svnroot/commonlibrary/trunk/ivy-repo" />
 
 	<settings defaultResolver="ncicb-chain" />
 	<!-- defaultCacheDir causes the bda-utils module to use it's own cache directory -->
@@ -22,6 +22,11 @@ This file is the is the settings file used by IVY.  It is a good starting point 
 				<artifact pattern="${ivy.project.repo}/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
 				<ivy pattern="${ivy.project.repo}/[organisation]/[module]/[revision]/ivy.xml" />
 			</filesystem>
+			<url name="ncicb-ivy-repo" m2compatible="false">
+				<ivy pattern="${nci.ivy.repo}/[organisation]/[module]/[revision]/ivy.xml" />
+				<artifact
+					pattern="${nci.ivy.repo}/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
+			</url>			
 			<!--<filesystem name="local-system-repo" local="true">
 				
 				<artifact pattern="${ivy.system.repo}/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />

@@ -25,7 +25,7 @@
 	<dependencies>
 		<dependency org="ncicb" name="iso-datatypes" rev="2.1" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>
 		
-		<dependency org="org.hibernate" name="hibernate" rev="3.2.0.ga" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)">
+		<dependency org="org.hibernate" name="hibernate" rev="3.2.0.ga-modified" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)">
 			<exclude org="javax.transaction"/>
 		</dependency>
 		<dependency org="org.springframework" name="spring" rev="2.0.2" conf="compile->compile(*),master(*);runtime->runtime(*)"/>
