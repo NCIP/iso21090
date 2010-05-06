@@ -251,7 +251,7 @@ public class IsoConstantTuplizerHelper {
         setValue(parent, rootNode.getName(), nullValueObject);
     }
 
-    private void setNullFlavor(Object parent) {
+    private Boolean setNullFlavor(Object parent) {
 
     	Class klass = parent.getClass();
     	Boolean allNullFlavors = true;
@@ -272,7 +272,7 @@ public class IsoConstantTuplizerHelper {
 				    			else {
 				    				if (Any.class.isAssignableFrom(value.getClass()))
 				    				{
-				    					setNullFlavor(value);
+				    					if(!setNullFlavor(value)) allNullFlavors = false; 
 				    					if(((Any) value).getNullFlavor() != null) 
 				    						allNullFlavors = false;
 				    				}
@@ -297,6 +297,7 @@ public class IsoConstantTuplizerHelper {
 		        	((Any) parent).setNullFlavor(NullFlavor.NI);
     		}
     	}    	
+        return allNullFlavors;
     }
     
     private void setNullFlavor(Object parent, String propertyName) {
