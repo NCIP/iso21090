@@ -84,6 +84,7 @@ package gov.nih.nci.iso21090.grid.dto.transform.iso;
 
 import gov.nih.nci.iso21090.Ivl;
 import gov.nih.nci.iso21090.Ts;
+import gov.nih.nci.iso21090.Pq;
 import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformer;
 import gov.nih.nci.iso21090.grid.dto.transform.DtoTransformException;
 import gov.nih.nci.iso21090.grid.dto.transform.Transformer;
@@ -91,6 +92,7 @@ import gov.nih.nci.iso21090.grid.dto.transform.Transformer;
 import org.apache.log4j.Logger;
 import org.iso._21090.IVLTS;
 import org.iso._21090.TS;
+import org.iso._21090.PQ;
 
 /**
  * Transforms timestamp intervals.
@@ -122,7 +124,7 @@ public final class IVLTSTransformer extends AbstractTransformer<IVLTS, Ivl<Ts>>
         result.setLowClosed(input.isLowClosed());
         result.setNullFlavor(NullFlavorTransformer.INSTANCE.toDto(input.getNullFlavor()));
         // Cast from QTY -> TS is ok by invariant in 21090 Sec. 7.11.8.3.5
-        result.setWidth(TSTransformer.INSTANCE.toDto((TS) input.getWidth()));
+        result.setWidth(PQTransformer.INSTANCE.toDto((PQ) input.getWidth()));
 
         // PO-1054 - any not in xsd, but is in our localization
 
@@ -150,11 +152,12 @@ public final class IVLTSTransformer extends AbstractTransformer<IVLTS, Ivl<Ts>>
         result.setLowClosed(input.getLowClosed());
         result.setNullFlavor(NullFlavorTransformer.INSTANCE.toXml(input.getNullFlavor()));
         // Cast from QTY -> TS is ok by invariant in 21090 Sec. 7.11.8.3.5
-        result.setWidth(TSTransformer.INSTANCE.toXml((Ts) input.getWidth()));
+        result.setWidth(PQTransformer.INSTANCE.toXml((Pq) input.getWidth()));
 
         // PO-1054 - any not in xsd, but is in our localization
-        if (input.getAny() != null) {
-            if (result.getHigh() == null && result.getLow() == null) {
+        if (input.getAny() != null && input.getAny().getNullFlavor() == null) {
+            if ((result.getHigh() == null || (result.getHigh() != null && result.getHigh().getNullFlavor() != null)) 
+            		&& (result.getLow() == null || (result.getLow() != null && result.getLow().getNullFlavor() != null))) {
                 result.setHigh(TSTransformer.INSTANCE.toXml(input.getAny()));
                 result.setLow(TSTransformer.INSTANCE.toXml(input.getAny()));
                 result.setHighClosed(true);
