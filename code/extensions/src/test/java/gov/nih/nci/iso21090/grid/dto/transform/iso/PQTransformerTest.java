@@ -89,8 +89,6 @@ import static org.junit.Assert.assertNull;
 import gov.nih.nci.iso21090.Pq;
 import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformerTestBase;
 
-import java.math.BigDecimal;
-
 import org.apache.commons.lang.math.NumberUtils;
 import org.iso._21090.NullFlavor;
 import org.iso._21090.PQ;
@@ -117,7 +115,7 @@ import org.junit.Test;
         @Override
         public Pq makeDtoSimple() {
             Pq x = new Pq();
-            x.setValue(BigDecimal.valueOf(VALUE_DOUBLE));
+            x.setValue(VALUE_DOUBLE);
             x.setPrecision(PRECISION);
             x.setUnit(UNIT);
             return x;
@@ -132,7 +130,7 @@ import org.junit.Test;
 
         @Override
         public void verifyDtoSimple(Pq x) {
-            assertEquals(new BigDecimal(VALUE_DOUBLE), x.getValue());
+            assertEquals(VALUE_DOUBLE, x.getValue());
             assertEquals(UNIT, x.getUnit());
             assertEquals(PRECISION, x.getPrecision());
         }
