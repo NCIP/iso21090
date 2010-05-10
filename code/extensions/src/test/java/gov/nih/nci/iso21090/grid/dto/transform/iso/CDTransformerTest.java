@@ -86,10 +86,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import gov.nih.nci.iso21090.Cd;
+import gov.nih.nci.iso21090.St;
 import gov.nih.nci.iso21090.NullFlavor;
 import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformerTestBase;
 
 import org.iso._21090.CD;
+import org.iso._21090.ST;
 import org.junit.Test;
 
 /**
@@ -127,22 +129,18 @@ public class CDTransformerTest extends AbstractTransformerTestBase<CDTransformer
     @Override
     public void verifyXmlSimple(CD x) {
         assertEquals("code", x.getCode());
-        assertNull(x.getCodeSystem());
-        assertNull(x.getCodeSystemName());
-        assertNull(x.getCodeSystemVersion());
-        assertNull(x.getDisplayName());
-        assertNull(x.getControlActRoot());
-        assertNull(x.getDisplayName());
+        assertEquals("ignored", x.getCodeSystem());
+        assertEquals("ignored", x.getCodeSystemName());
+        assertEquals("ignored", x.getCodeSystemVersion());
     }
 
 
     @Override
     public void verifyDtoSimple(Cd i) {
         assertEquals("code", i.getCode());
-        assertNull(i.getCodeSystem());
-        assertNull(i.getCodeSystemName());
-        assertNull( i.getCodeSystemVersion());
-        assertNull(i.getDisplayName());
+        assertEquals("sys", i.getCodeSystem());
+        assertEquals("name", i.getCodeSystemName());
+        assertEquals("v", i.getCodeSystemVersion());
     }
 
     @Test
