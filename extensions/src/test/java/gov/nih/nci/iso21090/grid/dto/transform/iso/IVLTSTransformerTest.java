@@ -88,6 +88,7 @@ import static junit.framework.Assert.assertNull;
 import static junit.framework.Assert.fail;
 
 import gov.nih.nci.iso21090.Ivl;
+import gov.nih.nci.iso21090.Pq;
 import gov.nih.nci.iso21090.Ts;
 import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformerTestBase;
 import gov.nih.nci.iso21090.grid.dto.transform.DtoTransformException;
@@ -98,6 +99,7 @@ import java.util.Calendar;
 
 import org.iso._21090.IVLTS;
 import org.iso._21090.TS;
+import org.iso._21090.PQ;
 import org.junit.Test;
 
 /**
@@ -113,7 +115,7 @@ public class IVLTSTransformerTest extends AbstractTransformerTestBase<IVLTSTrans
         result.setHighClosed(Boolean.TRUE);
         result.setLow(getTs(-1));
         result.setLowClosed(Boolean.FALSE);
-        result.setWidth(getTs(3));
+        result.setWidth(getPq(3));
 
         return result;
     }
@@ -125,7 +127,7 @@ public class IVLTSTransformerTest extends AbstractTransformerTestBase<IVLTSTrans
         result.setHighClosed(Boolean.TRUE);
         result.setLow(getTS(-1));
         result.setLowClosed(Boolean.FALSE);
-        result.setWidth(getTS(3));
+        result.setWidth(getPQ(3));
 
         return result;
     }
@@ -149,8 +151,20 @@ public class IVLTSTransformerTest extends AbstractTransformerTestBase<IVLTSTrans
         assertEquals(expected.isHighClosed(), x.isHighClosed());
         assertEquals(expected.getLow().getValue(), x.getLow().getValue());
         assertEquals(expected.isLowClosed(), x.isLowClosed());
-        assertEquals(((TS) expected.getWidth()).getValue(), ((TS) x.getWidth()).getValue());
+        assertEquals(((PQ) expected.getWidth()).getValue(), ((PQ) x.getWidth()).getValue());
 
+    }
+    
+    private Pq getPq(double value) {
+        Pq result = new PQTransformerTest().makeDtoSimple();
+        result.setValue(new Double(value));
+        return result;
+    }
+
+    private PQ getPQ(double value) {
+        PQ result = new PQTransformerTest().makeXmlSimple();
+        result.setValue(value);
+        return result;
     }
 
     private Ts getTs(int offsetFromDefault) {
@@ -182,20 +196,20 @@ public class IVLTSTransformerTest extends AbstractTransformerTestBase<IVLTSTrans
     public void testAnyXmlToDto() throws DtoTransformException {
          // set Any with equal high and low
          IVLTS input = new IVLTS();
-         input.setWidth(getTS(3));
+         input.setWidth(getPQ(3));
          input.setHigh(getTS(4));
          input.setLow(getTS(4));
          Ivl<Ts> output = IVLTSTransformer.INSTANCE.toDto(input);
          assertEquals(output.getAny(), getTs(4));
          // set Any with some high and no low
          IVLTS input2 = new IVLTS();
-         input2.setWidth(getTS(3));
+         input2.setWidth(getPQ(3));
          input2.setHigh(getTS(5));
          Ivl<Ts> output2 = IVLTSTransformer.INSTANCE.toDto(input2);
          assertEquals(output2.getAny(), getTs(5));
          // set Any with no high and some low
          IVLTS input3 = new IVLTS();
-         input3.setWidth(getTS(3));
+         input3.setWidth(getPQ(3));
          input3.setHigh(getTS(1));
          Ivl<Ts> output3 = IVLTSTransformer.INSTANCE.toDto(input3);
          assertEquals(output3.getAny(), getTs(1));
@@ -213,7 +227,7 @@ public class IVLTSTransformerTest extends AbstractTransformerTestBase<IVLTSTrans
          assertTrue(output.isLowClosed());
          // set Any with some high and low not being equal
          Ivl<Ts> input2 = new Ivl<Ts>();
-         input2.setWidth(getTs(3));
+         input2.setWidth(getPq(3));
          input2.setHigh(getTs(5));
          input2.setLow(getTs(1));
          input2.setAny(getTs(3));
