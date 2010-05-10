@@ -86,8 +86,6 @@ import gov.nih.nci.iso21090.Real;
 import gov.nih.nci.iso21090.grid.dto.transform.DtoTransformException;
 import gov.nih.nci.iso21090.grid.dto.transform.Transformer;
 
-import java.math.BigDecimal;
-
 /**
  * Transforms real numbers.
  * @author mshestopalov
@@ -128,7 +126,7 @@ public final class REALTransformer extends QTYTransformer<org.iso._21090.Real, R
             return null;
         }
         org.iso._21090.Real x = transformBaseXml(input);
-        BigDecimal v = input.getValue();
+        Double v = input.getValue();
         if (v != null) {
             x.setValue(v.doubleValue());
         } else {
@@ -148,7 +146,7 @@ public final class REALTransformer extends QTYTransformer<org.iso._21090.Real, R
         Real d = transformBaseDto(input);
         Double v = input.getValue();
         if (v != null) {
-            d.setValue(BigDecimal.valueOf(v));
+            d.setValue(v);
         } else {
             d.setNullFlavor(NullFlavorTransformer.INSTANCE.toDto(input.getNullFlavor()));
         }
