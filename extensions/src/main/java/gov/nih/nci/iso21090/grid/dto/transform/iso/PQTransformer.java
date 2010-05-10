@@ -86,8 +86,6 @@ import gov.nih.nci.iso21090.Pq;
 import gov.nih.nci.iso21090.grid.dto.transform.DtoTransformException;
 import gov.nih.nci.iso21090.grid.dto.transform.Transformer;
 
-import java.math.BigDecimal;
-
 import org.iso._21090.PQ;
 
 /**
@@ -130,17 +128,22 @@ public final class PQTransformer extends QTYTransformer<PQ, Pq>
             return null;
         }
         PQ x = transformBaseXml(input);
-        BigDecimal v = input.getValue();
+        Double v = input.getValue();
         if (v != null) {
-            x.setValue(v.doubleValue());
+            x.setValue(v);
         } else {
             x.setNullFlavor(NullFlavorTransformer.INSTANCE.toXml(input.getNullFlavor()));
         }
-        x.setPrecision(input.getPrecision());
+        
+        if(input.getPrecision() != null)
+        	x.setPrecision(input.getPrecision());
+        else
+        	x.setPrecision(0);
+        
         x.setUnit(input.getUnit());
-        if (input.getValue() != null) {
-            x.setValue(input.getValue().doubleValue());
-        }
+        //if (input.getValue() != null) {
+        //    x.setValue(input.getValue().doubleValue());
+        //}
 
         return x;
     }
@@ -155,16 +158,18 @@ public final class PQTransformer extends QTYTransformer<PQ, Pq>
         Pq d = transformBaseDto(input);
         Double v = input.getValue();
         if (v != null) {
-            d.setValue(BigDecimal.valueOf(v));
+            d.setValue(v);
         } else {
             d.setNullFlavor(NullFlavorTransformer.INSTANCE.toDto(input.getNullFlavor()));
         }
-        d.setPrecision(input.getPrecision());
+        
+       	d.setPrecision(input.getPrecision());
+        
         d.setUnit(input.getUnit());
-        if (input.getValue() != null) {
-            BigDecimal bd = new BigDecimal(input.getValue());
-            d.setValue(bd);
-        }
+        //if (input.getValue() != null) {
+        //    BigDecimal bd = new BigDecimal(input.getValue());
+        //    d.setValue(bd);
+        //}
 
         return d;
     }
