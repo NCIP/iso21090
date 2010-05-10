@@ -1,6 +1,5 @@
 package gov.nih.nci.iso21090;
 
-import java.math.BigDecimal;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
@@ -14,14 +13,14 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 public abstract class Pqv extends Qty implements Cloneable {
     private static final long serialVersionUID = 1L;
 
-    private BigDecimal value;
-    private Integer precision;
+    private Double value;
+    private Integer precision = 0;
 
     /**
      *
      * @return value
      */
-    public BigDecimal getValue() {
+    public Double getValue() {
         return value;
     }
 
@@ -29,7 +28,7 @@ public abstract class Pqv extends Qty implements Cloneable {
      *
      * @param value the value
      */
-    public void setValue(BigDecimal value) {
+    public void setValue(Double value) {
         this.value = value;
     }
 
@@ -46,7 +45,10 @@ public abstract class Pqv extends Qty implements Cloneable {
      * @param precision precision digits
      */
     public void setPrecision(Integer precision) {
-        this.precision = precision;
+    	if(precision != null)
+    		this.precision = precision;
+    	else
+    		this.precision = 0;
     }
 
     /**
