@@ -107,7 +107,7 @@ public final class SCTransformer extends AbstractTransformer<SC, Sc> implements 
     /**
      * {@inheritDoc}
      */
-    public SC toXml(Sc input) {
+    public SC toXml(Sc input) throws DtoTransformException{
         ST st = STTransformer.INSTANCE.toXml(input);
         if (st == null) {
             return null;
@@ -125,7 +125,7 @@ public final class SCTransformer extends AbstractTransformer<SC, Sc> implements 
     /**
      * {@inheritDoc}
      */
-    public Sc toDto(SC input) {
+    public Sc toDto(SC input) throws DtoTransformException{
         St st = STTransformer.INSTANCE.toDto(input);
         if (st == null) {
             return null;
