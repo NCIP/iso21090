@@ -113,7 +113,7 @@ public final class DSETCDTransformer extends AbstractTransformer<DSetCd, DSet<go
     /**
      * {@inheritDoc}
      */
-    public DSetCd toXml(DSet<Cd> input) {
+    public DSetCd toXml(DSet<Cd> input) throws DtoTransformException{
     	DSetCd x = new DSetCd();
         if (input != null && input.getItem() != null) {
             Set<Cd> sItem = input.getItem();
@@ -136,7 +136,7 @@ public final class DSETCDTransformer extends AbstractTransformer<DSetCd, DSet<go
     /**
      * {@inheritDoc}
      */
-    public DSet<Cd> toDto(DSetCd input) {
+    public DSet<Cd> toDto(DSetCd input) throws DtoTransformException{
         if (input == null || input.getNullFlavor() != null) {
             return null;
         }
