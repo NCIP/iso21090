@@ -152,7 +152,7 @@ final class ADXPTransformer extends AbstractTransformer<org.iso._21090.ADXP, Adx
     /**
      * {@inheritDoc}
      */
-    public Adxp toDto(org.iso._21090.ADXP input) {
+    public Adxp toDto(org.iso._21090.ADXP input)  throws DtoTransformException {
         // Don't worry about null here - this is a package-protected class and
         // the AD converter
         // has the responsibility to detect null.
@@ -170,49 +170,61 @@ final class ADXPTransformer extends AbstractTransformer<org.iso._21090.ADXP, Adx
      * @param type the typeof the part to create.
      * @return an address part with the
      */
-    public static Adxp createAddressPart(AddressPartType type) {
+    public static Adxp createAddressPart(AddressPartType type) throws DtoTransformException {
         if (type == null) {
             return new Adxp();
         }
-        Adxp value = types.get(type);
+        Class<? extends Adxp> klass = types.get(type);
+        try
+        {
+        Adxp value = klass.newInstance();
         if (value == null) {
             throw new UnsupportedOperationException(type.name());
         }
         return value;
+        }
+        catch(InstantiationException e)
+        {
+        	throw new DtoTransformException("Failed instantiating Adxp. ", e);
+        }
+        catch(IllegalAccessException e)
+        {
+        	throw new DtoTransformException("Failed instantiating Adxp. ", e);
+        }
     }
 
-    private static Map<AddressPartType, gov.nih.nci.iso21090.Adxp> types = new HashMap<AddressPartType, gov.nih.nci.iso21090.Adxp>();
+    private static Map<AddressPartType, Class<? extends Adxp>> types = new HashMap<AddressPartType, Class<? extends Adxp>>();
 
     static {
-        types.put(AddressPartType.ADL, new AdxpAdl());
-        types.put(AddressPartType.AL, new AdxpAl());
-        types.put(AddressPartType.BNN, new AdxpBnn());
-        types.put(AddressPartType.BNR, new AdxpBnr());
-        types.put(AddressPartType.BNS, new AdxpBns());
-        types.put(AddressPartType.CAR, new AdxpCar());
-        types.put(AddressPartType.CEN, new AdxpCen());
-        types.put(AddressPartType.CNT, new AdxpCnt());
-        types.put(AddressPartType.CPA, new AdxpCpa());
-        types.put(AddressPartType.CTY, new AdxpCty());
-        types.put(AddressPartType.DAL, new AdxpDal());
-        types.put(AddressPartType.DEL, new AdxpDel());
-        types.put(AddressPartType.DINST, new AdxpDinst());
-        types.put(AddressPartType.DINSTA, new AdxpDinsta());
-        types.put(AddressPartType.DINSTQ, new AdxpDinstq());
-        types.put(AddressPartType.DIR, new AdxpDir());
-        types.put(AddressPartType.DMOD, new AdxpDmod());
-        types.put(AddressPartType.DMODID, new AdxpDmodid());
-        types.put(AddressPartType.INT, new AdxpInt());
-        types.put(AddressPartType.POB, new AdxpPob());
-        types.put(AddressPartType.PRE, new AdxpPre());
-        types.put(AddressPartType.SAL, new AdxpSal());
-        types.put(AddressPartType.STA, new AdxpSta());
-        types.put(AddressPartType.STB, new AdxpStb());
-        types.put(AddressPartType.STR, new AdxpStr());
-        types.put(AddressPartType.STTYP, new AdxpSttyp());
-        types.put(AddressPartType.UNID, new AdxpUnid());
-        types.put(AddressPartType.UNIT, new AdxpUnit());
-        types.put(AddressPartType.ZIP, new AdxpZip());
+        types.put(AddressPartType.ADL, AdxpAdl.class);
+        types.put(AddressPartType.AL, AdxpAl.class);
+        types.put(AddressPartType.BNN, AdxpBnn.class);
+        types.put(AddressPartType.BNR, AdxpBnr.class);
+        types.put(AddressPartType.BNS, AdxpBns.class);
+        types.put(AddressPartType.CAR, AdxpCar.class);
+        types.put(AddressPartType.CEN, AdxpCen.class);
+        types.put(AddressPartType.CNT, AdxpCnt.class);
+        types.put(AddressPartType.CPA, AdxpCpa.class);
+        types.put(AddressPartType.CTY, AdxpCty.class);
+        types.put(AddressPartType.DAL, AdxpDal.class);
+        types.put(AddressPartType.DEL, AdxpDel.class);
+        types.put(AddressPartType.DINST, AdxpDinst.class);
+        types.put(AddressPartType.DINSTA, AdxpDinsta.class);
+        types.put(AddressPartType.DINSTQ, AdxpDinstq.class);
+        types.put(AddressPartType.DIR, AdxpDir.class);
+        types.put(AddressPartType.DMOD, AdxpDmod.class);
+        types.put(AddressPartType.DMODID, AdxpDmodid.class);
+        types.put(AddressPartType.INT, AdxpInt.class);
+        types.put(AddressPartType.POB, AdxpPob.class);
+        types.put(AddressPartType.PRE, AdxpPre.class);
+        types.put(AddressPartType.SAL, AdxpSal.class);
+        types.put(AddressPartType.STA, AdxpSta.class);
+        types.put(AddressPartType.STB, AdxpStb.class);
+        types.put(AddressPartType.STR, AdxpStr.class);
+        types.put(AddressPartType.STTYP, AdxpSttyp.class);
+        types.put(AddressPartType.UNID, AdxpUnid.class);
+        types.put(AddressPartType.UNIT, AdxpUnit.class);
+        types.put(AddressPartType.ZIP, AdxpZip.class);
     }
 
     /**
