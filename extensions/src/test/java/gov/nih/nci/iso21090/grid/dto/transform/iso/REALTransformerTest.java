@@ -88,8 +88,6 @@ import static org.junit.Assert.assertNull;
 import gov.nih.nci.iso21090.Real;
 import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformerTestBase;
 
-import java.math.BigDecimal;
-
 import org.iso._21090.NullFlavor;
 import org.junit.Test;
 
@@ -111,7 +109,7 @@ public class REALTransformerTest extends AbstractTransformerTestBase<REALTransfo
         @Override
         public Real makeDtoSimple() {
             Real x = new Real();
-            x.setValue(new BigDecimal(VALUE));
+            x.setValue(VALUE);
             return x;
         }
 

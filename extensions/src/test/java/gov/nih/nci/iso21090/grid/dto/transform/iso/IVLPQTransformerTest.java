@@ -91,8 +91,6 @@ import gov.nih.nci.iso21090.Pq;
 import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformerTestBase;
 import gov.nih.nci.iso21090.grid.dto.transform.DtoTransformException;
 
-import java.math.BigDecimal;
-
 import org.iso._21090.IVLPQ;
 import org.iso._21090.PQ;
 import org.junit.Test;
@@ -152,7 +150,7 @@ public class IVLPQTransformerTest extends AbstractTransformerTestBase<IVLPQTrans
 
     private Pq getPq(double value) {
         Pq result = new PQTransformerTest().makeDtoSimple();
-        result.setValue(new BigDecimal(value));
+        result.setValue(new Double(value));
         return result;
     }
 

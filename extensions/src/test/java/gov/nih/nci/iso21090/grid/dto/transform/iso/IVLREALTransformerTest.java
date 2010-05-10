@@ -93,7 +93,6 @@ import gov.nih.nci.iso21090.Ts;
 import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformerTestBase;
 import gov.nih.nci.iso21090.grid.dto.transform.DtoTransformException;
 
-import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -158,7 +157,7 @@ public class IVLREALTransformerTest extends AbstractTransformerTestBase<IVLREALT
 
     private Real getReal(int value) {
         Real result = new REALTransformerTest().makeDtoSimple();
-        result.setValue(new BigDecimal(value));
+        result.setValue(new Double(value));
 
         return result;
     }
