@@ -106,34 +106,40 @@ public final class CDTransformer extends AbstractTransformer<CD, Cd>
     /**
      * {@inheritDoc}
      */
-    public Cd toDto(CD input) {
+    public Cd toDto(CD input) throws DtoTransformException {
         if (input == null) {
             return null;
         }
         Cd res = new Cd();
-        String v = input.getCode();
-        if (v != null) {
-            res.setCode(v);
-        } else {
-            res.setNullFlavor(NullFlavorTransformer.INSTANCE.toDto(input.getNullFlavor()));
-        }
+        
+        res.setCode(input.getCode());
+        res.setCodeSystem(input.getCodeSystem());
+        res.setCodeSystemName(input.getCodeSystemName());
+        res.setCodeSystemVersion(input.getCodeSystemVersion());
+        res.setDisplayName(STTransformer.INSTANCE.toDto(input.getDisplayName()));
+        res.setOriginalText(EDTextTransformer.INSTANCE.toDto(input.getOriginalText()));
+        res.setNullFlavor(NullFlavorTransformer.INSTANCE.toDto(input.getNullFlavor()));
+
         return res;
     }
 
     /**
      * {@inheritDoc}
      */
-    public CD toXml(Cd input) {
+    public CD toXml(Cd input) throws DtoTransformException {
         if (input == null) {
             return null;
         }
         CD res = new CD();
-        String v = input.getCode();
-        if (v != null) {
-            res.setCode(v);
-        } else {
-            res.setNullFlavor(NullFlavorTransformer.INSTANCE.toXml(input.getNullFlavor()));
-        }
+        
+        res.setCode(input.getCode());
+        res.setCodeSystem(input.getCodeSystem());
+        res.setCodeSystemName(input.getCodeSystemName());
+        res.setCodeSystemVersion(input.getCodeSystemVersion());
+        res.setDisplayName(STTransformer.INSTANCE.toXml(input.getDisplayName()));
+        res.setOriginalText(EDTextTransformer.INSTANCE.toXml(input.getOriginalText()));
+        res.setNullFlavor(NullFlavorTransformer.INSTANCE.toXml(input.getNullFlavor()));
+        
         return res;
     }
 
