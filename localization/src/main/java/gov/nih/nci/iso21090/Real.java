@@ -82,8 +82,6 @@
  */
 package gov.nih.nci.iso21090;
 
-import java.math.BigDecimal;
-
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
@@ -97,21 +95,21 @@ public final class Real extends Qty implements Cloneable {
 
     private static final long serialVersionUID = 1L;
 
-    private BigDecimal value;
+    private Double value;
 
     /**
      *
      * @return value
      */
-    public BigDecimal getValue() {
+    public Double getValue() {
         return value;
     }
 
     /**
      *
-     * @param value value of BigDecimal
+     * @param value value of Double
      */
-    public void setValue(BigDecimal value) {
+    public void setValue(Double value) {
         this.value = value;
     }
 
