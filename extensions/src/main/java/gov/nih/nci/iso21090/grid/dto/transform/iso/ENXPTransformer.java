@@ -143,9 +143,13 @@ public final class ENXPTransformer extends AbstractTransformer<org.iso._21090.EN
         d.setCode(input.getCode());
         d.setCodeSystem(input.getCodeSystem());
         d.setCodeSystemVersion(input.getCodeSystemVersion());
-        d.setQualifier(new HashSet<EntityNamePartQualifier>());
-        for (org.iso._21090.EntityNamePartQualifier qual : input.getQualifiers()) {
-            d.getQualifier().add(EntityNamePartQualifier.valueOf(qual.name()));
+        if(input.getQualifiers() != null && input.getQualifiers().size() > 0)
+        {
+        	HashSet<EntityNamePartQualifier> qualifiers = new HashSet<EntityNamePartQualifier>();
+	        for (org.iso._21090.EntityNamePartQualifier qual : input.getQualifiers()) {
+	            qualifiers.add(EntityNamePartQualifier.valueOf(qual.name()));
+	        }
+	        d.setQualifier(qualifiers);
         }
         return d;
     }
