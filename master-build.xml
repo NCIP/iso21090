@@ -265,7 +265,6 @@
 	</target>
 	
 	<target name="perform-static-analysis-pmd"  unless="pmd.analysis.skip">
-		<echo message="PMD ========= SRC.DIR = ${src.dir}"/>
 		<mkdir dir="${pmd.report.dir}"/>
 		<pmd rulesetfiles="${pmd.config.file}" classpathref="static.analysis.classpath">
 			<formatter type="xml" toFile="${pmd.report.xml.file}" linkPrefix="http://pmd.sourceforge.net/xref/" />
