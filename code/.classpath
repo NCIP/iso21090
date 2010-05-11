@@ -4,9 +4,29 @@
 	<classpathentry kind="con" path="org.maven.ide.eclipse.MAVEN2_CLASSPATH_CONTAINER"/>
 	<classpathentry kind="src" path="localization/src/main/java"/>
 	<classpathentry kind="src" path="localization/src/test/java"/>
-	<classpathentry kind="src" path="localization/src/test/resources"/>
-	<classpathentry kind="src" path="extensions/target/generated-sources/stubs"/>
+	<classpathentry kind="src" path="extensions/target/generated-src"/>
 	<classpathentry kind="src" path="extensions/src/main/java"/>
 	<classpathentry kind="src" path="extensions/src/test/java"/>
+	<classpathentry kind="lib" path="extensions/target/lib/compile/activation-1.1.jar"/>
+	<classpathentry kind="lib" path="extensions/target/lib/compile/ant-1.7.0.jar"/>
+	<classpathentry kind="lib" path="extensions/target/lib/compile/ant-launcher-1.7.0.jar"/>
+	<classpathentry kind="lib" path="extensions/target/lib/compile/asm-3.1.jar"/>
+	<classpathentry kind="lib" path="extensions/target/lib/compile/asm-tree-3.0.jar"/>
+	<classpathentry kind="lib" path="extensions/target/lib/compile/axis-1.4.jar"/>
+	<classpathentry kind="lib" path="extensions/target/lib/compile/axis-jaxrpc-1.2.jar"/>
+	<classpathentry kind="lib" path="extensions/target/lib/compile/axis-saaj-1.4.jar"/>
+	<classpathentry kind="lib" path="extensions/target/lib/compile/cobertura-1.9.3.jar"/>
+	<classpathentry kind="lib" path="extensions/target/lib/compile/commons-beanutils-1.7.0.jar"/>
+	<classpathentry kind="lib" path="extensions/target/lib/compile/commons-collections-3.2.jar"/>
+	<classpathentry kind="lib" path="extensions/target/lib/compile/commons-lang-2.4.jar"/>
+	<classpathentry kind="lib" path="extensions/target/lib/compile/commons-logging-1.0.3.jar"/>
+	<classpathentry kind="lib" path="extensions/target/lib/compile/jaxb-api-2.1.jar"/>
+	<classpathentry kind="lib" path="extensions/target/lib/compile/jaxb-impl-2.1.4.jar"/>
+	<classpathentry kind="lib" path="extensions/target/lib/compile/jaxb-xjc-2.1.4.jar"/>
+	<classpathentry kind="lib" path="extensions/target/lib/compile/jaxrpc-api-1.1.jar"/>
+	<classpathentry kind="lib" path="extensions/target/lib/compile/log4j-1.2.14.jar"/>
+	<classpathentry kind="lib" path="extensions/target/lib/compile/oro-2.0.8.jar"/>
+	<classpathentry kind="lib" path="extensions/target/lib/compile/stax-api-1.0.jar"/>
+	<classpathentry kind="lib" path="localization/target/lib/test/junit-4.4.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
