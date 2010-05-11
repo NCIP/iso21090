@@ -154,9 +154,13 @@ public class ADXPTransformerTest {
     }
 
     private void verify(Adxp expectedType, AddressPartType adl) {
-        Adxp adxp = ADXPTransformer.createAddressPart(adl);
-        assertNotNull(adxp);
-        assertEquals(expectedType.getClass(), adxp.getClass());
+		try{
+			Adxp adxp = ADXPTransformer.createAddressPart(adl);
+			assertNotNull(adxp);
+			assertEquals(expectedType.getClass(), adxp.getClass());
+		}catch(gov.nih.nci.iso21090.grid.dto.transform.DtoTransformException e){
+    		assert false;
+    	}
     }
 
     /**
@@ -164,9 +168,13 @@ public class ADXPTransformerTest {
      */
     @Test
     public void testCreateAddressPartUnknown() {
-        for (AddressPartType type : AddressPartType.values()) {
-            assertNotNull(ADXPTransformer.createAddressPart(type));
-        }
+		try{
+			for (AddressPartType type : AddressPartType.values()) {
+				assertNotNull(ADXPTransformer.createAddressPart(type));
+			}
+		}catch(gov.nih.nci.iso21090.grid.dto.transform.DtoTransformException e){
+    		assert false;
+    	}
     }
     @Test
     public void testCreateAddressPartWhenParamIsNull() {
