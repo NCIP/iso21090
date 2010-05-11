@@ -45,10 +45,11 @@ public abstract class Pqv extends Qty implements Cloneable {
      * @param precision precision digits
      */
     public void setPrecision(Integer precision) {
-    	if(precision != null)
+    	if (precision != null){
     		this.precision = precision;
-    	else
+    	}else{
     		this.precision = 0;
+		}
     }
 
     /**
