@@ -141,6 +141,7 @@ public class JaxbDeserializer extends DeserializerImpl implements Deserializer {
                 }
             }
         } catch (Exception e) {
+        	e.printStackTrace();
             throw new SAXException(e);
         }
     }
