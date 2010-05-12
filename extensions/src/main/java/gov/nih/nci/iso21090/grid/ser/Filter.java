@@ -137,26 +137,27 @@ public class Filter implements ContentHandler {
 
 		prefixes.push(head);
 		head = new HashMap<String, String>();
-
+		
 		AttributesImpl fixed = new AttributesImpl();
 		for (int i = 0; i < atts.getLength(); i++) {
 			String au = atts.getURI(i);
 			String av = atts.getValue(i);
 			String aln = atts.getLocalName(i);
-			String aq = atts.getQName(i);
+
 			if (NamespaceConstants.NSURI_SCHEMA_XSI.equals(au) && "type".equals(aln)) {
+
+				String p = "";
+				String q = av;
+				
 				int idx = av.indexOf(':');
 				if (idx != -1) {
-					String p = av.substring(0, idx);
-					String q = av.substring(av.indexOf(':') + 1);
-					//					int idx = aq.indexOf(':');
-					//					String p = aq.substring(0, idx);
-					//					String q = aq.substring(av.indexOf(':') + 1);
-					String ns = getNS(p);
-					String axisPrefix = context.getPrefixForURI(ns);
-					av = axisPrefix + ':' + q;
+					p = av.substring(0, idx);
+					q = av.substring(av.indexOf(':') + 1);
 				}
-
+				
+				String ns = getNS(p);
+				String axisPrefix = context.getPrefixForURI(ns);
+				av = axisPrefix + ':' + q;
 			}
 			fixed.addAttribute(au, aln, atts.getQName(i), atts.getType(i), av);
 		}
