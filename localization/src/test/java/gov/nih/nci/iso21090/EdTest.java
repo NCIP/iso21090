@@ -32,9 +32,6 @@ public class EdTest {
     public void testEquality() {
         t.setCompression(Compression.BZ);
         t.setData(phrase.getBytes());
-        St st = new St();
-        st.setValue(phrase);
-        t.setDescription(st);
         t.setNullFlavor(NullFlavor.NA);
         TelUrl a = new TelUrl();
         a.setValue(URI.create("http:"+phrase));
@@ -45,31 +42,16 @@ public class EdTest {
         Ed t2 = new Ed();
         t2.setCompression(Compression.BZ);
         t2.setData(phrase.getBytes());
-        St st2 = new St();
-        st2.setValue(phrase);
-        
-        t2.setDescription(st2);
         t2.setNullFlavor(NullFlavor.NA);
         t2.setValue(phrase);
 
         assertTrue(t.equals(t2));
-
-        St st3 = new St();
-        st3.setValue(phrase+"something extra");
-        t2.setDescription(st3);
-
-        assertFalse(t.equals(t2));
     }
 
     @Test
     public void testHashCode() {
         t.setCompression(Compression.BZ);
         t.setData(phrase.getBytes());
-
-        St st = new St();
-        st.setValue(phrase);
-        t.setDescription(st);
-        
         t.setNullFlavor(NullFlavor.NA);
         TelUrl a = new TelUrl();
         a.setValue(URI.create("http:"+phrase));
@@ -80,32 +62,15 @@ public class EdTest {
         Ed t2 = new Ed();
         t2.setCompression(Compression.BZ);
         t2.setData(phrase.getBytes());
-        
-        St st2 = new St();
-        st2.setValue(phrase);
-        t2.setDescription(st2);
-
         t2.setNullFlavor(NullFlavor.NA);
         t2.setValue(phrase);
-
         assertEquals(t.hashCode(), t2.hashCode());
-        
-        
-        St st3 = new St();
-        st3.setValue(phrase+"something extra");
-        t2.setDescription(st3);
-        assertFalse(t.hashCode() == t2.hashCode());
     }
 
     @Test
     public void testCloneable() {
         t.setCompression(Compression.BZ);
         t.setData(phrase.getBytes());
-
-        St st = new St();
-        st.setValue(phrase);
-        t.setDescription(st);
-
         t.setNullFlavor(NullFlavor.NA);
         TelUrl a = new TelUrl();
         a.setValue(URI.create("http:"+phrase));

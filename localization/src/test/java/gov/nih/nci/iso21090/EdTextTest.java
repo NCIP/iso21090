@@ -45,14 +45,6 @@ public class EdTextTest {
     }
 
     @Test
-    public void testDescription() {
-        St st = new St();
-        st.setValue(phrase);    	
-        t.setDescription(st);
-        assertEquals(t.getDescription().getValue(), phrase);
-    }
-
-    @Test
     public void testValue() {
         t.setValue(phrase);
         assertEquals(t.getValue(), phrase);
