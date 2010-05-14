@@ -22,7 +22,6 @@ import gov.nih.nci.iso21090.AdxpDinstq;
 import gov.nih.nci.iso21090.AdxpDir;
 import gov.nih.nci.iso21090.AdxpDmod;
 import gov.nih.nci.iso21090.AdxpDmodid;
-import gov.nih.nci.iso21090.AdxpInt;
 import gov.nih.nci.iso21090.AdxpPob;
 import gov.nih.nci.iso21090.AdxpPre;
 import gov.nih.nci.iso21090.AdxpSal;
@@ -58,7 +57,6 @@ public class ADXPTransformerTest {
         verify(new AdxpDir(), AddressPartType.DIR);
         verify(new AdxpDmod(), AddressPartType.DMOD);
         verify(new AdxpDmodid(), AddressPartType.DMODID);
-        verify(new AdxpInt(), AddressPartType.INT);
         verify(new AdxpPob(), AddressPartType.POB);
         verify(new AdxpPre(), AddressPartType.PRE);
         verify(new AdxpSal(), AddressPartType.SAL);
