@@ -386,6 +386,23 @@ public class IsoConstantTuplizerHelper {
         return null;
     }
     
+    private ComplexNode getDSetItemComplexNodeBean(String configLookupKey) {
+    	try {
+    		configLookupKey = configLookupKey.substring(0, configLookupKey.lastIndexOf(".element"));
+    		String valueKey = configLookupKey.substring(0, configLookupKey.lastIndexOf(".item"));
+    		ComplexNode valueNode = (ComplexNode) ctx.getBean(valueKey);
+    		
+            for (Node node : valueNode.getInnerNodes()) {
+                if ("item".equals(node.getName()) && node instanceof ComplexNode) {
+                    return (ComplexNode)node;
+                }
+            }
+        } catch (Exception e) {
+            //Do Nothing
+        }
+        return null;
+    	
+    }
     /**
      * Determines the name of the property to be used for processing.
      * 
@@ -429,7 +446,11 @@ public class IsoConstantTuplizerHelper {
     @SuppressWarnings("PMD.CyclomaticComplexity")
     public void setConstantPartValues(Object component, Object value, String roleName, String propertyName)
     {
-        ComplexNode complexNode = getComplexNodeBean(roleName);
+    	ComplexNode complexNode = null;
+    	if(roleName != null && roleName.endsWith(".element"))
+    		complexNode = getDSetItemComplexNodeBean(roleName);
+    	else
+    		complexNode = getComplexNodeBean(roleName);
         if (complexNode == null) {
             return;
         } else if (NULL_FLAVOR_ATTRIBUTE.equals(propertyName)) {
