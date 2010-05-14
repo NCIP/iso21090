@@ -23,7 +23,6 @@ import gov.nih.nci.iso21090.AdxpDinstq;
 import gov.nih.nci.iso21090.AdxpDir;
 import gov.nih.nci.iso21090.AdxpDmod;
 import gov.nih.nci.iso21090.AdxpDmodid;
-import gov.nih.nci.iso21090.AdxpInt;
 import gov.nih.nci.iso21090.AdxpPob;
 import gov.nih.nci.iso21090.AdxpPre;
 import gov.nih.nci.iso21090.AdxpSal;
@@ -133,7 +132,6 @@ public class AdxpTest {
             case DIR: return new AdxpDir();
             case DMOD: return new AdxpDmod();
             case DMODID: return new AdxpDmodid();
-            case INT: return new AdxpInt();
             case POB: return new AdxpPob();
             case PRE: return new AdxpPre();
             case SAL: return new AdxpSal();
