@@ -18,7 +18,8 @@ public class Ed extends Any implements Cloneable {
 
     private Compression compression;
     private byte[] data;
-    private St description;
+    //This has been commented out to be consistent with ISO xsd
+    //private St description;
     private String value;
 
     /**
@@ -49,20 +50,6 @@ public class Ed extends Any implements Cloneable {
     @SuppressWarnings("PMD.ArrayIsStoredDirectly")
     public void setData(byte[] data) {
         this.data = data;
-    }
-
-    /**
-     * @return the description
-     */
-    public St getDescription() {
-        return description;
-    }
-
-    /**
-     * @param description the description to set
-     */
-    public void setDescription(St description) {
-        this.description = description;
     }
 
     /**
@@ -125,7 +112,6 @@ public class Ed extends Any implements Cloneable {
             .appendSuper(super.equals(obj))
             .append(this.getData(), x.getData())
             .append(this.getCompression(), x.getCompression())
-            .append(this.getDescription(), x.getDescription())
             .append(this.getValue(), x.getValue())
             .isEquals();
     }
@@ -139,7 +125,6 @@ public class Ed extends Any implements Cloneable {
         return new HashCodeBuilder(HASH_CODE_SEED_1, HASH_CODE_SEED_2)
             .append(this.getData())
             .append(this.getCompression())
-            .append(this.getDescription())
             .toHashCode();
     }
 
