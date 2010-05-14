@@ -20,7 +20,6 @@ import gov.nih.nci.iso21090.AdxpDinstq;
 import gov.nih.nci.iso21090.AdxpDir;
 import gov.nih.nci.iso21090.AdxpDmod;
 import gov.nih.nci.iso21090.AdxpDmodid;
-import gov.nih.nci.iso21090.AdxpInt;
 import gov.nih.nci.iso21090.AdxpPob;
 import gov.nih.nci.iso21090.AdxpPre;
 import gov.nih.nci.iso21090.AdxpSal;
@@ -132,7 +131,6 @@ final class ADXPTransformer extends AbstractTransformer<org.iso._21090.ADXP, Adx
         types.put(AddressPartType.DIR, AdxpDir.class);
         types.put(AddressPartType.DMOD, AdxpDmod.class);
         types.put(AddressPartType.DMODID, AdxpDmodid.class);
-        types.put(AddressPartType.INT, AdxpInt.class);
         types.put(AddressPartType.POB, AdxpPob.class);
         types.put(AddressPartType.PRE, AdxpPre.class);
         types.put(AddressPartType.SAL, AdxpSal.class);
