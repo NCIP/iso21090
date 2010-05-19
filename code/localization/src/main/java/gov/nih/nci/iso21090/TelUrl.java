@@ -22,8 +22,6 @@ public final class TelUrl extends Tel implements Cloneable {
     /** scheme. */
     public static final String SCHEME_FTP = "ftp";
     /** scheme. */
-    public static final String SCHEME_CID = "cid";
-    /** scheme. */
     public static final String SCHEME_HTTP = "http";
     /** scheme. */
     public static final String SCHEME_HTTPS = "https";
@@ -33,7 +31,6 @@ public final class TelUrl extends Tel implements Cloneable {
         SCHEME_FILE,
         SCHEME_NFS,
         SCHEME_FTP,
-        SCHEME_CID,
         SCHEME_HTTP,
         SCHEME_HTTPS));
 
