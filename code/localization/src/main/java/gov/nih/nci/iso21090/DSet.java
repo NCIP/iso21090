@@ -55,7 +55,7 @@ public final class DSet<T extends Any> extends Coll<T> implements Serializable, 
         if (currentSet == null && compareSet == null) {
             return true;
         } else if (currentSet != null && compareSet != null) {
-            return currentSet.equals(compareSet);
+            return compareSet.equals(currentSet);
         } else {
             return false;
         }
