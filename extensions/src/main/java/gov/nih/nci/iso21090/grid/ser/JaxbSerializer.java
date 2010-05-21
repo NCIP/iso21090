@@ -44,7 +44,9 @@ public class JaxbSerializer implements Serializer {
 
         } catch (Exception e) {
             e.printStackTrace();
-            throw new IOException(e.getMessage());
+            IOException ioe = new IOException(e.getMessage());
+            ioe.initCause(e);
+            throw ioe;
         }
     }
 
