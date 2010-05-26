@@ -22,8 +22,6 @@ import org.xml.sax.SAXException;
 public class JaxbDeserializer extends DeserializerImpl implements Deserializer {
     private static final long serialVersionUID = 6701906739176588187L;
 
-    private static final Map<String, JAXBContext> MAP = new HashMap<String, JAXBContext>();
-
     private final Class<?> javaType;
 
     /**
@@ -39,16 +37,13 @@ public class JaxbDeserializer extends DeserializerImpl implements Deserializer {
     /**
      * {@inheritDoc} Return something even if no characters were found.
      */
+    @SuppressWarnings("unchecked")
     @Override
     public void onEndElement(String namespace, String localName, DeserializationContext context) throws SAXException {
         try {
             MessageElement msgElem = context.getCurElement();
             if (msgElem != null) {
-                JAXBContext jc = MAP.get(javaType.getPackage().getName());
-                if (jc == null) {
-                    jc = JAXBContext.newInstance(javaType.getPackage().getName());
-                    MAP.put(javaType.getPackage().getName(), jc);
-                }
+                JAXBContext jc = JaxbContextManager.getContextForPackage(javaType.getPackage().getName());
                 Unmarshaller unmarshaller = jc.createUnmarshaller();
                 // Unmarshall the nested XML element into a jaxb object of type 'javaType'
                 value = unmarshaller.unmarshal(msgElem.getAsDOM());
