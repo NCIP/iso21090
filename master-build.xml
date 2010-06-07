@@ -138,8 +138,8 @@
 	
 	
 	<target name="package" >
-		<delete file="${release.src.package.file.name}"/>
-		<zip destfile="${release.src.package.file.name}"
+		<delete failonerror="false" file="../release/${release.src.package.file.name}"/>
+		<zip destfile="../release/${release.src.package.file.name}"
 		       basedir="."
 		       excludes="**/.svn/* **/*.class **/target/*"
 		/>
