@@ -8,7 +8,7 @@
 		xmlns="antlib:org.apache.tools.ant"
 		xmlns:cs="antlib:com.puppycrawl.tools.checkstyle">
 					
-	
+	<import file="master-build.xml" />	
 	
 	<!-- ====================================================================== -->
 	<!-- Cleaning up target                                                     -->
@@ -95,4 +95,7 @@
 	</target>
 
 
+	
+	
+	
 </project>
