@@ -266,10 +266,51 @@
 	<!-- ====================================================================== -->
 	<!-- Javadoc target                                                         -->
 	<!-- ====================================================================== -->
-
 	<target name="javadoc" description="Generates the Javadoc of the application">
-		<javadoc sourcepath="${src.dir}" distnames="*" destdir="${reporting.outputDirectory}/apidocs" access="protected" old="false" verbose="false" version="true" use="true" author="true" splitindex="false" nodeprecated="false" nodeprecatedlist="false" notree="false" noindex="false" nohelp="false" nonavbar="false" serialwarn="false" charset="ISO-8859-1" linksource="false" breakiterator="false" />
+		<javadoc packagenames="*" destdir="${reporting.outputDirectory}/apidocs" 
+		access="protected" verbose="false" version="true" use="true" author="true" 
+		splitindex="false" nodeprecated="false" nodeprecatedlist="false" notree="false" noindex="false" 
+		nohelp="false" nonavbar="false" serialwarn="false" charset="ISO-8859-1" linksource="false" 
+		breakiterator="false" windowtitle="NCICB ISO 21090 Common Library ${release.version} API Documentation"
+		doctitle="NCICB ISO 21090 Common Library ${release.version} API Documentation" useexternalfile="yes">
+		<fileset dir="${basedir}/src/main/java" includes="**/*.java"/>
+		<classpath>
+			<fileset dir="${basedir}/target" includes="*.jar" />
+			<fileset dir="${basedir}/target/lib/test" includes="*.jar" excludes="ant-1.6.jar"/>
+			<pathelement location="${build.instrumented.dir}" />
+			<pathelement location="${build.outputDir}" />
+			<pathelement location="${build.testOutputDir}" />
+		</classpath>
+		</javadoc>
 	</target>
+	
+	<target name="javadoc-combined" description="Generates the Javadoc of the application">
+		<javadoc packagenames="*" destdir="${reporting.outputDirectory}/apidocs" 
+		access="protected" verbose="false" version="true" use="true" author="true" 
+		splitindex="false" nodeprecated="false" nodeprecatedlist="false" notree="false" noindex="false" 
+		nohelp="false" nonavbar="false" serialwarn="false" charset="ISO-8859-1" linksource="false" 
+		breakiterator="false" windowtitle="NCICB ISO 21090 Common Project ${release.version} API Documentation"
+		doctitle="NCICB ISO 21090 Common Project ${release.version} API Documentation" useexternalfile="yes">
+		<group title="Localization Packages" packages="gov.nih.nci.iso21090*"/>
+		<group title="Extensions Packages" packages="gov.nih.nci.iso21090.grid.*"/>
+		<group title="Hibernate Packages" packages="gov.nih.nci.iso21090.hibernate.*"/>
+		<fileset dir="${basedir}/localization/src/main/java" includes="**/*.java"/>
+		<fileset dir="${basedir}/hibernate/src/main/java" includes="**/*.java"/>
+		<fileset dir="${basedir}/extensions/src/main/java" includes="**/*.java"/>
+		<classpath>
+			<fileset dir="${basedir}/localization/target" includes="*.jar" />
+			<fileset dir="${basedir}/hibernate/target" includes="*.jar" />
+			<fileset dir="${basedir}/extensions/target" includes="*.jar" />
+			<fileset dir="${basedir}/localization/target/lib/test" includes="*.jar" excludes="ant-1.6.jar"/>
+			<fileset dir="${basedir}/hibernate/target/lib/test" includes="*.jar" excludes="ant-1.6.jar"/>
+			<fileset dir="${basedir}/extensions/target/lib/test" includes="*.jar" excludes="ant-1.6.jar"/>
+			<pathelement location="${build.instrumented.dir}" />
+			<pathelement location="${build.outputDir}" />
+			<pathelement location="${build.testOutputDir}" />
+		</classpath>
+		</javadoc>
+	</target>
+
 	<!-- ====================================================================== -->
 	<!-- Static Analysis targets  - checkstyle                                         -->
 	<!-- ====================================================================== -->
