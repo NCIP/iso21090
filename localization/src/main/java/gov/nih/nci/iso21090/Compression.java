@@ -2,7 +2,7 @@ package gov.nih.nci.iso21090;
 
 /**
  * Represents the iso enum.
- * @author lpower
+ * @author lpower 
  */
 public enum Compression {
     
