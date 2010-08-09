@@ -5,13 +5,16 @@ import gov.nih.nci.iso21090.EnOn;
 import gov.nih.nci.iso21090.EnPn;
 import gov.nih.nci.iso21090.Enxp;
 import gov.nih.nci.iso21090.EntityNamePartType;
+import gov.nih.nci.iso21090.PostalAddressUse;
 import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformer;
 import gov.nih.nci.iso21090.grid.dto.transform.DtoTransformException;
 import gov.nih.nci.iso21090.grid.dto.transform.Transformer;
 
 import java.util.List;
+import java.util.Set;
 
 import org.iso._21090.EN;
+import org.iso._21090.EntityNameUse;
 
 /**
  * Transformer for EN and subtypes.
@@ -78,6 +81,12 @@ public abstract class ENTransformer<ENXX extends EN, EnXx extends En> extends Ab
             return;
         }
         copyTypesToDto(source, target);
+        List<org.iso._21090.EntityNameUse> sourceUse = source.getUses();
+        if (sourceUse != null) {
+            for (org.iso._21090.EntityNameUse use : sourceUse) {
+            	target.getUse().add(gov.nih.nci.iso21090.EntityNameUse.valueOf(use.name()));
+            }
+        }
     }
 
     /**
@@ -106,6 +115,12 @@ public abstract class ENTransformer<ENXX extends EN, EnXx extends En> extends Ab
             return;
         }
         copyTypesToXml(source, target);
+        Set<gov.nih.nci.iso21090.EntityNameUse> sourceUse = source.getUse();
+        if (sourceUse != null) {
+            for (gov.nih.nci.iso21090.EntityNameUse use : sourceUse) {
+            	target.getUses().add(org.iso._21090.EntityNameUse.valueOf(use.name()));
+            }
+        }
     }
 
     /**
