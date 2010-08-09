@@ -24,7 +24,7 @@ import java.io.Serializable;
  *
  */
 @SuppressWarnings("PMD.TooManyMethods")
-public class EntityPartNameQualifierUserType implements UserType {
+public class EntityPartNameQualifierUserType implements UserType, Serializable {
 
     /**
      * SQL type for this usertype.
