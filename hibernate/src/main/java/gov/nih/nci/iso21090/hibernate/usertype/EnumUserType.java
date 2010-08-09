@@ -17,7 +17,7 @@ import org.hibernate.usertype.UserType;
  *
  */
 @SuppressWarnings({"PMD.AbstractNaming", "PMD.TooManyMethods" })
-public class EnumUserType implements UserType, ParameterizedType {
+public class EnumUserType implements UserType, ParameterizedType, Serializable {
    
     /**
      * Enum class as set by the parameter enumClassName. 

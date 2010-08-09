@@ -17,7 +17,7 @@ import org.hibernate.usertype.UserType;
  *
  */
 @SuppressWarnings("PMD.TooManyMethods")
-public class IiUserType implements UserType {
+public class IiUserType implements UserType, Serializable {
 
     /**
      * SQL type for this usertype.
