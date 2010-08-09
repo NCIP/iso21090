@@ -15,7 +15,7 @@ import org.junit.Test;
  *
  * @author gax
  */
-public class CDTransformerTest extends AbstractTransformerTestBase<CDCoreTransformer, CD, Cd> {
+public class CDCVTransformerTest extends AbstractTransformerTestBase<CDCoreTransformer, CD, Cd> {
 
     @Override
     public Cd makeDtoSimple() {
