@@ -1,15 +1,20 @@
 package gov.nih.nci.iso21090.grid.dto.transform.iso;
 
 import gov.nih.nci.iso21090.Ad;
+import gov.nih.nci.iso21090.PostalAddressUse;
 import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformer;
 import gov.nih.nci.iso21090.grid.dto.transform.DtoTransformException;
 import gov.nih.nci.iso21090.grid.dto.transform.Transformer;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Transforms Addresses.
+ * 
+ * TODO QSet<TS> transformation
  */
 public final class ADTransformer extends AbstractTransformer<org.iso._21090.Ad, gov.nih.nci.iso21090.Ad> implements Transformer<org.iso._21090.Ad, gov.nih.nci.iso21090.Ad> {
 
@@ -44,6 +49,15 @@ public final class ADTransformer extends AbstractTransformer<org.iso._21090.Ad, 
                 }
             }
         }
+        
+        Set<gov.nih.nci.iso21090.PostalAddressUse> sourceUse = source.getUse();
+        if (source.getUse() != null) {
+            for (PostalAddressUse qual : source.getUse()) {
+            	target.getUses().add(org.iso._21090.PostalAddressUse.valueOf(qual.name()));
+            }
+        }
+        
+     
     }
 
     /**
@@ -68,6 +82,14 @@ public final class ADTransformer extends AbstractTransformer<org.iso._21090.Ad, 
                 targetPart.add(ADXPTransformer.INSTANCE.toDto(p));
             }
         }
+        List<org.iso._21090.PostalAddressUse> sourceUse = source.getUses();
+        Set<gov.nih.nci.iso21090.PostalAddressUse> targetUse = new HashSet<gov.nih.nci.iso21090.PostalAddressUse>(sourceUse.size());
+        for (org.iso._21090.PostalAddressUse pau : sourceUse) {
+        	target.getUse().add(gov.nih.nci.iso21090.PostalAddressUse.valueOf(pau.name()));
+        }
+        
+        
+        
     }
 
     /**
