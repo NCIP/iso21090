@@ -10,7 +10,21 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
  * Represents the iso ED type.
- * @author lpower
+ *
+ * TODO Add Invariants checks.
+. Either reference, data, value or xml must be provided if not null
+·  Only one of reference, data, value or xml may be specified
+·  An integrityCheckAlgorithm must be provided if an integrityCheck is provided
+·  if a thumbnail is provided, it must not use a reference
+·  if a thumbnail is provided, it must not have a thumbnail
+·  Compression can only be specified if data is provided as a binary
+·  mediaType cannot be null
+·  if value is used, the mediaType is plain text
+·  a character set must not be asserted for plain text or xml content (for plain text refer
+to 6.7.4, and implicitly derived for the XML content)
+·  translations may not contain translations
+ *
+ * @author lpower, Vijay Parmar
  */
 public class Ed extends Any implements Cloneable {
 
@@ -21,6 +35,24 @@ public class Ed extends Any implements Cloneable {
     //This has been commented out to be consistent with ISO xsd
     //private St description;
     private String value;
+    private String mediaType;
+
+
+    /**
+
+    /**
+     * @return the mediaType
+     */
+    public String getMediaType() {
+        return mediaType;
+    }
+
+    /**
+     * @param mediaType the mediaType to set
+     */
+    public void setMediaType(String mediaType) {
+        this.mediaType = mediaType;
+    }
 
     /**
      * @return the compression
@@ -113,6 +145,7 @@ public class Ed extends Any implements Cloneable {
             .append(this.getData(), x.getData())
             .append(this.getCompression(), x.getCompression())
             .append(this.getValue(), x.getValue())
+            .append(this.getMediaType(), x.getMediaType())
             .isEquals();
     }
 
