@@ -5,29 +5,29 @@ package gov.nih.nci.iso21090;
  * @author lpower
  */
 public enum TelecommunicationAddressUse {
-    
+
     /** home address. */
-    H, 
+    H,
     /** primary home. */
-    HP, 
+    HP,
     /** vacation home. */
-    HV, 
+    HV,
     /** work place. */
-    WP, 
+    WP,
     /** direct. */
-    DIR, 
+    DIR,
     /** public. */
-    PUB, 
+    PUB,
     /** bad address. */
-    BAD, 
+    BAD,
     /** temporary address. */
-    TMP, 
+    TMP,
     /** answering service. */
-    AS, 
+    AS,
     /** emergency contact. */
-    EC, 
+    EC,
     /** mobile contact. */
-    MC, 
+    MC,
     /** pager. **/
     PG;
 }

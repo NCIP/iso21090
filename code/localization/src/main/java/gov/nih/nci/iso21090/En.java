@@ -19,22 +19,22 @@ public class En extends Any implements Cloneable {
     private final List<Enxp> partsInternal;
     private Predicate partRestriction;
     private Set<EntityNameUse> use;
-    
+
     /**
-	 * @return the use
-	 */
-	public Set<EntityNameUse> getUse() {
-		return use;
-	}
+     * @return the use
+     */
+    public Set<EntityNameUse> getUse() {
+        return use;
+    }
 
-	/**
-	 * @param use the use to set
-	 */
-	public void setUse(Set<EntityNameUse> use) {
-		this.use = use;
-	}
+    /**
+     * @param use the use to set
+     */
+    public void setUse(Set<EntityNameUse> use) {
+        this.use = use;
+    }
 
-	/**
+    /**
      * Default ctor.
      */
     public En() {
@@ -65,14 +65,14 @@ public class En extends Any implements Cloneable {
     }
 
     /**
-     * @param partInstance ENXP instance to be added to part collection 
+     * @param partInstance ENXP instance to be added to part collection
      */
     public void addPart(Enxp partInstance) {
         if (partInstance != null) {
             getPart().add(partInstance);
         }
     }
-    
+
     /**
      * {@inheritDoc}
      */

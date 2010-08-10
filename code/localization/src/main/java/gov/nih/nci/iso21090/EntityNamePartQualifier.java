@@ -5,7 +5,7 @@ package gov.nih.nci.iso21090;
  * @author lpower
  */
 public enum EntityNamePartQualifier {
-    
+
     /** legal status. */
     LS,
     /** academic. */

@@ -22,5 +22,5 @@ public enum EntityNameUse {
     OS,
     /** assigned. */
     ASGN;
-    
+
 }
