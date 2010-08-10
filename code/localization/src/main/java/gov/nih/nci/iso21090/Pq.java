@@ -1,18 +1,36 @@
 package gov.nih.nci.iso21090;
 
+import java.util.Set;
+
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
- * Physical Quantity (PQ)/
+ * Physical Quantity (PQ)
  * A dimensioned quantity expressing the result of measuring.
  * @author Naveen Amiruddin
  *
  */
-public final class Pq extends Pqv implements Cloneable {
+public class Pq extends Pqv implements Cloneable {
     private static final long serialVersionUID = 1L;
 
     private String unit;
+    private Set<Pqr> translation;
+
+
+    /**
+     * @return the translation
+     */
+    public Set<Pqr> getTranslation() {
+        return translation;
+    }
+
+    /**
+     * @param translation the translation to set
+     */
+    public void setTranslation(Set<Pqr> translation) {
+        this.translation = translation;
+    }
 
     /**
      *
@@ -28,6 +46,16 @@ public final class Pq extends Pqv implements Cloneable {
      */
     public void setUnit(String unit) {
         this.unit = unit;
+    }
+
+    /* (non-Javadoc)
+     * @see gov.nih.nci.iso21090.Qty#setOriginalText(gov.nih.nci.iso21090.EdText)
+     */
+    /**
+     * @param originalText originalText
+     */
+    public final void setOriginalText(EdText originalText) {
+        throw new IllegalArgumentException("originalText not allowed in PQ");
     }
 
     /**
@@ -69,6 +97,7 @@ public final class Pq extends Pqv implements Cloneable {
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("PMD.CloneThrowsCloneNotSupportedException")
     @Override
     public Pq clone() {
         return (Pq) super.clone();
