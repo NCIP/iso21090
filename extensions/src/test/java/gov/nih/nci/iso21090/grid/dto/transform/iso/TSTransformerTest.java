@@ -33,7 +33,7 @@ public class TSTransformerTest extends AbstractTransformerTestBase<TSTransformer
     @Override
     public Ts makeDtoSimple() {
         SimpleDateFormat sdf = new SimpleDateFormat(TSTransformer.FORMAT_STRING);
-        sdf.setLenient(false);
+        //sdf.setLenient(false);
         Ts x = new Ts();
         try {
             x.setValue(sdf.parse(VALUE_DATE));
@@ -46,7 +46,7 @@ public class TSTransformerTest extends AbstractTransformerTestBase<TSTransformer
     @Override
     public void verifyXmlSimple(TS x) {
         SimpleDateFormat sdf = new SimpleDateFormat(TSTransformer.FORMAT_STRING);
-        sdf.setLenient(false);
+        //sdf.setLenient(false);
         try {
             Date number1 = sdf.parse(VALUE_DATE);
             Date number2 = sdf.parse(x.getValue());
@@ -62,7 +62,7 @@ public class TSTransformerTest extends AbstractTransformerTestBase<TSTransformer
     @Override
     public void verifyDtoSimple(Ts x) {
         SimpleDateFormat sdf = new SimpleDateFormat(TSTransformer.FORMAT_STRING);
-        sdf.setLenient(false);
+        //sdf.setLenient(false);
         try {
             assertEquals(sdf.parse(VALUE_DATE).getTime(), x.getValue().getTime());
         } catch (ParseException pe) {
