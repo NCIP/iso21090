@@ -12,13 +12,13 @@ import org.apache.commons.collections.Predicate;
 public final class EnPn extends En implements Cloneable {
 
     private static final long serialVersionUID = 2L;
-    
+
     /**
      * serializable predicate for notnull.
      */
     private static class SerializableNotNullPredicate implements Predicate, Serializable {
         private static final long serialVersionUID = 1L;
-        
+
         /**
          * {@inheritDoc}
          */
@@ -26,9 +26,9 @@ public final class EnPn extends En implements Cloneable {
             return object != null;
         }
     }
-    
+
     private static final SerializableNotNullPredicate PN_PREDICATE = new SerializableNotNullPredicate();
-    
+
     /**
      * Default ctor.
      */
