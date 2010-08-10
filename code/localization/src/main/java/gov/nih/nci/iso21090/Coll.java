@@ -3,7 +3,7 @@ package gov.nih.nci.iso21090;
 /**
  * Represents collection of ANY.
  * @author Dan Dumitru
- * 
+ *
  * @param <T> Collection element type
  */
 @SuppressWarnings({ "PMD.AbstractNaming", "PMD.AbstractClassWithoutAnyMethod" })
