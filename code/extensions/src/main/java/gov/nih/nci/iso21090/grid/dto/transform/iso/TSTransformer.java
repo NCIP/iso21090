@@ -54,7 +54,7 @@ public final class TSTransformer extends QTYTransformer<TS, Ts> implements Trans
         if (input == null) {
             return null;
         }
-        SimpleDateFormat sDf = new SimpleDateFormat(FORMAT_STRING, Locale.getDefault());
+        SimpleDateFormat sDf = new SimpleDateFormat(FORMAT_STRING);
         sDf.setLenient(false);
         TS x = transformBaseXml(input);
 
@@ -76,8 +76,8 @@ public final class TSTransformer extends QTYTransformer<TS, Ts> implements Trans
             return null;
         }
         Ts d = transformBaseDto(input);
-        SimpleDateFormat sDf = new SimpleDateFormat(FORMAT_STRING, Locale.getDefault());
-        sDf.setLenient(false);
+        SimpleDateFormat sDf = new SimpleDateFormat(FORMAT_STRING);
+        //sDf.setLenient(false);
         String v = input.getValue();
         if (v != null) {
             try {

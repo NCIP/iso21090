@@ -41,6 +41,7 @@ public final class EDTransformer extends AbstractTransformer<ED, Ed>
             x.setCompression(org.iso._21090.Compression.valueOf(input.getCompression().name()));
         }
         x.setData(input.getData());
+        x.setMediaType(input.getMediaType());
         return x;
     }
 
@@ -63,7 +64,7 @@ public final class EDTransformer extends AbstractTransformer<ED, Ed>
             d.setCompression(Compression.valueOf(input.getCompression().name()));
         }
         d.setData(input.getData());
-
+        d.setMediaType(input.getMediaType());
         return d;
     }
 
