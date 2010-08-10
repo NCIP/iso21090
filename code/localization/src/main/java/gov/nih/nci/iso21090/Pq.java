@@ -51,7 +51,7 @@ public class Pq extends Pqv implements Cloneable {
     /* (non-Javadoc)
      * @see gov.nih.nci.iso21090.Qty#setOriginalText(gov.nih.nci.iso21090.EdText)
      */
-	 /**
+    /**
      * @param originalText originalText
      */
     public final void setOriginalText(EdText originalText) {
