@@ -121,7 +121,7 @@ public abstract class CDTransformer<CDXX extends CD, CdXx extends Cd> extends Ab
         /**
          * Public singleton.
          */
-        public static final CDCoreTransformer INSTANCE = new CDCoreTransformer();
+        static final CDCoreTransformer INSTANCE = new CDCoreTransformer();
 
         private  CDCoreTransformer() {
         }
