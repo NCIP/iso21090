@@ -9,7 +9,7 @@ import gov.nih.nci.iso21090.Pqr;
 import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformer;
 import gov.nih.nci.iso21090.grid.dto.transform.DtoTransformException;
 import gov.nih.nci.iso21090.grid.dto.transform.Transformer;
-import gov.nih.nci.iso21090.grid.dto.transform.iso.CDTransformer.CDCoreTransformer;
+import gov.nih.nci.iso21090.grid.dto.transform.iso.CDTransformer;
 
 import org.iso._21090.CD;
 import org.iso._21090.PQR;
@@ -55,7 +55,7 @@ public final class PQRTransformer extends AbstractTransformer<PQR, Pqr>
 	        }
 	        if(((Cd)input).getSource()!=null){
 		        XReference xreference = new XReference();
-		        xreference.setXref(CDCoreTransformer.INSTANCE.toXml(((Cd)input).getSource()));
+		        xreference.setXref(CDTransformer.INSTANCE.toXml(((Cd)input).getSource()));
 		        res.setSource(xreference);
 	        }
 	        return res;
@@ -88,7 +88,7 @@ public final class PQRTransformer extends AbstractTransformer<PQR, Pqr>
         }
        //TODO verify correctness of CDTransformer/XRef of CD
         if(((CD)input).getSource()!=null){
-       	 res.setSource(CDCoreTransformer.INSTANCE.toDto(   (CD)(     ((CD)input).getSource().getXref()) ));
+       	 res.setSource(CDTransformer.INSTANCE.toDto(   (CD)(     ((CD)input).getSource().getXref()) ));
         }
         return res;
     }
