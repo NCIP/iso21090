@@ -52,7 +52,7 @@ public class IsoConstantTuplizerHelper {
      * @param processParts indicates if the innerNode is a collection part then whether to process it or not
      */
     public void setConstantValues(Object entity, Object propertyValue, String entityName, 
-            String propertyName, boolean processParts) {
+    		String propertyName, boolean processParts) {
         Node node = getComplexNodeBean(entityName, propertyName);
         setConstantValues(entity, propertyValue, propertyName, (ComplexNode) node, processParts);
     }
@@ -225,7 +225,7 @@ public class IsoConstantTuplizerHelper {
         } catch (IllegalAccessException e) {
             throw new HibernateException(e);
         } catch (InstantiationException e) {
-            throw new HibernateException(e);
+            return null; // throw new HibernateException(e);
         } catch (ClassNotFoundException e) {
             throw new HibernateException(e);
         }
@@ -242,8 +242,8 @@ public class IsoConstantTuplizerHelper {
         }
 
         Object nullValueObject = intantiatePropertyObject(rootNode.getIsoClassName());
-
-        if (!Any.class.isAssignableFrom(nullValueObject.getClass())) {
+        
+        if (nullValueObject == null || !Any.class.isAssignableFrom(nullValueObject.getClass())) {
             return;
         }
         
@@ -309,7 +309,8 @@ public class IsoConstantTuplizerHelper {
             return;
         }
         
-    	Object nullValueObject = intantiatePropertyObject(propertyTypeClass.getName());
+    	Object nullValueObject = intantiatePropertyObject(propertyTypeClass.getName());   	
+    	if (nullValueObject == null){ return;}
         
         setValue(nullValueObject, NULL_FLAVOR_ATTRIBUTE, nullFlavor);
         setValue(parent, propertyName, nullValueObject);
@@ -354,7 +355,7 @@ public class IsoConstantTuplizerHelper {
      * @param dataTypeObject key in the file
      * @return RootNode instance or null
      */
-    private ComplexNode getComplexNodeBean(String entityName, String propertyName) {
+    public ComplexNode getComplexNodeBean(String entityName, String propertyName) {
         String convertedEntityName = convertEntityName(entityName);
         String convertedPropertyName = convertPropertyName(entityName, propertyName);
         
