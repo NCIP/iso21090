@@ -24,6 +24,7 @@ public class ADTransformerTest extends AbstractTransformerTestBase<ADTransformer
         List<Adxp> li1 = new ArrayList<Adxp>();
         li1.add(adxp1);
         dto.setPart(li1);
+        
         return dto;
     }
 
@@ -32,6 +33,7 @@ public class ADTransformerTest extends AbstractTransformerTestBase<ADTransformer
     	org.iso._21090.Ad xml = new org.iso._21090.Ad();
     	org.iso._21090.ADXP part1 = new org.iso._21090.ADXP();
         part1.setCode(CODE);
+        
         part1.setValue(VAL);
         xml.getParts().add(part1);
         return xml;
