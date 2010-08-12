@@ -2,7 +2,7 @@
 <ivy-module version="1.0">
    <info organisation="ncicb"
 		module="iso-datatypes-hibernate"
-		revision="2.1"
+		revision="2.1.1"
 		status="integration"
 		publication="20100419073332"
 	/>
@@ -23,7 +23,7 @@
 		<artifact name="iso-datatypes-hibernate" type="jar" ext="jar" conf="master"/>
 	</publications>
 	<dependencies>
-		<dependency org="ncicb" name="iso-datatypes" rev="2.1" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>
+		<dependency org="ncicb" name="iso-datatypes" rev="2.1.1" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>
 		
 		<dependency org="org.hibernate" name="hibernate" rev="3.2.0.ga-modified" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)" transitive="false">
 			<exclude org="javax.transaction"/>
