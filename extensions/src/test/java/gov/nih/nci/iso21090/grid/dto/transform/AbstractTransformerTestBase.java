@@ -174,7 +174,7 @@ public abstract class AbstractTransformerTestBase<T extends Transformer<XML, DTO
     private void testOne(Method make, Method verify) {
         testConversion(make, verify);
         if (make.getName().startsWith("makeXml")) {
-            testRoudTripXml(make, verify);
+            testRoundTripXml(make, verify);
         } else {
             testRoundTripDto(make, verify);
         }
@@ -201,7 +201,7 @@ public abstract class AbstractTransformerTestBase<T extends Transformer<XML, DTO
 
     }
 
-    private void testRoudTripXml(Method make, Method verify) {
+    private void testRoundTripXml(Method make, Method verify) {
         try {
             XML x = (XML) make.invoke(this);
 
