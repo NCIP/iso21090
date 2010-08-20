@@ -208,7 +208,8 @@ public abstract class AbstractTransformerTestBase<T extends Transformer<XML, DTO
             JAXBContext jaxbContext = JAXBContext.newInstance(xmlClass.getPackage().getName());
 
             StringWriter sw = new StringWriter();
-            jaxbContext.createMarshaller().marshal(new JAXBElement(new QName("foo"), xmlClass, x), sw);
+            JAXBElement jaxbEl = new JAXBElement(new QName("foo"), xmlClass, x);
+            jaxbContext.createMarshaller().marshal(jaxbEl, sw);
             String xml = sw.getBuffer().toString();
             StreamSource s = new StreamSource(new StringReader(xml));
             XML x2 = jaxbContext.createUnmarshaller().unmarshal(s, xmlClass).getValue();
@@ -235,7 +236,8 @@ public abstract class AbstractTransformerTestBase<T extends Transformer<XML, DTO
             JAXBContext jaxbContext = JAXBContext.newInstance(xmlClass.getPackage().getName());
 
             StringWriter sw = new StringWriter();
-            jaxbContext.createMarshaller().marshal(new JAXBElement(new QName("foo"), xmlClass, x), sw);
+            JAXBElement jaxbEl = new JAXBElement(new QName("foo"), xmlClass, x);
+            jaxbContext.createMarshaller().marshal(jaxbEl, sw);
             String xml = sw.getBuffer().toString();
             StreamSource s = new StreamSource(new StringReader(xml));
             XML x2 = jaxbContext.createUnmarshaller().unmarshal(s, xmlClass).getValue();

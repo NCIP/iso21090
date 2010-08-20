@@ -26,13 +26,7 @@ public  class Cd extends Any implements Cloneable {
     private EdText originalText;
     private String valueSet;
     private String valueSetVersion;
-    private Cd source;
-    private Set<CodingRationale> codingRationale;
     private Set<Cd> translations;
-
-
-
-
 
     /**
      * @return the translations
@@ -54,33 +48,8 @@ public  class Cd extends Any implements Cloneable {
                 }
             }
             this.translations = translations;
-
         }
 
-    }
-    /**
-     * @return the codingRationale
-     */
-    public Set<CodingRationale> getCodingRationale() {
-        return codingRationale;
-    }
-    /**
-     * @param codingRationale the codingRationale to set
-     */
-    public void setCodingRationale(Set<CodingRationale> codingRationale) {
-        this.codingRationale = codingRationale;
-    }
-    /**
-     * @return the source
-     */
-    public Cd getSource() {
-        return source;
-    }
-    /**
-     * @param source the source to set
-     */
-    public void setSource(Cd source) {
-        this.source = source;
     }
     /**
      * @return the valueSetVersion
