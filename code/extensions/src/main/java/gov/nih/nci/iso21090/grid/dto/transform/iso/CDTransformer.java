@@ -11,7 +11,7 @@ import gov.nih.nci.iso21090.grid.dto.transform.DtoTransformException;
 import gov.nih.nci.iso21090.grid.dto.transform.Transformer;
 
 import org.iso._21090.CD;
-import org.iso._21090.XReference;
+
 /**
  * Transforms coded data elements.
  */
@@ -45,24 +45,16 @@ public final class CDTransformer extends AbstractTransformer<CD, Cd>
         res.setNullFlavor(NullFlavorTransformer.INSTANCE.toDto(input.getNullFlavor()));
         res.setValueSet(input.getValueSet());
         res.setValueSetVersion(input.getValueSetVersion());
-
-        List<org.iso._21090.CodingRationale> inputCodingRationales = input.getCodingRationales();
-        Set<gov.nih.nci.iso21090.CodingRationale> targetCodingRationales = new HashSet<gov.nih.nci.iso21090.CodingRationale>(inputCodingRationales.size());
-        for (org.iso._21090.CodingRationale codingRationale : inputCodingRationales) {
-            res.getCodingRationale().add(gov.nih.nci.iso21090.CodingRationale.valueOf(codingRationale.name()));
-        }
-        //TODO verify correctness of CDTransformer/XRef of CD
-        if(((CD)input).getSource()!=null){
-            res.setSource(CDTransformer.INSTANCE.toDto(   (CD)(     ((CD)input).getSource().getXref()) ));
-        }
-
+        
         if(input.getTranslations()!=null){
+        	HashSet<Cd> aSet = new HashSet<Cd>();
             for (org.iso._21090.CD cD: input.getTranslations()) {
-                Cd cd = CDTransformer.INSTANCE.toDto(   (CD)(     ((CD)input).getSource().getXref()) );
-                res.getTranslations().add(cd);
+                Cd cd = toDto(cD);
+                aSet.add(cd);
             }
+            if(aSet.size()>0)res.setTranslations(aSet);
         }
-
+        
         return res;
     }
 
@@ -84,29 +76,16 @@ public final class CDTransformer extends AbstractTransformer<CD, Cd>
         res.setNullFlavor(NullFlavorTransformer.INSTANCE.toXml(input.getNullFlavor()));
         res.setValueSet(input.getValueSet());
         res.setValueSetVersion(input.getValueSetVersion());
-
-        Set<gov.nih.nci.iso21090.CodingRationale> sourceUse = input.getCodingRationale();
-        if (sourceUse != null) {
-            for (gov.nih.nci.iso21090.CodingRationale codingRationale : sourceUse){
-                res.getCodingRationales().add(org.iso._21090.CodingRationale.valueOf(codingRationale.name()));
-            }
-        }
-        if(((Cd)input).getSource()!=null){
-            XReference xreference = new XReference();
-            xreference.setXref(CDTransformer.INSTANCE.toXml(((Cd)input).getSource()));
-            res.setSource(xreference);
-        }
+        
         Set<gov.nih.nci.iso21090.Cd> translations = input.getTranslations();
         if(translations!=null){
-            List aList = new ArrayList();
+            List<CD> aList = new ArrayList<CD>();
             for(gov.nih.nci.iso21090.Cd cd: translations){
-                XReference xreference = new XReference();
-                xreference.setXref(CDTransformer.INSTANCE.toXml(cd));
-                aList.add(xreference);
+                aList.add(toXml(cd));
             }
             if(aList.size()>0) res.getTranslations().addAll(aList);
         }
-
+        
         return res;
     }
 
