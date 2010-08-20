@@ -94,8 +94,4 @@
 		<ant antfile="build.xml" dir="hibernate" target="perform-static-analysis" />
 	</target>
 
-
-	
-	
-	
 </project>
