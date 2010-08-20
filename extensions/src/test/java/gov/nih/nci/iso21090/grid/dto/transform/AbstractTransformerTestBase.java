@@ -176,7 +176,7 @@ public abstract class AbstractTransformerTestBase<T extends Transformer<XML, DTO
         if (make.getName().startsWith("makeXml")) {
             testRoudTripXml(make, verify);
         } else {
-            testRoudTripDto(make, verify);
+            testRoundTripDto(make, verify);
         }
     }
 
@@ -227,7 +227,7 @@ public abstract class AbstractTransformerTestBase<T extends Transformer<XML, DTO
 
     }
 
-    private void testRoudTripDto(Method make, Method verify) {
+    private void testRoundTripDto(Method make, Method verify) {
         try {
             DTO d = (DTO) make.invoke(this);
             XML x = transformer.toXml(d);
