@@ -2,7 +2,7 @@
 <ivy-module version="1.0">
     <info organisation="ncicb"
 		module="iso-datatypes"
-		revision="2.1.1"
+		revision="2.2"
 		status="integration"
 		publication="20100419073341"
 	/>
