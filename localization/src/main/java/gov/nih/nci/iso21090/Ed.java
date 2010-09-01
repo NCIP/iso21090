@@ -36,10 +36,15 @@ public class Ed extends Any implements Cloneable {
     //private St description;
     private String value;
     private String mediaType;
-
+    
+    /**
+     * default constructor.
+     */
     public Ed() {
-		setMediaType("text/plain");
-	}
+        super();
+        mediaType = "text/plain";
+    }
+    
     /**
 
     /**
