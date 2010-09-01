@@ -37,7 +37,9 @@ public class Ed extends Any implements Cloneable {
     private String value;
     private String mediaType;
 
-
+    public Ed() {
+		setMediaType("text/plain");
+	}
     /**
 
     /**
