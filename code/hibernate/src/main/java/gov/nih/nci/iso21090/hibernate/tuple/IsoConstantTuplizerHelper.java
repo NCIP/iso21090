@@ -354,7 +354,7 @@ public class IsoConstantTuplizerHelper {
      * @param dataTypeObject key in the file
      * @return RootNode instance or null
      */
-    private ComplexNode getComplexNodeBean(String entityName, String propertyName) {
+    public ComplexNode getComplexNodeBean(String entityName, String propertyName) {
         String convertedEntityName = convertEntityName(entityName);
         String convertedPropertyName = convertPropertyName(entityName, propertyName);
         
