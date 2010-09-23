@@ -376,7 +376,7 @@ public class IsoConstantTuplizerHelper {
     }
 
     @SuppressWarnings("PMD.EmptyCatchBlock")
-    private ComplexNode getComplexNodeBean(String configLookupKey) {
+    public ComplexNode getComplexNodeBean(String configLookupKey) {
         
         try {
             return (ComplexNode) ctx.getBean(configLookupKey);
