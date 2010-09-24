@@ -12,7 +12,7 @@
 	<property name="combined.src.dir" value="${target.dir}/combined-src"/>
 	<property name="src.dir" value="${combined.src.dir}"/>
 	<property name="original.src.dir" value="${basedir}/src/main/java"/>
-	<property name="build.finalName" value="iso-datatypes-extensions-2.1" />
+	<property name="build.finalName" value="iso-datatypes-extensions-2.1.0.1" />
 	<property name="pmd.src.dir" value="${original.src.dir}"/>
 	<property name="checkstyle.src.dir" value="${original.src.dir}"/>
 	<property name="cobertura.src.dir"	value="${original.src.dir}" />
