@@ -67,18 +67,7 @@ public final class PQRTransformer extends AbstractTransformer<PQR, Pqr>
         res.setDisplayName(STTransformer.INSTANCE.toDto(input.getDisplayName()));
         
         res.setNullFlavor(NullFlavorTransformer.INSTANCE.toDto(input.getNullFlavor()));
-//        res.setValueSet(input.getValueSet());
-//        res.setValueSetVersion(input.getValueSetVersion());
         
-//        List<org.iso._21090.CodingRationale> inputCodingRationales = input.getCodingRationales();
-//        Set<gov.nih.nci.iso21090.CodingRationale> targetCodingRationales = new HashSet<gov.nih.nci.iso21090.CodingRationale>(inputCodingRationales.size());
-//        for (org.iso._21090.CodingRationale codingRationale : inputCodingRationales) {
-//        	res.getCodingRationale().add(gov.nih.nci.iso21090.CodingRationale.valueOf(codingRationale.name()));
-//        }
-       //TODO verify correctness of CDTransformer/XRef of CD
-//        if(((CD)input).getSource()!=null){
-//       	 res.setSource(CDTransformer.INSTANCE.toDto(   (CD)(     ((CD)input).getSource().getXref()) ));
-//        }
         return res;
     }
 
