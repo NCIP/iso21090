@@ -174,9 +174,9 @@ public abstract class AbstractTransformerTestBase<T extends Transformer<XML, DTO
     private void testOne(Method make, Method verify) {
         testConversion(make, verify);
         if (make.getName().startsWith("makeXml")) {
-            testRoudTripXml(make, verify);
+            testRoundTripXml(make, verify);
         } else {
-            testRoudTripDto(make, verify);
+            testRoundTripDto(make, verify);
         }
     }
 
@@ -201,14 +201,15 @@ public abstract class AbstractTransformerTestBase<T extends Transformer<XML, DTO
 
     }
 
-    private void testRoudTripXml(Method make, Method verify) {
+    private void testRoundTripXml(Method make, Method verify) {
         try {
             XML x = (XML) make.invoke(this);
 
             JAXBContext jaxbContext = JAXBContext.newInstance(xmlClass.getPackage().getName());
 
             StringWriter sw = new StringWriter();
-            jaxbContext.createMarshaller().marshal(new JAXBElement(new QName("foo"), xmlClass, x), sw);
+            JAXBElement jaxbEl = new JAXBElement(new QName("foo"), xmlClass, x);
+            jaxbContext.createMarshaller().marshal(jaxbEl, sw);
             String xml = sw.getBuffer().toString();
             StreamSource s = new StreamSource(new StringReader(xml));
             XML x2 = jaxbContext.createUnmarshaller().unmarshal(s, xmlClass).getValue();
@@ -227,7 +228,7 @@ public abstract class AbstractTransformerTestBase<T extends Transformer<XML, DTO
 
     }
 
-    private void testRoudTripDto(Method make, Method verify) {
+    private void testRoundTripDto(Method make, Method verify) {
         try {
             DTO d = (DTO) make.invoke(this);
             XML x = transformer.toXml(d);
@@ -235,7 +236,8 @@ public abstract class AbstractTransformerTestBase<T extends Transformer<XML, DTO
             JAXBContext jaxbContext = JAXBContext.newInstance(xmlClass.getPackage().getName());
 
             StringWriter sw = new StringWriter();
-            jaxbContext.createMarshaller().marshal(new JAXBElement(new QName("foo"), xmlClass, x), sw);
+            JAXBElement jaxbEl = new JAXBElement(new QName("foo"), xmlClass, x);
+            jaxbContext.createMarshaller().marshal(jaxbEl, sw);
             String xml = sw.getBuffer().toString();
             StreamSource s = new StreamSource(new StringReader(xml));
             XML x2 = jaxbContext.createUnmarshaller().unmarshal(s, xmlClass).getValue();

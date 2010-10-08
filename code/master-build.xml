@@ -124,6 +124,9 @@
 		        <attribute name="Implementation-Version" value="${version.num}"/>
 		</manifest>
 
+		<copy todir="${build.outputDir}">
+			<fileset dir="${src.dir}" includes="**/*.java" />
+		</copy>
 		
 		<jar jarfile="${build.dir}/${build.finalName}.jar" compress="true" index="false" basedir="${build.outputDir}" excludes="**/dist.html"  manifest="MANIFEST.MF"/>
 	</target>
@@ -375,9 +378,5 @@
 		<ivy:settings file="${ivy.settings.file}" />
 		<ivy:cleancache />
 	</target>
-	
-	
-
-
 	
 </project>
