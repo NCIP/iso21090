@@ -35,7 +35,7 @@ public class En extends Any implements Cloneable {
     }
 
     /**
-     * Default ctor.
+     * Default constructor.
      */
     public En() {
         partsInternal = new ArrayList<Enxp>();
@@ -62,6 +62,16 @@ public class En extends Any implements Cloneable {
             }
         }
         return part;
+    }
+
+    /**
+     * @param part the part list to set
+     */
+    public void setPart(List<Enxp> part) {
+        this.getPart().clear();
+        for (Enxp tempPart : part) {
+            this.getPart().add(tempPart);
+    }
     }
 
     /**
@@ -112,17 +122,6 @@ public class En extends Any implements Cloneable {
     @SuppressWarnings("PMD.CloneThrowsCloneNotSupportedException")
     @Override
     public En clone() {
-
-        En returnVal = (En) super.clone();
-
-        try {
-            for (Enxp tem : this.getPart()) {
-                returnVal.getPart().add(tem.clone());
-            }
-        } catch (Exception e) {
-            throw new IsoCloneException(e);
-        }
-
-        return returnVal;
+        return (En) super.clone();
     }
 }
