@@ -2,14 +2,10 @@ package gov.nih.nci.iso21090.grid.dto.transform.iso;
 
 
 import gov.nih.nci.iso21090.Pq;
-import gov.nih.nci.iso21090.Pqr;
 import gov.nih.nci.iso21090.grid.dto.transform.DtoTransformException;
 import gov.nih.nci.iso21090.grid.dto.transform.Transformer;
 
-
-
 import org.iso._21090.PQ;
-import org.iso._21090.PQR;
 
 /**
  * Transforms physical quantities.
@@ -94,12 +90,7 @@ public final class PQTransformer extends QTYTransformer<PQ, Pq>
         //    d.setValue(bd);
         //}
 
-        if(input.getTranslations()!=null){
-       	 for (PQR pQR: input.getTranslations()) {
-       		 Pqr pqr = PQRTransformer.INSTANCE.toDto(pQR);
-       		 d.getTranslation().add(pqr);
-       	 }
-        }
+        
         
         return d;
     }

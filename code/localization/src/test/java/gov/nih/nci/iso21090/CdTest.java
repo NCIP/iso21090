@@ -3,16 +3,14 @@ package gov.nih.nci.iso21090;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import gov.nih.nci.iso21090.Cd;
-import gov.nih.nci.iso21090.EdText;
-import gov.nih.nci.iso21090.NullFlavor;
-import gov.nih.nci.iso21090.St;
 
 import org.junit.Test;
 
 public class CdTest {
 
-     @Test
+	 
+	
+	@Test
      public void testEquality() {
          Cd first = new Cd();
          first.setNullFlavor(NullFlavor.ASKU);
@@ -22,10 +20,12 @@ public class CdTest {
          first.setCodeSystemVersion("code system version");
          St name = new St();
          name.setValue("value");
+         
          first.setDisplayName(name);
          EdText text = new EdText();
          text.setValue("ed text");
          first.setOriginalText(text);
+         
          assertTrue(first.equals(first));
          assertFalse(first.equals(null));
 
@@ -41,6 +41,7 @@ public class CdTest {
          EdText text2 = new EdText();
          text2.setValue("ed text");
          second.setOriginalText(text2);
+        
 
          assertTrue(first.equals(second));
 
