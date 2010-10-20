@@ -15,8 +15,8 @@ public class En extends Any implements Cloneable {
 
     private static final long serialVersionUID = 2L;
 
-    private transient List<Enxp> part;
-    private final List<Enxp> partsInternal;
+    private List<Enxp> part;
+    private final List<Enxp> partsInternal;    
     private Predicate partRestriction;
     private Set<EntityNameUse> use;
 
@@ -63,23 +63,24 @@ public class En extends Any implements Cloneable {
         }
         return part;
     }
-
+    
     /**
      * @param part the part list to set
      */
     public void setPart(List<Enxp> part) {
-        this.getPart().clear();
-        for (Enxp tempPart : part) {
-            this.getPart().add(tempPart);
-    }
+        this.part = part;
     }
 
+
     /**
-     * @param partInstance ENXP instance to be added to part collection
+     * @param partInstance ENXP part to be added to the part collection
      */
     public void addPart(Enxp partInstance) {
+        if (part == null) {
+            part = new ArrayList<Enxp>();
+        }
         if (partInstance != null) {
-            getPart().add(partInstance);
+            part.add(partInstance);
         }
     }
 
