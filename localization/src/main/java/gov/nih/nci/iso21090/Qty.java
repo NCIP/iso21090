@@ -19,14 +19,7 @@ public abstract class Qty extends Any implements Cloneable {
      *
      */
     private Ed expression;
-    /**
-     *
-     */
-    private EdText originalText;
-    /**
-     *
-     */
-    private Qty uncertainty;
+
     /**
      *
      */
@@ -45,41 +38,6 @@ public abstract class Qty extends Any implements Cloneable {
      */
     public void setExpression(Ed expression) {
         this.expression = expression;
-    }
-
-    /**
-     * @return the originalText
-     */
-    public EdText getOriginalText() {
-        return originalText;
-    }
-
-    /**
-     * @param originalText the originalText to set
-     */
-    public void setOriginalText(EdText originalText) {
-        this.originalText = originalText;
-    }
-
-    /**
-     * @return the uncertainty
-     */
-    public Qty getUncertainty() {
-        return uncertainty;
-    }
-
-    /**
-     * @param uncertainty the uncertainty to set
-     */
-    public void setUncertainty(Qty uncertainty) {
-        if (uncertainty  != null) {
-            if (uncertainty.getExpression() !=  null || uncertainty.getUncertainty() !=  null 
-                || uncertainty.getOriginalText() !=  null) {
-                throw new IllegalArgumentException(
-                    "Expression, Uncertainty and originalText not allowed in QTY.uncertainty");
-            }
-        }
-        this.uncertainty = uncertainty;
     }
 
     /**
