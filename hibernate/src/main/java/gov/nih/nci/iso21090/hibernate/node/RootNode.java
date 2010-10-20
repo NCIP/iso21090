@@ -1,5 +1,7 @@
 package gov.nih.nci.iso21090.hibernate.node;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+
 /**
  * Root of the graph.
  * 
@@ -154,4 +156,47 @@ public class RootNode extends ComplexNode {
     public void setJoinTableInverseKey(String joinTableInverseKey)    {
         this.joinTableInverseKey = joinTableInverseKey;
     }
+ 
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+
+        if (this == obj) {
+            return true;
+        }
+
+        if (!(obj instanceof Node)) {
+            return false;
+        }
+
+        RootNode x = (RootNode) obj;
+        
+        return new EqualsBuilder()
+        .appendSuper(super.equals(obj))
+        .append(this.getJoinTableName(), x.getJoinTableName())
+        .append(this.getParentClassName(), x.getParentClassName())
+        .append(this.getSelfTableName(), x.getSelfTableName())
+        .append(this.getTargetTableName(), x.getTargetTableName())        
+        .isEquals();
+        
+    }
+
+	/*public int compareTo(Object o) {
+
+		RootNode x = (RootNode)o;
+				
+		 int comparison = this.parentClassName.compareTo(x.parentClassName);
+		 if ( comparison != 0) return comparison;
+		 
+		 comparison = this.joinTableName.compareTo(x.joinTableName);
+		 if ( comparison != 0) return comparison;
+		 
+		 comparison = this.selfTableName.compareTo(x.selfTableName);
+		 if ( comparison != 0) return comparison;
+
+		return 0;
+	}*/
+    
+    
 }

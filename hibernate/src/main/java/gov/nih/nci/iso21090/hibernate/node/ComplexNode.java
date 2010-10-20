@@ -1,7 +1,10 @@
 package gov.nih.nci.iso21090.hibernate.node;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+
+import org.apache.commons.lang.builder.EqualsBuilder;
 
 /**
  * Represents collection of other nodes in the graph.
@@ -37,6 +40,7 @@ public class ComplexNode extends Node {
      */
     public void setInnerNodes(List<Node> innerNodes) {
         this.innerNodes = innerNodes;
+        Collections.sort(innerNodes, new NodeNameComparator());
     }
     
     /**
@@ -44,5 +48,34 @@ public class ComplexNode extends Node {
      */
     public void addInnerNode(Node node) {
         innerNodes.add(node);
+        Collections.sort(innerNodes, new NodeNameComparator());
     }
+    
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+
+        if (this == obj) {
+            return true;
+        }
+
+        if (!(obj instanceof Node)) {
+            return false;
+        }
+
+        ComplexNode x = (ComplexNode) obj;
+        
+        return new EqualsBuilder()
+        .appendSuper(super.equals(obj))
+        .isEquals();
+        
+    }
+
+   /* public int compareTo(Node node) {
+		
+		ComplexNode x = (ComplexNode)o;
+		
+		return 0;
+	}*/
 }

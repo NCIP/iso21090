@@ -1,5 +1,7 @@
 package gov.nih.nci.iso21090.hibernate.node;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+
 
 /**
  * Node in the graph.
@@ -8,7 +10,7 @@ package gov.nih.nci.iso21090.hibernate.node;
  *
  */
 @SuppressWarnings("PMD.AbstractNaming")
-public abstract class Node {
+public abstract class Node implements Comparable<Node> {
     /**
      * Name of the node.
      */
@@ -65,4 +67,37 @@ public abstract class Node {
     public void setNodeType(String nodeType) {
         this.nodeType = nodeType;
     }
+    
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+
+        if (this == obj) {
+            return true;
+        }
+
+        if (!(obj instanceof Node)) {
+            return false;
+        }
+
+        Node x = (Node) obj;
+        
+        return new EqualsBuilder()
+        .appendSuper(super.equals(obj))
+        .append(this.getName(), x.getName())
+        .append(this.getIsoClassName(), x.getIsoClassName())
+        .append(this.getNodeType(),x.getNodeType())
+        .isEquals();
+        
+    }
+
+    public int compareTo(Node node) {
+    	int comparison = 0;
+		if(name!=null && node.name!=null){
+			comparison = this.name.compareTo(node.name);	
+		}
+		return comparison;
+	}   
+    
 }
