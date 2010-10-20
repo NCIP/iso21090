@@ -1,5 +1,7 @@
 package gov.nih.nci.iso21090.hibernate.node;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+
 /**
  * Constant value node in the graph.
  * 
@@ -54,4 +56,37 @@ public class ConstantNode extends Node {
     public void setInstance(Object instance) {
         this.instance = instance;
     }
+
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+
+        if (this == obj) {
+            return true;
+        }
+
+        if (!(obj instanceof Node)) {
+            return false;
+        }
+
+        ConstantNode x = (ConstantNode) obj;
+        
+        return new EqualsBuilder()
+        .appendSuper(super.equals(obj))
+        .append(this.getConstantValue(), x.getConstantValue())
+        .isEquals();
+        
+    }
+    
+   /* public int compareTo(Node node) {
+    	
+		ConstantNode x = (ConstantNode)o;		
+		int comparison = this.constantValue.compareTo(x.constantValue);
+		if ( comparison != 0) return comparison;
+		
+		return 0;
+	}
+
+    */
 }
