@@ -6,6 +6,7 @@
 	<classpathentry kind="src" path="extensions/target/generated-src"/>
 	<classpathentry kind="src" path="extensions/src/main/java"/>
 	<classpathentry kind="src" path="extensions/src/test/java"/>
+	<classpathentry kind="src" path="hibernate/src/main/java"/>
 	<classpathentry kind="lib" path="extensions/target/lib/compile/activation-1.1.jar"/>
 	<classpathentry kind="lib" path="extensions/target/lib/compile/ant-1.7.0.jar"/>
 	<classpathentry kind="lib" path="extensions/target/lib/compile/ant-launcher-1.7.0.jar"/>
