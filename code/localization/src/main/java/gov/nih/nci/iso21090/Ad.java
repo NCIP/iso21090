@@ -2,10 +2,11 @@ package gov.nih.nci.iso21090;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Represents iso data type AD.
- *
+ * 
  * TODO invariants checks, equalsbuilder, etc.
  * @author lpower
  */
@@ -14,8 +15,42 @@ public final class Ad extends Any implements Cloneable {
     private static final long serialVersionUID = 1L;
     // TODO Invariant must be applied - see COPPA ISO's from EA
     private List<Adxp> part;
+    private Set<PostalAddressUse> use;
+    private QSet<Ts> useablePeriod;
+	
+	
+	
+    /**
+	 * @return the useablePeriod
+	 */
+	public QSet<Ts> getUseablePeriod() {
+		return useablePeriod;
+	}
+
+	/**
+	 * @param useablePeriod the useablePeriod to set
+	 */
+	public void setUseablePeriod(QSet<Ts> useablePeriod) {
+		this.useablePeriod = useablePeriod;
+	}
+
+
 
     /**
+	 * @return the use
+	 */
+	public Set<PostalAddressUse> getUse() {
+		return use;
+	}
+
+	/**
+	 * @param use the use to set
+	 */
+	public void setUse(Set<PostalAddressUse> use) {
+		this.use = use;
+	}
+
+	/**
      * @return the part
      */
     public List<Adxp> getPart() {
@@ -29,7 +64,7 @@ public final class Ad extends Any implements Cloneable {
         this.part = part;
     }
 
-
+    
     /**
      * @param partInstance ADXP part to be added to the part collection
      */
@@ -41,8 +76,8 @@ public final class Ad extends Any implements Cloneable {
             part.add(partInstance);
         }
     }
-
-
+    
+    
     /**
      * {@inheritDoc}
      */

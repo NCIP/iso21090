@@ -1,5 +1,7 @@
 package gov.nih.nci.iso21090;
 
+import java.util.Set;
+
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
@@ -13,8 +15,24 @@ public class Pq extends Pqv implements Cloneable {
     private static final long serialVersionUID = 1L;
 
     private String unit;
+    private Set<Pqr> translation;
 
-    /**
+    
+	/**
+	 * @return the translation
+	 */
+	public Set<Pqr> getTranslation() {
+		return translation;
+	}
+
+	/**
+	 * @param translation the translation to set
+	 */
+	public void setTranslation(Set<Pqr> translation) {
+		this.translation = translation;
+	}
+
+	/**
      *
      * @return unit
      */
@@ -30,16 +48,10 @@ public class Pq extends Pqv implements Cloneable {
         this.unit = unit;
     }
 
-    /* (non-Javadoc)
-     * @see gov.nih.nci.iso21090.Qty#setOriginalText(gov.nih.nci.iso21090.EdText)
-     */
-    /**
-     * @param originalText originalText
-     */
-    public final void setOriginalText(EdText originalText) {
-        throw new IllegalArgumentException("originalText not allowed in PQ");
+    public void setOriginalText(EdText originalText){
+    	throw new IllegalArgumentException("originalText not allowed in PQ");
     }
-
+    
     /**
      * {@inheritDoc}
      */
@@ -79,7 +91,6 @@ public class Pq extends Pqv implements Cloneable {
     /**
      * {@inheritDoc}
      */
-    @SuppressWarnings("PMD.CloneThrowsCloneNotSupportedException")
     @Override
     public Pq clone() {
         return (Pq) super.clone();

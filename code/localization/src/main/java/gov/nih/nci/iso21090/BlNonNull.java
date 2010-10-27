@@ -7,17 +7,17 @@ package gov.nih.nci.iso21090;
  * @author lpower
  */
 public final class BlNonNull extends Bl implements Cloneable {
-
+    
     @Override
     public void setNullFlavor(NullFlavor nf) {
         throw new IllegalArgumentException("BL NON NULL does not support a null flavor.");
     }
-
+    
     @Override
     public NullFlavor getNullFlavor() {
         return null;
     }
-
+    
     @SuppressWarnings("PMD.ProperCloneImplementation")
     @Override
     public BlNonNull clone() {

@@ -45,7 +45,7 @@ public class Adxp implements Serializable, Cloneable {
     public void setCode(String code) {
         this.code = code;
     }
-
+    
     /**
      * @return the code system
      */

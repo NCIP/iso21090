@@ -185,22 +185,5 @@ public final class Enxp implements Serializable, Cloneable {
         return snapshot;
     }
 
-    /**
-     * @return string representation of this class
-     */
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-
-        sb.append(" { ");
-        sb.append("code: " + code);
-        sb.append(" ; codeSystem: " + codeSystem);
-        sb.append(" ; codeSystemVersion: " + codeSystemVersion);
-        sb.append(" ; qualifier: " + qualifier);
-        sb.append(" ; type: " + type);
-        sb.append(" ; value: " + value);
-        sb.append(" } ");
-
-        return sb.toString();
-    }
 
 }

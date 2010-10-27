@@ -35,7 +35,7 @@ public class Tel extends Any implements Cloneable {
      * @param value the value to set
      */
     public void setValue(URI value) {
-
+        
         if (!isAllowed(value, getAllowedSchemes())) {
             throw new IllegalArgumentException(value.getScheme());
         }
@@ -51,7 +51,7 @@ public class Tel extends Any implements Cloneable {
      * @param allowedSchemes the schemes that we consider to be valid.
      * @return true if allowedSchemes is null or if it contains scheme.
      */
-    protected static boolean isAllowed(String scheme, List<String> allowedSchemes) {
+    protected static boolean isAllowed(String scheme, List<String> allowedSchemes) {     
         if (scheme == null) {
             return false;
         }

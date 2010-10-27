@@ -2,6 +2,7 @@ package gov.nih.nci.iso21090;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.collections.Predicate;
 import org.apache.commons.collections.list.PredicatedList;
@@ -14,12 +15,27 @@ public class En extends Any implements Cloneable {
 
     private static final long serialVersionUID = 2L;
 
-    private List<Enxp> part;
-    private final List<Enxp> partsInternal;    
+    private transient List<Enxp> part;
+    private final List<Enxp> partsInternal;
     private Predicate partRestriction;
-
+    private Set<EntityNameUse> use;
+    
     /**
-     * Default constructor.
+	 * @return the use
+	 */
+	public Set<EntityNameUse> getUse() {
+		return use;
+	}
+
+	/**
+	 * @param use the use to set
+	 */
+	public void setUse(Set<EntityNameUse> use) {
+		this.use = use;
+	}
+
+	/**
+     * Default ctor.
      */
     public En() {
         partsInternal = new ArrayList<Enxp>();
@@ -47,27 +63,16 @@ public class En extends Any implements Cloneable {
         }
         return part;
     }
-    
-    /**
-     * @param part the part list to set
-     */
-    public void setPart(List<Enxp> part) {
-        this.part = part;
-    }
-
 
     /**
-     * @param partInstance ENXP part to be added to the part collection
+     * @param partInstance ENXP instance to be added to part collection 
      */
     public void addPart(Enxp partInstance) {
-        if (part == null) {
-            part = new ArrayList<Enxp>();
-        }
         if (partInstance != null) {
-            part.add(partInstance);
+            getPart().add(partInstance);
         }
     }
-
+    
     /**
      * {@inheritDoc}
      */
@@ -107,6 +112,17 @@ public class En extends Any implements Cloneable {
     @SuppressWarnings("PMD.CloneThrowsCloneNotSupportedException")
     @Override
     public En clone() {
-        return (En) super.clone();
+
+        En returnVal = (En) super.clone();
+
+        try {
+            for (Enxp tem : this.getPart()) {
+                returnVal.getPart().add(tem.clone());
+            }
+        } catch (Exception e) {
+            throw new IsoCloneException(e);
+        }
+
+        return returnVal;
     }
 }

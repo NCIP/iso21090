@@ -5,7 +5,7 @@ package gov.nih.nci.iso21090;
  * @author lpower
  */
 public enum NullFlavor {
-
+    
     /** no information. */
     NI("No Information"),
     /** invalid. */
@@ -38,14 +38,14 @@ public enum NullFlavor {
     NA ("Not Applicable");
 
    private String description;
-
+   
    /**
     * @param description description to set
     */
    private NullFlavor(String description) {
        this.description = description;
    }
-
+   
    /**
     * @return the description
     */

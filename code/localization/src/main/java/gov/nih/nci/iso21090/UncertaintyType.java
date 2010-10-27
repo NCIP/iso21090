@@ -9,19 +9,19 @@ public enum UncertaintyType {
     /** uniform. */
     U,
     /** normal (gaussian). */
-    N,
+    N, 
     /** log-normal. */
-    LN,
+    LN, 
     /** ? (gamma) */
-    G,
+    G, 
     /** exponential. */
-    E,
+    E, 
     /** ? */
-    X2,
+    X2, 
     /** t (student). */
-    T,
+    T, 
     /** f. */
-    F,
+    F, 
     /** ? (beta) */
     B;
 }
