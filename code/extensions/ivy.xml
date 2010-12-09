@@ -2,7 +2,7 @@
 <ivy-module version="1.0">
     <info organisation="ncicb"
 		module="iso-datatypes-extensions"
-		revision="2.1.0.1"
+		revision="2.2"
 		status="integration"
 		publication="20100419073328"
 	/>
@@ -26,7 +26,7 @@
 		<artifact name="ISO_extensions" type="xsd" ext="xsd" conf="standards-xsd"/>
 	</publications>
 	<dependencies>
-		<dependency org="ncicb" name="iso-datatypes" rev="2.1.0.1" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>
+		<dependency org="ncicb" name="iso-datatypes" rev="2.2" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>
 		<dependency org="javax.activation" name="activation" rev="1.1" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>
 		<dependency org="apache" name="log4j" rev="1.2.14" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>
 		<dependency org="commons-collections" name="commons-collections" rev="3.2" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>
