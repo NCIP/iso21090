@@ -7,17 +7,17 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
  * Physical Quantity Representation (PQR)
  * 
  * An extension of the coded value datatype representing a physical quantity using a unit from
-	any code system. Used to show alternative representation for a physical quantity.
+    any code system. Used to show alternative representation for a physical quantity.
  * @author Vijay Parmar
  *
  */
-public class Pqr extends Cd implements Cloneable{
+public class Pqr extends Cd implements Cloneable {
 	
 
    /**
-    * 	@param originalText
+    * @param originalText
     */
-	public void setOriginalText(Cd originalText) {
+   public void setOriginalText(Cd originalText) {
    			throw new IllegalArgumentException("originalText not allowed in PQR");
    }
 	
