@@ -19,8 +19,8 @@
 	<property name="local.ivy.repo" value="${local.repo.dir}" />
 
 	<!-- Project properties -->
-	<property name="release.version"			value="2.1.0.1" />
-	<property name="release.src.package.file.name"	value="ncicb_iso21090.src.2.1.0.1.zip" />
+	<property name="release.version"			value="2.2" />
+	<property name="release.src.package.file.name"	value="ncicb_iso21090.src.2.2.zip" />
 	<property name="build.finalName"			value="iso-datatypes" />
 	<property name="build.dir"					value="${basedir}/target" />
 	<property name="lib.dir"					value="${build.dir}/lib" />
@@ -118,7 +118,7 @@
 	</target>
 	<target name="jar" depends="compile">
 		
-		<property name="version.num" value="2.1.0.1"/>
+		<property name="version.num" value="2.2"/>
 		<manifest file="MANIFEST.MF">
 		        <attribute name="Built-By" value="CBIIT ISO21090 Team"/>
 		        <attribute name="Implementation-Version" value="${version.num}"/>
