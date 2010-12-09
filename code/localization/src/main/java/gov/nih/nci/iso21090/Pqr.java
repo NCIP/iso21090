@@ -12,13 +12,13 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
  *
  */
 public class Pqr extends Cd implements Cloneable {
-	
 
-   /**
-    * @param originalText
-    */
+
+    /**
+     * @param originalText
+     */
    public void setOriginalText(Cd originalText) {
-   			throw new IllegalArgumentException("originalText not allowed in PQR");
+	   throw new IllegalArgumentException("originalText not allowed in PQR");
    }
 	
 	
