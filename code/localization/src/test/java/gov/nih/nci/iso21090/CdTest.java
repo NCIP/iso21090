@@ -3,6 +3,10 @@ package gov.nih.nci.iso21090;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import gov.nih.nci.iso21090.Cd;
+import gov.nih.nci.iso21090.EdText;
+import gov.nih.nci.iso21090.NullFlavor;
+import gov.nih.nci.iso21090.St;
 
 import org.junit.Test;
 

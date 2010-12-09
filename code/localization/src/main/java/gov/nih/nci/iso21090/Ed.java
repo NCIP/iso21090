@@ -10,7 +10,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
  * Represents the iso ED type.
- * 
+ *
  * TODO Add Invariants checks.
 . Either reference, data, value or xml must be provided if not null
 ·  Only one of reference, data, value or xml may be specified
@@ -23,7 +23,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 ·  a character set must not be asserted for plain text or xml content (for plain text refer
 to 6.7.4, and implicitly derived for the XML content)
 ·  translations may not contain translations
- * 
+ *
  * @author lpower, Vijay Parmar
  */
 public class Ed extends Any implements Cloneable {
@@ -36,23 +36,23 @@ public class Ed extends Any implements Cloneable {
     //private St description;
     private String value;
     private String mediaType;
-      
-   
-    /**
-	
-	/**
-	 * @return the mediaType
-	 */
-	public String getMediaType() {
-		return mediaType;
-	}
 
-	/**
-	 * @param mediaType the mediaType to set
-	 */
-	public void setMediaType(String mediaType) {
-		this.mediaType = mediaType;
-	}
+
+    /**
+
+    /**
+     * @return the mediaType
+     */
+    public String getMediaType() {
+        return mediaType;
+    }
+
+    /**
+     * @param mediaType the mediaType to set
+     */
+    public void setMediaType(String mediaType) {
+        this.mediaType = mediaType;
+    }
 
     /**
      * @return the compression

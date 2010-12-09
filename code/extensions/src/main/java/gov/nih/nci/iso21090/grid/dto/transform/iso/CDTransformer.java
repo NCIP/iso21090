@@ -43,7 +43,7 @@ public final class CDTransformer extends AbstractTransformer<CD, Cd>
         res.setDisplayName(STTransformer.INSTANCE.toDto(input.getDisplayName()));
         res.setOriginalText(EDTextTransformer.INSTANCE.toDto(input.getOriginalText()));
         res.setNullFlavor(NullFlavorTransformer.INSTANCE.toDto(input.getNullFlavor()));
-      
+        res.setValueSet(input.getValueSet());
         return res;
     }
 
@@ -63,6 +63,17 @@ public final class CDTransformer extends AbstractTransformer<CD, Cd>
         res.setDisplayName(STTransformer.INSTANCE.toXml(input.getDisplayName()));
         res.setOriginalText(EDTextTransformer.INSTANCE.toXml(input.getOriginalText()));
         res.setNullFlavor(NullFlavorTransformer.INSTANCE.toXml(input.getNullFlavor()));
+        res.setValueSet(input.getValueSet());
+        res.setValueSetVersion(input.getValueSetVersion());
+        
+        Set<gov.nih.nci.iso21090.Cd> translations = input.getTranslations();
+        if(translations!=null){
+            List<CD> aList = new ArrayList<CD>();
+            for(gov.nih.nci.iso21090.Cd cd: translations){
+                aList.add(toXml(cd));
+            }
+            if(aList.size()>0) res.getTranslations().addAll(aList);
+        }
         
         return res;
     }

@@ -17,22 +17,22 @@ public class Pq extends Pqv implements Cloneable {
     private String unit;
     private Set<Pqr> translation;
 
-    
-	/**
-	 * @return the translation
-	 */
-	public Set<Pqr> getTranslation() {
-		return translation;
-	}
 
-	/**
-	 * @param translation the translation to set
-	 */
-	public void setTranslation(Set<Pqr> translation) {
-		this.translation = translation;
-	}
+    /**
+     * @return the translation
+     */
+    public Set<Pqr> getTranslation() {
+        return translation;
+    }
 
-	/**
+    /**
+     * @param translation the translation to set
+     */
+    public void setTranslation(Set<Pqr> translation) {
+        this.translation = translation;
+    }
+
+    /**
      *
      * @return unit
      */
@@ -48,10 +48,16 @@ public class Pq extends Pqv implements Cloneable {
         this.unit = unit;
     }
 
-    public void setOriginalText(EdText originalText){
-    	throw new IllegalArgumentException("originalText not allowed in PQ");
+    /* (non-Javadoc)
+     * @see gov.nih.nci.iso21090.Qty#setOriginalText(gov.nih.nci.iso21090.EdText)
+     */
+    /**
+     * @param originalText originalText
+     */
+    public final void setOriginalText(EdText originalText) {
+        throw new IllegalArgumentException("originalText not allowed in PQ");
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -91,6 +97,7 @@ public class Pq extends Pqv implements Cloneable {
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("PMD.CloneThrowsCloneNotSupportedException")
     @Override
     public Pq clone() {
         return (Pq) super.clone();

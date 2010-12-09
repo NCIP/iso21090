@@ -7,11 +7,11 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
  * Represents the iso CD type.
- * 
+ *
  * TODO invariants check
  * translations cannot have original text
  * translations cannot have translations
- * 
+ *
  * @author lpower
  */
 public  class Cd extends Any implements Cloneable {
@@ -26,87 +26,56 @@ public  class Cd extends Any implements Cloneable {
     private EdText originalText;
     private String valueSet;
     private String valueSetVersion;
-    private Cd source;
-    private Set<CodingRationale> codingRationale;
     private Set<Cd> translations;
-    
-    
-    
-	
 
     /**
-	 * @return the translations
-	 */
-	public Set<Cd> getTranslations() {
-		return translations;
-	}
-	/**
-	 * @param translations the translations to set
-	 */
-	public void setTranslations(Set<Cd> translations) {
-		if(translations!=null){
-			for(Cd cd : translations){
-				if(cd.getTranslations()!=null){
-					throw new IllegalArgumentException("translations not allowed within translations in CD");
-				}
-				if(cd.getOriginalText()!=null){
-					throw new IllegalArgumentException("originalText not allowed within translations in CD");
-				}
-			}
-			this.translations = translations;
-			
-		}
-		
-	}
-	/**
-	 * @return the codingRationale
-	 */
-	public Set<CodingRationale> getCodingRationale() {
-		return codingRationale;
-	}
-	/**
-	 * @param codingRationale the codingRationale to set
-	 */
-	public void setCodingRationale(Set<CodingRationale> codingRationale) {
-		this.codingRationale = codingRationale;
-	}
-	/**
-	 * @return the source
-	 */
-	public Cd getSource() {
-		return source;
-	}
-	/**
-	 * @param source the source to set
-	 */
-	public void setSource(Cd source) {
-		this.source = source;
-	}
-	/**
-	 * @return the valueSetVersion
-	 */
-	public String getValueSetVersion() {
-		return valueSetVersion;
-	}
-	/**
-	 * @param valueSetVersion the valueSetVersion to set
-	 */
-	public void setValueSetVersion(String valueSetVersion) {
-		this.valueSetVersion = valueSetVersion;
-	}
-	/**
-	 * @return the valueSet
-	 */
-	public String getValueSet() {
-		return valueSet;
-	}
-	/**
-	 * @param valueSet the valueSet to set
-	 */
-	public void setValueSet(String valueSet) {
-		this.valueSet = valueSet;
-	}
-	/**
+     * @return the translations
+     */
+    public Set<Cd> getTranslations() {
+        return translations;
+    }
+    /**
+     * @param translations the translations to set
+     */
+    public void setTranslations(Set<Cd> translations) {
+        if (translations != null) {
+            for (Cd cd : translations) {
+                if (cd.getTranslations() != null) {
+                    throw new IllegalArgumentException("translations not allowed within translations in CD");
+                }
+                if (cd.getOriginalText() != null) {
+                    throw new IllegalArgumentException("originalText not allowed within translations in CD");
+                }
+            }
+            this.translations = translations;
+        }
+
+    }
+    /**
+     * @return the valueSetVersion
+     */
+    public String getValueSetVersion() {
+        return valueSetVersion;
+    }
+    /**
+     * @param valueSetVersion the valueSetVersion to set
+     */
+    public void setValueSetVersion(String valueSetVersion) {
+        this.valueSetVersion = valueSetVersion;
+    }
+    /**
+     * @return the valueSet
+     */
+    public String getValueSet() {
+        return valueSet;
+    }
+    /**
+     * @param valueSet the valueSet to set
+     */
+    public void setValueSet(String valueSet) {
+        this.valueSet = valueSet;
+    }
+    /**
      * @return the originalText
      */
     public EdText getOriginalText() {
@@ -203,7 +172,7 @@ public  class Cd extends Any implements Cloneable {
             .append(this.getCode(), x.getCode())
             .append(this.getCodeSystem(), x.getCodeSystem())
             .append(this.getCodeSystemName(), x.getCodeSystemName())
-            
+
             .append(this.getDisplayName(), x.getDisplayName())
             .append(this.getOriginalText(), x.getOriginalText())
             .isEquals();
@@ -228,6 +197,7 @@ public  class Cd extends Any implements Cloneable {
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("PMD.CloneThrowsCloneNotSupportedException")
     @Override
     public Cd clone() {
         return (Cd) super.clone();
