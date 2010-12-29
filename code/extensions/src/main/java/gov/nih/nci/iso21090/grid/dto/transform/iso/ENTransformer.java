@@ -84,7 +84,7 @@ public abstract class ENTransformer<ENXX extends EN, EnXx extends En> extends Ab
         List<org.iso._21090.EntityNameUse> sourceUse = source.getUses();
         if (sourceUse != null) {
             for (org.iso._21090.EntityNameUse use : sourceUse) {
-            	target.getUse().add(gov.nih.nci.iso21090.EntityNameUse.valueOf(use.name()));
+            	target.getUses().add(gov.nih.nci.iso21090.EntityNameUse.valueOf(use.name()));
             }
         }
     }
@@ -115,7 +115,7 @@ public abstract class ENTransformer<ENXX extends EN, EnXx extends En> extends Ab
             return;
         }
         copyTypesToXml(source, target);
-        Set<gov.nih.nci.iso21090.EntityNameUse> sourceUse = source.getUse();
+        Set<gov.nih.nci.iso21090.EntityNameUse> sourceUse = source.getUses();
         if (sourceUse != null) {
             for (gov.nih.nci.iso21090.EntityNameUse use : sourceUse) {
             	target.getUses().add(org.iso._21090.EntityNameUse.valueOf(use.name()));

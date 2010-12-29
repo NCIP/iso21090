@@ -1,14 +1,13 @@
 package gov.nih.nci.iso21090.grid.dto.transform.iso;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import gov.nih.nci.iso21090.Cd;
 import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformer;
 import gov.nih.nci.iso21090.grid.dto.transform.DtoTransformException;
 import gov.nih.nci.iso21090.grid.dto.transform.Transformer;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 import org.iso._21090.CD;
 
@@ -44,6 +43,14 @@ public final class CDTransformer extends AbstractTransformer<CD, Cd>
         res.setOriginalText(EDTextTransformer.INSTANCE.toDto(input.getOriginalText()));
         res.setNullFlavor(NullFlavorTransformer.INSTANCE.toDto(input.getNullFlavor()));
         res.setValueSet(input.getValueSet());
+        res.setValueSetVersion(input.getValueSetVersion());        
+
+        if(input.getTranslations()!=null){
+       	    for (CD translation: input.getTranslations()) {
+                Cd translatedDto = toDto(translation);
+                res.getTranslations().add(translatedDto);
+            }
+        }
         return res;
     }
 

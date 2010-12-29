@@ -6,14 +6,12 @@ import gov.nih.nci.iso21090.Pqr;
 import gov.nih.nci.iso21090.grid.dto.transform.DtoTransformException;
 import gov.nih.nci.iso21090.grid.dto.transform.Transformer;
 
-
-
 import org.iso._21090.PQ;
 import org.iso._21090.PQR;
 
 /**
  * Transforms physical quantities.
- * @author mshestopalov
+ * @author mshestopalov, Dan Dumitru
  */
 public final class PQTransformer extends QTYTransformer<PQ, Pq>
     implements Transformer<PQ, Pq> {
@@ -64,9 +62,23 @@ public final class PQTransformer extends QTYTransformer<PQ, Pq>
         	x.setPrecision(0);
         
         x.setUnit(input.getUnit());
-        //if (input.getValue() != null) {
-        //    x.setValue(input.getValue().doubleValue());
-        //}
+
+        for (Pqr translation : input.getTranslations()) {
+            x.getTranslations().add(PQRTransformer.INSTANCE.toXml(translation));
+        }
+
+        Pq inputUncertainty = (Pq)(input.getUncertainty());
+        if (inputUncertainty != null) {
+            PQ xUncertainty = newXml();
+            xUncertainty.setValue(inputUncertainty.getValue());
+            xUncertainty.setUnit(inputUncertainty.getUnit());
+            xUncertainty.setPrecision(inputUncertainty.getPrecision());             
+            x.setUncertainty(xUncertainty);
+            if (input.getUncertaintyType() != null){
+                x.setUncertaintyType(org.iso._21090.UncertaintyType.valueOf(input.getUncertaintyType().name()));
+            }          
+        }
+        
 
         return x;
     }
@@ -89,18 +101,25 @@ public final class PQTransformer extends QTYTransformer<PQ, Pq>
        	d.setPrecision(input.getPrecision());
         
         d.setUnit(input.getUnit());
-        //if (input.getValue() != null) {
-        //    BigDecimal bd = new BigDecimal(input.getValue());
-        //    d.setValue(bd);
-        //}
 
         if(input.getTranslations()!=null){
-       	 for (PQR pQR: input.getTranslations()) {
-       		 Pqr pqr = PQRTransformer.INSTANCE.toDto(pQR);
-       		 d.getTranslation().add(pqr);
-       	 }
+       	    for (PQR pQR: input.getTranslations()) {
+                Pqr pqr = PQRTransformer.INSTANCE.toDto(pQR);
+                d.getTranslations().add(pqr);
+            }
         }
         
+        PQ inputUncertainty = (PQ)(input.getUncertainty());
+        if (inputUncertainty != null) {
+            Pq xUncertainty = newDto();
+            xUncertainty.setValue(inputUncertainty.getValue());
+            xUncertainty.setUnit(inputUncertainty.getUnit());
+            xUncertainty.setPrecision(inputUncertainty.getPrecision());             
+            d.setUncertainty(xUncertainty);
+            if (input.getUncertaintyType() != null){
+                d.setUncertaintyType(gov.nih.nci.iso21090.UncertaintyType.valueOf(input.getUncertaintyType().name()));            
+            }            
+        }        
         
         return d;
     }

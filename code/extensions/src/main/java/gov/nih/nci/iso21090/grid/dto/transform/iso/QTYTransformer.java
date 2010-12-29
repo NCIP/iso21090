@@ -53,5 +53,5 @@ public abstract class QTYTransformer<QTYX extends QTY, Qtyx extends Qty> extends
             return null;
         }
         return newDto();
-    }
+    } 
 }

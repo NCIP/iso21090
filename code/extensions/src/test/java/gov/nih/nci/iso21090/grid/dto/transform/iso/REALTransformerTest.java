@@ -7,6 +7,7 @@ import gov.nih.nci.iso21090.Real;
 import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformerTestBase;
 
 import org.iso._21090.NullFlavor;
+import org.iso._21090.PQ;
 import org.junit.Test;
 
 /**
@@ -16,11 +17,23 @@ import org.junit.Test;
 public class REALTransformerTest extends AbstractTransformerTestBase<REALTransformer, org.iso._21090.Real, Real>{
 
         private static final Double VALUE = new Double(4.0);
+        private static final Integer PRECISION = new Integer(1);
+        public org.iso._21090.UncertaintyType xmlUncertaintyType = org.iso._21090.UncertaintyType.F;
+        public gov.nih.nci.iso21090.UncertaintyType dtoUncertaintyType = gov.nih.nci.iso21090.UncertaintyType.F;         
 
         @Override
         public org.iso._21090.Real makeXmlSimple() {
         	org.iso._21090.Real x = new org.iso._21090.Real();
-            x.setValue(new Double(VALUE));
+            x.setValue(VALUE);
+            x.setPrecision(PRECISION);
+            
+            org.iso._21090.Real uncertainty = new org.iso._21090.Real();
+            uncertainty.setValue(VALUE);
+            uncertainty.setPrecision(PRECISION);
+            x.setUncertainty(uncertainty);
+
+            x.setUncertaintyType(xmlUncertaintyType);
+
             return x;
         }
 
@@ -28,17 +41,28 @@ public class REALTransformerTest extends AbstractTransformerTestBase<REALTransfo
         public Real makeDtoSimple() {
             Real x = new Real();
             x.setValue(VALUE);
+            x.setPrecision(PRECISION);           
+            
+            Real uncertainty = new Real();
+            uncertainty.setValue(VALUE);
+            uncertainty.setPrecision(PRECISION);
+            x.setUncertainty(uncertainty);
+
+            x.setUncertaintyType(dtoUncertaintyType);             
+            
             return x;
         }
 
         @Override
         public void verifyXmlSimple(org.iso._21090.Real x) {
             assertEquals(null, VALUE, x.getValue(), 0);
+            assertEquals(x.getUncertaintyType(), xmlUncertaintyType);
         }
 
         @Override
         public void verifyDtoSimple(Real x) {
             assertEquals(null, VALUE, x.getValue().doubleValue(), 0);
+            assertEquals(x.getUncertaintyType(), dtoUncertaintyType);            
         }
 
         public org.iso._21090.Real makeXmlNullFlavored() {

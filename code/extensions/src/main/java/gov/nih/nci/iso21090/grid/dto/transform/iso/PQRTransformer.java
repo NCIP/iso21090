@@ -1,19 +1,11 @@
 package gov.nih.nci.iso21090.grid.dto.transform.iso;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import gov.nih.nci.iso21090.Cd;
 import gov.nih.nci.iso21090.Pqr;
 import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformer;
 import gov.nih.nci.iso21090.grid.dto.transform.DtoTransformException;
 import gov.nih.nci.iso21090.grid.dto.transform.Transformer;
-import gov.nih.nci.iso21090.grid.dto.transform.iso.CDTransformer;
 
-import org.iso._21090.CD;
 import org.iso._21090.PQR;
-import org.iso._21090.XReference;
 
 /**
  * Transforms strings.

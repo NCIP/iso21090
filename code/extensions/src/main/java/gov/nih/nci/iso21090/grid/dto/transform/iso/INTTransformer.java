@@ -1,6 +1,7 @@
 package gov.nih.nci.iso21090.grid.dto.transform.iso;
 
 import gov.nih.nci.iso21090.Int;
+import gov.nih.nci.iso21090.Qty;
 import gov.nih.nci.iso21090.grid.dto.transform.DtoTransformException;
 import gov.nih.nci.iso21090.grid.dto.transform.Transformer;
 
@@ -53,6 +54,8 @@ public final class INTTransformer extends QTYTransformer<INT, Int>
             x.setNullFlavor(NullFlavorTransformer.INSTANCE.toXml(input.getNullFlavor()));
         }
 
+        x.setOriginalText(EDTextTransformer.INSTANCE.toXml(input.getOriginalText()));       
+
         return x;
     }
 
@@ -70,6 +73,9 @@ public final class INTTransformer extends QTYTransformer<INT, Int>
         } else {
             d.setNullFlavor(NullFlavorTransformer.INSTANCE.toDto(input.getNullFlavor()));
         }
+
+        d.setOriginalText(EDTextTransformer.INSTANCE.toDto(input.getOriginalText()));       
+
         return d;
     }
 

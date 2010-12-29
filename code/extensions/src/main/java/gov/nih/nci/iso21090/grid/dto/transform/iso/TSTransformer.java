@@ -7,14 +7,13 @@ import gov.nih.nci.iso21090.grid.dto.transform.Transformer;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 import org.iso._21090.TS;
 
 /**
  * Transforms strings.
  *
- * @author mshestopalov
+ * @author mshestopalov, Dan Dumitru
  */
 public final class TSTransformer extends QTYTransformer<TS, Ts> implements Transformer<TS, Ts> {
 
@@ -65,6 +64,23 @@ public final class TSTransformer extends QTYTransformer<TS, Ts> implements Trans
             x.setNullFlavor(NullFlavorTransformer.INSTANCE.toXml(input.getNullFlavor()));
         }
 
+        x.setOriginalText(EDTextTransformer.INSTANCE.toXml(input.getOriginalText()));
+
+        Ts inputUncertainty = (Ts)(input.getUncertainty());
+        if (inputUncertainty != null) {
+        	org.iso._21090.TS xUncertainty = newXml();
+            Date y = input.getValue();
+            if (y != null) {
+            	xUncertainty.setValue(sDf.format(y));
+            } else {
+            	xUncertainty.setNullFlavor(NullFlavorTransformer.INSTANCE.toXml(input.getNullFlavor()));
+            }        	    
+            x.setUncertainty(xUncertainty);
+            if (input.getUncertaintyType() != null) {
+                x.setUncertaintyType(org.iso._21090.UncertaintyType.valueOf(input.getUncertaintyType().name()));
+            }
+        }         
+                
         return x;
     }
 
@@ -89,6 +105,25 @@ public final class TSTransformer extends QTYTransformer<TS, Ts> implements Trans
             d.setNullFlavor(NullFlavorTransformer.INSTANCE.toDto(input.getNullFlavor()));
         }
 
+        d.setOriginalText(EDTextTransformer.INSTANCE.toDto(input.getOriginalText()));
+        
+        org.iso._21090.TS inputUncertainty = (org.iso._21090.TS)(input.getUncertainty());
+        if (inputUncertainty != null) {
+            Ts xUncertainty = newDto();
+            String y = input.getValue();            
+            if (y != null) {
+                try {
+                	xUncertainty.setValue(sDf.parse(y));
+                } catch (ParseException pe) {
+                    throw new DtoTransformException(pe);
+                }
+            } else {
+            	xUncertainty.setNullFlavor(NullFlavorTransformer.INSTANCE.toDto(input.getNullFlavor()));
+            }
+            if (input.getUncertaintyType() != null) {
+                d.setUncertaintyType(gov.nih.nci.iso21090.UncertaintyType.valueOf(input.getUncertaintyType().name()));            
+            }
+        } 
         return d;
     }
 

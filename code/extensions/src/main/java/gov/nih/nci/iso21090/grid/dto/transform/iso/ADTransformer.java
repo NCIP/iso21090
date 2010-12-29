@@ -1,7 +1,9 @@
 package gov.nih.nci.iso21090.grid.dto.transform.iso;
 
 import gov.nih.nci.iso21090.Ad;
-import gov.nih.nci.iso21090.PostalAddressUse;
+import gov.nih.nci.iso21090.Ivl;
+import gov.nih.nci.iso21090.QSet;
+import gov.nih.nci.iso21090.Ts;
 import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformer;
 import gov.nih.nci.iso21090.grid.dto.transform.DtoTransformException;
 import gov.nih.nci.iso21090.grid.dto.transform.Transformer;
@@ -10,6 +12,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import org.iso._21090.IVLTS;
+import org.iso._21090.QSETTS;
 
 /**
  * Transforms Addresses.
@@ -50,14 +55,22 @@ public final class ADTransformer extends AbstractTransformer<org.iso._21090.Ad, 
             }
         }
         
-        Set<gov.nih.nci.iso21090.PostalAddressUse> sourceUse = source.getUse();
-        if (source.getUse() != null) {
-            for (PostalAddressUse qual : source.getUse()) {
-            	target.getUses().add(org.iso._21090.PostalAddressUse.valueOf(qual.name()));
-            }
+        Set<gov.nih.nci.iso21090.PostalAddressUse> sourceUses = source.getUses();
+        if (sourceUses != null) {
+        	for (gov.nih.nci.iso21090.PostalAddressUse sourceUse : sourceUses){
+        		target.getUses().add(org.iso._21090.PostalAddressUse.valueOf(sourceUse.name()));
+        	}
         }
         
-     
+        QSet<gov.nih.nci.iso21090.Ts> sourceUseablePeriod = source.getUseablePeriod();
+        if (sourceUseablePeriod != null){
+        	try {
+				target.setUseablePeriod(IVLTSTransformer.INSTANCE.toXml(((Ivl<Ts>)sourceUseablePeriod)));
+			} catch (DtoTransformException e) {
+				e.printStackTrace();
+			}
+        }
+
     }
 
     /**
@@ -83,14 +96,14 @@ public final class ADTransformer extends AbstractTransformer<org.iso._21090.Ad, 
             }
         }
         List<org.iso._21090.PostalAddressUse> sourceUse = source.getUses();
-        Set<gov.nih.nci.iso21090.PostalAddressUse> targetUse = new HashSet<gov.nih.nci.iso21090.PostalAddressUse>(sourceUse.size());
+        target.setUses(new HashSet<gov.nih.nci.iso21090.PostalAddressUse>());
         for (org.iso._21090.PostalAddressUse pau : sourceUse) {
-        	target.getUse().add(gov.nih.nci.iso21090.PostalAddressUse.valueOf(pau.name()));
+        	target.getUses().add(gov.nih.nci.iso21090.PostalAddressUse.valueOf(pau.name()));
         }
         
-        
-        
-        
+        QSETTS sourceUseablePeriod = source.getUseablePeriod();
+        target.setUseablePeriod(IVLTSTransformer.INSTANCE.toDto((IVLTS)sourceUseablePeriod));
+
     }
 
     /**

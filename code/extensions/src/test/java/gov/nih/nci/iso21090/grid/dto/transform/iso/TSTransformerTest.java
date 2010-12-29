@@ -22,11 +22,17 @@ public class TSTransformerTest extends AbstractTransformerTestBase<TSTransformer
 
     public final String VALUE_DATE = "19800928023033.0978-0000";
     public final String OVERFLOW_VALUE_DATE = "20090229000000.0000-0000";
+    public org.iso._21090.UncertaintyType xmlUncertaintyType = org.iso._21090.UncertaintyType.F;
+    public gov.nih.nci.iso21090.UncertaintyType dtoUncertaintyType = gov.nih.nci.iso21090.UncertaintyType.F;    
 
     @Override
     public TS makeXmlSimple() {
         TS x = new TS();
         x.setValue(VALUE_DATE);
+        org.iso._21090.TS uncertainty = new org.iso._21090.TS();
+        uncertainty.setValue(VALUE_DATE);
+        x.setUncertainty(uncertainty);
+        x.setUncertaintyType(xmlUncertaintyType);
         return x;
     }
 
@@ -40,6 +46,14 @@ public class TSTransformerTest extends AbstractTransformerTestBase<TSTransformer
         } catch (ParseException pe) {
             throw new RuntimeException(pe);
         }
+        Ts uncertainty = new Ts();
+        try {
+        	uncertainty.setValue(sdf.parse(VALUE_DATE));
+        } catch (ParseException pe) {
+            throw new RuntimeException(pe);
+        }        
+        x.setUncertainty(uncertainty);
+        x.setUncertaintyType(dtoUncertaintyType);        
         return x;
     }
 
@@ -54,9 +68,18 @@ public class TSTransformerTest extends AbstractTransformerTestBase<TSTransformer
             
             number1 = sdf.parse(VALUE_DATE);
             assertEquals(number1.getTime(), number2.getTime());
+
+            TS uncertainty = (TS)(x.getUncertainty());
+            number1 = sdf.parse(VALUE_DATE);
+            number2 = sdf.parse(uncertainty.getValue());
+            assertEquals(number1.getTime(), number2.getTime());
+            
+            number1 = sdf.parse(VALUE_DATE);
+            assertEquals(number1.getTime(), number2.getTime());
         } catch (ParseException pe) {
             throw new RuntimeException(pe);
         }
+        assertEquals(x.getUncertaintyType(), xmlUncertaintyType);
     }
 
     @Override
@@ -68,6 +91,7 @@ public class TSTransformerTest extends AbstractTransformerTestBase<TSTransformer
         } catch (ParseException pe) {
             throw new RuntimeException(pe);
         }
+        assertEquals(x.getUncertaintyType(), dtoUncertaintyType);
     }
 
     public TS makeXmlNullFlavored() {

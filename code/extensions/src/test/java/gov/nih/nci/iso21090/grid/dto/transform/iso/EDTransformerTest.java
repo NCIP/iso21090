@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 
 import gov.nih.nci.iso21090.Compression;
 import gov.nih.nci.iso21090.Ed;
+import gov.nih.nci.iso21090.EdMediaType;
 import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformerTestBase;
 
 import java.util.Arrays;
@@ -48,6 +49,7 @@ public class EDTransformerTest extends AbstractTransformerTestBase<EDTransformer
         assertEquals(org.iso._21090.Compression.DF, x.getCompression());
         assertTrue(Arrays.equals(DATA_BYTES, x.getData()));
         assertEquals(VALUE, x.getValue());
+        assertEquals(EdMediaType.TEXT_PLAIN.getDescription(), x.getMediaType());//when value is set, media type is automatically set to 'text/plain'
     }
 
     @Override
@@ -55,6 +57,7 @@ public class EDTransformerTest extends AbstractTransformerTestBase<EDTransformer
         assertEquals(org.iso._21090.Compression.DF.value(), x.getCompression().name());
         assertTrue(Arrays.equals(DATA_BYTES, x.getData()));
         assertEquals(VALUE, x.getValue());
+        assertEquals(EdMediaType.TEXT_PLAIN.getDescription(), x.getMediaType());//when value is set, media type is automatically set to 'text/plain'
     }
 
     public ED makeXmlNullFlavored() {

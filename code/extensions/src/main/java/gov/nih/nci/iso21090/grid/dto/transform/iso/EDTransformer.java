@@ -2,6 +2,7 @@ package gov.nih.nci.iso21090.grid.dto.transform.iso;
 
 import gov.nih.nci.iso21090.Compression;
 import gov.nih.nci.iso21090.Ed;
+import gov.nih.nci.iso21090.EdMediaType;
 import gov.nih.nci.iso21090.grid.dto.transform.AbstractTransformer;
 import gov.nih.nci.iso21090.grid.dto.transform.DtoTransformException;
 import gov.nih.nci.iso21090.grid.dto.transform.Transformer;
@@ -34,14 +35,15 @@ public final class EDTransformer extends AbstractTransformer<ED, Ed>
         String v = input.getValue();
         if (v != null) {
             x.setValue(v);
+            x.setMediaType(EdMediaType.TEXT_PLAIN.getDescription());
         } else {
             x.setNullFlavor(NullFlavorTransformer.INSTANCE.toXml(input.getNullFlavor()));
+            x.setMediaType(input.getMediaType());
         }
         if (input.getCompression() != null) {
             x.setCompression(org.iso._21090.Compression.valueOf(input.getCompression().name()));
         }
         x.setData(input.getData());
-        x.setMediaType(input.getMediaType());
         return x;
     }
 
@@ -56,15 +58,16 @@ public final class EDTransformer extends AbstractTransformer<ED, Ed>
         String v = input.getValue();
         if (v != null) {
             d.setValue(v);
+            d.setMediaType(EdMediaType.TEXT_PLAIN.getDescription());
         } else {
             d.setNullFlavor(NullFlavorTransformer.INSTANCE.toDto(input.getNullFlavor()));
+            d.setMediaType(input.getMediaType());
         }
 
         if (input.getCompression() != null) {
             d.setCompression(Compression.valueOf(input.getCompression().name()));
         }
         d.setData(input.getData());
-        d.setMediaType(input.getMediaType());
         return d;
     }
 

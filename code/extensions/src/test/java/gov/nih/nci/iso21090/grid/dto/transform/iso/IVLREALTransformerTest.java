@@ -55,11 +55,15 @@ public class IVLREALTransformerTest extends AbstractTransformerTestBase<IVLREALT
         // instead of doing expected.equals(x), we need to account for PO-1054
         Ivl<Real> expected = makeDtoSimple();
         assertNull(x.getAny()); // Proves PO-1054 is still around
-        assertEquals(expected.getHigh(), x.getHigh());
+//        assertEquals(expected.getHigh().getValue(), x.getHigh().getValue());
+//        assertEquals(expected.getHigh().getPrecision(), x.getHigh().getPrecision());
+        assertTrue(expected.getHigh().equals(x.getHigh()));  
         assertEquals(expected.getHighClosed(), x.getHighClosed());
-        assertEquals(expected.getLow(), x.getLow());
+//        assertEquals(expected.getLow().getValue(), x.getLow().getValue());
+//        assertEquals(expected.getLow().getPrecision(), x.getLow().getPrecision());   
+        assertTrue(expected.getLow().equals(x.getLow()));         
         assertEquals(expected.getLowClosed(), x.getLowClosed());
-        assertEquals(expected.getWidth(), x.getWidth());
+        assertTrue(expected.getWidth().equals(x.getWidth()));
     }
 
     @Override
@@ -95,19 +99,22 @@ public class IVLREALTransformerTest extends AbstractTransformerTestBase<IVLREALT
          input.setHigh(getREAL(4));
          input.setLow(getREAL(4));
          Ivl<Real> output = IVLREALTransformer.INSTANCE.toDto(input);
-         assertEquals(output.getAny(), getReal(4));
+         assertTrue(output.getAny().equals(getReal(4)));
+//         assertEquals(output.getAny(), getReal(4));         
          // set Any with some high and no low
          IVLREAL input2 = new IVLREAL();
          input2.setWidth(getREAL(3));
          input2.setHigh(getREAL(5));
          Ivl<Real> output2 = IVLREALTransformer.INSTANCE.toDto(input2);
-         assertEquals(output2.getAny(), getReal(5));
+         assertTrue(output2.getAny().equals(getReal(5)));        
+//         assertEquals(output2.getAny(), getReal(5));
          // set Any with no high and some low
          IVLREAL input3 = new IVLREAL();
          input3.setWidth(getREAL(3));
          input3.setHigh(getREAL(1));
          Ivl<Real> output3 = IVLREALTransformer.INSTANCE.toDto(input3);
-         assertEquals(output3.getAny(), getReal(1));
+         assertTrue(output3.getAny().equals(getReal(1)));
+//         assertEquals(output3.getAny(), getReal(1));         
     }
 
     @Test
