@@ -33,9 +33,12 @@ public class EdTest {
         t.setCompression(Compression.BZ);
         t.setData(phrase.getBytes());
         t.setNullFlavor(NullFlavor.NA);
+        
         TelUrl a = new TelUrl();
         a.setValue(URI.create("http:"+phrase));
+        assertTrue(t.getMediaType().equals(EdMediaType.TEXT_PLAIN.getDescription()));
         t.setValue(phrase);
+        assertTrue(t.getMediaType().equals(EdMediaType.TEXT_PLAIN.getDescription()));
         assertTrue(t.equals(t));
         assertFalse(t.equals(null));
 
@@ -43,7 +46,10 @@ public class EdTest {
         t2.setCompression(Compression.BZ);
         t2.setData(phrase.getBytes());
         t2.setNullFlavor(NullFlavor.NA);
+        
+        assertTrue(t2.getMediaType().equals(EdMediaType.TEXT_PLAIN.getDescription()));
         t2.setValue(phrase);
+        assertTrue(t2.getMediaType().equals(EdMediaType.TEXT_PLAIN.getDescription()));         
 
         assertTrue(t.equals(t2));
     }
@@ -55,7 +61,11 @@ public class EdTest {
         t.setNullFlavor(NullFlavor.NA);
         TelUrl a = new TelUrl();
         a.setValue(URI.create("http:"+phrase));
+        
+        assertTrue(t.getMediaType().equals(EdMediaType.TEXT_PLAIN.getDescription()));
         t.setValue(phrase);
+        assertTrue(t.getMediaType().equals(EdMediaType.TEXT_PLAIN.getDescription()));
+        
         assertTrue(t.equals(t));
         assertFalse(t.equals(null));
 
@@ -63,7 +73,11 @@ public class EdTest {
         t2.setCompression(Compression.BZ);
         t2.setData(phrase.getBytes());
         t2.setNullFlavor(NullFlavor.NA);
+        
+        assertTrue(t2.getMediaType().equals(EdMediaType.TEXT_PLAIN.getDescription()));
         t2.setValue(phrase);
+        assertTrue(t2.getMediaType().equals(EdMediaType.TEXT_PLAIN.getDescription()));
+        
         assertEquals(t.hashCode(), t2.hashCode());
     }
 
@@ -74,7 +88,11 @@ public class EdTest {
         t.setNullFlavor(NullFlavor.NA);
         TelUrl a = new TelUrl();
         a.setValue(URI.create("http:"+phrase));
+        
+        assertTrue(t.getMediaType().equals(EdMediaType.TEXT_PLAIN.getDescription()));
         t.setValue(phrase);
+        assertTrue(t.getMediaType().equals(EdMediaType.TEXT_PLAIN.getDescription()));
+        
         assertTrue(t.equals(t));
         assertFalse(t.equals(null));
 

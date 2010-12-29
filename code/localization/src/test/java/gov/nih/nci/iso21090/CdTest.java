@@ -25,6 +25,12 @@ public class CdTest {
          St name = new St();
          name.setValue("value");
          
+         Cd firstTranslation = first.clone();
+         first.getTranslations().add(firstTranslation);
+         
+         first.setValueSet("valueSet");
+         first.setValueSetVersion("valueSetVersion");
+
          first.setDisplayName(name);
          EdText text = new EdText();
          text.setValue("ed text");
@@ -45,11 +51,14 @@ public class CdTest {
          EdText text2 = new EdText();
          text2.setValue("ed text");
          second.setOriginalText(text2);
-        
 
+//       The equality of two CD values is determined solely based upon code and codeSystem. The
+//       codeSystemVersion, originalText, codingRationale, source, valueSet information and
+//       translations are not included in the equality test.  Null values are not equal even if
+//       they have the same NULL-flavor or the same original text.
          assertTrue(first.equals(second));
 
-         second.getDisplayName().setValue("not value");
+         second.setCode("COD2");
 
          assertFalse(first.equals(second));
 
@@ -64,6 +73,13 @@ public class CdTest {
             first.setCodeSystem("code system");
             first.setCodeSystemName("code system name");
             first.setCodeSystemVersion("code system version");
+
+            Cd firstTranslation = first.clone();
+            first.getTranslations().add(firstTranslation);
+            
+            first.setValueSet("valueSet");
+            first.setValueSetVersion("valueSetVersion");
+            
             St name = new St();
             name.setValue("value");
             first.setDisplayName(name);
@@ -75,18 +91,14 @@ public class CdTest {
             second.setNullFlavor(NullFlavor.ASKU);
             second.setCode("COD");
             second.setCodeSystem("code system");
-            second.setCodeSystemName("code system name");
-            second.setCodeSystemVersion("code system version");
-            St name2 = new St();
-            name2.setValue("value");
-            second.setDisplayName(name2);
-            EdText text2 = new EdText();
-            text2.setValue("ed text");
-            second.setOriginalText(text2);
 
+//          The equality of two CD values is determined solely based upon code and codeSystem. The
+//          codeSystemVersion, originalText, codingRationale, source, valueset information and
+//          translations are not included in the equality test.  Null values are not equal even if
+//          they have the same NULL-flavor or the same original text.
             assertEquals(first.hashCode(), second.hashCode());
 
-            second.getDisplayName().setValue("not value");
+            second.setCode("COD2");
 
             assertFalse(first.hashCode() == second.hashCode());
 
@@ -100,13 +112,21 @@ public class CdTest {
             first.setCodeSystem("code system");
             first.setCodeSystemName("code system name");
             first.setCodeSystemVersion("code system version");
+
             St name = new St();
             name.setValue("value");
             first.setDisplayName(name);
+
             EdText text = new EdText();
             text.setValue("ed text");
             first.setOriginalText(text);
 
+            Cd firstTranslation = first.clone();
+            first.getTranslations().add(firstTranslation);
+            
+            first.setValueSet("valueSet");
+            first.setValueSetVersion("valueSetVersion");
+            
             Cd second = first.clone();
 
             assertTrue(first != second);

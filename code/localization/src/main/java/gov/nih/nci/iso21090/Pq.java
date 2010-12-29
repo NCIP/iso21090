@@ -1,5 +1,6 @@
 package gov.nih.nci.iso21090;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -15,21 +16,24 @@ public class Pq extends Pqv implements Cloneable {
     private static final long serialVersionUID = 1L;
 
     private String unit;
-    private Set<Pqr> translation;
+    private Set<Pqr> translations;
 
 
     /**
-     * @return the translation
+     * @return the translations
      */
-    public Set<Pqr> getTranslation() {
-        return translation;
+    public Set<Pqr> getTranslations() {
+        if (this.translations == null) {
+            this.translations = new HashSet<Pqr>();
+        }
+        return translations;
     }
 
     /**
-     * @param translation the translation to set
+     * @param translations the translations to set
      */
-    public void setTranslation(Set<Pqr> translation) {
-        this.translation = translation;
+    public void setTranslations(Set<Pqr> translations) {
+        this.translations = translations;
     }
 
     /**
@@ -80,6 +84,8 @@ public class Pq extends Pqv implements Cloneable {
         return new EqualsBuilder()
             .appendSuper(super.equals(o))
             .append(this.getUnit(), x.getUnit())
+            .append(this.getPrecision(), x.getPrecision())
+            .append(this.getValue(), x.getValue())            
             .isEquals();
     }
 
@@ -91,6 +97,8 @@ public class Pq extends Pqv implements Cloneable {
 
         return new HashCodeBuilder(HASH_CODE_SEED_1, HASH_CODE_SEED_2)
             .append(this.getUnit())
+            .append(this.getPrecision())
+            .append(this.getValue())              
             .toHashCode();
     }
 

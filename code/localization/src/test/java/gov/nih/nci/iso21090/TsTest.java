@@ -17,14 +17,16 @@ public class TsTest {
     @Test
     public void testEquality() throws InterruptedException {
 
-        Int uncertainty1 = new Int();
-        uncertainty1.setNullFlavor(NullFlavor.DER);
-        uncertainty1.setValue(111);
+        Ts uncertainty1 = new Ts();
+//        uncertainty1.setNullFlavor(NullFlavor.DER);
+        uncertainty1.setValue(date);
 
         Ts first = new Ts();
         first.setNullFlavor(NullFlavor.ASKU);
         first.setValue(date);
 
+        first.setUncertainty(uncertainty1);
+        first.setUncertaintyType(UncertaintyType.T);
 
         assertTrue(first.equals(first));
         assertFalse(first.equals(null));
@@ -35,10 +37,15 @@ public class TsTest {
 
         Ts second = new Ts();
         second.setNullFlavor(NullFlavor.ASKU);
+
+//      The QTY attributes (expression,
+//      originalText, uncertainty and uncertaintyType) never participate in the
+//      determination of equality or hashcode generation of specializations of QTY.
+        assertFalse(first.equals(second));
+
         second.setValue(date);
-
         assertTrue(first.equals(second));
-
+        
         // prove that different date hashcodes -> !equal
         Date secondDate = new Date();
         int i = 0;
@@ -59,17 +66,20 @@ public class TsTest {
        @Test
        public void testHashCode() throws InterruptedException  {
 
-           Int uncertainty1 = new Int();
-           uncertainty1.setNullFlavor(NullFlavor.DER);
-           uncertainty1.setValue(111);
+           Ts uncertainty1 = new Ts();
+//           uncertainty1.setNullFlavor(NullFlavor.DER);
+           uncertainty1.setValue(date);
 
            Ts first = new Ts();
            first.setNullFlavor(NullFlavor.ASKU);
            first.setValue(date);
 
-           Int uncertainty2 = new Int();
-           uncertainty2.setNullFlavor(NullFlavor.DER);
-           uncertainty2.setValue(111);
+           first.setUncertainty(uncertainty1);
+           first.setUncertaintyType(UncertaintyType.T);
+
+//           Int uncertainty2 = new Int();
+//           uncertainty2.setNullFlavor(NullFlavor.DER);
+//           uncertainty2.setValue(111);
 
            Ts second = new Ts();
            second.setNullFlavor(NullFlavor.ASKU);
@@ -91,19 +101,20 @@ public class TsTest {
 
            assertFalse(first.hashCode() == second.hashCode());
 
-
-
        }
 
        @Test
        public void testCloneable() {
-           Int uncertainty1 = new Int();
-           uncertainty1.setNullFlavor(NullFlavor.DER);
-           uncertainty1.setValue(111);
+           Ts uncertainty1 = new Ts();
+//           uncertainty1.setNullFlavor(NullFlavor.DER);
+           uncertainty1.setValue(date);
 
            Ts first = new Ts();
            first.setNullFlavor(NullFlavor.ASKU);
            first.setValue(date);
+
+           first.setUncertainty(uncertainty1);
+           first.setUncertaintyType(UncertaintyType.T);           
 
            Ts second = first.clone();
 

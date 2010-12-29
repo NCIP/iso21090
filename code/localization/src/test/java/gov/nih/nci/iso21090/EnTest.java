@@ -3,6 +3,9 @@ package gov.nih.nci.iso21090;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
+import java.util.HashSet;
+
 import gov.nih.nci.iso21090.En;
 import gov.nih.nci.iso21090.EntityNamePartType;
 import gov.nih.nci.iso21090.Enxp;
@@ -20,6 +23,10 @@ public class EnTest {
         first.getPart().add(new Enxp(EntityNamePartType.DEL));
         first.getPart().add(new Enxp(EntityNamePartType.FAM));
         first.addPart(new Enxp(EntityNamePartType.GIV));
+        
+        first.setUses(new HashSet<EntityNameUse>());        
+        first.getUses().add(EntityNameUse.A);
+        first.getUses().add(EntityNameUse.ABC);        
 
         assertTrue(first.equals(first));
         assertFalse(first.equals(null));
@@ -30,10 +37,16 @@ public class EnTest {
         second.getPart().add(new Enxp(EntityNamePartType.FAM));
         second.getPart().add(new Enxp(EntityNamePartType.GIV));
 
+        second.getUses().add(EntityNameUse.A);
+        second.getUses().add(EntityNameUse.ABC); 
+
         assertTrue(first.equals(second));
 
         second.getPart().remove(new Enxp(EntityNamePartType.DEL));
         second.getPart().add(new Enxp(EntityNamePartType.SFX));
+        
+        second.getUses().remove(EntityNameUse.A);
+        second.getUses().add(EntityNameUse.C);
 
         assertFalse(first.equals(second));
 
@@ -47,6 +60,9 @@ public class EnTest {
         first.getPart().add(new Enxp(EntityNamePartType.DEL));
         first.getPart().add(new Enxp(EntityNamePartType.FAM));
         first.getPart().add(new Enxp(EntityNamePartType.GIV));
+        
+        first.getUses().add(EntityNameUse.A);
+        first.getUses().add(EntityNameUse.ABC);
 
         En second = new En();
         second.setNullFlavor(NullFlavor.ASKU);
@@ -54,10 +70,16 @@ public class EnTest {
         second.getPart().add(new Enxp(EntityNamePartType.FAM));
         second.getPart().add(new Enxp(EntityNamePartType.GIV));
 
+        second.getUses().add(EntityNameUse.A);
+        second.getUses().add(EntityNameUse.ABC);
+
         assertEquals(first.hashCode(), second.hashCode());
 
         second.getPart().remove(new Enxp(EntityNamePartType.DEL));
         second.getPart().add(new Enxp(EntityNamePartType.SFX));
+        
+        second.getUses().remove(EntityNameUse.A);
+        second.getUses().add(EntityNameUse.C);
 
         assertFalse(first.hashCode() == second.hashCode());
 

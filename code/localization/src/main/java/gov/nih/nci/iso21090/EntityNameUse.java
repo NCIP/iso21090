@@ -5,7 +5,13 @@ package gov.nih.nci.iso21090;
  * @author lpower
  */
 public enum EntityNameUse {
-
+    
+    /** alphabetic. */
+    ABC,
+    /** ideographic. */
+    IDE,
+    /** license. */
+    SYL,    
     /** license. */
     C,
     /** indigenous/tribal. */
@@ -19,8 +25,14 @@ public enum EntityNameUse {
     /** religious. */
     R,
     /** official record. */
-    OS,
+    OR,
     /** assigned. */
-    ASGN;
+    ASGN,
+    /** search type uses. */
+    SRCH,
+    /** soundex. */
+    SNDX,
+    /** phonetic. */
+    PHON;
     
 }

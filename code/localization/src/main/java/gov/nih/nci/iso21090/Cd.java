@@ -1,5 +1,6 @@
 package gov.nih.nci.iso21090;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -8,6 +9,11 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 /**
  * Represents the iso CD type.
  *
+ * The equality of two CD values is determined solely based upon code and codeSystem. The
+ * codeSystemVersion, originalText, codingRationale, source, valueset information and
+ * translations are not included in the equality test.  Null values are not equal even if
+ * they have the same NULL-flavor or the same original text.
+ * 
  * TODO invariants check
  * translations cannot have original text
  * translations cannot have translations
@@ -32,6 +38,9 @@ public  class Cd extends Any implements Cloneable {
      * @return the translations
      */
     public Set<Cd> getTranslations() {
+        if (translations == null) {
+            translations = new HashSet<Cd>();
+        }
         return translations;
     }
     /**
@@ -40,7 +49,7 @@ public  class Cd extends Any implements Cloneable {
     public void setTranslations(Set<Cd> translations) {
         if (translations != null) {
             for (Cd cd : translations) {
-                if (cd.getTranslations() != null) {
+                if (!cd.getTranslations().isEmpty()) {
                     throw new IllegalArgumentException("translations not allowed within translations in CD");
                 }
                 if (cd.getOriginalText() != null) {
@@ -171,10 +180,7 @@ public  class Cd extends Any implements Cloneable {
             .appendSuper(super.equals(obj))
             .append(this.getCode(), x.getCode())
             .append(this.getCodeSystem(), x.getCodeSystem())
-            .append(this.getCodeSystemName(), x.getCodeSystemName())
 
-            .append(this.getDisplayName(), x.getDisplayName())
-            .append(this.getOriginalText(), x.getOriginalText())
             .isEquals();
     }
 
@@ -187,10 +193,6 @@ public  class Cd extends Any implements Cloneable {
         return new HashCodeBuilder(HASH_CODE_SEED_1, HASH_CODE_SEED_2)
             .append(this.getCode())
             .append(this.getCodeSystem())
-            .append(this.getCodeSystemName())
-            .append(this.getCodeSystemVersion())
-            .append(this.getDisplayName())
-            .append(this.getOriginalText())
             .toHashCode();
     }
 
@@ -200,6 +202,30 @@ public  class Cd extends Any implements Cloneable {
     @SuppressWarnings("PMD.CloneThrowsCloneNotSupportedException")
     @Override
     public Cd clone() {
-        return (Cd) super.clone();
+        Cd returnVal = new Cd();
+        
+        returnVal.setCode(this.code);
+        returnVal.setCodeSystem(this.codeSystem);
+        returnVal.setCodeSystemName(this.codeSystemName);
+        returnVal.setCodeSystemVersion(this.codeSystemVersion);
+        returnVal.setDisplayName(this.displayName);
+        returnVal.setNullFlavor(this.getNullFlavor());
+        returnVal.setOriginalText(this.originalText);
+        returnVal.setValueSet(this.valueSet);
+        returnVal.setValueSetVersion(this.valueSetVersion);       
+        
+        if (this.getTranslations() != null) {
+            returnVal.setTranslations(new HashSet<Cd>());
+
+            try {
+                for (Cd translation : this.getTranslations()) {
+                    returnVal.getTranslations().add(translation.clone());
+                }
+            } catch (Exception e) {
+                throw new IsoCloneException(e);
+            }
+        }
+
+        return returnVal;
     }
 }

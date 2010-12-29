@@ -6,7 +6,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 /**
  * Real numbers. The initial use case is to capture a java.lang.Float in the caDSR data model.
  *
- * @author mshestopalov
+ * @author mshestopalov, Dan Dumitru
  *
  */
 public final class Real extends Qty implements Cloneable {
@@ -14,6 +14,7 @@ public final class Real extends Qty implements Cloneable {
     private static final long serialVersionUID = 1L;
 
     private Double value;
+    private Integer precision = 0;    
 
     /**
      *
@@ -31,6 +32,25 @@ public final class Real extends Qty implements Cloneable {
         this.value = value;
     }
 
+    /**
+     *
+     * @return precision
+     */
+    public Integer getPrecision() {
+        return precision;
+    }
+
+    /**
+     *
+     * @param precision precision digits
+     */
+    public void setPrecision(Integer precision) {
+        if (precision != null) {
+            this.precision = precision;
+        } else {
+            this.precision = 0;
+        }
+    }
     /**
      * {@inheritDoc}
      */
@@ -53,6 +73,7 @@ public final class Real extends Qty implements Cloneable {
         return new EqualsBuilder()
             .appendSuper(super.equals(obj))
             .append(this.getValue(), x.getValue())
+            .append(this.getPrecision(), x.getPrecision())            
             .isEquals();
     }
 
@@ -64,6 +85,7 @@ public final class Real extends Qty implements Cloneable {
 
         return new HashCodeBuilder(HASH_CODE_SEED_1, HASH_CODE_SEED_2)
             .append(this.getValue())
+            .append(this.getPrecision())            
             .toHashCode();
     }
 

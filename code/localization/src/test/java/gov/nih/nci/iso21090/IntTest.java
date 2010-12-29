@@ -10,70 +10,76 @@ import gov.nih.nci.iso21090.NullFlavor;
 import org.junit.Test;
 
 public class IntTest {
+
+    private static final String ED_TEXT_VALUE = "ed text";
+
     @Test
     public void testEquality() {
 
-        Int uncertainty1 = new Int();
-        uncertainty1.setNullFlavor(NullFlavor.DER);
-        uncertainty1.setValue(111);
+        Int firstInt = new Int();
+        firstInt.setNullFlavor(NullFlavor.DER);
+        firstInt.setValue(111);
 
-        Int first = new Int();
-        first.setNullFlavor(NullFlavor.ASKU);
+        EdText text = new EdText();
+        text.setValue(ED_TEXT_VALUE);
+        firstInt.setOriginalText(text);
         
-        assertTrue(first.equals(first));
-        assertFalse(first.equals(null));
-
-        Int uncertainty2 = new Int();
-        uncertainty2.setNullFlavor(NullFlavor.DER);
-        uncertainty2.setValue(111);
-
-        Int second = new Int();
-        second.setNullFlavor(NullFlavor.ASKU);
+        Int uncertainty = new Int();
+ //       uncertainty.setNullFlavor(NullFlavor.DER);
+        uncertainty.setValue(111);
+        firstInt.setUncertainty(uncertainty);
         
-        assertTrue(first.equals(second));
+        assertTrue(firstInt.equals(firstInt));
+        assertFalse(firstInt.equals(null));
+
+        Int secondInt = new Int();
+        secondInt.setNullFlavor(NullFlavor.DER);
+        secondInt.setValue(111);
+ 
+        /**
+         * Note: Equality is not defined for the QTY datatype as it is an 
+         * abstract type.  The QTY attributes (expression, originalText,
+         * uncertainty and uncertaintyType) never participate in the
+         * determination of equality (or hashcode) of specializations of QTY.
+         **/  
+        assertTrue(firstInt.equals(secondInt));
        }
 
        @Test
        public void testHashCode() {
 
-           Int uncertainty1 = new Int();
-           uncertainty1.setNullFlavor(NullFlavor.DER);
-           uncertainty1.setValue(111);
-
-           Int first = new Int();
-           first.setNullFlavor(NullFlavor.ASKU);
+           Int firstInt = new Int();
+           firstInt.setNullFlavor(NullFlavor.DER);
+           firstInt.setValue(111);
+           
            EdText firstText = new EdText();
+           firstInt.setOriginalText(firstText);           
 
-           Int uncertainty2 = new Int();
-           uncertainty2.setNullFlavor(NullFlavor.DER);
-           uncertainty2.setValue(111);
+           Int secondInt = new Int();
+           secondInt.setNullFlavor(NullFlavor.DER);
+           secondInt.setValue(111);
 
-           Int second = new Int();
-           second.setNullFlavor(NullFlavor.ASKU);
            EdText secondText = new EdText();
+           secondInt.setOriginalText(secondText);           
 
-           assertEquals(first.hashCode(), second.hashCode());
+           assertEquals(firstInt.hashCode(), secondInt.hashCode());
 
-           second.setValue(555);
+           secondInt.setValue(555);
 
-           assertFalse(first.hashCode() == second.hashCode());
+           assertFalse(firstInt.hashCode() == secondInt.hashCode());
 
        }
 
        @Test
        public void testCloneable() {
-           Int uncertainty1 = new Int();
-           uncertainty1.setNullFlavor(NullFlavor.DER);
-           uncertainty1.setValue(111);
-
-           Int first = new Int();
-           first.setNullFlavor(NullFlavor.ASKU);
+           Int firstInt = new Int();
+           firstInt.setNullFlavor(NullFlavor.DER);
+           firstInt.setValue(111);
            
-           Int second = first.clone();
+           Int secondInt = firstInt.clone();
 
-           assertTrue(first != second);
-           assertTrue(first.equals(second));
-           assertEquals(first.hashCode(), second.hashCode());
-
+           assertTrue(firstInt != secondInt);
+           assertTrue(firstInt.equals(secondInt));
+           assertEquals(firstInt.hashCode(), secondInt.hashCode());
        }
 }

@@ -4,34 +4,22 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
- * Represents iso datatype QTY.
- * @author lpower
+ * Represents iso datatype QTY.  Note: Equality is not defined for the QTY
+ * datatype as it is an abstract type.  The QTY attributes (expression,
+ * originalText, uncertainty and uncertaintyType) never participate in the
+ * determination of equality or hashcode generation of specializations of QTY.
+ * 
+ * @author lpower, Dan Dumitru
  */
 @SuppressWarnings("PMD.AbstractNaming")
 public abstract class Qty extends Any implements Cloneable {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 2L;
 
-    /**
-     *
-     */
     private Ed expression;
-    /**
-     *
-     */
     private EdText originalText;
-    /**
-     *
-     */
     private Qty uncertainty;
-    /**
-     *
-     */
     private UncertaintyType uncertaintyType;
-
 
     /**
      * @return the expression
@@ -73,10 +61,20 @@ public abstract class Qty extends Any implements Cloneable {
      */
     public void setUncertainty(Qty uncertainty) {
         if (uncertainty  != null) {
-            if (uncertainty.getExpression() !=  null || uncertainty.getUncertainty() !=  null 
-                || uncertainty.getOriginalText() !=  null) {
+            if (!(uncertainty instanceof gov.nih.nci.iso21090.Qty) 
+                    && !(uncertainty instanceof gov.nih.nci.iso21090.Real) 
+                    && !(uncertainty instanceof gov.nih.nci.iso21090.Pq) 
+                    && !(uncertainty instanceof gov.nih.nci.iso21090.Ts)) {
+                    throw new IllegalArgumentException(
+                        "QTY.uncertainty must be an instance of Real, Pq, or Ts");
+            }
+            if (uncertainty.getExpression() !=  null
+                    || uncertainty.getUncertainty() !=  null
+                    || uncertainty.getUncertaintyType() !=  null
+                    || uncertainty.getOriginalText() !=  null
+                    || uncertainty.getNullFlavor() !=  null) {
                 throw new IllegalArgumentException(
-                    "Expression, Uncertainty and originalText not allowed in QTY.uncertainty");
+            "Expression, Uncertainty, Uncertainty Type, originalText, and Null Flavor not allowed in QTY.uncertainty");
             }
         }
         this.uncertainty = uncertainty;

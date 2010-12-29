@@ -1,11 +1,13 @@
 package gov.nih.nci.iso21090;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.collections.Predicate;
 import org.apache.commons.collections.list.PredicatedList;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
  * Represents the En ISO datatype.
@@ -18,20 +20,23 @@ public class En extends Any implements Cloneable {
     private List<Enxp> part;
     private final List<Enxp> partsInternal;    
     private Predicate partRestriction;
-    private Set<EntityNameUse> use;
+    private Set<EntityNameUse> uses;
 
     /**
-     * @return the use
+     * @return the uses
      */
-    public Set<EntityNameUse> getUse() {
-        return use;
+    public Set<EntityNameUse> getUses() {
+        if (this.uses == null) {
+            setUses(new HashSet<EntityNameUse>());
+        }
+        return uses;
     }
 
     /**
-     * @param use the use to set
+     * @param uses the uses to set
      */
-    public void setUse(Set<EntityNameUse> use) {
-        this.use = use;
+    public void setUses(Set<EntityNameUse> uses) {
+        this.uses = uses;
     }
 
     /**
@@ -103,7 +108,18 @@ public class En extends Any implements Cloneable {
 
         En x = (En) obj;
 
-        return super.equals(obj) && this.getPart().equals(x.getPart());
+        return super.equals(obj) && this.getPart().equals(x.getPart())
+        && compareEntityNameUseSets(this.getUses(), x.getUses());
+    }
+
+    private boolean compareEntityNameUseSets(Set<EntityNameUse> currentUse, Set<EntityNameUse> compareUse) {
+        if (currentUse == null && compareUse == null) {
+            return true;
+        } else if (currentUse != null && compareUse != null) {
+            return currentUse.equals(compareUse);
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -111,10 +127,12 @@ public class En extends Any implements Cloneable {
      */
     @Override
     public int hashCode() {
-        if (!this.getPart().isEmpty()) {
-            return this.getPart().hashCode();
-        }
-        return super.hashCode();
+
+        return new HashCodeBuilder(HASH_CODE_SEED_1, HASH_CODE_SEED_2)
+        .append(this.getPart())
+        .append(this.getUses()) 
+        .append(super.hashCode())
+        .toHashCode();
     }
 
     /**

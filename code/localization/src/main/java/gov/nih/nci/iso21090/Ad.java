@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.lang.builder.HashCodeBuilder;
+
 /**
  * Represents iso data type AD.
  *
@@ -15,10 +17,8 @@ public final class Ad extends Any implements Cloneable {
     private static final long serialVersionUID = 1L;
     // TODO Invariant must be applied - see COPPA ISO's from EA
     private List<Adxp> part;
-    private Set<PostalAddressUse> use;
+    private Set<PostalAddressUse> uses;
     private QSet<Ts> useablePeriod;
-
-
 
     /**
      * @return the useablePeriod
@@ -37,17 +37,17 @@ public final class Ad extends Any implements Cloneable {
 
 
     /**
-     * @return the use
+     * @return the uses
      */
-    public Set<PostalAddressUse> getUse() {
-        return use;
+    public Set<PostalAddressUse> getUses() {
+        return uses;
     }
 
     /**
-     * @param use the use to set
+     * @param uses the uses to set
      */
-    public void setUse(Set<PostalAddressUse> use) {
-        this.use = use;
+    public void setUses(Set<PostalAddressUse> uses) {
+        this.uses = uses;
     }
 
     /**
@@ -97,11 +97,13 @@ public final class Ad extends Any implements Cloneable {
 
         Ad x = (Ad) obj;
 
-        return super.equals(obj) && compareLists(this.getPart(), x.getPart());
+        return super.equals(obj) && comparePartsLists(this.getPart(), x.getPart())
+        && compareUseLists(this.getUses(), x.getUses())
+        && compareUseablePeriods(this.getUseablePeriod(), x.getUseablePeriod());
 
     }
 
-    private boolean compareLists(List<Adxp> currentList, List<Adxp> compareList) {
+    private boolean comparePartsLists(List<Adxp> currentList, List<Adxp> compareList) {
         if (currentList == null && compareList == null) {
             return true;
         } else if (currentList != null && compareList != null) {
@@ -110,6 +112,26 @@ public final class Ad extends Any implements Cloneable {
             return false;
         }
     }
+    
+    private boolean compareUseLists(Set<PostalAddressUse> currentList, Set<PostalAddressUse> compareList) {
+        if (currentList == null && compareList == null) {
+            return true;
+        } else if (currentList != null && compareList != null) {
+            return currentList.equals(compareList);
+        } else {
+            return false;
+        }
+    }   
+    
+    private boolean compareUseablePeriods(QSet<Ts> currentUseablePeriod, QSet<Ts> compareUseablePeriod) {
+        if (currentUseablePeriod == null && compareUseablePeriod == null) {
+            return true;
+        } else if (currentUseablePeriod != null && compareUseablePeriod != null) {
+            return currentUseablePeriod.equals(compareUseablePeriod);
+        } else {
+            return false;
+        }
+    }      
 
 
     /**
@@ -117,10 +139,14 @@ public final class Ad extends Any implements Cloneable {
      */
     @Override
     public int hashCode() {
-        if (this.getPart() != null) {
-            return this.getPart().hashCode();
-        }
-        return super.hashCode();
+        
+        return new HashCodeBuilder(HASH_CODE_SEED_1, HASH_CODE_SEED_2)
+        .append(this.getPart())
+        .append(this.getUses())
+        .append(this.getUseablePeriod())  
+        .append(super.hashCode())
+        .toHashCode();
+        
     }
 
     /**
@@ -141,6 +167,12 @@ public final class Ad extends Any implements Cloneable {
                 throw new IsoCloneException(e);
             }
         }
+        if (this.getUses() != null) {
+            returnVal.setUses(this.getUses());
+        } 
+        if (this.getUses() != null) {
+            returnVal.setUseablePeriod(this.getUseablePeriod());
+        }         
 
         return returnVal;
     }
