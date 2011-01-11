@@ -1,11 +1,13 @@
 package gov.nih.nci.iso21090.grid.dto.transform.iso;
 
 import gov.nih.nci.iso21090.Int;
+import gov.nih.nci.iso21090.Pq;
 import gov.nih.nci.iso21090.Qty;
 import gov.nih.nci.iso21090.grid.dto.transform.DtoTransformException;
 import gov.nih.nci.iso21090.grid.dto.transform.Transformer;
 
 import org.iso._21090.INT;
+import org.iso._21090.PQ;
 
 /**
  * Transforms strings.
@@ -54,7 +56,17 @@ public final class INTTransformer extends QTYTransformer<INT, Int>
             x.setNullFlavor(NullFlavorTransformer.INSTANCE.toXml(input.getNullFlavor()));
         }
 
-        x.setOriginalText(EDTextTransformer.INSTANCE.toXml(input.getOriginalText()));       
+        x.setOriginalText(EDTextTransformer.INSTANCE.toXml(input.getOriginalText()));
+
+        Int inputUncertainty = (Int)(input.getUncertainty());
+        if (inputUncertainty != null) {
+            INT xUncertainty = newXml();
+            xUncertainty.setValue(inputUncertainty.getValue());            
+            x.setUncertainty(xUncertainty);
+            if (input.getUncertaintyType() != null){
+                x.setUncertaintyType(org.iso._21090.UncertaintyType.valueOf(input.getUncertaintyType().name()));
+            }          
+        }
 
         return x;
     }
@@ -74,7 +86,17 @@ public final class INTTransformer extends QTYTransformer<INT, Int>
             d.setNullFlavor(NullFlavorTransformer.INSTANCE.toDto(input.getNullFlavor()));
         }
 
-        d.setOriginalText(EDTextTransformer.INSTANCE.toDto(input.getOriginalText()));       
+        d.setOriginalText(EDTextTransformer.INSTANCE.toDto(input.getOriginalText()));  
+
+        INT inputUncertainty = (INT)(input.getUncertainty());
+        if (inputUncertainty != null) {
+            Int xUncertainty = newDto();
+            xUncertainty.setValue(inputUncertainty.getValue());          
+            d.setUncertainty(xUncertainty);
+            if (input.getUncertaintyType() != null){
+                d.setUncertaintyType(gov.nih.nci.iso21090.UncertaintyType.valueOf(input.getUncertaintyType().name()));            
+            }            
+        }
 
         return d;
     }
