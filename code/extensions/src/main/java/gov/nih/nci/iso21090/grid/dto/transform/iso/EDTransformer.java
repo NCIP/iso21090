@@ -35,6 +35,9 @@ public final class EDTransformer extends AbstractTransformer<ED, Ed>
         String v = input.getValue();
         if (v != null) {
             x.setValue(v);
+
+            // If 'value' is used, the mediatype is fixed to text/plain and the charset
+            // must be consistent with the String Character Set
             x.setMediaType(EdMediaType.TEXT_PLAIN.getDescription());
         } else {
             x.setNullFlavor(NullFlavorTransformer.INSTANCE.toXml(input.getNullFlavor()));
