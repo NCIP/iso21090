@@ -51,6 +51,11 @@ public class Ed extends Any implements Cloneable {
         if (mediaType == null) {
             throw new IllegalArgumentException("mediaType must not be null");
         }
+        if ((this.value != null && this.value.length() > 0) 
+                && !mediaType.equalsIgnoreCase(EdMediaType.TEXT_PLAIN.getDescription())) {
+            throw new IllegalArgumentException("If value is set, mediaType must equal to " 
+                + EdMediaType.TEXT_PLAIN.getDescription());
+        }
         this.mediaType = mediaType;        
     }
 
@@ -88,6 +93,10 @@ public class Ed extends Any implements Cloneable {
      * @param value the value to set
      */
     public void setValue(String value) {
+        if (!mediaType.equalsIgnoreCase(EdMediaType.TEXT_PLAIN.getDescription())) {
+            throw new IllegalArgumentException("If value is set, mediaType must equal to " 
+                + EdMediaType.TEXT_PLAIN.getDescription());
+        }
         this.value = value;
         setMediaType(EdMediaType.TEXT_PLAIN.getDescription());
     }
