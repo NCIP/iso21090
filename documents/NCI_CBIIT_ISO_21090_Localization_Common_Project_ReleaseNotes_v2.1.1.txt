@@ -1,8 +1,8 @@
                                 Release Notes
     
                NCI CBIIT ISO 21090 Localization Common Library
-                                 Version 2.2
-                                January 22, 2011
+                                 Version 2.1.1
+                                November 08, 2010
 
                         National Cancer Institute
           Center for Biomedical Informatics and Information Technology
@@ -24,7 +24,7 @@
 ===============================================================================
     1.1 Introduction
 ===============================================================================
-
+    
     The ISO 21090 Healthcare data types standard provides a set of data type
     definitions for representing and exchanging basic concepts that are 
     commonly encountered in healthcare environments in support of information 
@@ -52,23 +52,21 @@
     More details on localized data types can be referred at:
 	
     --  https://wiki.nci.nih.gov/x/DCNyAQ
-	
+
 ===============================================================================
     1.2 Release History 
 ===============================================================================
-    
-    NCI CBIIT ISO 21090 Localization Common Library v2.2
 
-    --  22 January 2011
-    
+
     NCI CBIIT ISO 21090 Localization Common Library v2.1.1
-
-    --  08 November 2010
     
-    NCI CBIIT ISO 21090 Localization Common Library v2.1 (Initial Version)
+    --  08 November 2010
 
+    NCI CBIIT ISO 21090 Localization Common Library v2.1 (Initial Version)	
+    	
     --  22 June 2010
-	
+
+
 ===============================================================================
     2.0 Features and Updates
 ===============================================================================
@@ -126,64 +124,38 @@
     +---------------------------------------+
     | Updates / New Features                         |
     +---------------------------------------+
+ 
+   ISO 21090 Localization Common Library v2.1.1 is a minor release which 
+  incorporates the following changes:
+  
+    --  CD:  Added Code System Version attribute
     
-   ISO 21090 Localization Common Library v2.2 is a moderate release which incorporates the following 
-   data type attribute additions:    
-
-   AD is primarily used to communicate data that will allow printing mail labels, or that will allow a 
-   person to physically visit that address. Addresses are essentially sequences of address parts, but 
-   add a "use" code and a valid time range for information about if and when the address can be 
-   used for a given purpose.   Added use : Set(PostalAddressUse) and the useablePeriod : QSET(TS).
-
-   CD is a reference to a concept defined in an external code system, terminology or ontology. 
-   In many cases, a CD is created from a value set – either a code/code system pair is chosen from 
-   a valueSet.  Translations represent a set of other CDs that each represent a translation of this CD 
-   into equivalent codes within the same code system or into corresponding concepts from other 
-   code systems.   Added valueSet : character string, valueSetVersion : character string, and 
-   translation : Set(CD).
-
-   ED carries data that is primarily intended for human interpretation or for further machine processing 
-   outside the scope of this International Standard. This includes unformatted or formatted written 
-   language, multimedia data, or structured information as defined by a different standard (e.g., 
-   XML-signatures). The mediaType attribute identifies the type of the encapsulated data and can be 
-   used to determine a method to interpret or render the content. The IANA defined domain of media 
-   types is established by the IETF RFCs 2045 and 2046. mediaType has a default value of text/plain and 
-   cannot be null. If the media type is different to text/plain, the mediaType attribute shall be populated 
-   to be conformant in an HL7 communication.  Added mediaType : character string.
-
-   EN.  An entity name is a name for a person, organization, place or thing.  Entity names are essentially 
-   sequences of entity name parts, but add a "use" code and a valid time range for information about 
-   when the name was used and how to choose between multiple aliases that may be valid at the same 
-   time.  Added use : Set(EntityNameUse).
-
-   QTY defines three facilities that all quantities may carry: an expression that may be used to derive 
-   the actual value, an originalText that carries the original form in which the quantity was represented 
-   and the uncertainty associated with the value.  These attributes are inherited for all data types that 
-   specialize QTY.   Added originalText : ED.TEXT and uncertainty : QTY.
-
-   PQ is a dimensioned quantity expressing the result of measuring. All PQ values must use UCUM 
-   codes for the units of measure. To accommodate the variance of expressions used, a translation 
-   attribute is used to provide an alternative representation of the same physical quantity expressed in 
-   a different unit from a different unit code system and possibly with a different value.  Added 
-   translation : Set(PQR).
-   
+    --  Added Coding Rationale enumeration class
+    
+    --  EN:  Enhanced cloning functionality to include cloning of any ENXP parts
+    
+    --  PQ:  Added check to ensure that Original Text attribute cannot be set for PQ instances
+    
+    --  PQR:  Removed this data type altogether, along with the corresponding transformer class
+    
+    --  QTY:  Added expression : ED and uncertaintyType : UncertaintyType attributes
+      
 ===============================================================================
     3.0 Bug Fixes Since Last Release
 ===============================================================================
 
-    --   
+    --  Updated method IsoConstantTuplizerHelper.getComplexNodeBean(String 
+	configLookupKey) from private to public.
 
 ===============================================================================
     4.0 Known Issues
 ===============================================================================
 
-    Localization has an attribute called "Any" used to specify that nothing is known about the interval 
-    except that some particular value lies within the interval. In the localization, "Any" is used to populate 
-    "High" and "Low" values conditionally. ISO 21090 XSD does not have this attribute. "Any" attribute will 
-    not be transmitted during outward mapping.
-    
-    There are minor variations between the XSD and UML for the ISO 21090 specification. This implementation 
-    is primarily based on the XSD. ED reference is implemented as TEL (per the XSD) as opposed to TEL.URL (per the UML).“    
+    Localization has an attribute called "Any" used to specify that nothing 
+    is known about the interval except that some particular value lies within 
+    the interval. In the localization, "Any" is used to populate "High" and "Low" 
+    values conditionally. ISO 21090 XSD does not have this attribute. 
+    "Any" attribute will not be transmitted during outward mapping.
 		
 ===============================================================================
     5.0 Bug Reports and Support
@@ -209,7 +181,7 @@
 
     A list summarizing the online Workbench resources is provided below:
 
-       Mailing List:			   ISO21090_USERS@list.nih.gov	
+       Mailing List:			               ISO21090_USERS@list.nih.gov	
        Project Home (GForge):	   https://gforge.nci.nih.gov/projects/iso21090/
        Support Tracker (GForge):   https://gforge.nci.nih.gov/tracker/?group_id=669 
 

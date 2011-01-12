@@ -1,8 +1,8 @@
                                 Release Notes
     
                NCI CBIIT ISO 21090 Localization Common Library
-                                 Version 2.1.1
-                                September 29, 2010
+                                 Version 2.1
+                                June 22, 2010
 
                         National Cancer Institute
           Center for Biomedical Informatics and Information Technology
@@ -11,8 +11,7 @@
     Contents
 ===============================================================================
 
-    1.1 Introduction
-    1.2 Release History
+    1.0 Introduction and History
     2.0 Features and Updates
     3.0 Bug Fixes
     4.0 Known Issues
@@ -22,9 +21,13 @@
     8.0 NCI CBIIT and caBIG(r) Web Pages
 
 ===============================================================================
-    1.1 Introduction
+    1.0 Introduction and History
 ===============================================================================
     
+    NCI CBIIT ISO 21090 Localization Common Library v2.1 (Initial Version)
+
+    --  22 June 2010
+	
     The ISO 21090 Healthcare data types standard provides a set of data type
     definitions for representing and exchanging basic concepts that are 
     commonly encountered in healthcare environments in support of information 
@@ -52,18 +55,7 @@
     More details on localized data types can be referred at:
 	
     --  https://wiki.nci.nih.gov/x/DCNyAQ
-
-===============================================================================
-    1.2 Release History 
-===============================================================================
-
-
-    NCI CBIIT ISO 21090 Localization Common Library v2.1.1
-    --  29 September 2010
-
-    NCI CBIIT ISO 21090 Localization Common Library v2.1.1 (Initial Version)		
-    --  22 June 2010
-
+	
 
 ===============================================================================
     2.0 Features and Updates
@@ -123,8 +115,7 @@
     3.0 Bug Fixes Since Last Release
 ===============================================================================
 
-    --  Updated method IsoConstantTuplizerHelper.getComplexNodeBean(String 
-	configLookupKey) from private to public.
+    --   
 
 ===============================================================================
     4.0 Known Issues
@@ -160,7 +151,7 @@
 
     A list summarizing the online Workbench resources is provided below:
 
-       Mailing List:			               ISO21090_USERS@list.nih.gov	
+       Mailing List:			   ISO21090_USERS@list.nih.gov	
        Project Home (GForge):	   https://gforge.nci.nih.gov/projects/iso21090/
        Support Tracker (GForge):   https://gforge.nci.nih.gov/tracker/?group_id=669 
 
