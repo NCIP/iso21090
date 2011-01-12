@@ -1,7 +1,7 @@
                                 Release Notes
     
                NCI CBIIT ISO 21090 Localization Common Library
-                                 Version 2.1.0.1
+                                 Version 2.1.1
                                 September 29, 2010
 
                         National Cancer Institute
@@ -58,10 +58,10 @@
 ===============================================================================
 
 
-    NCI CBIIT ISO 21090 Localization Common Library v2.1.0.1
+    NCI CBIIT ISO 21090 Localization Common Library v2.1.1
     --  29 September 2010
 
-    NCI CBIIT ISO 21090 Localization Common Library v2.1 (Initial Version)		
+    NCI CBIIT ISO 21090 Localization Common Library v2.1.1 (Initial Version)		
     --  22 June 2010
 
 
@@ -160,7 +160,7 @@
 
     A list summarizing the online Workbench resources is provided below:
 
-       Mailing List:			   ISO21090_USERS@list.nih.gov	
+       Mailing List:			               ISO21090_USERS@list.nih.gov	
        Project Home (GForge):	   https://gforge.nci.nih.gov/projects/iso21090/
        Support Tracker (GForge):   https://gforge.nci.nih.gov/tracker/?group_id=669 
 
