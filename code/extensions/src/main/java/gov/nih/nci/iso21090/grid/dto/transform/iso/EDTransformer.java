@@ -60,6 +60,10 @@ public final class EDTransformer extends AbstractTransformer<ED, Ed>
         Ed d = new Ed();
         String v = input.getValue();
         if (v != null) {
+        	if (input.getMediaType() != null && !input.getMediaType().equalsIgnoreCase(EdMediaType.TEXT_PLAIN.getDescription())) {
+                throw new DtoTransformException("If value is set, mediaType must equal to " 
+                        + EdMediaType.TEXT_PLAIN.getDescription());
+        	}
             d.setValue(v);
             d.setMediaType(EdMediaType.TEXT_PLAIN.getDescription());
         } else {
