@@ -2,7 +2,7 @@
     
                NCI CBIIT ISO 21090 Localization Common Library
                                  Version 2.2
-                                January 22, 2011
+                                January 27, 2011
 
                         National Cancer Institute
           Center for Biomedical Informatics and Information Technology
@@ -59,11 +59,11 @@
     
     NCI CBIIT ISO 21090 Localization Common Library v2.2
 
-    --  22 January 2011
+    --  27 January 2011
     
     NCI CBIIT ISO 21090 Localization Common Library v2.1.1
 
-    --  08 November 2010
+    --  27 January 2011
     
     NCI CBIIT ISO 21090 Localization Common Library v2.1 (Initial Version)
 
