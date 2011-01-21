@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<project name="developers-build-deploy file" basedir=".">
+	<!-- ============================================================== -->
+	<!-- This file is designed to allow the developer to extend the     -->
+	<!-- deploy process without having to edit the build-deploy.xml     -->
+	<!-- file. DO NOT REMOVE ANY TARGETS                                -->
+	<!-- ============================================================== -->
+    <property name="jboss.serverinstance.name" value="refimpl"/>
+    <property name="globus.webapp" value="wsrf" />
+    <property name="webapp.deploy.dir" value="${jboss.dir}/server/${jboss.serverinstance.name}/deploy/${globus.webapp}.war" />
+
+	<!-- ============================================================== -->
+	<!-- Pre Deploy Tomcat                                              -->
+	<!-- ============================================================== -->
+	<target name="preDeployTomcat">
+
+	</target>
+	
+
+	<!-- ============================================================== -->
+	<!-- Pre Deploy Globus                                              -->
+	<!-- ============================================================== -->
+	<target name="preDeployGlobus">
+
+	</target>
+	
+	
+	<!-- ============================================================== -->
+	<!-- Pre Deploy JBOSS                                               -->
+	<!-- ============================================================== -->
+	<target name="preDeployJBoss">
+
+	</target>
+	
+	
+	<!-- ============================================================== -->
+	<!-- Post UnDeploy Tomcat                                              -->
+	<!-- ============================================================== -->
+	<target name="postUndeployTomcat">
+
+	</target>
+
+
+	<!-- ============================================================== -->
+	<!-- Post UnDeploy Globus                                              -->
+	<!-- ============================================================== -->
+	<target name="postUndeployGlobus">
+
+	</target>
+	
+	
+	<!-- ============================================================== -->
+	<!-- Post UnDeploy JBOSS                                               -->
+	<!-- ============================================================== -->
+	<target name="postUndeployJBoss">
+
+	</target>
+
+
+
+</project>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="iso-datatypes-hibernate" default="dist" basedir="." >
+
+	<property name="software.dir" value="${basedir}/.."/>
+	<property name="target.dir" value="${basedir}/target"/>
+	<property name="build.finalName" value="iso-datatypes-hibernate-2.1.1" />
+	<property name="junit.present" value="false"/>
+	<property name="test.skip" value="true"/>
+	<import file="../master-build.xml" />
+	
+</project>

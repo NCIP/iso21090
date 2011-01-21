@@ -1,0 +1,205 @@
+                                Release Notes
+    
+               NCI CBIIT ISO 21090 Localization Common Library
+                                 Version 2.1
+                                June 22, 2010
+
+                        National Cancer Institute
+          Center for Biomedical Informatics and Information Technology
+
+===============================================================================
+    Contents
+===============================================================================
+
+    1.0 Introduction and History
+    2.0 Features and Updates
+    3.0 Bug Fixes
+    4.0 Known Issues
+    5.0 Bug Reports and Support
+    6.0 Open Development
+    7.0 Documentation
+    8.0 NCI CBIIT and caBIG(r) Web Pages
+
+===============================================================================
+    1.0 Introduction and History
+===============================================================================
+    
+    NCI CBIIT ISO 21090 Localization Common Library v2.1 (Initial Version)
+
+    --  22 June 2010
+	
+    The ISO 21090 Healthcare data types standard provides a set of data type
+    definitions for representing and exchanging basic concepts that are 
+    commonly encountered in healthcare environments in support of information 
+    exchange in the healthcare environment, [and] specifies a collection of 
+    healthcare related data types suitable for use in a number of health-
+    related information environments.
+
+    NCI CBIIT ISO 21090 Localization Common Library is Specialized/constrained 
+    version of the ISO 21090 Healthcare Data Types. Localization is the list 
+    of approved ISO 21090 data types that will be maintained by CBIIT, along 
+    with common implementation artifacts. Localization provides indirect 
+    conformance to ISO 21090 Healthcare data types by:
+	
+    --  Providing mappings between internal data types and the healthcare 
+        data types 
+    --  Specifying for which of the data types an inward mapping is provided, 
+        for which an outward mapping is provided, and for which no mapping 
+        is provided
+    --  Specifying whether the XML representation described herein is used when 
+        the data types are represented in XML, or optionally to provide an 
+        alternative namespace for the XML representation 
+
+    This version refers to ISO 21090 (2007-09-24).
+
+    More details on localized data types can be referred at:
+	
+    --  https://wiki.nci.nih.gov/x/DCNyAQ
+	
+
+===============================================================================
+    2.0 Features and Updates
+===============================================================================
+
+    NCI CBIIT ISO 21090 Localization Common Library provides following features:
+
+    --  JAXB generated ISO 21090 data types
+    --  NCI Localized ISO 21090 data types
+    --  Transformers between ISO and localized ISO data types
+    --  Hibernate Framework
+    --  Serialization framework
+	
+    Applications developed using this library interoperate with other applications 
+    using XML messages based on ISO 21090 data types. NCI CBIIT ISO 21090 
+    Localization transformers convert JAXB generated ISO data types to localized 
+    ISO data types. Applications can internally map these NCI localized ISO 21090 
+    Java classes to the database using the Hibernate framework.
+
+    NCI CBIIT ISO 21090 Localization Common Library is organized as follows:
+
+    --  Localization - NCI CBIIT Localized ISO 21090 data types
+    --  Extensions - Transformers and JAXB serialization framework 
+    --  Hibernate - Hibernate framework maps localized ISO data types to a database 
+
+    The following is the package structure:
+
+    Localization (code\localization\src\main\java\):
+    --  gov.nih.nci.iso21090
+
+    Localization Junit tests (code\localization\src\test\java\):
+    --  gov.nih.nci.iso21090
+
+    Extension(code\extensions\src\main\java):
+    --  gov.nih.nci.iso21090.grid.dto.transform
+    --  gov.nih.nci.iso21090.grid.ser
+
+    Extension JUnit tests (code\extensions\src\test\java):
+    --  gov.nih.nci.iso21090.grid.dto.transform
+    --  gov.nih.nci.iso21090.grid.ser
+
+    Hibernate Framework (code\hibernate\src\main\java\):
+    --  gov.nih.nci.iso21090.hibernate.node
+    --  gov.nih.nci.iso21090.hibernate.property
+    --  gov.nih.nci.iso21090.hibernate.tuple
+    --  gov.nih.nci.iso21090.hibernate.usertype
+
+    ISO XSD:
+    --  code\extensions\src\main\xsd\ISO_datatypes_Narrative.xsd
+    --  code\extensions\src\main\xsd\ISO_extensions.xsd
+
+    --  Ant buildfile
+
+    --  build.xml
+
+===============================================================================
+    3.0 Bug Fixes Since Last Release
+===============================================================================
+
+    --   
+
+===============================================================================
+    4.0 Known Issues
+===============================================================================
+
+    Localization has an attribute called "Any" used to specify that nothing 
+    is known about the interval except that some particular value lies within 
+    the interval. In the localization, "Any" is used to populate "High" and "Low" 
+    values conditionally. ISO 21090 XSD does not have this attribute. 
+    "Any" attribute will not be transmitted during outward mapping.
+		
+===============================================================================
+    5.0 Bug Reports and Support
+===============================================================================
+
+    The NCI CBIIT Application Support group can be contacted at:
+
+       http://ncicb.nci.nih.gov/NCICB/support
+       Telephone: 301-451-4384 	
+       Toll free: 888-478-4423
+
+    A GForge Support tracker group, which is actively monitored by NCI 
+    CBIIT ISO 21090 Localization Common Library developers, has been created 
+    to track any support requests. If you believe there is a bug/issue in 
+    the software, or have a technical issue that cannot be resolved by 
+    contacting the NCI CBIIT Application Support group, please submit a new 
+    support tracker using this link: 
+	   
+    -- https://gforge.nci.nih.gov/tracker/?group_id=669
+
+    Prior to submitting a new tracker, review any existing support request
+    trackers in order to help avoid duplicate submissions.
+
+    A list summarizing the online Workbench resources is provided below:
+
+       Mailing List:			   ISO21090_USERS@list.nih.gov	
+       Project Home (GForge):	   https://gforge.nci.nih.gov/projects/iso21090/
+       Support Tracker (GForge):   https://gforge.nci.nih.gov/tracker/?group_id=669 
+
+
+===============================================================================
+    6.0 Open Development
+===============================================================================
+
+    The CBIIT ODI offers the opportunity to get involved in shaping the next 
+    frontier for CBIIT software development as we pursue our vision of rapidly 
+    expanding the suite of applications and infrastructure.      
+
+    The following link provides details on Open Development Initiative:
+	
+    --  https://wiki.nci.nih.gov/x/PpV9AQ     
+
+===============================================================================
+    7.0 Documentation
+===============================================================================
+    
+    Tooling Support User Guide: https://wiki.nci.nih.gov/x/Pol-AQ
+
+    NCI CBIIT ISO 21090 Common Project: https://wiki.nci.nih.gov/x/7JZ-AQ
+	
+    Platform Independent Model (PIM):	
+	
+    --  https://ncisvn.nci.nih.gov/svn/ISO21090/branches/v2_1/documents/PIM_21090.pdf 
+    
+===============================================================================
+    8.0 NCI CBIIT and caBIG(r) Web Pages
+===============================================================================
+
+    The NCI Center for Biomedical Informatics and Information Technology
+
+    --  http://ncicb.nci.nih.gov/
+    
+    NCI CBIIT Application Support
+     
+    --  http://ncicbsupport.nci.nih.gov/sw/
+    --  http://ncicb.nci.nih.gov/NCICB/support
+
+    NCI CBIIT Download Center
+
+    --  http://ncicb.nci.nih.gov/download/
+ 
+    caBIG(r) Community Website
+
+    -- https://cabig.nci.nih.gov/
+
+
+//end

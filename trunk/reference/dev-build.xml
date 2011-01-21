@@ -1,0 +1,235 @@
+<?xml version="1.0"?>
+<project name="Developer Modified Build File" basedir=".">
+	<!-- ============================================================== -->
+	<!-- This file is designed to allow the developer to extend the     -->
+	<!-- build process without having to edit the master build.xml      -->
+	<!-- file. DO NOT REMOVE ANY TARGETS                                -->
+	<!-- ============================================================== -->
+
+
+	<!-- ============================================================== -->
+	<!-- Place any other properties you will need here                  -->
+	<!-- ============================================================== -->
+    <property file="local.properties" />
+    <property name="service.hostname" value="localhost" />
+    <property name="service.port" value="8080" />
+    <property name="build.dir" location="build" />
+    
+    <patternset id="dependent.schema.folders.ps">
+        <include name="core/**/*" />
+        <include name="pkgdata/**/*" />
+        <include name="ws/**/*" />
+        <include name="wsrf/**/*" />
+    </patternset>
+    
+	<!-- ============================================================== -->
+	<!-- Create any extended Classpaths here                            -->
+	<!-- ============================================================== -->
+	<target name="defineExtendedClasspaths">
+		<path id="base.extended.classpath">
+		</path>
+		<path id="service.build.extended.classpath">
+		</path>
+		<path id="service.run.extended.classpath">
+		</path>
+		<path id="test.build.extended.classpath">
+		</path>
+		<path id="test.run.extended.classpath">
+		</path>
+		<path id="run.extended.classpath">
+		</path>
+		<path id="tasks.run.extended.classpath">
+		</path>
+	</target>
+
+
+	<!-- ============================================================== -->
+	<!-- Pre Init Target                                                -->
+	<!-- ============================================================== -->
+	<target name="preInit">
+	    <copy todir="${schema.dir}">
+	        <fileset dir="${ext.globus.dir}/schema">
+	            <patternset refid="dependent.schema.folders.ps" />
+	        </fileset>
+	    </copy>
+	</target>
+
+	<!-- ============================================================== -->
+	<!-- Post Init Build Target                                         -->
+	<!-- ============================================================== -->
+	<target name="postInit">
+
+	</target>
+
+
+	<!-- ============================================================== -->
+	<!-- Pre Stubs Target                                               -->
+	<!-- ============================================================== -->
+	<target name="preStubs">
+
+	</target>
+
+	<!-- ============================================================== -->
+	<!-- Post Stubs Build Target                                        -->
+	<!-- ============================================================== -->
+	<target name="postStubs">
+	    <java classname="com.sun.tools.xjc.XJCFacade" fork="true" failonerror="true">
+	        <classpath>
+	            <path refid="base.classpath"/>
+	        </classpath>
+	        <arg value="-xmlschema" />
+	        <arg file="${basedir}/schema/ISO21090ReferenceService/ReferenceObjects.xsd" />
+	        <arg file="${basedir}/schema/ISO21090ReferenceService/ISO_datatypes_Narrative.xsd" />
+	        <arg value="-d" />
+	        <arg file="${stubs.src}" />
+	        <arg value="-b" />
+	        <arg file="${basedir}/schema/ISO21090ReferenceService/jaxb-config.xjb" />
+	        <arg value="-nv" />
+	        <arg value="-verbose" />
+	    </java>
+	    <delete dir="${stubs.src}/org" />
+	</target>
+
+	<!-- ============================================================== -->
+	<!-- Pre Compile Stubs Build Target                                 -->
+	<!-- ============================================================== -->
+	<target name="preCompileStubs">
+
+	</target>
+
+	<!-- ============================================================== -->
+	<!-- Post Compile Stubs Build Target                                -->
+	<!-- ============================================================== -->
+	<target name="postCompileStubs">
+
+	</target>
+
+	<!-- ============================================================== -->
+	<!-- Pre Jar Stubs Build Target                                     -->
+	<!-- ============================================================== -->
+	<target name="preJarStubs">
+
+	</target>
+
+	<!-- ============================================================== -->
+	<!-- Post Jar Stubs Build Target                                    -->
+	<!-- ============================================================== -->
+	<target name="postJarStubs">
+
+	</target>
+
+	<!-- ============================================================== -->
+	<!-- Pre Compile Build Target                                       -->
+	<!-- ============================================================== -->
+	<target name="preCompile">
+	    
+	</target>
+
+	<!-- ============================================================== -->
+	<!-- Post Compile Build Target                                       -->
+	<!-- ============================================================== -->
+	<target name="postCompile">
+
+	</target>
+
+	<!-- ============================================================== -->
+	<!-- Pre Jar Build Target                                       -->
+	<!-- ============================================================== -->
+	<target name="preJar">
+
+	</target>
+
+	<!-- ============================================================== -->
+	<!-- Post Jar Build Target                                          -->
+	<!-- ============================================================== -->
+	<target name="postJar">
+
+	</target>
+
+	<!-- ============================================================== -->
+	<!-- Pre Compile Tests Build Target                                 -->
+	<!-- ============================================================== -->
+	<target name="preCompileTests">
+
+	</target>
+
+	<!-- ============================================================== -->
+	<!-- Post Compile Tests Build Target                                -->
+	<!-- ============================================================== -->
+	<target name="postCompileTests">
+
+	</target>
+
+	<!-- ============================================================== -->
+	<!-- Pre Jar Tests Build Target                                     -->
+	<!-- ============================================================== -->
+	<target name="preJarTests">
+
+	</target>
+
+	<!-- ============================================================== -->
+	<!-- Post Jar Tests Build Target                                    -->
+	<!-- ============================================================== -->
+	<target name="postJarTests">
+
+	</target>
+
+	<!-- ============================================================== -->
+	<!-- Pre Clean Target                                               -->
+	<!-- ============================================================== -->
+	<target name="preClean">
+
+	</target>
+  
+	<!-- ============================================================== -->
+	<!-- Post Clean Target                                              -->
+	<!-- ============================================================== -->
+	<target name="postClean">
+
+	</target>
+    
+    <!-- ============================================================== -->
+	<!-- Call any tests.                                                -->
+	<!-- ============================================================== -->
+	<target name="test" depends="checkGlobus" description="Runs the service's tests.">
+		<echo message="Test results dir: ${junit.results.dir}" />
+		<mkdir dir="${junit.results.dir}" />
+		<junit dir="${basedir}" printsummary="yes" showoutput="true">
+			<classpath refid="test.run.classpath" />
+			<formatter type="xml" />
+			<batchtest fork="yes" todir="${junit.results.dir}">
+				<fileset dir="${test.src.dir}">
+					<include name="**/Test*.java" />
+					<include name="**/*TestCase.java" />
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+    
+    <macrodef name="run-client">
+        <attribute name="class" default="gov.nih.nci.iso21090.reference.client.ISO21090ReferenceServiceClient" />
+        <attribute name="serviceEndpointName" default="ISO21090ReferenceService" />
+        <attribute name="hostname" default="${service.hostname}" />
+        <attribute name="port" default="${service.port}" />
+        <attribute name="debug-suspend" default="n" />
+        <sequential>
+            <var name="run-client.service.url" unset="true" />
+            <var name="run-client.service.url" value="http://@{hostname}:@{port}/wsrf/services/cagrid/@{serviceEndpointName}" />
+            <property name="runclasspath" refid="run.classpath" />
+            <echo message="Connecting to service: ${run-client.service.url}" />
+            <java failonerror="true" classname="@{class}" classpathref="run.classpath" fork="yes">
+                <jvmarg value="-Xdebug" />
+                <jvmarg value="-Xrunjdwp:transport=dt_socket,address=8989,server=y,suspend=@{debug-suspend}" />
+                <jvmarg value="-DGLOBUS_LOCATION=${ext.globus.dir}" />
+                <arg value="-url" />
+                <arg value="${run-client.service.url}" />
+                <arg line="${args}"/>
+            </java>
+        </sequential>
+   </macrodef>
+    
+    <target name="runReferenceClient" depends="checkGlobus, defineClasspaths" description="Run the sample Reference Client">
+        <run-client serviceEndpointName="ISO21090ReferenceService" class="gov.nih.nci.iso21090.reference.client.ISO21090ReferenceServiceClient" debug-suspend="n" />
+    </target>
+
+</project>

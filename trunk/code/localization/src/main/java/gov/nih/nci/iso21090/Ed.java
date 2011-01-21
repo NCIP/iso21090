@@ -1,0 +1,154 @@
+package gov.nih.nci.iso21090;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.zip.GZIPInputStream;
+
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+
+/**
+ * Represents the iso ED type.
+ *
+ * TODO Add Invariants checks.
+. Either reference, data, value or xml must be provided if not null
+·  Only one of reference, data, value or xml may be specified
+·  An integrityCheckAlgorithm must be provided if an integrityCheck is provided
+·  if a thumbnail is provided, it must not use a reference
+·  if a thumbnail is provided, it must not have a thumbnail
+·  Compression can only be specified if data is provided as a binary
+·  if value is used, the mediaType is plain text
+·  a character set must not be asserted for plain text or xml content (for plain text refer
+to 6.7.4, and implicitly derived for the XML content)
+·  translations may not contain translations
+ *
+ * @author lpower, Vijay Parmar
+ */
+public class Ed extends Any implements Cloneable {
+
+    private static final long serialVersionUID = 1L;
+
+    private Compression compression;
+    private byte[] data;
+    //This has been commented out to be consistent with ISO xsd
+    //private St description;
+    private String value;
+
+
+    /**
+     * @return the compression
+     */
+    public Compression getCompression() {
+        return compression;
+    }
+
+    /**
+     * @param compression the compression to set
+     */
+    public void setCompression(Compression compression) {
+        this.compression = compression;
+    }
+
+    /**
+     * @return the data
+     */
+    @SuppressWarnings("PMD.MethodReturnsInternalArray")
+    public byte[] getData() {
+        return data;
+    }
+
+    /**
+     * @param data the data to set
+     */
+    @SuppressWarnings("PMD.ArrayIsStoredDirectly")
+    public void setData(byte[] data) {
+        this.data = data;
+    }
+
+    /**
+     * @param value the value to set
+     */
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    /**
+     * @return the value
+     */
+    public String getValue() {
+        return value;
+    }
+
+    /**
+     * Helper method that examines the data and compression fields together, and returns
+     * clients the uncompressed data as a stream.  The only compressions supported now
+     * are:
+     * <ul>
+     * <li>no compression
+     * <li><code>GZ</code>
+     * </ul>
+     * Null data fields are returned as an InputSteam with nothing to read.
+     * @return uncompressed data
+     * @throws IOException if gzip stream is corrupted
+     */
+    public InputStream getDataUncompressed() throws IOException {
+        byte[] myBytes = getData() == null ? new byte[] {} : getData();
+        if (getCompression() == null) {
+            return new ByteArrayInputStream(myBytes);
+        }
+        if (getCompression() == Compression.GZ) {
+            return new GZIPInputStream(new ByteArrayInputStream(myBytes));
+        }
+        throw new IllegalArgumentException("Unsupported compression: " + getCompression());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+
+        if (this == obj) {
+            return true;
+        }
+
+        if (!(obj instanceof Ed)) {
+            return false;
+        }
+
+        Ed x = (Ed) obj;
+
+        return new EqualsBuilder()
+            .appendSuper(super.equals(obj))
+            .append(this.getData(), x.getData())
+            .append(this.getCompression(), x.getCompression())
+            .append(this.getValue(), x.getValue())
+            .isEquals();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+
+        return new HashCodeBuilder(HASH_CODE_SEED_1, HASH_CODE_SEED_2)
+            .append(this.getData())
+            .append(this.getCompression())
+            .toHashCode();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("PMD.CloneThrowsCloneNotSupportedException")
+    @Override
+    public Ed clone() {
+        return (Ed) super.clone();
+    }
+
+}
