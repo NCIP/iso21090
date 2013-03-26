@@ -1,5 +1,4 @@
 <ivysettings>
-	<property name="nci.ivy.repo" value="http://gforge.nci.nih.gov/svnroot/commonlibrary/trunk/ivy-repo" />
 	<property name="nci.cagrid.ivy.repo" value="http://software.cagrid.org/repository-1.3" />
 	
 	<property name="iso-datatypes.basedir" value="${ivy.settings.dir}/.." />
@@ -14,11 +13,6 @@
 					pattern="${local.repo.dir}/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
 				<ivy pattern="${local.repo.dir}/[organisation]/[module]/[revision]/ivy.xml" />
 			</filesystem>
-			<url name="ncicb-ivy-repo" m2compatible="false">
-				<ivy pattern="${nci.ivy.repo}/[organisation]/[module]/[revision]/ivy.xml" />
-				<artifact
-					pattern="${nci.ivy.repo}/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
-			</url>
 			<url name="ncicb-cagrid-ivy-repo" m2compatible="false">
 				<ivy pattern="${nci.cagrid.ivy.repo}/[organisation]/[module]/ivy-[revision].xml" />
 				<artifact pattern="${nci.cagrid.ivy.repo}/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />

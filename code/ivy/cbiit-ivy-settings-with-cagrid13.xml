@@ -32,17 +32,16 @@ This file is the is the settings file used by IVY.  It is a good starting point 
 				<artifact pattern="${ivy.system.repo}/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
 				<ivy pattern="${ivy.system.repo}/[organisation]/[module]/[revision]/ivy.xml" />
 			</filesystem>-->
-			<url name="cbiit-ivy-repo">
-				<!-- remote enterprise repository -->
+			<!--<url name="cbiit-ivy-repo">
 				<artifact pattern="https://ncisvn.nci.nih.gov/svn/cbiit-ivy-repo/trunk/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
 				<ivy pattern="https://ncisvn.nci.nih.gov/svn/cbiit-ivy-repo/trunk/[organisation]/[module]/[revision]/ivy.xml" />
-			</url>
+			</url>-->
 			<url name="ncicb-cagrid13-ivy-repo" m2compatible="false">
 				<ivy pattern="http://software.cagrid.org/repository-1.3/[organisation]/[module]/ivy-[revision].xml" />
 				<artifact pattern="http://software.cagrid.org/repository-1.3/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
 				<artifact pattern="http://software.cagrid.org/repository-1.3/[organisation]/[module]/[revision]/[artifact].[ext]" />
 			</url>
-			<ibiblio name="cbiit-maven-mirror" m2compatible="true" root="https://ncisvn.nci.nih.gov/svn/maven-mirror/trunk" changingPattern=".*SNAPSHOT" />
+			<ibiblio name="cbiit-maven-mirror" m2compatible="true" root="https://ncisvn.nci.nih.gov/svn/maven-mirror/trunk/" changingPattern=".*SNAPSHOT" />
 			<!--<url name="cbiit-maven-mirror" m2compatible="true">
 				<artifact pattern="https://ncisvn.nci.nih.gov/svn/maven-mirror/trunk/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]"/>
 			</url>-->
