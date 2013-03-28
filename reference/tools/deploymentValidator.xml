@@ -1,3 +1,14 @@
+<!--L
+   Copyright 5AM Solutions, Inc
+   Copyright Ekagra Software Technologies Ltd.
+   Copyright Guidewire Architecture
+   Copyright The Ohio State University Research Foundation
+   Copyright Science Applications International Corporation
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/iso21090/LICENSE.txt for details.
+L-->
+
 <ns1:DeploymentValidatorDescriptor xsi:type="ns1:DeploymentValidatorDescriptor" xmlns:ns1="gme://gov.nih.nci.cagrid.introduce/1/DeploymentValidator" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
  <ValidatorDescriptor validationClass="org.cagrid.introduce.extensions.metadata.deployment.validator.MetadataDeploymentValidator" xsi:type="ns1:ValidatorDescriptor"/>
 </ns1:DeploymentValidatorDescriptor>
