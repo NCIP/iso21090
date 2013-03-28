@@ -26,7 +26,7 @@ L-->
 	<!-- ====================================================================== -->
 
 	<target name="clean" description="Clean the output directory">
-		<delete dir="${local.ivy.repo}" />
+		<delete dir="${local.ivy.repo}/ncicb" />
 		<ant antfile="build.xml" dir="localization" target="clean" />
 		<ant antfile="build.xml" dir="extensions" target="clean" />
 		<ant antfile="build.xml" dir="hibernate" target="clean" />
