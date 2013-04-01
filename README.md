@@ -32,4 +32,6 @@ Please join us in further developing and improving NCI CBIIT ISO21090 Localizati
  * Ant 1.6.x
  
 # Build
- * ant dist
+ * From code folder:  
+ 	ant dist
+ 	
