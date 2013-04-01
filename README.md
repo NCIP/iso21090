@@ -16,11 +16,11 @@ Please see the NOTICE and LICENSE files for details.
 
 You will find more details about NCI CBIIT ISO21090 Localization Common Library in the following links:
 
- * [Home Page] (https://wiki.nci.nih.gov/x/8gYhAQ
- * [Release Notes] (https://wiki.nci.nih.gov/x/3gM9Ag
- * [Documentation] (https://wiki.nci.nih.gov/x/8gYhAQ
- * [NCI OSDI] (https://wiki.nci.nih.gov/display/caBIGCommunityCode/CBIIT+Open+Source+Development+Initiative
- * [Forum] (https://cabig-kc.nci.nih.gov/CaGrid/forums/viewforum.php?f=31&sid=317abcd4b7ae1f07e547e12f9c2b9059
+ * [Home Page] (https://wiki.nci.nih.gov/x/8gYhAQ)
+ * [Release Notes] (https://wiki.nci.nih.gov/x/3gM9Ag)
+ * [Documentation] (https://wiki.nci.nih.gov/x/8gYhAQ)
+ * [NCI OSDI] (https://wiki.nci.nih.gov/display/caBIGCommunityCode/CBIIT+Open+Source+Development+Initiative)
+ * [Forum] (https://cabig-kc.nci.nih.gov/CaGrid/forums/viewforum.php?f=31&sid=317abcd4b7ae1f07e547e12f9c2b9059)
  * [Issue Tracker] (https://tracker.nci.nih.gov/browse/SDK)
  * [Code Repository] (https://github.com/NCIP/iso21090)
  * [Binaries packages] (http://gforge.nci.nih.gov/frs/?group_id=669)
