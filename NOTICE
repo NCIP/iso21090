@@ -1,11 +1,11 @@
 NCI CBIIT ISO21090 Localization Common Library
 Copyright 2010 5AM Solutions, Inc ("5AM"), Ekagra Software Technologies Ltd. ("EKAGRA"), Guidewire Architecture ("GUIDEWIRE"), the Ohio State University Research Foundation ("OSURF") and Science Applications International Corporation ("SAIC").
 
-This project is distributed under the BSD 3-Clauses License.
+This project is distributed under the BSD 3-Clause License.
 Please see LICENSE file for details.
 
 
-This project was developed as part of the NCI CBIIT initiative.
+This project was developed as part of the NCI caBIG initiative.
 
 NCI CBIIT ISO21090 Localization Common Library started as a project of the larger caBIG initiative, with the goal of allowing researchers to integrate, query, report, and analyze significant associations between genetic variations and disease, drug response or other clinical outcomes.
 The project was initially developed by 5AM Solutions, Inc ("5AM"), Ekagra Software Technologies Ltd. ("EKAGRA"), 
