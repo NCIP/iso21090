@@ -11,10 +11,10 @@ NCI CBIIT ISO 21090 Localization Common Library is written in Java using JAXB, H
 
 The goal of NCI CBIIT ISO21090 Localization Common Library is to enable round-trip development of model-driven applications and services that include ISO 21090 data types. The focus of interoperability between systems has been facilitating information sharing between data systems. Available tools also support analytical systems. Introduction of the ISO 21090 Localization Common Library has provided support for the kind of complex datatypes required by analytical systems to work efficiently with healthcare data.
 
-NCI CBIIT ISO21090 Localization Common Library is distributed under the BSD 3-Clause License.
+The ISO21090 (Localization Common Library) is distributed under the BSD 3-Clause License.
 Please see the NOTICE and LICENSE files for details.
 
-You will find more details about NCI CBIIT ISO21090 Localization Common Library in the following links:
+You will find more details about ISO21090 (Localization Common Library) project in the following links:
 
  * [Community Wiki] (https://wiki.nci.nih.gov/x/8gYhAQ)
  * [Issue Tracker] (https://tracker.nci.nih.gov/browse/SDK)
@@ -26,11 +26,5 @@ You will find more details about NCI CBIIT ISO21090 Localization Common Library 
 
 Please join us in further developing and improving ISO21090 (Localization Common Library) project.
 
-# Prerequisites
- * JDK 1.6.x
- * Ant 1.6.x
  
-# Build
- * From code folder:  
- 	ant dist
  	
