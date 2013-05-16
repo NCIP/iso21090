@@ -1,5 +1,5 @@
-Welcome to the ISO21090 Localization Common Library Project!
-============================================================
+Welcome to the ISO21090 (Localization Common Library) Project!
+==============================================================
 
 The ISO 21090 Healthcare Data Type Standard provides a set of data type definitions for representing and exchanging basic concepts that are commonly encountered in healthcare environments in support of information exchange in the healthcare environment, and specifies a collection of healthcare related data types suitable for use in a number of health-related information environments.
 
@@ -24,7 +24,7 @@ You will find more details about NCI CBIIT ISO21090 Localization Common Library 
  * [Installation Packages] (http://gforge.nci.nih.gov/frs/?group_id=669)
  * [Forum] (https://cabig-kc.nci.nih.gov/CaGrid/forums/viewforum.php?f=31&sid=317abcd4b7ae1f07e547e12f9c2b9059)
 
-Please join us in further developing and improving NCI CBIIT ISO21090 Localization Common Library.
+Please join us in further developing and improving ISO21090 (Localization Common Library) project.
 
 # Prerequisites
  * JDK 1.6.x
