@@ -1,5 +1,5 @@
-Welcome to the NCI CBIIT ISO21090 Localization Common Library Project!
-=====================================
+Welcome to the ISO21090 Localization Common Library Project!
+============================================================
 
 The ISO 21090 Healthcare Data Type Standard provides a set of data type definitions for representing and exchanging basic concepts that are commonly encountered in healthcare environments in support of information exchange in the healthcare environment, and specifies a collection of healthcare related data types suitable for use in a number of health-related information environments.
 
@@ -16,14 +16,13 @@ Please see the NOTICE and LICENSE files for details.
 
 You will find more details about NCI CBIIT ISO21090 Localization Common Library in the following links:
 
- * [Home Page] (https://wiki.nci.nih.gov/x/8gYhAQ)
- * [Release Notes] (https://wiki.nci.nih.gov/x/3gM9Ag)
- * [Documentation] (https://wiki.nci.nih.gov/x/8gYhAQ)
- * [NCI OSDI] (https://wiki.nci.nih.gov/display/caBIGCommunityCode/CBIIT+Open+Source+Development+Initiative)
- * [Forum] (https://cabig-kc.nci.nih.gov/CaGrid/forums/viewforum.php?f=31&sid=317abcd4b7ae1f07e547e12f9c2b9059)
+ * [Community Wiki] (https://wiki.nci.nih.gov/x/8gYhAQ)
  * [Issue Tracker] (https://tracker.nci.nih.gov/browse/SDK)
  * [Code Repository] (https://github.com/NCIP/iso21090)
- * [Binaries packages] (http://gforge.nci.nih.gov/frs/?group_id=669)
+ * [Documentation] (https://wiki.nci.nih.gov/x/8gYhAQ)
+ * [Release Notes] (https://wiki.nci.nih.gov/x/3gM9Ag)
+ * [Installation Packages] (http://gforge.nci.nih.gov/frs/?group_id=669)
+ * [Forum] (https://cabig-kc.nci.nih.gov/CaGrid/forums/viewforum.php?f=31&sid=317abcd4b7ae1f07e547e12f9c2b9059)
 
 Please join us in further developing and improving NCI CBIIT ISO21090 Localization Common Library.
 
