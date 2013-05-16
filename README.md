@@ -1,4 +1,4 @@
-Welcome to the ISO21090 (Localization Common Library) Project!
+Welcome to the ISO21090 Localization Common Library Project!
 ==============================================================
 
 The ISO 21090 Healthcare Data Type Standard provides a set of data type definitions for representing and exchanging basic concepts that are commonly encountered in healthcare environments in support of information exchange in the healthcare environment, and specifies a collection of healthcare related data types suitable for use in a number of health-related information environments.
@@ -14,7 +14,7 @@ The goal of NCI CBIIT ISO21090 Localization Common Library is to enable round-tr
 The ISO21090 (Localization Common Library) is distributed under the BSD 3-Clause License.
 Please see the NOTICE and LICENSE files for details.
 
-You will find more details about ISO21090 (Localization Common Library) project in the following links:
+You will find more details about ISO21090 Localization Common Library project in the following links:
 
  * [Community Wiki] (https://wiki.nci.nih.gov/x/8gYhAQ)
  * [Issue Tracker] (https://tracker.nci.nih.gov/browse/SDK)
@@ -24,7 +24,7 @@ You will find more details about ISO21090 (Localization Common Library) project 
  * [Installation Packages] (http://gforge.nci.nih.gov/frs/?group_id=669)
  * [Forum] (https://cabig-kc.nci.nih.gov/CaGrid/forums/viewforum.php?f=31&sid=317abcd4b7ae1f07e547e12f9c2b9059)
 
-Please join us in further developing and improving ISO21090 (Localization Common Library) project.
+Please join us in further developing and improving ISO21090 Localization Common Library project.
 
  
  	
