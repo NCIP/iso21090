@@ -11,7 +11,7 @@ It is written in Java using JAXB, Hibernate, XML technologies. It requires Ant 1
 
 The goal of ISO21090 Localization Common Library is to enable round-trip development of model-driven applications and services that include ISO 21090 data types. The focus of interoperability between systems has been facilitating information sharing between data systems. Available tools also support analytical systems. Introduction of the ISO 21090 Localization Common Library has provided support for the kind of complex datatypes required by analytical systems to work efficiently with healthcare data.
 
-The ISO21090 (Localization Common Library) is distributed under the BSD 3-Clause License.
+The ISO21090 Localization Common Library is distributed under the BSD 3-Clause License.
 Please see the NOTICE and LICENSE files for details.
 
 You will find more details about ISO21090 Localization Common Library project in the following links:
