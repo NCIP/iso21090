@@ -6,10 +6,6 @@ Please see LICENSE file for details.
 
 This project was developed as part of the NCI caBIG initiative.
 
-ISO21090 Localization Common Library started as a project of the larger caBIG initiative, 
-with the goal of allowing researchers to integrate, query, report, and analyze significant 
-associations between genetic variations and disease, drug response or other clinical outcomes.
-
 In 2013, as part of the National Cancer Informatics Program (NCIP) Open Development Initiative, 
 the NCI CBIIT ISO21090 Localization Common Library source code was migrated to GitHub to allow 
 further development by the broader community
